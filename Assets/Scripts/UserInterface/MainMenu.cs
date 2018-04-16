@@ -28,6 +28,10 @@ namespace DdSG {
             SceneManager.GoTo(Constants.HIGHSCORE_MENU);
         }
 
+        public void GoToAboutMenu() {
+            SceneManager.GoTo(Constants.ABOUT_MENU);
+        }
+
         public void ExitGame() {
             Debug.Log("Exiting game...");
             Application.Quit();
