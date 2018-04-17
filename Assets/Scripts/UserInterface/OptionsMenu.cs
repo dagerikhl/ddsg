@@ -23,27 +23,20 @@ namespace DdSG {
 
         private void Start() {
             VolumeSlider.value = Mathf.RoundToInt(AudioListener.volume*10f);
+            MusicToggle.isOn = !AudioListener.pause;
+            SoundsToggle.isOn = !AudioListener.pause;
             QualityDropdown.value = QualitySettings.GetQualityLevel();
         }
 
         public void ChangeVolume(Slider volumeSlider) {
             // Set volume
             AudioListener.volume = volumeSlider.value/10f;
-
-            // Update UI
-            if (volumeSlider.value <= 0) {
-                MusicToggle.interactable = false;
-                SoundsToggle.interactable = false;
-            } else {
-                MusicToggle.interactable = true;
-                SoundsToggle.interactable = true;
-            }
         }
 
         public void ToggleMusic(Toggle musicToggle) {
             // Set volume
             // TODO Distinguish between music and sounds
-            AudioListener.volume = 0;
+            AudioListener.pause = true;
 
             // Update UI
             if (!musicToggle.isOn && !SoundsToggle.isOn) {
@@ -56,7 +49,7 @@ namespace DdSG {
         public void ToggleSounds(Toggle soundsToggle) {
             // Set volume
             // TODO Distinguish between music and sounds
-            AudioListener.volume = 0;
+            AudioListener.pause = true;
 
             // Update UI
             if (!soundsToggle.isOn && !MusicToggle.isOn) {
