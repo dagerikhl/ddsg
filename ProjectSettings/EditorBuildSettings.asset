@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Menus/HighscoreMenu.unity
     guid: 763dcd957145d5442a4f9095bf0adce8
+  - enabled: 1
+    path: Assets/_Scenes/Menus/LevelSelectMenu.unity
+    guid: 98ce9de2e2f9f2749a6c237b31315bcb
