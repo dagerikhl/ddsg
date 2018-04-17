@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -17,6 +18,7 @@ namespace DdSG {
 
         // Private members
 
+        [UsedImplicitly]
         public void StartLevel(Button levelButton) {
             State.Level = levelButton.GetComponent<SelectLevelButton>().LevelNumber;
             SceneManager.GoTo(Constants.GAME_VIEW);

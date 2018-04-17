@@ -6,7 +6,8 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        //[Header("Unity Setup Fields")]
+        [Header("Unity Setup Fields")]
+        public SceneManager SceneManager;
 
         //[Header("Optional")]
 

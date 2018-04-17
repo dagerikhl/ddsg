@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnitySceneManagement = UnityEngine.SceneManagement;
 using System.Collections;
+using JetBrains.Annotations;
 
 namespace DdSG {
 
@@ -35,6 +36,7 @@ namespace DdSG {
             StartCoroutine(fadeOut(sceneName));
         }
 
+        [UsedImplicitly]
         public void GoToLastMenu() {
             GoTo(State.LastScene);
         }

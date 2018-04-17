@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -28,11 +29,13 @@ namespace DdSG {
             QualityDropdown.value = QualitySettings.GetQualityLevel();
         }
 
+        [UsedImplicitly]
         public void ChangeVolume(Slider volumeSlider) {
             // Set volume
             AudioListener.volume = volumeSlider.value/10f;
         }
 
+        [UsedImplicitly]
         public void ToggleMusic(Toggle musicToggle) {
             // Set volume
             // TODO Distinguish between music and sounds
@@ -46,6 +49,7 @@ namespace DdSG {
             }
         }
 
+        [UsedImplicitly]
         public void ToggleSounds(Toggle soundsToggle) {
             // Set volume
             // TODO Distinguish between music and sounds
@@ -59,6 +63,7 @@ namespace DdSG {
             }
         }
 
+        [UsedImplicitly]
         public void ChangeQuality(Dropdown qualityDropdown) {
             QualitySettings.SetQualityLevel(qualityDropdown.value);
         }

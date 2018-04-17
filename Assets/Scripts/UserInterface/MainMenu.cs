@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace DdSG {
 
@@ -16,22 +17,27 @@ namespace DdSG {
 
         // Private members
 
+        [UsedImplicitly]
         public void GoToLevelSelectMenu() {
             SceneManager.GoTo(Constants.LEVEL_SELECT_MENU);
         }
 
+        [UsedImplicitly]
         public void GoToOptionsMenu() {
             SceneManager.GoTo(Constants.OPTIONS_MENU);
         }
 
+        [UsedImplicitly]
         public void GoToHighscoreMenu() {
             SceneManager.GoTo(Constants.HIGHSCORE_MENU);
         }
 
+        [UsedImplicitly]
         public void GoToAboutMenu() {
             SceneManager.GoTo(Constants.ABOUT_MENU);
         }
 
+        [UsedImplicitly]
         public void ExitGame() {
             Debug.Log("Exiting game...");
             Application.Quit();
