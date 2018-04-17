@@ -11,15 +11,18 @@ namespace DdSG {
         public AnimationCurve FadeCurve;
 
         [Header("Unity Setup Fields")]
-        public Image FadeImage;
+        public Image FadeOverlay;
 
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
 
         // Private members
+        private GraphicRaycaster inputBlocker;
 
         private void Start() {
+            inputBlocker = FadeOverlay.GetComponent<GraphicRaycaster>();
+
             StartCoroutine(fadeIn());
         }
 
@@ -37,28 +40,37 @@ namespace DdSG {
         }
 
         private IEnumerator fadeIn() {
+            // Fade
             float t = 1f;
 
             while (t > 0f) {
                 t -= Time.deltaTime;
                 float alpha = FadeCurve.Evaluate(t);
-                FadeImage.color = new Color(1f, 1f, 1f, alpha);
+                FadeOverlay.color = new Color(1f, 1f, 1f, alpha);
 
                 yield return 0;
             }
+
+            // Disable input blocking
+            inputBlocker.enabled = false;
         }
 
         private IEnumerator fadeOut(string sceneName) {
+            // Enable input blocking
+            inputBlocker.enabled = true;
+
+            // Fade
             float t = 0f;
 
             while (t < 1f) {
                 t += Time.deltaTime;
                 float alpha = FadeCurve.Evaluate(t);
-                FadeImage.color = new Color(1f, 1f, 1f, alpha);
+                FadeOverlay.color = new Color(1f, 1f, 1f, alpha);
 
                 yield return 0;
             }
 
+            // Load new scene
             UnitySceneManagement.SceneManager.LoadScene(sceneName);
         }
 

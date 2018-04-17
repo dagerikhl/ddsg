@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 224000011776077348}
   - component: {fileID: 222000012597947242}
   - component: {fileID: 114000013671715898}
+  - component: {fileID: 223978013356149312}
+  - component: {fileID: 114351648576499512}
   m_Layer: 5
   m_Name: FadeOverlay
   m_TagString: Untagged
@@ -123,6 +125,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114351648576499512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010685413396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 3
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114856539890442454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +170,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  FadeImage: {fileID: 114000013671715898}
+  FadeOverlay: {fileID: 114000013671715898}
 --- !u!222 &222000012597947242
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -178,6 +196,26 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 9999
+  m_TargetDisplay: 0
+--- !u!223 &223978013356149312
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010685413396}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224000011776077348
 RectTransform:
