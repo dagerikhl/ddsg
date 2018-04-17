@@ -12,6 +12,7 @@ namespace DdSG {
         public Slider VolumeSlider;
         public Toggle MusicToggle;
         public Toggle SoundsToggle;
+        public Dropdown QualityDropdown;
 
         //[Header("Optional")]
 
@@ -20,7 +21,12 @@ namespace DdSG {
 
         // Private members
 
-        public void SetVolume(Slider volumeSlider) {
+        private void Start() {
+            VolumeSlider.value = Mathf.RoundToInt(AudioListener.volume*10f);
+            QualityDropdown.value = QualitySettings.GetQualityLevel();
+        }
+
+        public void ChangeVolume(Slider volumeSlider) {
             // Set volume
             AudioListener.volume = volumeSlider.value/10f;
 
@@ -58,6 +64,10 @@ namespace DdSG {
             } else {
                 VolumeSlider.interactable = true;
             }
+        }
+
+        public void ChangeQuality(Dropdown qualityDropdown) {
+            QualitySettings.SetQualityLevel(qualityDropdown.value);
         }
 
         public void GoToLastMenu() {
