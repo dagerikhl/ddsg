@@ -70,10 +70,6 @@ namespace DdSG {
             QualitySettings.SetQualityLevel(qualityDropdown.value);
         }
 
-        public void GoToLastMenu() {
-            SceneManager.GoTo(State.LastScene);
-        }
-
     }
 
 }

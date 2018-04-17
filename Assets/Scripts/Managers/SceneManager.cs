@@ -32,6 +32,10 @@ namespace DdSG {
             StartCoroutine(fadeOut(sceneName));
         }
 
+        public void GoToLastMenu() {
+            GoTo(State.LastScene);
+        }
+
         private IEnumerator fadeIn() {
             float t = 1f;
 
