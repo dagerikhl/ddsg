@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 namespace DdSG {
+
     public class HighscoreMenu: MonoBehaviour {
 
         //[Header("Attributes")]
@@ -15,4 +16,5 @@ namespace DdSG {
         // Private members
 
     }
+
 }
