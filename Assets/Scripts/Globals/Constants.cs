@@ -8,14 +8,14 @@
         public const string OPTIONS_MENU = "OptionsMenu";
         public const string HIGHSCORE_MENU = "HighscoreMenu";
         public const string ABOUT_MENU = "AboutMenu";
-        public const string LEVEL_01 = "Level01";
+        public const string GAME_VIEW = "GameView";
         public static readonly string[] SCENES = {
             MAIN_MENU,
             LEVEL_SELECT_MENU,
             OPTIONS_MENU,
             HIGHSCORE_MENU,
             ABOUT_MENU,
-            LEVEL_01
+            GAME_VIEW
         };
 
     }

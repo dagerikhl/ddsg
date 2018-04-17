@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace DdSG {
 
@@ -6,7 +7,8 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        //[Header("Unity Setup Fields")]
+        [Header("Unity Setup Fields")]
+        public SceneManager SceneManager;
 
         //[Header("Optional")]
 
@@ -14,6 +16,11 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private members
+
+        public void StartLevel(Button levelButton) {
+            State.Level = levelButton.GetComponent<SelectLevelButton>().LevelNumber;
+            SceneManager.GoTo(Constants.GAME_VIEW);
+        }
 
     }
 
