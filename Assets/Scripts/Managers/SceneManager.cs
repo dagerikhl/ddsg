@@ -19,10 +19,15 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
 
         // Private members
+        private const float fadeTime = 0.8f;
+        private static readonly Color fadeColor = new Color(0.9f, 0.9f, 0.92f);
+
         private GraphicRaycaster inputBlocker;
 
         private void Start() {
             inputBlocker = FadeOverlay.GetComponent<GraphicRaycaster>();
+
+            FadeOverlay.color = fadeColor;
 
             StartCoroutine(fadeIn());
         }
@@ -43,12 +48,12 @@ namespace DdSG {
 
         private IEnumerator fadeIn() {
             // Fade
-            float t = 1f;
+            float t = fadeTime;
 
             while (t > 0f) {
                 t -= Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t);
-                FadeOverlay.color = new Color(1f, 1f, 1f, alpha);
+                float alpha = FadeCurve.Evaluate(t/fadeTime);
+                FadeOverlay.color = fadeColor.WithAlpha(alpha);
 
                 yield return 0;
             }
@@ -64,10 +69,10 @@ namespace DdSG {
             // Fade
             float t = 0f;
 
-            while (t < 1f) {
+            while (t < fadeTime) {
                 t += Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t);
-                FadeOverlay.color = new Color(1f, 1f, 1f, alpha);
+                float alpha = FadeCurve.Evaluate(t/fadeTime);
+                FadeOverlay.color = fadeColor.WithAlpha(alpha);
 
                 yield return 0;
             }
