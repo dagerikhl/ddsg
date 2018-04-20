@@ -607,7 +607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Top scores of ALL TIME on this computer
 --- !u!222 &899337335
 CanvasRenderer:
   m_ObjectHideFlags: 0

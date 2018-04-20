@@ -19,7 +19,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToLevelSelectMenu() {
-            SceneManager.GoTo(Constants.LEVEL_SELECT_MENU);
+            SceneManager.GoTo(Constants.PLAY_MENU);
         }
 
         [UsedImplicitly]

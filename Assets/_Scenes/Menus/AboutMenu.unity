@@ -487,7 +487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: STIX and Stones
+  m_Text: "STIX and Stones \u2014 the Data-driven Security Game"
 --- !u!222 &899337335
 CanvasRenderer:
   m_ObjectHideFlags: 0

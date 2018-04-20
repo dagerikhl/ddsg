@@ -6,7 +6,6 @@ namespace DdSG {
 
         // Scenes
         private static string lastScene = Constants.MAIN_MENU;
-        private static string currentScene = Constants.MAIN_MENU;
 
         public static string LastScene {
             get { return lastScene; }
@@ -15,18 +14,22 @@ namespace DdSG {
             }
         }
 
+        private static string currentScene = Constants.MAIN_MENU;
+
         public static string CurrentScene {
             get { return currentScene; }
             set {
-                if (Constants.SCENES.Contains(value)) {
-                    currentScene = value;
-                }
+                if (Constants.SCENES.Contains(value)) { currentScene = value; }
             }
         }
 
-        // Level
-        private static int level = 1;
-        public static int Level { get { return level; } set { level = value; } }
+        // Play configuration
+        private static PlayConfiguration playConfiguration = new PlayConfiguration();
+
+        public static PlayConfiguration PlayConfiguration {
+            get { return playConfiguration; }
+            set { playConfiguration = value; }
+        }
 
     }
 
