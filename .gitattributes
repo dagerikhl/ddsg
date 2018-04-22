@@ -2,3 +2,5 @@
 *.csproj eol=crlf
 *.asset eol=lf
 *.meta eol=lf
+*.unity eol=lf
+*.prefab eol=lf
