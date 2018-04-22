@@ -8,8 +8,7 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        [Header("Unity Setup Fields")]
-        public SceneManager SceneManager;
+        //[Header("Unity Setup Fields")]
         public Slider VolumeSlider;
         public Toggle MusicToggle;
         public Toggle SoundsToggle;

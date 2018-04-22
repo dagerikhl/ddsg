@@ -18,6 +18,9 @@
             GAME_VIEW
         };
 
+        // Scene transitions
+        public const float SCENE_TRANSITION_DURATION = 0.8f;
+
         // Play configuration
         public static readonly string[] DIFFICULTIES = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
         public static readonly string[] GAME_SPEEDS = { "1x", "2x", "3x" };

@@ -10,8 +10,6 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public SceneManager SceneManager;
-
         public Dropdown DifficultyDropdown;
         public Dropdown GameSpeedDropdown;
         public Toggle OwaspFilterToggle;
@@ -32,14 +30,15 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void StartGame() {
-            State.PlayConfiguration = new PlayConfiguration {
+            State.Instance.PlayConfiguration = new PlayConfiguration {
                 Difficulty = float.Parse(DifficultyDropdown.captionText.text.Replace(" %", ""))/100f,
                 GameSpeed = float.Parse(GameSpeedDropdown.captionText.text.Replace("x", "")),
                 OwaspFilter = OwaspFilterToggle.isOn,
                 Entities = EntitiesInputField.text.Split(',')
             };
 
-            SceneManager.GoTo(Constants.GAME_VIEW);
+            AmbientManager.Instance.PlayGameAmbient();
+            SceneManager.Instance.GoTo(Constants.GAME_VIEW);
         }
 
     }

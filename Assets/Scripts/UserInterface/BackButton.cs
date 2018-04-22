@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace DdSG {
 
-    public class HighscoreMenu: MonoBehaviour {
+    public class BackButton: MonoBehaviour {
 
         //[Header("Attributes")]
 
@@ -14,6 +15,11 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private members
+
+        [UsedImplicitly]
+        public void GoToLastMenu() {
+            SceneManager.Instance.GoTo(State.Instance.LastScene);
+        }
 
     }
 

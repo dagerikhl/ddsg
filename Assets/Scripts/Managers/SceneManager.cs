@@ -2,13 +2,16 @@
 using UnityEngine.UI;
 using UnitySceneManagement = UnityEngine.SceneManagement;
 using System.Collections;
-using JetBrains.Annotations;
 
 namespace DdSG {
 
-    public class SceneManager: MonoBehaviour {
+    public class SceneManager: ScenePersistentSingleton<SceneManager> {
+
+        protected SceneManager() {
+        }
 
         [Header("Attributes")]
+        public Color FadeColor = new Color(0.9f, 0.9f, 0.92f);
         public AnimationCurve FadeCurve;
 
         [Header("Unity Setup Fields")]
@@ -17,43 +20,38 @@ namespace DdSG {
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
+        //[HideInInspector]
 
         // Private members
-        private const float fadeTime = 0.8f;
-        private static readonly Color fadeColor = new Color(0.9f, 0.9f, 0.92f);
+        protected override string persistentTag { get { return "SceneManager"; } }
 
         private GraphicRaycaster inputBlocker;
 
         private void Start() {
             inputBlocker = FadeOverlay.GetComponent<GraphicRaycaster>();
 
-            FadeOverlay.color = fadeColor;
+            FadeOverlay.color = FadeColor;
 
             StartCoroutine(fadeIn());
         }
 
         public void GoTo(string sceneName) {
             // Update last and current scene in state
-            State.LastScene = UnitySceneManagement.SceneManager.GetActiveScene().name;
-            State.CurrentScene = sceneName;
+            State.Instance.LastScene = UnitySceneManagement.SceneManager.GetActiveScene().name;
+            State.Instance.CurrentScene = sceneName;
 
             // Fade to new scene
             StartCoroutine(fadeOut(sceneName));
         }
 
-        [UsedImplicitly]
-        public void GoToLastMenu() {
-            GoTo(State.LastScene);
-        }
-
         private IEnumerator fadeIn() {
             // Fade
-            float t = fadeTime;
+            float t = Constants.SCENE_TRANSITION_DURATION;
 
             while (t > 0f) {
                 t -= Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/fadeTime);
-                FadeOverlay.color = fadeColor.WithAlpha(alpha);
+                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_DURATION);
+                FadeOverlay.color = FadeColor.WithAlpha(alpha);
 
                 yield return 0;
             }
@@ -69,13 +67,16 @@ namespace DdSG {
             // Fade
             float t = 0f;
 
-            while (t < fadeTime) {
+            while (t < Constants.SCENE_TRANSITION_DURATION) {
                 t += Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/fadeTime);
-                FadeOverlay.color = fadeColor.WithAlpha(alpha);
+                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_DURATION);
+                FadeOverlay.color = FadeColor.WithAlpha(alpha);
 
                 yield return 0;
             }
+
+            // Fade back in
+            StartCoroutine(fadeIn());
 
             // Load new scene
             UnitySceneManagement.SceneManager.LoadScene(sceneName);

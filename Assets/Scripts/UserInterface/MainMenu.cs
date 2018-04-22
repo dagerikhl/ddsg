@@ -7,8 +7,7 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        [Header("Unity Setup Fields")]
-        public SceneManager SceneManager;
+        //[Header("Unity Setup Fields")]
 
         //[Header("Optional")]
 
@@ -19,22 +18,22 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToLevelSelectMenu() {
-            SceneManager.GoTo(Constants.PLAY_MENU);
+            SceneManager.Instance.GoTo(Constants.PLAY_MENU);
         }
 
         [UsedImplicitly]
         public void GoToOptionsMenu() {
-            SceneManager.GoTo(Constants.OPTIONS_MENU);
+            SceneManager.Instance.GoTo(Constants.OPTIONS_MENU);
         }
 
         [UsedImplicitly]
         public void GoToHighscoreMenu() {
-            SceneManager.GoTo(Constants.HIGHSCORE_MENU);
+            SceneManager.Instance.GoTo(Constants.HIGHSCORE_MENU);
         }
 
         [UsedImplicitly]
         public void GoToAboutMenu() {
-            SceneManager.GoTo(Constants.ABOUT_MENU);
+            SceneManager.Instance.GoTo(Constants.ABOUT_MENU);
         }
 
         [UsedImplicitly]
