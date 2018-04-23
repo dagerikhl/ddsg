@@ -20,7 +20,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         //[HideInInspector]
 
-        // Private members
+        // Private and protected members
 
         private void Start() {
             // Disable sounds when setting the initial state

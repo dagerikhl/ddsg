@@ -22,7 +22,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         //[HideInInspector]
 
-        // Private members
+        // Private and protected members
         protected override string persistentTag { get { return "SceneManager"; } }
 
         private GraphicRaycaster inputBlocker;

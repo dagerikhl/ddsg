@@ -18,7 +18,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         //[HideInInspector]
 
-        // Private members
+        // Private and protected members
         protected override string persistentTag { get { return "SoundsManager"; } }
 
         public void PlayClickSound() {

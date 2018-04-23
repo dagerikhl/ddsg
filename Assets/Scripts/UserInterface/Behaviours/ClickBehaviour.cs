@@ -13,7 +13,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         //[HideInInspector]
 
-        // Private members
+        // Private and protected members
         protected T clickable { get { return GetComponent<T>(); } }
 
         protected void PerformClickBehaviour() {
