@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 20928705}
   - component: {fileID: 20928704}
   - component: {fileID: 20928703}
+  - component: {fileID: 20928707}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -253,6 +254,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 20928701}
+--- !u!114 &20928707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 20928701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5ca1e0b6831864d824ba3ce332afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &64838337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2055,7 @@ GameObject:
   - component: {fileID: 806167570}
   - component: {fileID: 806167572}
   - component: {fileID: 806167571}
+  - component: {fileID: 806167573}
   m_Layer: 0
   m_Name: Toggle
   m_TagString: Untagged
@@ -2142,6 +2155,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &806167573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806167569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee4d12045494526b159ef696daea1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &828778268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,6 +3471,7 @@ GameObject:
   - component: {fileID: 1321897446}
   - component: {fileID: 1321897445}
   - component: {fileID: 1321897444}
+  - component: {fileID: 1321897447}
   m_Layer: 0
   m_Name: Dropdown
   m_TagString: Untagged
@@ -3568,6 +3593,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1321897442}
+--- !u!114 &1321897447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1321897442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d142d60d3f4e74a0ba5b49eaca077c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1381850713
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,6 +4035,7 @@ GameObject:
   - component: {fileID: 1729404097}
   - component: {fileID: 1729404096}
   - component: {fileID: 1729404095}
+  - component: {fileID: 1729404098}
   m_Layer: 0
   m_Name: Dropdown
   m_TagString: Untagged
@@ -4120,6 +4157,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1729404093}
+--- !u!114 &1729404098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729404093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d142d60d3f4e74a0ba5b49eaca077c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1771401437
 GameObject:
   m_ObjectHideFlags: 0
