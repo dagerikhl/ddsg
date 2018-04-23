@@ -24,12 +24,18 @@ namespace DdSG {
         // Private members
 
         private void Start() {
+            // Disable sounds when setting the initial state
+            SoundsManager.I.Source.enabled = false;
+
             AmbientToggle.isOn = State.I.AmbientEnabled;
             AmbientSlider.value = Mathf.RoundToInt(State.I.AmbientVolume*10f);
             SoundsToggle.isOn = State.I.SoundsEnabled;
             SoundsSlider.value = Mathf.RoundToInt(State.I.SoundsVolume*10f);
 
             QualityDropdown.value = QualitySettings.GetQualityLevel();
+
+            // Restore sounds after setting the initial state
+            SoundsManager.I.Source.enabled = true;
         }
 
         [UsedImplicitly]

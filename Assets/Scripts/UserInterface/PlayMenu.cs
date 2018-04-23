@@ -23,6 +23,9 @@ namespace DdSG {
         // Private members
 
         private void Start() {
+            // Disable sounds when setting the initial state
+            SoundsManager.I.Source.enabled = false;
+
             DifficultyDropdown.AddOptions(Constants.DIFFICULTY_OPTIONS.ToList());
             GameSpeedDropdown.AddOptions(Constants.GAME_SPEED_OPTIONS.ToList());
 
@@ -32,6 +35,9 @@ namespace DdSG {
                                                .IndexOf(unparseGameSpeed(State.I.PlayConfiguration.GameSpeed));
             OwaspFilterToggle.isOn = State.I.PlayConfiguration.OwaspFilter;
             EntitiesInputField.text = string.Join(",", State.I.PlayConfiguration.Entities);
+
+            // Restore sounds after setting the initial state
+            SoundsManager.I.Source.enabled = true;
         }
 
         [UsedImplicitly]

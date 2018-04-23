@@ -17,7 +17,7 @@ namespace DdSG {
         // Private members
 
         public void ToggleEnabled(bool isEnabled) {
-            Source.enabled = isEnabled;
+            Source.mute = isEnabled;
         }
 
         public void SetVolume(float volume) {
