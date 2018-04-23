@@ -11,6 +11,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public AudioClip ClickSound;
+        public AudioClip MildClickSound;
         public AudioClip KillSound;
 
         //[Header("Optional")]
@@ -27,6 +28,10 @@ namespace DdSG {
 
         public void PlayClickSound() {
             Source.PlayOneShot(ClickSound);
+        }
+
+        public void PlayMildClickSound() {
+            Source.PlayOneShot(MildClickSound);
         }
 
         public void PlayKillSound() {

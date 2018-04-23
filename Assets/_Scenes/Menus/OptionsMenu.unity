@@ -1077,6 +1077,7 @@ GameObject:
   - component: {fileID: 778963276}
   - component: {fileID: 778963278}
   - component: {fileID: 778963277}
+  - component: {fileID: 778963279}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -1181,6 +1182,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &778963279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 778963275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35422ff0854449628765863ce5d21ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &782645838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,6 +2047,7 @@ GameObject:
   - component: {fileID: 1069386048}
   - component: {fileID: 1069386049}
   - component: {fileID: 1069386050}
+  - component: {fileID: 1069386051}
   m_Layer: 0
   m_Name: Toggle
   m_TagString: Untagged
@@ -2134,6 +2147,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1069386051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1069386047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee4d12045494526b159ef696daea1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1095538698
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,6 +2977,7 @@ GameObject:
   - component: {fileID: 1559975294}
   - component: {fileID: 1559975296}
   - component: {fileID: 1559975295}
+  - component: {fileID: 1559975297}
   m_Layer: 0
   m_Name: Toggle
   m_TagString: Untagged
@@ -3052,6 +3077,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1559975297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1559975293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee4d12045494526b159ef696daea1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1587004939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,6 +3590,7 @@ GameObject:
   - component: {fileID: 1865183069}
   - component: {fileID: 1865183071}
   - component: {fileID: 1865183070}
+  - component: {fileID: 1865183072}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -3658,6 +3695,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1865183072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865183068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35422ff0854449628765863ce5d21ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1914143306
 GameObject:
   m_ObjectHideFlags: 0

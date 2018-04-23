@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class ButtonBehaviour: ClickBehaviour<Button> {
+    public class SliderBehaviour: ClickBehaviour<Slider> {
 
         //[Header("Attributes")]
 
@@ -16,7 +16,7 @@ namespace DdSG {
         // Private members
 
         private void Start() {
-            clickable.onClick.AddListener(PerformClickBehaviour);
+            clickable.onValueChanged.AddListener((value) => PerformMildClickBehaviour());
         }
 
     }
