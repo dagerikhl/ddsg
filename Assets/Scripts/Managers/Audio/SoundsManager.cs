@@ -34,6 +34,7 @@ namespace DdSG {
             Source.PlayOneShot(MildClickSound);
         }
 
+        // TODO Impl. functionality where kill sound will be required
         public void PlayKillSound() {
             Source.PlayOneShot(KillSound);
         }
