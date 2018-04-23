@@ -30,15 +30,15 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void StartGame() {
-            State.Instance.PlayConfiguration = new PlayConfiguration {
+            State.I.PlayConfiguration = new PlayConfiguration {
                 Difficulty = float.Parse(DifficultyDropdown.captionText.text.Replace(" %", ""))/100f,
                 GameSpeed = float.Parse(GameSpeedDropdown.captionText.text.Replace("x", "")),
                 OwaspFilter = OwaspFilterToggle.isOn,
                 Entities = EntitiesInputField.text.Split(',')
             };
 
-            AmbientManager.Instance.PlayGameAmbient();
-            SceneManager.Instance.GoTo(Constants.GAME_VIEW);
+            AmbientManager.I.PlayGameAmbient();
+            SceneManager.I.GoTo(Constants.GAME_VIEW);
         }
 
     }

@@ -18,7 +18,7 @@ namespace DdSG {
 
         private static readonly object _lock = new object();
 
-        public static T Instance {
+        public static T I {
             get {
                 lock (_lock) {
                     if (instance == null) {

@@ -9,9 +9,11 @@ namespace DdSG {
         //[Header("Attributes")]
 
         //[Header("Unity Setup Fields")]
-        public Slider VolumeSlider;
-        public Toggle MusicToggle;
+        public Toggle AmbientToggle;
+        public Slider AmbientSlider;
         public Toggle SoundsToggle;
+        public Slider SoundsSlider;
+
         public Dropdown QualityDropdown;
 
         //[Header("Optional")]
@@ -22,44 +24,48 @@ namespace DdSG {
         // Private members
 
         private void Start() {
-            VolumeSlider.value = Mathf.RoundToInt(AudioListener.volume*10f);
-            MusicToggle.isOn = !AudioListener.pause;
-            SoundsToggle.isOn = !AudioListener.pause;
+            AmbientToggle.isOn = State.I.AmbientEnabled;
+            AmbientSlider.value = Mathf.RoundToInt(State.I.AmbientVolume*10f);
+            SoundsToggle.isOn = State.I.SoundsEnabled;
+            SoundsSlider.value = Mathf.RoundToInt(State.I.SoundsVolume*10f);
+
             QualityDropdown.value = QualitySettings.GetQualityLevel();
         }
 
         [UsedImplicitly]
-        public void ChangeVolume(Slider volumeSlider) {
-            // Set volume
-            AudioListener.volume = volumeSlider.value/10f;
-        }
+        public void ToggleAmbient(Toggle toggle) {
+            State.I.AmbientEnabled = toggle.isOn;
+            AmbientManager.I.ToggleEnabled(toggle.isOn);
 
-        [UsedImplicitly]
-        public void ToggleMusic(Toggle musicToggle) {
-            // Set volume
-            // TODO Distinguish between music and sounds
-            AudioListener.pause = true;
+            AmbientSlider.interactable = toggle.isOn;
 
-            // Update UI
-            if (!musicToggle.isOn && !SoundsToggle.isOn) {
-                VolumeSlider.interactable = false;
-            } else {
-                VolumeSlider.interactable = true;
+            if (toggle.isOn) {
+                AmbientManager.I.PlayMenuAmbient();
             }
         }
 
         [UsedImplicitly]
-        public void ToggleSounds(Toggle soundsToggle) {
-            // Set volume
-            // TODO Distinguish between music and sounds
-            AudioListener.pause = true;
+        public void ChangeAmbientVolume(Slider slider) {
+            var volume = slider.value/10f;
 
-            // Update UI
-            if (!soundsToggle.isOn && !MusicToggle.isOn) {
-                VolumeSlider.interactable = false;
-            } else {
-                VolumeSlider.interactable = true;
-            }
+            State.I.AmbientVolume = volume;
+            AmbientManager.I.SetVolume(volume);
+        }
+
+        [UsedImplicitly]
+        public void ToggleSounds(Toggle toggle) {
+            State.I.SoundsEnabled = toggle.isOn;
+            SoundsManager.I.ToggleEnabled(toggle.isOn);
+
+            SoundsSlider.interactable = toggle.isOn;
+        }
+
+        [UsedImplicitly]
+        public void ChangeSoundsVolume(Slider slider) {
+            var volume = slider.value/10f;
+
+            State.I.SoundsVolume = volume;
+            SoundsManager.I.SetVolume(volume);
         }
 
         [UsedImplicitly]

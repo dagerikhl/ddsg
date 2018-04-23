@@ -37,8 +37,8 @@ namespace DdSG {
 
         public void GoTo(string sceneName) {
             // Update last and current scene in state
-            State.Instance.LastScene = UnitySceneManagement.SceneManager.GetActiveScene().name;
-            State.Instance.CurrentScene = sceneName;
+            State.I.LastScene = UnitySceneManagement.SceneManager.GetActiveScene().name;
+            State.I.CurrentScene = sceneName;
 
             // Fade to new scene
             StartCoroutine(fadeOut(sceneName));
@@ -46,11 +46,11 @@ namespace DdSG {
 
         private IEnumerator fadeIn() {
             // Fade
-            float t = Constants.SCENE_TRANSITION_DURATION;
+            float t = Constants.SCENE_TRANSITION_TIME;
 
             while (t > 0f) {
                 t -= Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_DURATION);
+                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME);
                 FadeOverlay.color = FadeColor.WithAlpha(alpha);
 
                 yield return 0;
@@ -67,9 +67,9 @@ namespace DdSG {
             // Fade
             float t = 0f;
 
-            while (t < Constants.SCENE_TRANSITION_DURATION) {
+            while (t < Constants.SCENE_TRANSITION_TIME) {
                 t += Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_DURATION);
+                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME);
                 FadeOverlay.color = FadeColor.WithAlpha(alpha);
 
                 yield return 0;

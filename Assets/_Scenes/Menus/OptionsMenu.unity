@@ -1169,7 +1169,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1305852323}
-        m_MethodName: ChangeVolume
+        m_MethodName: ChangeSoundsVolume
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 778963278}
@@ -1959,7 +1959,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1305852323}
-        m_MethodName: ToggleMusic
+        m_MethodName: ToggleAmbient
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1069386049}
@@ -2439,9 +2439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7d15aff7b9fb9498a97f6c5db4cf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VolumeSlider: {fileID: 0}
-  MusicToggle: {fileID: 0}
-  SoundsToggle: {fileID: 0}
+  AmbientToggle: {fileID: 1069386049}
+  AmbientSlider: {fileID: 1865183071}
+  SoundsToggle: {fileID: 1559975296}
+  SoundsSlider: {fileID: 778963278}
   QualityDropdown: {fileID: 1095538700}
 --- !u!4 &1305852324
 Transform:
@@ -2893,7 +2894,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1305852323}
-        m_MethodName: ToggleMusic
+        m_MethodName: ToggleSounds
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1559975296}
@@ -3422,7 +3423,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1305852323}
-        m_MethodName: ChangeVolume
+        m_MethodName: ChangeAmbientVolume
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1865183071}
@@ -3489,7 +3490,7 @@ Prefab:
     - target: {fileID: 224843877733536126, guid: 83fb61b81380ccd4db89971d6daa89a3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224843877733536126, guid: 83fb61b81380ccd4db89971d6daa89a3,
         type: 2}
@@ -3549,7 +3550,7 @@ Prefab:
     - target: {fileID: 224671057159598922, guid: 83fb61b81380ccd4db89971d6daa89a3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224314441529183220, guid: 83fb61b81380ccd4db89971d6daa89a3,
         type: 2}
@@ -3569,7 +3570,7 @@ Prefab:
     - target: {fileID: 224314441529183220, guid: 83fb61b81380ccd4db89971d6daa89a3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 83fb61b81380ccd4db89971d6daa89a3, type: 2}

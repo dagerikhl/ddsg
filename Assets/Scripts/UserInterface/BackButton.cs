@@ -18,7 +18,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToLastMenu() {
-            SceneManager.Instance.GoTo(State.Instance.LastScene);
+            SceneManager.I.GoTo(State.I.LastScene);
         }
 
     }

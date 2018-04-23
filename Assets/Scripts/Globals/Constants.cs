@@ -19,7 +19,7 @@
         };
 
         // Scene transitions
-        public const float SCENE_TRANSITION_DURATION = 0.8f;
+        public const float SCENE_TRANSITION_TIME = 0.8f;
 
         // Play configuration
         public static readonly string[] DIFFICULTIES = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };

@@ -18,22 +18,22 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToLevelSelectMenu() {
-            SceneManager.Instance.GoTo(Constants.PLAY_MENU);
+            SceneManager.I.GoTo(Constants.PLAY_MENU);
         }
 
         [UsedImplicitly]
         public void GoToOptionsMenu() {
-            SceneManager.Instance.GoTo(Constants.OPTIONS_MENU);
+            SceneManager.I.GoTo(Constants.OPTIONS_MENU);
         }
 
         [UsedImplicitly]
         public void GoToHighscoreMenu() {
-            SceneManager.Instance.GoTo(Constants.HIGHSCORE_MENU);
+            SceneManager.I.GoTo(Constants.HIGHSCORE_MENU);
         }
 
         [UsedImplicitly]
         public void GoToAboutMenu() {
-            SceneManager.Instance.GoTo(Constants.ABOUT_MENU);
+            SceneManager.I.GoTo(Constants.ABOUT_MENU);
         }
 
         [UsedImplicitly]

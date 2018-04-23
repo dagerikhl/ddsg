@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class SoundsManager: ScenePersistentSingleton<SoundsManager> {
+    public class SoundsManager: AudioManager<SoundsManager> {
 
         protected SoundsManager() {
         }
@@ -10,7 +10,6 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public AudioSource SoundsSource;
         public AudioClip ClickSound;
         public AudioClip KillSound;
 
@@ -23,16 +22,15 @@ namespace DdSG {
         protected override string persistentTag { get { return "SoundsManager"; } }
 
         public void PlaySound(AudioClip sound) {
-            SoundsSource.PlayOneShot(sound);
+            Source.PlayOneShot(sound);
         }
 
         public void PlayClickSound() {
-            Debug.Log("Playing");
-            SoundsSource.PlayOneShot(ClickSound);
+            Source.PlayOneShot(ClickSound);
         }
 
         public void PlayKillSound() {
-            SoundsSource.PlayOneShot(KillSound);
+            Source.PlayOneShot(KillSound);
         }
 
     }
