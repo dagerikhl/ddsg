@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AmbientMusic
   - SceneManager
+  - SoundsManager
   layers:
   - Default
   - TransparentFX
