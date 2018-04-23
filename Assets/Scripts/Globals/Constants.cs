@@ -19,11 +19,11 @@
         };
 
         // Scene transitions
-        public const float SCENE_TRANSITION_TIME = 0.8f;
+        public const float SCENE_TRANSITION_TIME = 1.2f;
 
         // Play configuration
-        public static readonly string[] DIFFICULTIES = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
-        public static readonly string[] GAME_SPEEDS = { "1x", "2x", "3x" };
+        public static readonly string[] DIFFICULTY_OPTIONS = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
+        public static readonly string[] GAME_SPEED_OPTIONS = { "1x", "2x", "3x" };
 
     }
 

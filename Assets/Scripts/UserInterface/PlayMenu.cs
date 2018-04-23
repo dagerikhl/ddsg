@@ -23,22 +23,44 @@ namespace DdSG {
         // Private members
 
         private void Start() {
-            DifficultyDropdown.AddOptions(Constants.DIFFICULTIES.ToList());
-            GameSpeedDropdown.AddOptions(Constants.GAME_SPEEDS.ToList());
-            // TODO Add the rest
+            DifficultyDropdown.AddOptions(Constants.DIFFICULTY_OPTIONS.ToList());
+            GameSpeedDropdown.AddOptions(Constants.GAME_SPEED_OPTIONS.ToList());
+
+            DifficultyDropdown.value = Constants.DIFFICULTY_OPTIONS.ToList()
+                                                .IndexOf(unparseDifficulty(State.I.PlayConfiguration.Difficulty));
+            GameSpeedDropdown.value = Constants.GAME_SPEED_OPTIONS.ToList()
+                                               .IndexOf(unparseGameSpeed(State.I.PlayConfiguration.GameSpeed));
+            OwaspFilterToggle.isOn = State.I.PlayConfiguration.OwaspFilter;
+            EntitiesInputField.text = string.Join(",", State.I.PlayConfiguration.Entities);
         }
 
         [UsedImplicitly]
         public void StartGame() {
             State.I.PlayConfiguration = new PlayConfiguration {
-                Difficulty = float.Parse(DifficultyDropdown.captionText.text.Replace(" %", ""))/100f,
-                GameSpeed = float.Parse(GameSpeedDropdown.captionText.text.Replace("x", "")),
+                Difficulty = parseDifficulty(DifficultyDropdown.captionText.text),
+                GameSpeed = parseGameSpeed(GameSpeedDropdown.captionText.text),
                 OwaspFilter = OwaspFilterToggle.isOn,
                 Entities = EntitiesInputField.text.Split(',')
             };
 
             AmbientManager.I.PlayGameAmbient();
             SceneManager.I.GoTo(Constants.GAME_VIEW);
+        }
+
+        private float parseDifficulty(string difficulty) {
+            return float.Parse(difficulty.Replace(" %", ""))/100f;
+        }
+
+        private string unparseDifficulty(float difficulty) {
+            return difficulty*100f + " %";
+        }
+
+        private float parseGameSpeed(string gameSpeed) {
+            return float.Parse(gameSpeed.Replace("x", ""));
+        }
+
+        private string unparseGameSpeed(float gameSpeed) {
+            return Mathf.RoundToInt(gameSpeed) + "x";
         }
 
     }

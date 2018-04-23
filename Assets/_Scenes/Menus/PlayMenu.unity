@@ -1410,7 +1410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quality
+  m_Text: Difficulty
 --- !u!222 &467936330
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1484,7 +1484,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: OWASP filter
+  m_Text: OWASP Top 10 filter
 --- !u!222 &502345016
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2462,7 +2462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Speed
+  m_Text: Game Speed
 --- !u!222 &937859903
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2955,7 +2955,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1x
+  m_Text: 
 --- !u!222 &1168102995
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3248,7 +3248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DifficultyDropdown: {fileID: 1729404095}
   GameSpeedDropdown: {fileID: 1321897444}
-  OwaspFilterToggle: {fileID: 0}
+  OwaspFilterToggle: {fileID: 806167572}
   EntitiesInputField: {fileID: 661645425}
 --- !u!4 &1305852324
 Transform:
@@ -3345,13 +3345,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: 1x
-      m_Image: {fileID: 0}
-    - m_Text: 2x
-      m_Image: {fileID: 0}
-    - m_Text: 3x
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3814,7 +3808,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10 %
+  m_Text: 
 --- !u!222 &1594076821
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3903,19 +3897,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: 10 %
-      m_Image: {fileID: 0}
-    - m_Text: 25 %
-      m_Image: {fileID: 0}
-    - m_Text: 50 %
-      m_Image: {fileID: 0}
-    - m_Text: 75 %
-      m_Image: {fileID: 0}
-    - m_Text: 90 %
-      m_Image: {fileID: 0}
-    - m_Text: 100 %
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
