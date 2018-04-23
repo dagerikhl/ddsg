@@ -25,7 +25,7 @@ namespace DdSG {
 
         private void Start() {
             // Disable sounds when setting the initial state
-            SoundsManager.I.Source.enabled = false;
+            SoundsManager.I.DisableAudio();
 
             AmbientToggle.isOn = State.I.AmbientEnabled;
             AmbientSlider.value = Mathf.RoundToInt(State.I.AmbientVolume*10f);
@@ -35,13 +35,17 @@ namespace DdSG {
             QualityDropdown.value = QualitySettings.GetQualityLevel();
 
             // Restore sounds after setting the initial state
-            SoundsManager.I.Source.enabled = true;
+            SoundsManager.I.EnableAudio();
         }
 
         [UsedImplicitly]
         public void ToggleAmbient(Toggle toggle) {
             State.I.AmbientEnabled = toggle.isOn;
-            AmbientManager.I.ToggleEnabled(toggle.isOn);
+            if (toggle.isOn) {
+                AmbientManager.I.EnableAudio();
+            } else {
+                AmbientManager.I.DisableAudio();
+            }
 
             AmbientSlider.interactable = toggle.isOn;
 
@@ -61,7 +65,11 @@ namespace DdSG {
         [UsedImplicitly]
         public void ToggleSounds(Toggle toggle) {
             State.I.SoundsEnabled = toggle.isOn;
-            SoundsManager.I.ToggleEnabled(toggle.isOn);
+            if (toggle.isOn) {
+                SoundsManager.I.EnableAudio();
+            } else {
+                SoundsManager.I.DisableAudio();
+            }
 
             SoundsSlider.interactable = toggle.isOn;
         }

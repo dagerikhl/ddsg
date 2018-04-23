@@ -15,9 +15,16 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private members
+        protected bool AudioEnabled { get; private set; }
 
-        public void ToggleEnabled(bool isEnabled) {
-            Source.mute = isEnabled;
+        public void EnableAudio() {
+            AudioEnabled = true;
+            Source.mute = false;
+        }
+
+        public void DisableAudio() {
+            AudioEnabled = false;
+            Source.mute = true;
         }
 
         public void SetVolume(float volume) {

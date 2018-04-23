@@ -12,7 +12,6 @@ namespace DdSG {
         [Header("Unity Setup Fields")]
         public AudioClip ClickSound;
         public AudioClip MildClickSound;
-        public AudioClip KillSound;
 
         //[Header("Optional")]
 
@@ -22,21 +21,18 @@ namespace DdSG {
         // Private members
         protected override string persistentTag { get { return "SoundsManager"; } }
 
-        public void PlaySound(AudioClip sound) {
-            Source.PlayOneShot(sound);
-        }
-
         public void PlayClickSound() {
-            Source.PlayOneShot(ClickSound);
+            PlaySound(ClickSound);
         }
 
         public void PlayMildClickSound() {
-            Source.PlayOneShot(MildClickSound);
+            PlaySound(MildClickSound);
         }
 
-        // TODO Impl. functionality where kill sound will be required
-        public void PlayKillSound() {
-            Source.PlayOneShot(KillSound);
+        private void PlaySound(AudioClip sound) {
+            if (AudioEnabled) {
+                Source.PlayOneShot(sound);
+            }
         }
 
     }

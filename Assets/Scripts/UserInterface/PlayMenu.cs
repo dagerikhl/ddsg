@@ -24,7 +24,7 @@ namespace DdSG {
 
         private void Start() {
             // Disable sounds when setting the initial state
-            SoundsManager.I.Source.enabled = false;
+            SoundsManager.I.DisableAudio();
 
             DifficultyDropdown.AddOptions(Constants.DIFFICULTY_OPTIONS.ToList());
             GameSpeedDropdown.AddOptions(Constants.GAME_SPEED_OPTIONS.ToList());
@@ -37,7 +37,7 @@ namespace DdSG {
             EntitiesInputField.text = string.Join(",", State.I.PlayConfiguration.Entities);
 
             // Restore sounds after setting the initial state
-            SoundsManager.I.Source.enabled = true;
+            SoundsManager.I.EnableAudio();
         }
 
         [UsedImplicitly]
