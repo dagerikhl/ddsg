@@ -29,7 +29,7 @@ namespace DdSG {
 
         public void PlayMenuAmbient() {
             if (Source.clip && Source.clip.Equals(GameAmbient)) {
-                StartCoroutine(fadeOutAndInWithAmbient(MenuAmbient));
+                StartCoroutine(fadeOutAndInWithNewAmbient(MenuAmbient));
             } else {
                 Source.clip = MenuAmbient;
                 Source.Play();
@@ -39,7 +39,7 @@ namespace DdSG {
 
         public void PlayGameAmbient() {
             if (Source.clip && Source.clip.Equals(MenuAmbient)) {
-                StartCoroutine(fadeOutAndInWithAmbient(GameAmbient));
+                StartCoroutine(fadeOutAndInWithNewAmbient(GameAmbient));
             } else {
                 Source.clip = GameAmbient;
                 Source.Play();
@@ -59,7 +59,7 @@ namespace DdSG {
             }
         }
 
-        private IEnumerator fadeOutAndInWithAmbient(AudioClip ambient) {
+        private IEnumerator fadeOutAndInWithNewAmbient(AudioClip ambient) {
             var t = Constants.SCENE_TRANSITION_TIME;
 
             while (t > 0f) {
