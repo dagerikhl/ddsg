@@ -1,8 +1,11 @@
-﻿namespace DdSG {
+﻿using UnityEngine;
+
+namespace DdSG {
 
     public static class Constants {
 
         // Scenes
+        public const string LOADING_SCREEN = "LoadingScreen";
         public const string MAIN_MENU = "MainMenu";
         public const string OPTIONS_MENU = "OptionsMenu";
         public const string HIGHSCORE_MENU = "HighscoreMenu";
@@ -10,6 +13,7 @@
         public const string PLAY_MENU = "PlayMenu";
         public const string GAME_VIEW = "GameView";
         public static readonly string[] SCENES = {
+            LOADING_SCREEN,
             MAIN_MENU,
             OPTIONS_MENU,
             HIGHSCORE_MENU,
@@ -24,6 +28,11 @@
         // Play configuration
         public static readonly string[] DIFFICULTY_OPTIONS = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
         public static readonly string[] GAME_SPEED_OPTIONS = { "1x", "2x", "3x" };
+
+        // URLs
+        // TODO Fix the production URL to an actualy deployed server
+        public static readonly string API_URL =
+            Debug.isDebugBuild ? "http://localhost:8000" : "https://ddsg-server.herokuapp.com";
 
     }
 

@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace DdSG {
 
-    public class FileClient: MonoBehaviour {
+    public class FileClient: Singleton<FileClient> {
+
+        protected FileClient() {
+        }
 
         //[Header("Attributes")]
 
