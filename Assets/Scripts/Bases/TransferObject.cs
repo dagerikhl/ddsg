@@ -43,7 +43,7 @@ namespace DdSG {
         }
 
         private string indent() {
-            return StringHelper.Repeat("  ", depth);
+            return ' '.Repeat(depth*2);
         }
 
     }

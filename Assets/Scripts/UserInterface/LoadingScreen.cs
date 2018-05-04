@@ -84,7 +84,7 @@ namespace DdSG {
         private string getLoadingTextDots() {
             var numberOfDots = animationValue < 0.25f ? 0 : animationValue < 0.5f ? 1 : animationValue < 0.75f ? 2 : 3;
 
-            return StringHelper.Repeat(" .", numberOfDots);
+            return StringExtensions.Repeat(" .", numberOfDots);
         }
 
     }
