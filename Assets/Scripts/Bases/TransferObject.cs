@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace DdSG {
 
@@ -7,7 +7,7 @@ namespace DdSG {
     public abstract class TransferObject {
 
         public override string ToString() {
-            return JsonUtility.ToJson(this, true);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
     }

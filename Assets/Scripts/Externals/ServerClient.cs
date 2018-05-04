@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -37,7 +38,7 @@ namespace DdSG {
                 Debug.Log(req.error);
             } else {
                 var text = req.downloadHandler.text;
-                var data = JsonUtility.FromJson<T>(text);
+                var data = JsonConvert.DeserializeObject<T>(text);
                 FileClient.I.SaveToFile(filename, data);
             }
         }
