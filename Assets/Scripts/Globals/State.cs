@@ -5,6 +5,11 @@ namespace DdSG {
     public class State: Singleton<State> {
 
         protected State() {
+            AmbientEnabled = true;
+            AmbientVolume = 1f;
+            SoundsEnabled = true;
+            SoundsVolume = 1f;
+            PlayConfiguration = new PlayConfiguration();
         }
 
         // Scenes
@@ -18,7 +23,6 @@ namespace DdSG {
         }
 
         private string currentScene = Constants.MAIN_MENU;
-
         public string CurrentScene {
             get { return currentScene; }
             set {
@@ -28,25 +32,17 @@ namespace DdSG {
 
         // Audio
         // TODO Impl. fetching of these settings from file
-        private bool ambientEnabled = true;
-        public bool AmbientEnabled { get { return ambientEnabled; } set { ambientEnabled = value; } }
-
-        private float ambientVolume = 1f;
-        public float AmbientVolume { get { return ambientVolume; } set { ambientVolume = value; } }
-
-        private bool soundsEnabled = true;
-        public bool SoundsEnabled { get { return soundsEnabled; } set { soundsEnabled = value; } }
-
-        private float soundsVolume = 1f;
-        public float SoundsVolume { get { return soundsVolume; } set { soundsVolume = value; } }
+        public bool AmbientEnabled { get; set; }
+        public float AmbientVolume { get; set; }
+        public bool SoundsEnabled { get; set; }
+        public float SoundsVolume { get; set; }
 
         // Play configuration
-        private PlayConfiguration playConfiguration = new PlayConfiguration();
 
-        public PlayConfiguration PlayConfiguration {
-            get { return playConfiguration; }
-            set { playConfiguration = value; }
-        }
+        public PlayConfiguration PlayConfiguration { get; set; }
+
+        // Entities
+        public Entities Entities { get; set; }
 
     }
 
