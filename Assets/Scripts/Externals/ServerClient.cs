@@ -1,14 +1,25 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DdSG {
 
-    public class ServerClient {
+    public class ServerClient: MonoBehaviour {
 
-        private const string apiEndpoint = "/entities";
-        private readonly string apiPath;
+        //[Header("Attributes")]
 
-        public ServerClient() {
-            apiPath = Environment.GetEnvironmentVariable("API_URI") + apiEndpoint;
+        [Header("Unity Setup Fields")]
+        public WebClient WebClient;
+
+        //[Header("Optional")]
+
+        // Public members hidden from Unity Inspector
+        //[HideInInspector]
+
+        // Private and protected members
+        private readonly string entitiesEndpoint = Environment.GetEnvironmentVariable("API_URI") + "/" + "entities";
+
+        public void DownloadEntities() {
+            StartCoroutine(WebClient.DownloadJsonToFile<Entities>(entitiesEndpoint, "entities.json"));
         }
 
     }

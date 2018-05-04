@@ -8,7 +8,8 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        //[Header("Unity Setup Fields")]
+        [Header("Unity Setup Fields")]
+        public FileClient FileClient;
 
         //[Header("Optional")]
 
@@ -16,13 +17,8 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
-        private FileClient fc;
 
-        private void Start() {
-            fc = GetComponent<FileClient>();
-        }
-
-        private IEnumerator DownloadJsonToFile<T>(string uri, string filename) {
+        public IEnumerator DownloadJsonToFile<T>(string uri, string filename) {
             var req = UnityWebRequest.Get(uri);
             yield return req.SendWebRequest();
 
@@ -31,7 +27,7 @@ namespace DdSG {
             } else {
                 var text = req.downloadHandler.text;
                 var data = JsonUtility.FromJson<T>(text);
-                fc.SaveToFile<T>(filename, data);
+                FileClient.SaveToFile(filename, data);
             }
         }
 
