@@ -22,7 +22,7 @@ namespace DdSG {
         private readonly BinaryFormatter bf = new BinaryFormatter();
 
         public T LoadFromFile<T>(string filename) {
-            var path = Application.persistentDataPath + "/" + filename;
+            var path = Application.persistentDataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.Open);
 
             T data = (T) bf.Deserialize(file);
@@ -32,7 +32,7 @@ namespace DdSG {
         }
 
         public void SaveToFile<T>(string filename, T data) {
-            var path = Application.persistentDataPath + "/" + filename;
+            var path = Application.persistentDataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.OpenOrCreate);
 
             bf.Serialize(file, data);

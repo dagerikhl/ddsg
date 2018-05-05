@@ -34,6 +34,9 @@ namespace DdSG {
         public static readonly string API_URL =
             Debug.isDebugBuild ? "http://localhost:8000" : "https://ddsg-server.herokuapp.com";
 
+        // Files
+        public const string FILE_DATA_EXT = ".ddsgd";
+
     }
 
 }

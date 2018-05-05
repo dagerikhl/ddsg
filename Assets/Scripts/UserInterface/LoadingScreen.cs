@@ -40,7 +40,7 @@ namespace DdSG {
             Debug.Log("Fetching and saving entities... Done.");
 
             Debug.Log("Loading entities...");
-            var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities.json");
+            var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
             State.I.Entities = entitiesJson.entities;
             Debug.Log("Loading entities... Done.");
 
