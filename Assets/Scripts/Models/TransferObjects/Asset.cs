@@ -6,14 +6,17 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class Asset: StixEntityBase {
+    public class Asset: StixDataEntityBase {
 
-        public string[] description;
-        public ExternalReference[] external_references;
         public AssetCustoms custom;
 
-        [JsonIgnore]
-        public string FullDescription { get { return string.Join(" ", description); } }
+    }
+
+    [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class AssetCustoms: TransferObjectBase {
+
+        public string category;
 
     }
 

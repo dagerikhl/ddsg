@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class AttackPattern: StixEntityBase {
+    public class AttackPattern: StixDataEntityBase {
 
     }
 
