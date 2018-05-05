@@ -10,6 +10,7 @@ namespace DdSG {
         public string source_name;
         public string id;
         public string url;
+        public string description;
 
     }
 

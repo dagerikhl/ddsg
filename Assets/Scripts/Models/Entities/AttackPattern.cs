@@ -30,27 +30,54 @@ namespace DdSG {
     }
 
     [Serializable]
-    public class AttackSteps {
+    public class AttackSteps: TransferObjectBase {
+
+        public AttackStep[] explore;
+        public AttackStep[] experiment;
+        public AttackStep[] exploit;
 
     }
 
     [Serializable]
-    public class AttackExample {
+    public class AttackStep: TransferObjectBase {
+
+        public string title;
+        public string[] description;
+        public string[] steps;
 
     }
 
     [Serializable]
-    public class AttackMotivation {
+    public class AttackExample: TransferObjectBase {
+
+        public string[] description;
+        public ExternalReference[] external_references;
 
     }
 
     [Serializable]
-    public class AttackInjectionVector {
+    public class AttackMotivation: TransferObjectBase {
+
+        public string[] scope;
+        public string[] impact;
+        public string[] notes;
 
     }
 
     [Serializable]
-    public class AttackImpact {
+    public class AttackInjectionVector: TransferObjectBase {
+
+        public string description;
+        public string[] category;
+
+    }
+
+    [Serializable]
+    public class AttackImpact: TransferObjectBase {
+
+        public string confidentiality;
+        public string integrity;
+        public string availability;
 
     }
 
