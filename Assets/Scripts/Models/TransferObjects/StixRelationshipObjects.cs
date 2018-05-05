@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class StixRelationshipObjects: TransferObject {
+    public class StixRelationshipObjects: TransferObjectBase {
 
         public Relationship[] relationships;
 

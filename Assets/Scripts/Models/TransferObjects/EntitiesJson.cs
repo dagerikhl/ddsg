@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class EntitiesJson: TransferObject {
+    public class EntitiesJson: TransferObjectBase {
 
         public string created;
         public Entities entities;

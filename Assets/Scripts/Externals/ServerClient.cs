@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 namespace DdSG {
 
-    public class ServerClient: Singleton<ServerClient> {
+    public class ServerClient: SingletonBehaviour<ServerClient> {
 
         protected ServerClient() {
         }

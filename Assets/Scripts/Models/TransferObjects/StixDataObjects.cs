@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class StixDataObjects: TransferObject {
+    public class StixDataObjects: TransferObjectBase {
 
         public AttackPattern[] attack_patterns;
         public CourseOfAction[] course_of_actions;

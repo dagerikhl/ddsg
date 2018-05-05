@@ -12,7 +12,7 @@ namespace DdSG {
     /// As a note, this is made as MonoBehaviour because we need Coroutines.
     /// </summary>
     [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-    public class Singleton<T>: MonoBehaviour where T : MonoBehaviour {
+    public abstract class SingletonBehaviour<T>: MonoBehaviour where T : MonoBehaviour {
 
         private static T instance;
 
@@ -26,7 +26,7 @@ namespace DdSG {
 
                         if (FindObjectsOfType(typeof(T)).Length > 1) {
                             Debug.LogError(
-                                "[Singleton] Something went really wrong "
+                                "[SingletonBehaviour] Something went really wrong "
                                 + " - there should never be more than 1 singleton!"
                                 + " Reopening the scene might fix it.");
                             return instance;
@@ -40,13 +40,13 @@ namespace DdSG {
                             DontDestroyOnLoad(singleton);
 
                             Debug.Log(
-                                "[Singleton] An instance of "
+                                "[SingletonBehaviour] An instance of "
                                 + typeof(T)
                                 + " is needed in the scene, so '"
                                 + singleton
                                 + "' was created with DontDestroyOnLoad.");
                         } else {
-                            Debug.Log("[Singleton] Using instance already created: " + instance.gameObject.name);
+                            Debug.Log("[SingletonBehaviour] Using instance already created: " + instance.gameObject.name);
                         }
                     }
 

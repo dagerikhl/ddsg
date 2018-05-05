@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DdSG {
 
-    public class AmbientManager: AudioManager<AmbientManager> {
+    public class AmbientManager: AudioManagerBase<AmbientManager> {
 
         protected AmbientManager() {
         }

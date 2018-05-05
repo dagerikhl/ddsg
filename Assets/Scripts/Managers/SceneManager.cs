@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace DdSG {
 
-    public class SceneManager: ScenePersistentSingleton<SceneManager> {
+    public class SceneManager: PersistentSingletonBehaviour<SceneManager> {
 
         protected SceneManager() {
         }

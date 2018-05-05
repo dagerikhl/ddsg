@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class State: Singleton<State> {
+    public class State: SingletonBehaviour<State> {
 
         protected State() {
             AmbientEnabled = true;

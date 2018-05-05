@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public abstract class AudioManager<T>: ScenePersistentSingleton<T> where T : MonoBehaviour {
+    public abstract class AudioManagerBase<T>: PersistentSingletonBehaviour<T> where T : MonoBehaviour {
 
         //[Header("Attributes")]
 

@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class SoundsManager: AudioManager<SoundsManager> {
+    public class SoundsManager: AudioManagerBase<SoundsManager> {
 
         protected SoundsManager() {
         }

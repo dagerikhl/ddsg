@@ -7,7 +7,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class Relationship: TransferObject {
+    public class Relationship: TransferObjectBase {
 
         [JsonConverter(typeof(StringEnumConverter))]
         public StixType type;
