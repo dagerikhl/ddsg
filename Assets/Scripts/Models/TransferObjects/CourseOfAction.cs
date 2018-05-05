@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class CourseOfAction: TransferObjectBase {
+    public class CourseOfAction: StixEntityBase {
 
     }
 

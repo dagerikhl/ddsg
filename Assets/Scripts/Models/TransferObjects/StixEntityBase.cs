@@ -7,14 +7,14 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class Relationship: StixEntityBase {
+    public abstract class StixEntityBase: TransferObjectBase {
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public StixRelationshipType relationship_type;
+        public StixType type;
         [JsonConverter(typeof(StixIdConverter))]
-        public StixId source_ref;
-        [JsonConverter(typeof(StixIdConverter))]
-        public StixId target_ref;
+        public StixId id;
+        public DateTime created;
+        public DateTime modified;
 
     }
 

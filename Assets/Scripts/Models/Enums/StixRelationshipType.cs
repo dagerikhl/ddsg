@@ -1,12 +1,13 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Runtime.Serialization;
 
 namespace DdSG {
 
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum StixRelationshipType {
 
-        mitigates,
-        targets
+        [EnumMember(Value = "mitigates")]
+        Mitigates,
+        [EnumMember(Value = "targets")]
+        Targets
 
     }
 

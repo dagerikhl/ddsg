@@ -5,7 +5,7 @@ namespace DdSG {
 
     [Serializable]
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class Asset: TransferObjectBase {
+    public class Asset: StixEntityBase {
 
     }
 

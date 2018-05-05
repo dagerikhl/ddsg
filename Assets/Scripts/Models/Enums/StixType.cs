@@ -1,14 +1,17 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Runtime.Serialization;
 
 namespace DdSG {
 
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum StixType {
 
-        attack_pattern,
-        course_of_action,
-        asset,
-        relationship
+        [EnumMember(Value = "attack-pattern")]
+        AttackPattern,
+        [EnumMember(Value = "course-of-action")]
+        CourseOfAction,
+        [EnumMember(Value = "asset")]
+        Asset,
+        [EnumMember(Value = "relationship")]
+        Relationship
 
     }
 
