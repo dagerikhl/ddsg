@@ -7,7 +7,7 @@ namespace DdSG {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class EntitiesJson: TransferObjectBase {
 
-        public string created;
+        public DateTime created;
         public Entities entities;
 
     }

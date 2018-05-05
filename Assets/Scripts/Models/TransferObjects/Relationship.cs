@@ -12,8 +12,8 @@ namespace DdSG {
         [JsonConverter(typeof(StringEnumConverter))]
         public StixType type;
         public string id;
-        public string created;
-        public string modified;
+        public DateTime created;
+        public DateTime modified;
         [JsonConverter(typeof(StringEnumConverter))]
         public StixRelationshipType relationship_type;
         public string source_ref;
