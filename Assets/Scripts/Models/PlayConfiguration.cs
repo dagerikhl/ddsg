@@ -11,7 +11,7 @@
             Difficulty = 0.5f;
             GameSpeed = 1f;
             OwaspFilter = true;
-            Entities = new string[] { "attackPatterns", "weaknesses", "assets", "courseOfActions" };
+            Entities = new string[] { "attack_patterns", "weaknesses", "assets", "course_of_ations" };
         }
 
     }
