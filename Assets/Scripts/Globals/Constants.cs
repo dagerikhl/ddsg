@@ -32,7 +32,7 @@ namespace DdSG {
         // URLs
         // TODO Fix the production URL to an actualy deployed server
         public static readonly string API_URL =
-            Debug.isDebugBuild ? "http://localhost:8000" : "https://ddsg-server.herokuapp.com";
+            Debug.isDebugBuild ? "http://localhost:8000" : "https://ddsg-server.azurewebsites.net";
 
         // Files
         public const string FILE_DATA_EXT = ".ddsgd";
