@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
+
+// ReSharper disable InconsistentNaming
 
 namespace DdSG {
 
     [Serializable]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class EntitiesJson: TransferObjectBase {
 
         public DateTime created;

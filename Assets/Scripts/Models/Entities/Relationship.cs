@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+// ReSharper disable InconsistentNaming
 
 namespace DdSG {
 
     [Serializable]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Relationship: StixEntityBase {
 
         [JsonConverter(typeof(StringEnumConverter))]

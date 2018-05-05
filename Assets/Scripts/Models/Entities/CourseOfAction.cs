@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
+
+// ReSharper disable InconsistentNaming
 
 namespace DdSG {
 
     [Serializable]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class CourseOfAction: StixDataEntityBase {
 
         public CourseOfActionCustoms custom;
@@ -12,7 +12,6 @@ namespace DdSG {
     }
 
     [Serializable]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class CourseOfActionCustoms: TransferObjectBase {
 
         public string category;
