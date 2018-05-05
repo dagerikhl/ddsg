@@ -43,7 +43,8 @@ namespace DdSG {
             var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
             State.I.Entities = entitiesJson.entities;
             Debug.Log("Loading entities... Done.");
-            Debug.Log(entitiesJson);
+            // TODO Remove
+            Debug.Log(entitiesJson.entities.SDOs.assets[0]);
 
             SceneManager.I.GoTo(Constants.MAIN_MENU);
         }
