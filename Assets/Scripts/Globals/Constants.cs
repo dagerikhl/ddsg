@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace DdSG {
+﻿namespace DdSG {
 
     public static class Constants {
 
@@ -30,9 +28,8 @@ namespace DdSG {
         public static readonly string[] GAME_SPEED_OPTIONS = { "1x", "2x", "3x" };
 
         // URLs
-        // TODO Fix the production URL to an actualy deployed server
-        public static readonly string API_URL =
-            Debug.isDebugBuild ? "http://localhost:8000" : "https://ddsg-server.azurewebsites.net";
+        public const string API_URL = "https://ddsg-server.azurewebsites.net";
+        public const string API_URL_DEVELOPMENT = "http://localhost:8000";
 
         // Files
         public const string FILE_DATA_EXT = ".ddsgd";

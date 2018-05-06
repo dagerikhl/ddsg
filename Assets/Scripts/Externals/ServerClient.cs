@@ -23,7 +23,9 @@ namespace DdSG {
         private string entitiesEndpoint;
 
         private void Start() {
-            entitiesEndpoint = Constants.API_URL + "/" + "entities";
+            entitiesEndpoint = (Debug.isDebugBuild ? Constants.API_URL_DEVELOPMENT : Constants.API_URL)
+                               + "/"
+                               + "entities";
         }
 
         public IEnumerator DownloadEntities() {
