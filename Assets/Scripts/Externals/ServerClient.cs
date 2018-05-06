@@ -37,7 +37,7 @@ namespace DdSG {
             yield return req.SendWebRequest();
 
             if (req.isNetworkError || req.isHttpError) {
-                Debug.Log(req.error);
+                Logger.Error(req.error);
             } else {
                 var text = req.downloadHandler.text;
                 var data = JsonConvert.DeserializeObject<T>(text);

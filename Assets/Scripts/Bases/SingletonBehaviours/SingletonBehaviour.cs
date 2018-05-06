@@ -25,7 +25,7 @@ namespace DdSG {
                         instance = (T) FindObjectOfType(typeof(T));
 
                         if (FindObjectsOfType(typeof(T)).Length > 1) {
-                            Debug.LogError(
+                            Logger.Error(
                                 "[SingletonBehaviour] Something went really wrong "
                                 + " - there should never be more than 1 singleton!"
                                 + " Reopening the scene might fix it.");
@@ -39,14 +39,15 @@ namespace DdSG {
 
                             DontDestroyOnLoad(singleton);
 
-                            Debug.Log(
+                            Logger.Debug(
                                 "[SingletonBehaviour] An instance of "
                                 + typeof(T)
                                 + " is needed in the scene, so '"
                                 + singleton
                                 + "' was created with DontDestroyOnLoad.");
                         } else {
-                            Debug.Log("[SingletonBehaviour] Using instance already created: " + instance.gameObject.name);
+                            Logger.Debug(
+                                "[SingletonBehaviour] Using instance already created: " + instance.gameObject.name);
                         }
                     }
 

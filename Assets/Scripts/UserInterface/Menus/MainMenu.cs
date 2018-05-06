@@ -38,7 +38,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void ExitGame() {
-            Debug.Log("Exiting game...");
+            Logger.Debug("Exiting game...");
             Application.Quit();
         }
 

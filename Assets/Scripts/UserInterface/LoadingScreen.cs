@@ -35,14 +35,14 @@ namespace DdSG {
 
         private IEnumerator updateEntities() {
             // TODO Check if the file exists and is older than date X
-            Debug.Log("Fetching and saving entities...");
+            Logger.Debug("Fetching and saving entities...");
             yield return StartCoroutine(ServerClient.I.DownloadEntities());
-            Debug.Log("Fetching and saving entities... Done.");
+            Logger.Debug("Fetching and saving entities... Done.");
 
-            Debug.Log("Loading entities...");
+            Logger.Debug("Loading entities...");
             var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
             State.I.Entities = entitiesJson.entities;
-            Debug.Log("Loading entities... Done.");
+            Logger.Debug("Loading entities... Done.");
 
             SceneManager.I.GoTo(Constants.MAIN_MENU);
         }
