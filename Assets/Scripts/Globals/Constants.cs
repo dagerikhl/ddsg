@@ -28,7 +28,7 @@
         public static readonly string[] GAME_SPEED_OPTIONS = { "1x", "2x", "3x" };
 
         // URLs
-        public const string API_URL = "https://ddsg-server.azurewebsites.net";
+        public const string API_URL = "https://ddsg-server.herokuapp.com";
         public const string API_URL_DEVELOPMENT = "http://localhost:8000";
 
         // Files
