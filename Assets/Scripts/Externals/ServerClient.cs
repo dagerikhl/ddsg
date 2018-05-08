@@ -29,7 +29,8 @@ namespace DdSG {
         }
 
         public IEnumerator DownloadEntities() {
-            yield return StartCoroutine(DownloadJsonToFile<EntitiesJson>(entitiesEndpoint, "entities"));
+            yield return StartCoroutine(
+                DownloadJsonToFile<EntitiesJson>(entitiesEndpoint, Constants.ENTITIES_FILENAME));
         }
 
         private IEnumerator DownloadJsonToFile<T>(string uri, string filename) {

@@ -65,7 +65,7 @@ namespace DdSG {
         }
 
         public void StoreOptions() {
-            FileClient.I.SaveToFile("options", Options);
+            FileClient.I.SaveToFile(Constants.OPTIONS_FILENAME, Options);
         }
 
     }

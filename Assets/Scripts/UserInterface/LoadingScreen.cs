@@ -38,29 +38,26 @@ namespace DdSG {
         }
 
         private void fetchOptions() {
-            const string filename = "options";
-
-            if (FileClient.I.FileExists(filename)) {
-                State.I.Options = FileClient.I.LoadFromFile<Options>(filename);
+            if (FileClient.I.FileExists(Constants.OPTIONS_FILENAME)) {
+                State.I.Options = FileClient.I.LoadFromFile<Options>(Constants.OPTIONS_FILENAME);
             } else {
-                FileClient.I.SaveToFile(filename, State.I.Options);
+                FileClient.I.SaveToFile(Constants.OPTIONS_FILENAME, State.I.Options);
             }
         }
 
         private void fetchDefaultPlayConfiguration() {
-            const string filename = "playConfiguration";
-
-            if (FileClient.I.FileExists(filename)) {
-                State.I.PlayConfiguration = FileClient.I.LoadFromFile<PlayConfiguration>(filename);
+            if (FileClient.I.FileExists(Constants.PLAY_CONFIGURATION_FILENAME)) {
+                State.I.PlayConfiguration =
+                    FileClient.I.LoadFromFile<PlayConfiguration>(Constants.PLAY_CONFIGURATION_FILENAME);
             } else {
-                FileClient.I.SaveToFile(filename, State.I.PlayConfiguration);
+                FileClient.I.SaveToFile(Constants.PLAY_CONFIGURATION_FILENAME, State.I.PlayConfiguration);
             }
         }
 
         private IEnumerator updateEntities() {
             var shouldFetchNewEntities = true;
-            if (FileClient.I.FileExists("entities")) {
-                var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
+            if (FileClient.I.FileExists(Constants.ENTITIES_FILENAME)) {
+                var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
                 if (entitiesJson.created.AddDays(7) > DateTime.Now) {
                     shouldFetchNewEntities = false;
                 }
@@ -73,7 +70,7 @@ namespace DdSG {
             }
 
             Logger.Debug("Loading entities...");
-            var newEntitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
+            var newEntitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
             State.I.Entities = newEntitiesJson.entities;
             Logger.Debug("Loading entities... Done.");
 
