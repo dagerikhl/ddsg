@@ -24,7 +24,9 @@ namespace DdSG {
         protected override string persistentTag { get { return "AmbientManager"; } }
 
         private void Start() {
-            PlayMenuAmbient();
+            if (State.I.Options.AmbientEnabled) {
+                PlayMenuAmbient();
+            }
         }
 
         public void PlayMenuAmbient() {
