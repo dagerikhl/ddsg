@@ -52,7 +52,7 @@ namespace DdSG {
 
             while (t < Constants.SCENE_TRANSITION_TIME) {
                 t += Time.deltaTime;
-                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.AmbientVolume;
+                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.Options.AmbientVolume;
                 Source.volume = volume;
 
                 yield return 0;
@@ -64,7 +64,7 @@ namespace DdSG {
 
             while (t > 0f) {
                 t -= Time.deltaTime;
-                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.AmbientVolume;
+                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.Options.AmbientVolume;
                 Source.volume = volume;
 
                 yield return 0;

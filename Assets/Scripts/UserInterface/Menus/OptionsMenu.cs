@@ -27,10 +27,10 @@ namespace DdSG {
             // Disable sounds when setting the initial state
             SoundsManager.I.DisableAudio();
 
-            AmbientToggle.isOn = State.I.AmbientEnabled;
-            AmbientSlider.value = Mathf.RoundToInt(State.I.AmbientVolume*10f);
-            SoundsToggle.isOn = State.I.SoundsEnabled;
-            SoundsSlider.value = Mathf.RoundToInt(State.I.SoundsVolume*10f);
+            AmbientToggle.isOn = State.I.Options.AmbientEnabled;
+            AmbientSlider.value = Mathf.RoundToInt(State.I.Options.AmbientVolume*10f);
+            SoundsToggle.isOn = State.I.Options.SoundsEnabled;
+            SoundsSlider.value = Mathf.RoundToInt(State.I.Options.SoundsVolume*10f);
 
             QualityDropdown.value = QualitySettings.GetQualityLevel();
 
@@ -40,7 +40,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void ToggleAmbient(Toggle toggle) {
-            State.I.AmbientEnabled = toggle.isOn;
+            State.I.Options.AmbientEnabled = toggle.isOn;
             if (toggle.isOn) {
                 AmbientManager.I.EnableAudio();
             } else {
@@ -58,13 +58,13 @@ namespace DdSG {
         public void ChangeAmbientVolume(Slider slider) {
             var volume = slider.value/10f;
 
-            State.I.AmbientVolume = volume;
+            State.I.Options.AmbientVolume = volume;
             AmbientManager.I.SetVolume(volume);
         }
 
         [UsedImplicitly]
         public void ToggleSounds(Toggle toggle) {
-            State.I.SoundsEnabled = toggle.isOn;
+            State.I.Options.SoundsEnabled = toggle.isOn;
             if (toggle.isOn) {
                 SoundsManager.I.EnableAudio();
             } else {
@@ -78,7 +78,7 @@ namespace DdSG {
         public void ChangeSoundsVolume(Slider slider) {
             var volume = slider.value/10f;
 
-            State.I.SoundsVolume = volume;
+            State.I.Options.SoundsVolume = volume;
             SoundsManager.I.SetVolume(volume);
         }
 

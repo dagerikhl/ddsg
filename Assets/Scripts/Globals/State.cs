@@ -39,10 +39,7 @@ namespace DdSG {
 
         // Audio
         // TODO Impl. fetching of these settings from file
-        public bool AmbientEnabled { get; set; }
-        public float AmbientVolume { get; set; }
-        public bool SoundsEnabled { get; set; }
-        public float SoundsVolume { get; set; }
+        public Options Options { get; set; }
 
         // Play configuration
         public PlayConfiguration PlayConfiguration { get; set; }
@@ -51,10 +48,12 @@ namespace DdSG {
         public Entities Entities { get; set; }
 
         private void Start() {
-            AmbientEnabled = true;
-            AmbientVolume = 1f;
-            SoundsEnabled = true;
-            SoundsVolume = 1f;
+            Options = new Options {
+                AmbientEnabled = true,
+                AmbientVolume = 1f,
+                SoundsEnabled = true,
+                SoundsVolume = 1f
+            };
             PlayConfiguration = new PlayConfiguration {
                 Difficulty = 0.5f,
                 GameSpeed = 1f,
