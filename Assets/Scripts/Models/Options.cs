@@ -9,6 +9,7 @@ namespace DdSG {
         public float AmbientVolume { get; set; }
         public bool SoundsEnabled { get; set; }
         public float SoundsVolume { get; set; }
+        public int QualityLevelValue { get; set; }
 
     }
 

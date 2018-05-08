@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 namespace DdSG {
 
-    public class State: PersistentSingletonBehaviour<State> {
+    public class State: SingletonBehaviour<State> {
 
         protected State() {
         }
@@ -17,7 +18,6 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
-        protected override string persistentTag { get { return "State"; } }
 
         // Scenes
         private string lastScene = Constants.MAIN_MENU;
@@ -38,7 +38,6 @@ namespace DdSG {
         }
 
         // Audio
-        // TODO Impl. fetching of these settings from file
         public Options Options { get; set; }
 
         // Play configuration
@@ -52,7 +51,8 @@ namespace DdSG {
                 AmbientEnabled = true,
                 AmbientVolume = 1f,
                 SoundsEnabled = true,
-                SoundsVolume = 1f
+                SoundsVolume = 1f,
+                QualityLevelValue = QualitySettings.GetQualityLevel()
             };
 
             // Default play configuration
@@ -62,6 +62,10 @@ namespace DdSG {
                 OwaspFilter = true,
                 Entities = new string[] { "attack_patterns", "weaknesses", "assets", "course_of_ations" }
             };
+        }
+
+        public void StoreOptions() {
+            FileClient.I.SaveToFile("options", Options);
         }
 
     }

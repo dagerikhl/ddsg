@@ -6,7 +6,6 @@ TagManager:
   tags:
   - SceneManager
   - SoundsManager
-  - State
   - AmbientManager
   layers:
   - Default
