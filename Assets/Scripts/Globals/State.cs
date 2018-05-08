@@ -47,13 +47,15 @@ namespace DdSG {
         // Entities
         public Entities Entities { get; set; }
 
-        private void Start() {
+        private void Awake() {
             Options = new Options {
                 AmbientEnabled = true,
                 AmbientVolume = 1f,
                 SoundsEnabled = true,
                 SoundsVolume = 1f
             };
+
+            // Default play configuration
             PlayConfiguration = new PlayConfiguration {
                 Difficulty = 0.5f,
                 GameSpeed = 1f,

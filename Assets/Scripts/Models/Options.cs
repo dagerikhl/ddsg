@@ -1,5 +1,8 @@
-﻿namespace DdSG {
+﻿using System;
 
+namespace DdSG {
+
+    [Serializable]
     public class Options {
 
         public bool AmbientEnabled { get; set; }

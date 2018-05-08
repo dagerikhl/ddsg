@@ -25,7 +25,7 @@ namespace DdSG {
         private float animationValue;
 
         private void Start() {
-            fetchSettings();
+            fetchOptions();
             fetchDefaultPlayConfiguration();
 
             StartCoroutine(updateEntities());
@@ -37,13 +37,23 @@ namespace DdSG {
             updateLoadingText();
         }
 
-        private void fetchSettings() {
-            if (FileClient.I.FileExists("settings")) {
+        private void fetchOptions() {
+            const string filename = "options";
+
+            if (FileClient.I.FileExists(filename)) {
+                State.I.Options = FileClient.I.LoadFromFile<Options>(filename);
+            } else {
+                FileClient.I.SaveToFile(filename, State.I.Options);
             }
         }
 
         private void fetchDefaultPlayConfiguration() {
-            if (FileClient.I.FileExists("playConfiguration")) {
+            const string filename = "playConfiguration";
+
+            if (FileClient.I.FileExists(filename)) {
+                State.I.PlayConfiguration = FileClient.I.LoadFromFile<PlayConfiguration>(filename);
+            } else {
+                FileClient.I.SaveToFile(filename, State.I.PlayConfiguration);
             }
         }
 

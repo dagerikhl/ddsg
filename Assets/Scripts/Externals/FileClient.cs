@@ -22,7 +22,7 @@ namespace DdSG {
         private readonly BinaryFormatter bf = new BinaryFormatter();
         private string dataPath;
 
-        private void Start() {
+        private void Awake() {
             dataPath = Application.persistentDataPath;
         }
 
