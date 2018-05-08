@@ -26,6 +26,7 @@ namespace DdSG {
 
         private void Start() {
             StartCoroutine(updateEntities());
+            StartCoroutine(fetchSettings());
         }
 
         private void Update() {

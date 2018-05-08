@@ -9,7 +9,12 @@ namespace DdSG {
             AmbientVolume = 1f;
             SoundsEnabled = true;
             SoundsVolume = 1f;
-            PlayConfiguration = new PlayConfiguration();
+            PlayConfiguration = new PlayConfiguration {
+                Difficulty = 0.5f,
+                GameSpeed = 1f,
+                OwaspFilter = true,
+                Entities = new string[] { "attack_patterns", "weaknesses", "assets", "course_of_ations" }
+            };
         }
 
         // Scenes
@@ -38,7 +43,6 @@ namespace DdSG {
         public float SoundsVolume { get; set; }
 
         // Play configuration
-
         public PlayConfiguration PlayConfiguration { get; set; }
 
         // Entities
