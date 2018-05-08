@@ -20,7 +20,11 @@ namespace DdSG {
 
         // Private and protected members
         private readonly BinaryFormatter bf = new BinaryFormatter();
-        private readonly string dataPath = Application.persistentDataPath;
+        private string dataPath;
+
+        private void Start() {
+            dataPath = Application.persistentDataPath;
+        }
 
         public bool FileExists(string filename) {
             var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;

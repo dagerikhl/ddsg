@@ -56,8 +56,6 @@ namespace DdSG {
             Logger.Debug("Loading entities... Done.");
 
             SceneManager.I.GoTo(Constants.MAIN_MENU);
-
-            yield return 0;
         }
 
         private void updateLoadingText() {
