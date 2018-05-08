@@ -20,9 +20,15 @@ namespace DdSG {
 
         // Private and protected members
         private readonly BinaryFormatter bf = new BinaryFormatter();
+        private readonly string dataPath = Application.persistentDataPath;
+
+        public bool FileExists(string filename) {
+            var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
+            return File.Exists(path);
+        }
 
         public T LoadFromFile<T>(string filename) {
-            var path = Application.persistentDataPath + "/" + filename + Constants.FILE_DATA_EXT;
+            var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.Open);
 
             T data = (T) bf.Deserialize(file);
@@ -32,7 +38,7 @@ namespace DdSG {
         }
 
         public void SaveToFile<T>(string filename, T data) {
-            var path = Application.persistentDataPath + "/" + filename + Constants.FILE_DATA_EXT;
+            var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.OpenOrCreate);
 
             bf.Serialize(file, data);

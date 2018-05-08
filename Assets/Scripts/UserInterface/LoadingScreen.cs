@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,17 +35,28 @@ namespace DdSG {
         }
 
         private IEnumerator updateEntities() {
-            // TODO Check if the file exists and is older than date X
-            Logger.Debug("Fetching and saving entities...");
-            yield return StartCoroutine(ServerClient.I.DownloadEntities());
-            Logger.Debug("Fetching and saving entities... Done.");
+            var shouldFetchNewEntities = true;
+            if (FileClient.I.FileExists("entities")) {
+                var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
+                if (entitiesJson.created.AddDays(7) > DateTime.Now) {
+                    shouldFetchNewEntities = false;
+                }
+            }
+
+            if (shouldFetchNewEntities) {
+                Logger.Debug("Fetching and saving entities...");
+                yield return StartCoroutine(ServerClient.I.DownloadEntities());
+                Logger.Debug("Fetching and saving entities... Done.");
+            }
 
             Logger.Debug("Loading entities...");
-            var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
-            State.I.Entities = entitiesJson.entities;
+            var newEntitiesJson = FileClient.I.LoadFromFile<EntitiesJson>("entities");
+            State.I.Entities = newEntitiesJson.entities;
             Logger.Debug("Loading entities... Done.");
 
             SceneManager.I.GoTo(Constants.MAIN_MENU);
+
+            yield return 0;
         }
 
         private void updateLoadingText() {
