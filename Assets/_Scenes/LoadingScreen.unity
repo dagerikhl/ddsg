@@ -1380,6 +1380,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   FadeOverlay: {fileID: 393151229}
+  InputBlocker: {fileID: 393151230}
 --- !u!1 &1392140342
 GameObject:
   m_ObjectHideFlags: 0

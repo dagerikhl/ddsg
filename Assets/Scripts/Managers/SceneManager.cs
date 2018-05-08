@@ -16,6 +16,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public Image FadeOverlay;
+        public GraphicRaycaster InputBlocker;
 
         //[Header("Optional")]
 
@@ -25,13 +26,7 @@ namespace DdSG {
         // Private and protected members
         protected override string persistentTag { get { return "SceneManager"; } }
 
-        private GraphicRaycaster inputBlocker;
-
         private void Start() {
-            inputBlocker = FadeOverlay.GetComponent<GraphicRaycaster>();
-
-            FadeOverlay.color = FadeColor;
-
             StartCoroutine(fadeIn());
         }
 
@@ -57,12 +52,12 @@ namespace DdSG {
             }
 
             // Disable input blocking
-            inputBlocker.enabled = false;
+            InputBlocker.enabled = false;
         }
 
         private IEnumerator fadeOut(string sceneName) {
             // Enable input blocking
-            inputBlocker.enabled = true;
+            InputBlocker.enabled = true;
 
             // Fade
             float t = 0f;
