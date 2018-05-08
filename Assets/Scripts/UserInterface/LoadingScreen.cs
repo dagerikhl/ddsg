@@ -25,14 +25,26 @@ namespace DdSG {
         private float animationValue;
 
         private void Start() {
+            fetchSettings();
+            fetchDefaultPlayConfiguration();
+
             StartCoroutine(updateEntities());
-            StartCoroutine(fetchSettings());
         }
 
         private void Update() {
             animationValue = LoadingTextAnimationCurve.Evaluate(Time.time/LoadingTextAnimationDuration);
 
             updateLoadingText();
+        }
+
+        private void fetchSettings() {
+            if (FileClient.I.FileExists("settings")) {
+            }
+        }
+
+        private void fetchDefaultPlayConfiguration() {
+            if (FileClient.I.FileExists("playConfiguration")) {
+            }
         }
 
         private IEnumerator updateEntities() {

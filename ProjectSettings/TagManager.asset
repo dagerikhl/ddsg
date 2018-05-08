@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AmbientMusic
   - SceneManager
   - SoundsManager
+  - State
+  - AmbientManager
   layers:
   - Default
   - TransparentFX

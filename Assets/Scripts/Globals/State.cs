@@ -2,20 +2,22 @@
 
 namespace DdSG {
 
-    public class State: SingletonBehaviour<State> {
+    public class State: PersistentSingletonBehaviour<State> {
 
         protected State() {
-            AmbientEnabled = true;
-            AmbientVolume = 1f;
-            SoundsEnabled = true;
-            SoundsVolume = 1f;
-            PlayConfiguration = new PlayConfiguration {
-                Difficulty = 0.5f,
-                GameSpeed = 1f,
-                OwaspFilter = true,
-                Entities = new string[] { "attack_patterns", "weaknesses", "assets", "course_of_ations" }
-            };
         }
+
+        //[Header("Attributes")]
+
+        //[Header("Unity Setup Fields")]
+
+        //[Header("Optional")]
+
+        // Public members hidden from Unity Inspector
+        //[HideInInspector]
+
+        // Private and protected members
+        protected override string persistentTag { get { return "State"; } }
 
         // Scenes
         private string lastScene = Constants.MAIN_MENU;
@@ -47,6 +49,19 @@ namespace DdSG {
 
         // Entities
         public Entities Entities { get; set; }
+
+        private void Start() {
+            AmbientEnabled = true;
+            AmbientVolume = 1f;
+            SoundsEnabled = true;
+            SoundsVolume = 1f;
+            PlayConfiguration = new PlayConfiguration {
+                Difficulty = 0.5f,
+                GameSpeed = 1f,
+                OwaspFilter = true,
+                Entities = new string[] { "attack_patterns", "weaknesses", "assets", "course_of_ations" }
+            };
+        }
 
     }
 

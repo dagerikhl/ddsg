@@ -21,7 +21,7 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
-        protected override string persistentTag { get { return "AmbientMusic"; } }
+        protected override string persistentTag { get { return "AmbientManager"; } }
 
         private void Start() {
             PlayMenuAmbient();
