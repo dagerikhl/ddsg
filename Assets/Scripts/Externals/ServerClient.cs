@@ -22,7 +22,7 @@ namespace DdSG {
         // Private and protected members
         private string entitiesEndpoint;
 
-        private void Start() {
+        private void Awake() {
             entitiesEndpoint = (Debug.isDebugBuild ? Constants.API_URL_DEVELOPMENT : Constants.API_URL)
                                + "/"
                                + "entities";
