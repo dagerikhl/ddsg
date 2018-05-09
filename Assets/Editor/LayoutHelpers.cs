@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
 
+/// <summary>
+/// All credits for this class goes to Denis Sylkin for his RTS Camera:
+/// https://assetstore.unity.com/packages/tools/camera/rts-camera-43321
+/// </summary>
 public class VerticalBlock: IDisposable {
 
     public VerticalBlock(GUIStyle style, params GUILayoutOption[] options) {
@@ -16,6 +20,10 @@ public class VerticalBlock: IDisposable {
 
 }
 
+/// <summary>
+/// All credits for this class goes to Denis Sylkin for his RTS Camera:
+/// https://assetstore.unity.com/packages/tools/camera/rts-camera-43321
+/// </summary>
 public class HorizontalBlock: IDisposable {
 
     public HorizontalBlock(params GUILayoutOption[] options) {
@@ -28,6 +36,10 @@ public class HorizontalBlock: IDisposable {
 
 }
 
+/// <summary>
+/// All credits for this class goes to Denis Sylkin for his RTS Camera:
+/// https://assetstore.unity.com/packages/tools/camera/rts-camera-43321
+/// </summary>
 public class ColoredBlock: IDisposable {
 
     public ColoredBlock(Color color) {
@@ -40,6 +52,10 @@ public class ColoredBlock: IDisposable {
 
 }
 
+/// <summary>
+/// All credits for this class goes to Denis Sylkin for his RTS Camera:
+/// https://assetstore.unity.com/packages/tools/camera/rts-camera-43321
+/// </summary>
 [Serializable]
 public class TabsBlock {
 

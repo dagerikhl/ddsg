@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace DdSG {
 
+    /// <summary>
+    /// All credits for this class goes to Denis Sylkin for his RTS Camera:
+    /// https://assetstore.unity.com/packages/tools/camera/rts-camera-43321
+    /// </summary>
     [CustomEditor(typeof(CameraManager))]
     public class CameraManagerEditor: Editor {
 
