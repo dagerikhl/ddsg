@@ -78802,7 +78802,6 @@ GameObject:
   - component: {fileID: 1255186407}
   - component: {fileID: 1255186406}
   - component: {fileID: 1255186405}
-  - component: {fileID: 1255186409}
   - component: {fileID: 1255186410}
   m_Layer: 0
   m_Name: MainCamera
@@ -78878,63 +78877,6 @@ Transform:
   m_Father: {fileID: 1392140343}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
---- !u!114 &1255186409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1255186404}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ef8c68bade09b41aca258d42a632f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastTab: 0
-  movementSettingsFoldout: 0
-  zoomingSettingsFoldout: 0
-  rotationSettingsFoldout: 0
-  heightSettingsFoldout: 0
-  mapLimitSettingsFoldout: 0
-  targetingSettingsFoldout: 0
-  inputSettingsFoldout: 0
-  useFixedUpdate: 0
-  keyboardMovementSpeed: 100
-  screenEdgeMovementSpeed: 50
-  followingSpeed: 5
-  rotationSped: 3
-  panningSpeed: 50
-  mouseRotationSpeed: 10
-  autoHeight: 1
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxHeight: 15
-  minHeight: 40
-  heightDampening: 5
-  keyboardZoomingSensitivity: 2
-  scrollWheelZoomingSensitivity: 25
-  limitMap: 1
-  limitX: 20
-  limitY: 70
-  targetFollow: {fileID: 0}
-  targetOffset: {x: 0, y: 0, z: 0}
-  useScreenEdgeInput: 1
-  screenEdgeBorder: 25
-  useKeyboardInput: 1
-  horizontalAxis: Horizontal
-  verticalAxis: Vertical
-  usePanning: 1
-  panningKey: 325
-  useKeyboardZooming: 1
-  zoomInKey: 101
-  zoomOutKey: 113
-  useScrollwheelZooming: 1
-  zoomingAxis: Mouse ScrollWheel
-  useKeyboardRotation: 0
-  rotateRightKey: 120
-  rotateLeftKey: 122
-  useMouseRotation: 0
-  mouseRotationKey: 324
 --- !u!114 &1255186410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78946,44 +78888,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d92eebb2a1b99458b553a9fca6a207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useFixedUpdate: 0
-  keyboardMovementSpeed: 5
-  screenEdgeMovementSpeed: 3
-  followingSpeed: 5
-  rotationSped: 3
-  panningSpeed: 10
-  mouseRotationSpeed: 10
-  autoHeight: 1
-  groundMask:
+  LastTab: 2
+  UseFixedUpdate: 0
+  KeyboardMovementSpeed: 50
+  ScreenEdgeMovementSpeed: 50
+  FollowingSpeed: 5
+  RotationSped: 3
+  PanningSpeed: 50
+  MouseRotationSpeed: 10
+  AutoHeight: 1
+  GroundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxHeight: 10
-  minHeight: 15
-  heightDampening: 5
-  keyboardZoomingSensitivity: 2
-  scrollWheelZoomingSensitivity: 25
-  limitMap: 1
-  limitX: 50
-  limitY: 50
-  targetFollow: {fileID: 0}
-  targetOffset: {x: 0, y: 0, z: 0}
-  useScreenEdgeInput: 1
-  screenEdgeBorder: 25
-  useKeyboardInput: 1
-  horizontalAxis: Horizontal
-  verticalAxis: Vertical
-  usePanning: 1
-  panningKey: 325
-  useKeyboardZooming: 1
-  zoomInKey: 101
-  zoomOutKey: 113
-  useScrollwheelZooming: 1
-  zoomingAxis: Mouse ScrollWheel
-  useKeyboardRotation: 1
-  rotateRightKey: 120
-  rotateLeftKey: 122
-  useMouseRotation: 1
-  mouseRotationKey: 324
+  MaxHeight: 20
+  MinHeight: 40
+  HeightDampening: 5
+  KeyboardZoomingSensitivity: 50
+  ScrollWheelZoomingSensitivity: 50
+  LimitMap: 1
+  LimitX: 20
+  LimitY: 50
+  TargetFollow: {fileID: 0}
+  TargetOffset: {x: 0, y: 0, z: 0}
+  UseScreenEdgeInput: 1
+  ScreenEdgeBorder: 25
+  UseKeyboardInput: 1
+  HorizontalAxis: Horizontal
+  VerticalAxis: Vertical
+  UsePanning: 1
+  PanningKey: 325
+  UseKeyboardZooming: 1
+  ZoomInKey: 280
+  ZoomOutKey: 281
+  UseScrollwheelZooming: 1
+  ZoomingAxis: Mouse ScrollWheel
+  UseKeyboardRotation: 0
+  RotateRightKey: 120
+  RotateLeftKey: 122
+  UseMouseRotation: 0
+  MouseRotationKey: 324
 --- !u!1 &1263476446
 GameObject:
   m_ObjectHideFlags: 0
@@ -129427,7 +129370,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-903946
+  m_Name: pb_Mesh226584
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
