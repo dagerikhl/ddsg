@@ -78888,7 +78888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d92eebb2a1b99458b553a9fca6a207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LastTab: 2
+  LastTab: 0
   UseFixedUpdate: 0
   KeyboardMovementSpeed: 50
   ScreenEdgeMovementSpeed: 50
@@ -78907,7 +78907,7 @@ MonoBehaviour:
   ScrollWheelZoomingSensitivity: 50
   LimitMap: 1
   LimitX: 20
-  LimitY: 50
+  LimitY: 20
   TargetFollow: {fileID: 0}
   TargetOffset: {x: 0, y: 0, z: 0}
   UseScreenEdgeInput: 1

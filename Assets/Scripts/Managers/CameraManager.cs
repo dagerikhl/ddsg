@@ -24,6 +24,7 @@ namespace DdSG {
 
         private void Awake() {
             originalPosition = transform.position;
+            Logger.Debug(originalPosition);
         }
 
         #region Foldouts
@@ -295,7 +296,7 @@ namespace DdSG {
             mTransform.position = new Vector3(
                 Mathf.Clamp(mTransform.position.x, originalPosition.x - LimitX, originalPosition.x + LimitX),
                 mTransform.position.y,
-                Mathf.Clamp(mTransform.position.z, originalPosition.y - LimitY, originalPosition.y + LimitY));
+                Mathf.Clamp(mTransform.position.z, originalPosition.z - LimitY, originalPosition.z + LimitY));
         }
 
         /// <summary>
