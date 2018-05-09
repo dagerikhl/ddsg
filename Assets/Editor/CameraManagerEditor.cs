@@ -25,7 +25,7 @@ namespace DdSG {
         }
 
         public override void OnInspectorGUI() {
-            Undo.RecordObject(camera, "CameraManager");
+            Undo.RegisterCompleteObjectUndo(camera, "CameraManager");
             tabs.Draw();
             if (GUI.changed) {
                 camera.LastTab = tabs.CurMethodIndex;
@@ -72,6 +72,9 @@ namespace DdSG {
                 camera.LimitMap = EditorGUILayout.Toggle(camera.LimitMap);
             }
             if (camera.LimitMap) {
+                camera.LimitMapOriginalPos = EditorGUILayout.Toggle(
+                    "Base on camera's original position: ",
+                    camera.LimitMapOriginalPos);
                 camera.LimitX = EditorGUILayout.FloatField("Limit X: ", camera.LimitX);
                 camera.LimitY = EditorGUILayout.FloatField("Limit Y: ", camera.LimitY);
             }
@@ -95,7 +98,7 @@ namespace DdSG {
             if (camera.UseKeyboardRotation) {
                 camera.RotateLeftKey = (KeyCode) EditorGUILayout.EnumPopup("Rotate left: ", camera.RotateLeftKey);
                 camera.RotateRightKey = (KeyCode) EditorGUILayout.EnumPopup("Rotate right: ", camera.RotateRightKey);
-                camera.RotationSped = EditorGUILayout.FloatField("Keyboard rotation speed", camera.RotationSped);
+                camera.RotationSpeed = EditorGUILayout.FloatField("Keyboard rotation speed", camera.RotationSpeed);
             }
 
             using (new HorizontalBlock()) {
@@ -146,8 +149,19 @@ namespace DdSG {
 
             if (camera.UseScrollwheelZooming || camera.UseKeyboardZooming) {
                 using (new HorizontalBlock()) {
-                    camera.MaxHeight = EditorGUILayout.FloatField("Max height: ", camera.MaxHeight);
                     camera.MinHeight = EditorGUILayout.FloatField("Min height: ", camera.MinHeight);
+                    camera.MaxHeight = EditorGUILayout.FloatField("Max height: ", camera.MaxHeight);
+                }
+            }
+
+            using (new HorizontalBlock()) {
+                GUILayout.Label("Camera tilting on zoom: ", EditorStyles.boldLabel, GUILayout.Width(170f));
+                camera.TiltCamera = EditorGUILayout.Toggle(camera.TiltCamera);
+            }
+            if (camera.TiltCamera) {
+                using (new HorizontalBlock()) {
+                    camera.MinTiltAngle = EditorGUILayout.FloatField("Min tilt angle: ", camera.MinTiltAngle);
+                    camera.MaxTiltAngle = EditorGUILayout.FloatField("Max tilt angle: ", camera.MaxTiltAngle);
                 }
             }
         }

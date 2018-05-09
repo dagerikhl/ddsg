@@ -78870,13 +78870,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1255186404}
-  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
-  m_LocalPosition: {x: 0, y: 80, z: -70}
+  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
+  m_LocalPosition: {x: 0, y: 100, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1392140343}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!114 &1255186410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78890,24 +78890,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LastTab: 0
   UseFixedUpdate: 0
-  KeyboardMovementSpeed: 50
-  ScreenEdgeMovementSpeed: 50
+  KeyboardMovementSpeed: 100
+  ScreenEdgeMovementSpeed: 100
   FollowingSpeed: 5
-  RotationSped: 3
-  PanningSpeed: 50
-  MouseRotationSpeed: 10
+  RotationSpeed: 100
+  PanningSpeed: 100
+  MouseRotationSpeed: 100
   AutoHeight: 1
   GroundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  MaxHeight: 20
-  MinHeight: 40
+  MinHeight: 10
+  MaxHeight: 50
   HeightDampening: 5
-  KeyboardZoomingSensitivity: 50
+  KeyboardZoomingSensitivity: 1
   ScrollWheelZoomingSensitivity: 50
+  TiltCamera: 1
+  MinTiltAngle: 50
+  MaxTiltAngle: 75
   LimitMap: 1
-  LimitX: 20
-  LimitY: 20
+  LimitX: 70
+  LimitY: 70
+  LimitMapOriginalPos: 0
   TargetFollow: {fileID: 0}
   TargetOffset: {x: 0, y: 0, z: 0}
   UseScreenEdgeInput: 1
@@ -78918,14 +78922,14 @@ MonoBehaviour:
   UsePanning: 1
   PanningKey: 325
   UseKeyboardZooming: 1
-  ZoomInKey: 280
-  ZoomOutKey: 281
+  ZoomInKey: 281
+  ZoomOutKey: 280
   UseScrollwheelZooming: 1
   ZoomingAxis: Mouse ScrollWheel
-  UseKeyboardRotation: 0
-  RotateRightKey: 120
-  RotateLeftKey: 122
-  UseMouseRotation: 0
+  UseKeyboardRotation: 1
+  RotateRightKey: 127
+  RotateLeftKey: 277
+  UseMouseRotation: 1
   MouseRotationKey: 324
 --- !u!1 &1263476446
 GameObject:

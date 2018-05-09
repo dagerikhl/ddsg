@@ -11,20 +11,10 @@ namespace DdSG {
     [AddComponentMenu("Camera Manager")]
     public class CameraManager: MonoBehaviour {
 
-        //[Header("Attributes")]
-
-        //[Header("Unity Setup Fields")]
-
-        //[Header("Optional")]
-
-        // Public members hidden from Unity Inspector
-
-        // Private members
         private Vector3 originalPosition;
 
         private void Awake() {
-            originalPosition = transform.position;
-            Logger.Debug(originalPosition);
+            originalPosition = LimitMapOriginalPos ? transform.position : Vector3.zero;
         }
 
         #region Foldouts
@@ -43,7 +33,7 @@ namespace DdSG {
         public float KeyboardMovementSpeed = 5f; //speed with keyboard movement
         public float ScreenEdgeMovementSpeed = 3f; //spee with screen edge movement
         public float FollowingSpeed = 5f; //speed when following a target
-        public float RotationSped = 3f;
+        public float RotationSpeed = 3f;
         public float PanningSpeed = 10f;
         public float MouseRotationSpeed = 10f;
 
@@ -54,11 +44,15 @@ namespace DdSG {
         public bool AutoHeight = true;
         public LayerMask GroundMask = -1; //layermask of ground or other objects that affect height
 
-        public float MaxHeight = 10f; //maximal height
-        public float MinHeight = 15f; //minimnal height
+        public float MinHeight = 10f; //maximal height
+        public float MaxHeight = 15f; //minimnal height
         public float HeightDampening = 5f;
         public float KeyboardZoomingSensitivity = 2f;
         public float ScrollWheelZoomingSensitivity = 25f;
+
+        public bool TiltCamera = true;
+        public float MinTiltAngle = 30f;
+        public float MaxTiltAngle = 60f;
 
         private float zoomPos; //value in range (0, 1) used as t in Matf.Lerp
 
@@ -69,6 +63,8 @@ namespace DdSG {
         public bool LimitMap = true;
         public float LimitX = 50f; //x limit of map
         public float LimitY = 50f; //z limit of map
+
+        public bool LimitMapOriginalPos;
 
         #endregion
 
@@ -186,6 +182,7 @@ namespace DdSG {
             }
 
             HeightCalculation();
+            Tilt();
             Rotation();
             LimitPosition();
         }
@@ -250,7 +247,7 @@ namespace DdSG {
 
             zoomPos = Mathf.Clamp01(zoomPos);
 
-            float targetHeight = Mathf.Lerp(MinHeight, MaxHeight, zoomPos);
+            float targetHeight = Mathf.Lerp(MaxHeight, MinHeight, zoomPos);
             float difference = 0;
 
             if (Math.Abs(distanceToGround - targetHeight) > 0.001f) {
@@ -264,11 +261,25 @@ namespace DdSG {
         }
 
         /// <summary>
+        /// Tilts the camera up or down according to the height above ground for a more bird's eye view.
+        /// </summary>
+        private void Tilt() {
+            var heightPos = (transform.position.y/2f - MinHeight)/(MaxHeight - MinHeight);
+            Logger.Debug(heightPos);
+            var tiltAngle = Mathf.Lerp(MinTiltAngle, MaxTiltAngle, heightPos);
+            Logger.Debug("\t->\t" + tiltAngle);
+            var eulerAngles = transform.rotation.eulerAngles;
+            Logger.Debug(eulerAngles);
+            transform.rotation = Quaternion.Euler(tiltAngle, eulerAngles.y, eulerAngles.z);
+            Logger.Debug(" -> " + transform.rotation.eulerAngles);
+        }
+
+        /// <summary>
         /// rotate camera
         /// </summary>
         private void Rotation() {
             if (UseKeyboardRotation) {
-                transform.Rotate(Vector3.up, RotationDirection*Time.deltaTime*RotationSped, Space.World);
+                transform.Rotate(Vector3.up, RotationDirection*Time.deltaTime*RotationSpeed, Space.World);
             }
 
             if (UseMouseRotation && Input.GetKey(MouseRotationKey)) {
