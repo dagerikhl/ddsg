@@ -45,7 +45,15 @@ namespace DdSG {
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
-        public void ExitGame() {
+        public void ExitGame(float delay = 0f) {
+            StartCoroutine(exitGameRoutine(delay));
+        }
+
+        private IEnumerator exitGameRoutine(float delay) {
+            if (delay > 0f) {
+                yield return new WaitForSeconds(delay);
+            }
+
             Logger.Debug("Exiting game.");
             Application.Quit();
         }

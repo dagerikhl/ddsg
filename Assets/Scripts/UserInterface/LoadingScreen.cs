@@ -13,8 +13,8 @@ namespace DdSG {
         public float LoadingTextAnimationDuration = 1f;
 
         [Header("Unity Setup Fields")]
-        public ServerClient ServerClient;
         public Text LoadingText;
+        public CanvasGroup ExitMessage;
 
         //[Header("Optional")]
 
@@ -67,6 +67,12 @@ namespace DdSG {
                 Logger.Debug("Fetching and saving entities...");
                 yield return StartCoroutine(ServerClient.I.DownloadEntities());
                 Logger.Debug("Fetching and saving entities... Done.");
+            }
+
+            // Check if entities are available, otherwise terminate the game
+            if (!FileClient.I.FileExists(Constants.ENTITIES_FILENAME)) {
+                ExitMessage.gameObject.SetActive(true);
+                SceneManager.I.ExitGame(10f);
             }
 
             Logger.Debug("Loading entities...");

@@ -55,7 +55,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void Exit() {
-            StartCoroutine(fadeOutAndPerformAction(SceneManager.I.ExitGame));
+            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.ExitGame()));
         }
 
         private IEnumerator fadeIn() {
