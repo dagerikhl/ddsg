@@ -265,13 +265,10 @@ namespace DdSG {
         /// </summary>
         private void Tilt() {
             var heightPos = (transform.position.y/2f - MinHeight)/(MaxHeight - MinHeight);
-            Logger.Debug(heightPos);
             var tiltAngle = Mathf.Lerp(MinTiltAngle, MaxTiltAngle, heightPos);
-            Logger.Debug("\t->\t" + tiltAngle);
+
             var eulerAngles = transform.rotation.eulerAngles;
-            Logger.Debug(eulerAngles);
             transform.rotation = Quaternion.Euler(tiltAngle, eulerAngles.y, eulerAngles.z);
-            Logger.Debug(" -> " + transform.rotation.eulerAngles);
         }
 
         /// <summary>
