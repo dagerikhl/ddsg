@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -24,14 +25,37 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void Pause() {
+            // Deactivate and suspend time
             gameObject.SetActive(true);
             Time.timeScale = 0f;
+
+            // Fade in menu
             StartCoroutine(fadeIn());
         }
 
         [UsedImplicitly]
         public void Resume() {
-            StartCoroutine(fadeOutAndResume());
+            StartCoroutine(fadeOutAndPerformAction());
+        }
+
+        [UsedImplicitly]
+        public void Restart() {
+            StartCoroutine(fadeOutAndPerformAction(SceneManager.I.RestartScene));
+        }
+
+        [UsedImplicitly]
+        public void GoToOptionsMenu() {
+            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.OPTIONS_MENU)));
+        }
+
+        [UsedImplicitly]
+        public void GoToMainMenu() {
+            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.MAIN_MENU)));
+        }
+
+        [UsedImplicitly]
+        public void Exit() {
+            StartCoroutine(fadeOutAndPerformAction(SceneManager.I.ExitGame));
         }
 
         private IEnumerator fadeIn() {
@@ -47,7 +71,7 @@ namespace DdSG {
             }
         }
 
-        private IEnumerator fadeOutAndResume() {
+        private IEnumerator fadeOutAndPerformAction(Action action = null) {
             // Fade
             float t = Constants.PAUSE_TRANSITION_TIME;
 
@@ -59,9 +83,14 @@ namespace DdSG {
                 yield return 0;
             }
 
-            // Hide
+            // Hide and resume time
             gameObject.SetActive(false);
             Time.timeScale = 1f;
+
+            // Perform next action if supplied
+            if (action != null) {
+                action();
+            }
         }
 
     }

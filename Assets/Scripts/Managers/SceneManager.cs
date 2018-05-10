@@ -39,6 +39,17 @@ namespace DdSG {
             StartCoroutine(fadeOut(sceneName));
         }
 
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public void RestartScene() {
+            UnitySceneManagement.SceneManager.LoadScene(UnitySceneManagement.SceneManager.GetActiveScene().name);
+        }
+
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public void ExitGame() {
+            Logger.Debug("Exiting game.");
+            Application.Quit();
+        }
+
         private IEnumerator fadeIn() {
             // Fade
             float t = Constants.SCENE_TRANSITION_TIME;
