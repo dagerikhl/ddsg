@@ -50,7 +50,7 @@ namespace DdSG {
             };
 
             AmbientManager.I.PlayGameAmbient();
-            SceneManager.I.GoTo(Constants.GAME_VIEW);
+            SceneManager.I.GoTo(Constants.GAME_VIEW, false);
         }
 
         private float parseDifficulty(string difficulty) {
