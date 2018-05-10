@@ -32,6 +32,10 @@ namespace DdSG {
             return sb.ToString();
         }
 
+        public static string Monospaced(this string value, float monospaceEm = 2f) {
+            return string.Format("<mspace={0}em>{1}</mspace>", monospaceEm, value);
+        }
+
     }
 
 }
