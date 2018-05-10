@@ -13,14 +13,18 @@ namespace DdSG {
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
+        public static bool IsPaused;
+        public static bool ShouldResume;
 
         // Private members
         private float secondsElapsed;
 
         private void Update() {
-            secondsElapsed += Time.deltaTime;
+            if (!IsPaused) {
+                secondsElapsed += Time.deltaTime;
 
-            GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
+                GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
+            }
         }
 
     }

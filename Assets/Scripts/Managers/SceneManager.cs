@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnitySceneManagement = UnityEngine.SceneManagement;
 using System.Collections;
-using System.Linq;
 
 namespace DdSG {
 
@@ -51,12 +50,13 @@ namespace DdSG {
             State.I.LastScene = getCurrentSceneName();
             State.I.CurrentScene = getLastSceneName();
 
-            Debug.LogError(UnitySceneManagement.SceneManager.sceneCount);
-            Debug.LogError(
-                string.Join(", ", UnitySceneManagement.SceneManager.GetAllScenes().Select((e) => e.name).ToArray()));
-
             // Fade to new scene
             StartCoroutine(fadeOut(() => UnitySceneManagement.SceneManager.UnloadSceneAsync(State.I.LastScene)));
+
+            // If going back into the game view when the game is paused we should show pause menu
+            if (State.I.CurrentScene == Constants.GAME_VIEW && GameManager.IsPaused) {
+                GameManager.ShouldResume = true;
+            }
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
@@ -124,7 +124,7 @@ namespace DdSG {
         }
 
         private string getLastSceneName() {
-            var lastSceneIndex = UnitySceneManagement.SceneManager.sceneCount - 1;
+            var lastSceneIndex = UnitySceneManagement.SceneManager.sceneCount - 2;
             return UnitySceneManagement.SceneManager.GetSceneAt(lastSceneIndex).name;
         }
 

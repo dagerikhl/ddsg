@@ -23,11 +23,18 @@ namespace DdSG {
             canvasGroup = gameObject.GetComponent<CanvasGroup>();
         }
 
+        private void Update() {
+            if (GameManager.ShouldResume) {
+                StartCoroutine(showAfterDelay(Constants.SCENE_TRANSITION_TIME));
+                GameManager.ShouldResume = false;
+            }
+        }
+
         [UsedImplicitly]
         public void Pause() {
-            // Deactivate and suspend time
-            gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            // Pause game
+            show();
+            GameManager.IsPaused = true;
 
             // Fade in menu
             StartCoroutine(fadeIn());
@@ -45,17 +52,38 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToOptionsMenu() {
-            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.OPTIONS_MENU)));
+            hide();
+            SceneManager.I.GoTo(Constants.OPTIONS_MENU);
         }
 
         [UsedImplicitly]
         public void GoToMainMenu() {
-            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.MAIN_MENU)));
+            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.MAIN_MENU, false)));
         }
 
         [UsedImplicitly]
         public void Exit() {
             StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.ExitGame()));
+        }
+
+        private IEnumerator showAfterDelay(float delay) {
+            yield return new WaitForSeconds(delay);
+
+            show();
+        }
+
+        private void show() {
+            // gameObject.SetActive(true);
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 1f;
+        }
+
+        private void hide() {
+            // gameObject.SetActive(false);
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0f;
         }
 
         private IEnumerator fadeIn() {
@@ -69,6 +97,8 @@ namespace DdSG {
 
                 yield return 0;
             }
+
+            show();
         }
 
         private IEnumerator fadeOutAndPerformAction(Action action = null) {
@@ -83,9 +113,9 @@ namespace DdSG {
                 yield return 0;
             }
 
-            // Hide and resume time
-            gameObject.SetActive(false);
-            Time.timeScale = 1f;
+            // Hide and potentially resume
+            hide();
+            GameManager.IsPaused = false;
 
             // Perform next action if supplied
             if (action != null) {
