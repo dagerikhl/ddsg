@@ -14023,7 +14023,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-5821846
+  m_Name: pb_Mesh6500
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -20034,7 +20034,7 @@ GameObject:
   m_Layer: 0
   m_Name: ServerSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -22211,7 +22211,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-5887680
+  m_Name: pb_Mesh9146
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -39961,7 +39961,7 @@ GameObject:
   m_Layer: 0
   m_Name: NetworkSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -40354,7 +40354,7 @@ GameObject:
   m_Layer: 0
   m_Name: ClientSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -81037,7 +81037,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1255186404}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0, y: 100, z: -30}
+  m_LocalPosition: {x: 0, y: 160, z: -60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1392140343}
@@ -81067,7 +81067,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   MinHeight: 10
-  MaxHeight: 50
+  MaxHeight: 80
   HeightDampening: 5
   KeyboardZoomingSensitivity: 1
   ScrollWheelZoomingSensitivity: 50
@@ -81075,7 +81075,7 @@ MonoBehaviour:
   MinTiltAngle: 50
   MaxTiltAngle: 75
   LimitMap: 1
-  LimitX: 70
+  LimitX: 100
   LimitY: 70
   LimitMapOriginalPos: 0
   TargetFollow: {fileID: 0}
@@ -98321,7 +98321,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-5890354
+  m_Name: pb_Mesh8284
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
