@@ -80,6 +80,10 @@ namespace DdSG {
             State.I.Entities = newEntitiesJson.entities;
             Logger.Debug("Loading entities... Done.");
 
+            // Wait for fading in to complete
+            var remainingFadeTime = Constants.SCENE_TRANSITION_TIME - Time.time;
+            yield return new WaitForSeconds(remainingFadeTime);
+
             SceneManager.I.GoTo(Constants.MAIN_MENU);
         }
 
