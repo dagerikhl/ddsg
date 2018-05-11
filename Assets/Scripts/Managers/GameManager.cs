@@ -24,7 +24,7 @@ namespace DdSG {
             HelperObjects.HoverOverlay =
                 Instantiate(HoverOverlayPrefab, HelperObjects.Ephemerals).GetComponent<HoverOverlay>();
 
-            // TODO Make alterations according to PlayConfiguration
+            Time.timeScale = State.I.PlayConfiguration.GameSpeed;
 
             // TODO Pick out entities
 
