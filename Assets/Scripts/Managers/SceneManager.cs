@@ -65,7 +65,10 @@ namespace DdSG {
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public void RestartScene() {
-            UnitySceneManagement.SceneManager.LoadScene(UnitySceneManagement.SceneManager.GetActiveScene().name);
+            StartCoroutine(
+                fadeOut(
+                    () => UnitySceneManagement.SceneManager.LoadScene(
+                        UnitySceneManagement.SceneManager.GetActiveScene().name)));
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
