@@ -15,7 +15,7 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
 
-        // Private members
+        // Private and protected members
 
     }
 

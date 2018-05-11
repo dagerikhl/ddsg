@@ -17,7 +17,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         public static Transform[] Sockets;
 
-        // Private members
+        // Private and protected members
 
         private void Awake() {
             Sockets = new Transform[] { AssetSocket1, AssetSocket2, AssetSocket3, AssetSocket4 };

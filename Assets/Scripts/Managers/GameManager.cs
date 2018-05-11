@@ -16,7 +16,7 @@ namespace DdSG {
         public static bool IsPaused;
         public static bool ShouldResume;
 
-        // Private members
+        // Private and protected members
         private float secondsElapsed;
 
         private void Update() {

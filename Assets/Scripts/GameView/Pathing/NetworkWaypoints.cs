@@ -13,7 +13,7 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         public static Transform[] Points;
 
-        // Private members
+        // Private and protected members
 
         private void Awake() {
             Points = new Transform[transform.childCount];
