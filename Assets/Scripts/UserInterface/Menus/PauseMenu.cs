@@ -52,7 +52,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToOptionsMenu() {
-            hide();
+            StartCoroutine(hideAfterDelay(Constants.SCENE_TRANSITION_TIME));
             SceneManager.I.GoTo(Constants.OPTIONS_MENU);
         }
 
@@ -73,14 +73,18 @@ namespace DdSG {
         }
 
         private void show() {
-            // gameObject.SetActive(true);
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
         }
 
+        private IEnumerator hideAfterDelay(float delay) {
+            yield return new WaitForSeconds(delay);
+
+            hide();
+        }
+
         private void hide() {
-            // gameObject.SetActive(false);
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0f;
