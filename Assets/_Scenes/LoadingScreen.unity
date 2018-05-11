@@ -1750,7 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d014eb52b8277a04b89c68998e1e1454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeColor: {r: 0.9, g: 0.9, b: 0.92, a: 1}
+  FadeColor: {r: 1, g: 1, b: 1, a: 1}
   FadeCurve:
     serializedVersion: 2
     m_Curve:
@@ -1763,6 +1763,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29252577
+      value: 0.8310078
+      inSlope: 0.84216815
+      outSlope: 0.84216815
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08442776
     - serializedVersion: 3
       time: 1
       value: 1
