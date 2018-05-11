@@ -9,6 +9,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI GameTime;
+        public GameObject HoverOverlayPrefab;
 
         //[Header("Optional")]
 
@@ -20,6 +21,9 @@ namespace DdSG {
         private float secondsElapsed;
 
         private void Awake() {
+            HelperObjects.HoverOverlay =
+                Instantiate(HoverOverlayPrefab, HelperObjects.Ephemerals).GetComponent<HoverOverlay>();
+
             // TODO Make alterations according to PlayConfiguration
 
             // TODO Pick out entities
