@@ -42,7 +42,7 @@ namespace DdSG {
         }
 
         private void updateGameTime() {
-            secondsElapsed += Time.deltaTime;
+            secondsElapsed += Time.unscaledDeltaTime;
 
             GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
         }
