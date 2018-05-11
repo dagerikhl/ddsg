@@ -9,6 +9,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public string Title;
+        [TextArea(20, 50)]
         public string Text;
 
         //[Header("Optional")]
