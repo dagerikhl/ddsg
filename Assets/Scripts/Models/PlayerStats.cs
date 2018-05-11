@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace DdSG {
@@ -11,6 +12,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI WorthUi;
+        public TextMeshProUGUI IntegrityUi;
 
         //[Header("Optional")]
 
@@ -20,7 +22,7 @@ namespace DdSG {
             set {
                 worth = value;
 
-                WorthUi.text = value.ToString().CurrencyFormat().Monospaced();
+                WorthUi.text = value.ToString().WorthFormat().Monospaced();
             }
         }
         public int NumberOfAssets {
@@ -50,6 +52,8 @@ namespace DdSG {
 
         public void SetAssetIntegrity(int assetIndex, float integrity) {
             integrities[assetIndex] = integrity;
+
+            IntegrityUi.text = integrities.Select((e) => e.IntegrityFormat()).Join(" \U0000f142 ").Monospaced();
         }
 
     }
