@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace DdSG {
@@ -28,15 +27,6 @@ namespace DdSG {
             // TODO Set a real number of assets
             const int numberOfAssets = 4;
             PlayerStats.I.NumberOfAssets = numberOfAssets;
-
-            StartCoroutine(test());
-        }
-
-        private IEnumerator test() {
-            while (true) {
-                PlayerStats.I.SetAssetIntegrity(Mathf.RoundToInt(Random.value*3), Random.value*100);
-                yield return new WaitForSeconds(1);
-            }
         }
 
         private void Update() {
