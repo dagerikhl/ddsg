@@ -43,6 +43,8 @@ namespace DdSG {
                         sceneName,
                         additive ? UnitySceneManagement.LoadSceneMode.Additive
                             : UnitySceneManagement.LoadSceneMode.Single)));
+
+            AmbientManager.I.UpdateAmbient();
         }
 
         public void GoToLastMenu() {
@@ -57,6 +59,8 @@ namespace DdSG {
             if (State.I.CurrentScene == Constants.GAME_VIEW && GameManager.IsPaused) {
                 GameManager.ShouldResume = true;
             }
+
+            AmbientManager.I.UpdateAmbient();
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Global

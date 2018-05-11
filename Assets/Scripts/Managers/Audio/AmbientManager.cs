@@ -29,6 +29,14 @@ namespace DdSG {
             }
         }
 
+        public void UpdateAmbient() {
+            if (State.I.CurrentScene == Constants.GAME_VIEW) {
+                PlayGameAmbient();
+            } else if (State.I.LastScene == Constants.GAME_VIEW) {
+                PlayMenuAmbient();
+            }
+        }
+
         public void PlayMenuAmbient() {
             if (Source.clip && Source.clip.Equals(GameAmbient)) {
                 StartCoroutine(fadeOutAndInWithNewAmbient(MenuAmbient));
@@ -39,7 +47,7 @@ namespace DdSG {
             }
         }
 
-        public void PlayGameAmbient() {
+        private void PlayGameAmbient() {
             if (Source.clip && Source.clip.Equals(MenuAmbient)) {
                 StartCoroutine(fadeOutAndInWithNewAmbient(GameAmbient));
             } else {

@@ -49,7 +49,6 @@ namespace DdSG {
                 Entities = EntitiesInputField.text.Split(',')
             };
 
-            AmbientManager.I.PlayGameAmbient();
             SceneManager.I.GoTo(Constants.GAME_VIEW, false);
         }
 
