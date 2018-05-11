@@ -49,6 +49,7 @@ namespace DdSG {
                 Entities = EntitiesInputField.text.Split(',')
             };
 
+            GameManager.IsPaused = false;
             SceneManager.I.GoTo(Constants.GAME_VIEW, false);
         }
 
