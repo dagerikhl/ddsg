@@ -11,6 +11,9 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public AnimationCurve FadeCurve;
+        public GameObject RestartPrompt;
+        public GameObject MainMenuPrompt;
+        public GameObject ExitPrompt;
 
         //[Header("Optional")]
 
@@ -47,7 +50,20 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void Restart() {
-            StartCoroutine(fadeOutAndPerformAction(SceneManager.I.RestartScene));
+            RestartPrompt.SetActive(true);
+            hide();
+        }
+
+        [UsedImplicitly]
+        public void RestartPromptYes() {
+            RestartPrompt.SetActive(false);
+            SceneManager.I.RestartScene();
+        }
+
+        [UsedImplicitly]
+        public void RestartPromptNo() {
+            RestartPrompt.SetActive(false);
+            show();
         }
 
         [UsedImplicitly]
@@ -58,12 +74,38 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToMainMenu() {
-            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.GoTo(Constants.MAIN_MENU, false)));
+            MainMenuPrompt.SetActive(true);
+            hide();
+        }
+
+        [UsedImplicitly]
+        public void MainMenuPromptYes() {
+            MainMenuPrompt.SetActive(false);
+            SceneManager.I.GoTo(Constants.MAIN_MENU, false);
+        }
+
+        [UsedImplicitly]
+        public void MainMenuPromptNo() {
+            MainMenuPrompt.SetActive(false);
+            show();
         }
 
         [UsedImplicitly]
         public void Exit() {
-            StartCoroutine(fadeOutAndPerformAction(() => SceneManager.I.ExitGame()));
+            ExitPrompt.SetActive(true);
+            hide();
+        }
+
+        [UsedImplicitly]
+        public void ExitPromptYes() {
+            ExitPrompt.SetActive(false);
+            SceneManager.I.ExitGame();
+        }
+
+        [UsedImplicitly]
+        public void ExitPromptNo() {
+            ExitPrompt.SetActive(false);
+            show();
         }
 
         private IEnumerator showAfterDelay(float delay) {
