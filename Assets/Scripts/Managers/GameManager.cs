@@ -24,8 +24,6 @@ namespace DdSG {
             HelperObjects.HoverOverlay =
                 Instantiate(HoverOverlayPrefab, HelperObjects.Ephemerals).GetComponent<HoverOverlay>();
 
-            Time.timeScale = State.I.PlayConfiguration.GameSpeed;
-
             // TODO Pick out entities
 
             // TODO Set a real number of assets
@@ -34,11 +32,19 @@ namespace DdSG {
         }
 
         private void Update() {
-            if (!IsPaused) {
-                secondsElapsed += Time.deltaTime;
+            if (IsPaused) {
+                Time.timeScale = 1f;
+            } else {
+                Time.timeScale = State.I.PlayConfiguration.GameSpeed;
 
-                GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
+                updateGameTime();
             }
+        }
+
+        private void updateGameTime() {
+            secondsElapsed += Time.deltaTime;
+
+            GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
         }
 
     }
