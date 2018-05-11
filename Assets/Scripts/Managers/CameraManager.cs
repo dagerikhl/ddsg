@@ -195,7 +195,7 @@ namespace DdSG {
                 Vector3 desiredMove = new Vector3(KeyboardInput.x, 0, KeyboardInput.y);
 
                 desiredMove *= KeyboardMovementSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f))*desiredMove;
                 desiredMove = mTransform.InverseTransformDirection(desiredMove);
 
@@ -214,7 +214,7 @@ namespace DdSG {
                 desiredMove.z = upRect.Contains(MouseInput) ? 1 : downRect.Contains(MouseInput) ? -1 : 0;
 
                 desiredMove *= ScreenEdgeMovementSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f))*desiredMove;
                 desiredMove = mTransform.InverseTransformDirection(desiredMove);
 
@@ -225,7 +225,7 @@ namespace DdSG {
                 Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
 
                 desiredMove *= PanningSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f))*desiredMove;
                 desiredMove = mTransform.InverseTransformDirection(desiredMove);
 
@@ -239,10 +239,10 @@ namespace DdSG {
         private void HeightCalculation() {
             float distanceToGround = DistanceToGround();
             if (UseScrollwheelZooming) {
-                zoomPos += ScrollWheel*Time.deltaTime*ScrollWheelZoomingSensitivity;
+                zoomPos += ScrollWheel*Time.unscaledDeltaTime*ScrollWheelZoomingSensitivity;
             }
             if (UseKeyboardZooming) {
-                zoomPos += ZoomDirection*Time.deltaTime*KeyboardZoomingSensitivity;
+                zoomPos += ZoomDirection*Time.unscaledDeltaTime*KeyboardZoomingSensitivity;
             }
 
             zoomPos = Mathf.Clamp01(zoomPos);
@@ -257,7 +257,7 @@ namespace DdSG {
             mTransform.position = Vector3.Lerp(
                 mTransform.position,
                 new Vector3(mTransform.position.x, targetHeight + difference, mTransform.position.z),
-                Time.deltaTime*HeightDampening);
+                Time.unscaledDeltaTime*HeightDampening);
         }
 
         /// <summary>
@@ -276,11 +276,11 @@ namespace DdSG {
         /// </summary>
         private void Rotation() {
             if (UseKeyboardRotation) {
-                transform.Rotate(Vector3.up, RotationDirection*Time.deltaTime*RotationSpeed, Space.World);
+                transform.Rotate(Vector3.up, RotationDirection*Time.unscaledDeltaTime*RotationSpeed, Space.World);
             }
 
             if (UseMouseRotation && Input.GetKey(MouseRotationKey)) {
-                mTransform.Rotate(Vector3.up, -MouseAxis.x*Time.deltaTime*MouseRotationSpeed, Space.World);
+                mTransform.Rotate(Vector3.up, -MouseAxis.x*Time.unscaledDeltaTime*MouseRotationSpeed, Space.World);
             }
         }
 
@@ -290,7 +290,7 @@ namespace DdSG {
         private void FollowTarget() {
             Vector3 targetPos = new Vector3(TargetFollow.position.x, mTransform.position.y, TargetFollow.position.z)
                                 + TargetOffset;
-            mTransform.position = Vector3.MoveTowards(mTransform.position, targetPos, Time.deltaTime*FollowingSpeed);
+            mTransform.position = Vector3.MoveTowards(mTransform.position, targetPos, Time.unscaledDeltaTime*FollowingSpeed);
         }
 
         /// <summary>
