@@ -36,6 +36,10 @@ namespace DdSG {
             return string.Format("<mspace={0}em>{1}</mspace>", monospaceEm, value);
         }
 
+        public static string CurrencyFormat(this string value) {
+            return string.Format("{0:###,##0}", Convert.ToInt32(value));
+        }
+
     }
 
 }

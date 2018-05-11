@@ -19,6 +19,16 @@ namespace DdSG {
         // Private and protected members
         private float secondsElapsed;
 
+        private void Awake() {
+            // TODO Make alterations according to PlayConfiguration
+
+            // TODO Pick out entities
+
+            // TODO Set a real number of assets
+            const int numberOfAssets = 4;
+            PlayerStats.I.NumberOfAssets = numberOfAssets;
+        }
+
         private void Update() {
             if (!IsPaused) {
                 secondsElapsed += Time.deltaTime;
