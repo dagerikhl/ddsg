@@ -31,8 +31,9 @@ namespace DdSG {
             Overlay.SetActive(active);
         }
 
-        public void SetPosition(Vector3 position) {
-            Overlay.transform.position = position + pivot;
+        public void SetPosition(Vector3 position, bool showUnder, bool showOnLeft) {
+            var offset = new Vector3(showOnLeft ? -1 : 1, showUnder ? -1 : 1);
+            Overlay.transform.position = position + Vector3.Scale(pivot, offset);
         }
 
         public void SetTitle(string title) {

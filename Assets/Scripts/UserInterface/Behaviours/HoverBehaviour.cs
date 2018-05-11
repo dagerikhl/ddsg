@@ -11,6 +11,8 @@ namespace DdSG {
         public string Title;
         [TextArea(20, 50)]
         public string Text;
+        public bool ShowUnder;
+        public bool ShowOnLeft;
 
         //[Header("Optional")]
 
@@ -31,7 +33,7 @@ namespace DdSG {
             HelperObjects.HoverOverlay.SetTitle(Title);
             HelperObjects.HoverOverlay.SetText(Text);
 
-            HelperObjects.HoverOverlay.SetPosition(transform.position);
+            HelperObjects.HoverOverlay.SetPosition(transform.position, ShowUnder, ShowOnLeft);
 
             HelperObjects.HoverOverlay.SetActive(true);
         }
