@@ -45,6 +45,7 @@ namespace DdSG {
 
         // Entities
         public Entities Entities { get; set; }
+        public Entities GameEntities { get; set; }
 
         private void Awake() {
             Options = new Options {
