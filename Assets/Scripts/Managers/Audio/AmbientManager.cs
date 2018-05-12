@@ -30,10 +30,12 @@ namespace DdSG {
         }
 
         public void UpdateAmbient() {
-            if (State.I.CurrentScene == Constants.GAME_VIEW) {
-                PlayGameAmbient();
-            } else if (State.I.LastScene == Constants.GAME_VIEW) {
-                PlayMenuAmbient();
+            if (State.I.Options.AmbientEnabled) {
+                if (State.I.CurrentScene == Constants.GAME_VIEW) {
+                    PlayGameAmbient();
+                } else if (State.I.LastScene == Constants.GAME_VIEW) {
+                    PlayMenuAmbient();
+                }
             }
         }
 
