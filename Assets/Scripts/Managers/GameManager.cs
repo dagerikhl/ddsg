@@ -55,7 +55,7 @@ namespace DdSG {
             var relationships = new List<Relationship>();
 
             // This is very banal and may become incredibly cumbersome, should one be unlucky
-            const int maxAttempts = 1000;
+            const int maxAttempts = 100;
             var attempts = 0;
             while (attempts < maxAttempts
                    && (gameEntities.SDOs.assets == null
@@ -63,27 +63,32 @@ namespace DdSG {
                        || gameEntities.SDOs.course_of_actions == null
                        || gameEntities.SROs.relationships == null)) {
                 attempts++;
+                gameEntities = new Entities { SDOs = new StixDataObjects(), SROs = new StixRelationshipObjects() };
+                relationships = new List<Relationship>();
 
                 // Assets
                 var numberOfAssets = Rnd.Gen.Next(1, 5);
-
                 PlayerStats.I.NumberOfAssets = numberOfAssets;
 
                 gameEntities.SDOs.assets = State.I.Entities.SDOs.assets.TakeRandom(numberOfAssets).ToArray();
 
-                // Asset relationships
-                // Using for over foreach to avoid errors with accessing foreach variable in closure
-                for (var i = 0; i < gameEntities.SDOs.assets.Length; i++) {
-                    var asset = gameEntities.SDOs.assets[i];
-                    var assetRelationships = State.I.Entities.SROs.relationships.Where(
-                        (r) => r.target_ref.Type == StixType.Asset
-                               && string.Equals(asset.id.Id, r.target_ref.Id));
-                    relationships.AddRange(assetRelationships);
+                // Asset -> Attack pattern relationships
+                foreach (var asset in gameEntities.SDOs.assets) {
+                    relationships.AddRange(
+                        State.I.Entities.SROs.relationships.Where(
+                            (r) => r.target_ref.Type == StixType.Asset
+                                   && string.Equals(asset.id.Id, r.target_ref.Id)));
+                }
+
+                if (gameEntities.SDOs.assets == null || !relationships.Any()) {
+                    continue;
                 }
 
                 // Attack patterns
+                gameEntities.SDOs.attack_patterns = pickAttackPatterns(relationships);
 
-                // Attack pattern relationships
+                // Attack pattern -> Course of action relationships
+                // TODO Next up
 
                 // Course of actions
 
@@ -98,8 +103,21 @@ namespace DdSG {
             // Store game entities
             gameEntities.SROs.relationships = relationships.ToArray();
 
+            // TODO Remove
             Logger.Debug(gameEntities);
             State.I.GameEntities = gameEntities;
+        }
+
+        private AttackPattern[] pickAttackPatterns(IEnumerable<Relationship> relationships) {
+            var attackPatterns = new List<AttackPattern>();
+            foreach (var relationship in relationships) {
+                attackPatterns.AddRange(
+                    State.I.Entities.SDOs.attack_patterns.Where(
+                        (aP) => relationship.source_ref.Type == StixType.AttackPattern
+                                && string.Equals(relationship.source_ref.Id, aP.id.Id)));
+            }
+
+            return attackPatterns.Distinct().ToArray();
         }
 
     }
