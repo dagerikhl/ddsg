@@ -19,6 +19,7 @@ namespace DdSG {
 
         // Private and protected members
         private Vector3 pivot;
+        private readonly Vector3 offset = new Vector3(50f, 50f);
 
         private void Awake() {
             var overlayRect = Overlay.GetComponent<RectTransform>().rect;
@@ -32,8 +33,12 @@ namespace DdSG {
         }
 
         public void SetPosition(Vector3 position, bool showUnder, bool showOnLeft) {
-            var offset = new Vector3(showOnLeft ? -1 : 1, showUnder ? -1 : 1);
-            Overlay.transform.position = position + Vector3.Scale(pivot, offset);
+            var scale = transform.localScale;
+            var direction = new Vector3(showOnLeft ? -1 : 1, showUnder ? -1 : 1);
+
+            // Overlay.transform.position = Vector3.Scale(position, scale) + Vector3.Scale(pivot, offset);
+            Overlay.transform.position = position + Vector3.Scale(Vector3.Scale(pivot + offset, scale), direction);
+            // Overlay.transform.position = position;
         }
 
         public void SetTitle(string title) {
