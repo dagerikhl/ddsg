@@ -12,7 +12,16 @@ namespace DdSG {
         public ExternalReference[] external_references;
 
         [JsonIgnore]
-        public string FullDescription { get { return string.Join(" ", description); } }
+        public string FullDescription {
+            get {
+                var fullDescription = string.Join(" ", description);
+                if (!fullDescription.EndsWith(".")) {
+                    fullDescription += ".";
+                }
+
+                return fullDescription;
+            }
+        }
 
     }
 

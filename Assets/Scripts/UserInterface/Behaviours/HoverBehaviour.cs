@@ -8,6 +8,7 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
+        public bool GameOverlay;
         public string Title;
         [TextArea(20, 50)]
         public string Text;
@@ -33,7 +34,8 @@ namespace DdSG {
             HelperObjects.HoverOverlay.SetTitle(Title);
             HelperObjects.HoverOverlay.SetText(Text);
 
-            HelperObjects.HoverOverlay.SetPosition(transform.position, ShowUnder, ShowOnLeft);
+            var position = GameOverlay ? Input.mousePosition : transform.position;
+            HelperObjects.HoverOverlay.SetPosition(position, ShowUnder, ShowOnLeft);
 
             HelperObjects.HoverOverlay.SetActive(true);
         }
@@ -45,7 +47,11 @@ namespace DdSG {
         private void addPointerEntersEvent() {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
 
-            eventType.callback.AddListener((eventData) => { showHoverOverlay(); });
+            eventType.callback.AddListener(
+                (eventData) => {
+                    // Logger.Debug("Showing overlay.");
+                    showHoverOverlay();
+                });
 
             eventTrigger.triggers.Add(eventType);
         }
@@ -53,7 +59,11 @@ namespace DdSG {
         private void addPointerExitsEvent() {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
 
-            eventType.callback.AddListener((eventData) => { hideHoverOverlay(); });
+            eventType.callback.AddListener(
+                (eventData) => {
+                    // Logger.Debug("Hiding overlay.");
+                    hideHoverOverlay();
+                });
 
             eventTrigger.triggers.Add(eventType);
         }
