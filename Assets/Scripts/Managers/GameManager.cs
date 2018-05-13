@@ -10,10 +10,12 @@ namespace DdSG {
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI GameTime;
         public GameObject HoverOverlayPrefab;
+        public AssetSockets AssetSockets;
 
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
+        //[HideInInspector]
         public static bool IsPaused;
         public static bool ShouldResume;
 

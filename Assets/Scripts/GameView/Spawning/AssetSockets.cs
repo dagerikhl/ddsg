@@ -11,16 +11,35 @@ namespace DdSG {
         public Transform AssetSocket2;
         public Transform AssetSocket3;
         public Transform AssetSocket4;
+        public GameObject AssetPrefab;
 
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
-        public static Transform[] Sockets;
+        //[HideInInspector]
 
         // Private and protected members
+        private Transform[] sockets;
+        private AssetBehaviour[] assets = new AssetBehaviour[4];
 
         private void Awake() {
-            Sockets = new Transform[] { AssetSocket1, AssetSocket2, AssetSocket3, AssetSocket4 };
+            sockets = new[] { AssetSocket1, AssetSocket2, AssetSocket3, AssetSocket4 };
+        }
+
+        public void PlaceAssetsOnSockets() {
+            for (var i = 0; i < State.I.GameEntities.SDOs.assets.Length; i++) {
+                var asset = State.I.GameEntities.SDOs.assets[i];
+
+                assets[i] = instantiateAsset(asset, sockets[i].position);
+            }
+        }
+
+        private AssetBehaviour instantiateAsset(Asset asset, Vector3 position) {
+            var assetGameObject = Instantiate(AssetPrefab, position, Quaternion.identity, HelperObjects.Ephemerals)
+                .GetComponent<AssetBehaviour>();
+            assetGameObject.Initialize(asset);
+
+            return assetGameObject;
         }
 
     }

@@ -17,6 +17,7 @@ namespace DdSG {
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
+        //[HideInInspector]
         public int Worth {
             get { return worth; }
             set {
