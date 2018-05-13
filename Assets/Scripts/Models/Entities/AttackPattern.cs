@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 // ReSharper disable InconsistentNaming
 
@@ -8,6 +9,9 @@ namespace DdSG {
     public class AttackPattern: StixDataEntityBase {
 
         public AttackPatternCustoms custom;
+
+        [JsonIgnore]
+        public string[] TargetsAssetCategories { get; set; }
 
     }
 
