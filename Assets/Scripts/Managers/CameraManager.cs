@@ -175,16 +175,18 @@ namespace DdSG {
         /// update camera movement and rotation
         /// </summary>
         private void CameraUpdate() {
-            if (FollowingTarget) {
-                FollowTarget();
-            } else {
-                Move();
-            }
+            if (!GameManager.IsPaused) {
+                if (FollowingTarget) {
+                    FollowTarget();
+                } else {
+                    Move();
+                }
 
-            HeightCalculation();
-            Tilt();
-            Rotation();
-            LimitPosition();
+                HeightCalculation();
+                Tilt();
+                Rotation();
+                LimitPosition();
+            }
         }
 
         /// <summary>
@@ -290,7 +292,10 @@ namespace DdSG {
         private void FollowTarget() {
             Vector3 targetPos = new Vector3(TargetFollow.position.x, mTransform.position.y, TargetFollow.position.z)
                                 + TargetOffset;
-            mTransform.position = Vector3.MoveTowards(mTransform.position, targetPos, Time.unscaledDeltaTime*FollowingSpeed);
+            mTransform.position = Vector3.MoveTowards(
+                mTransform.position,
+                targetPos,
+                Time.unscaledDeltaTime*FollowingSpeed);
         }
 
         /// <summary>
