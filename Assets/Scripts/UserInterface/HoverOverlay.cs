@@ -11,6 +11,7 @@ namespace DdSG {
         public GameObject Overlay;
         public TextMeshProUGUI Title;
         public TextMeshProUGUI Text;
+        public CanvasGroup CanvasGroup;
 
         //[Header("Optional")]
 
@@ -24,21 +25,27 @@ namespace DdSG {
         private void Awake() {
             var overlayRect = Overlay.GetComponent<RectTransform>().rect;
             pivot = new Vector3(overlayRect.width/2f, overlayRect.height/2f);
-
-            SetActive(false);
         }
 
-        public void SetActive(bool active) {
-            Overlay.SetActive(active);
+        public void Show() {
+            StartCoroutine(
+                FadeManager.I.Fade(0f, Constants.HOVER_TRANSITION_TIME, (value) => CanvasGroup.alpha = value));
+        }
+
+        public void Hide() {
+            StartCoroutine(
+                FadeManager.I.Fade(
+                    Constants.HOVER_TRANSITION_TIME,
+                    0f,
+                    (value) => CanvasGroup.alpha = value,
+                    () => Destroy(gameObject)));
         }
 
         public void SetPosition(Vector3 position, bool showUnder, bool showOnLeft) {
             var scale = transform.localScale;
             var direction = new Vector3(showOnLeft ? -1 : 1, showUnder ? -1 : 1);
 
-            // Overlay.transform.position = Vector3.Scale(position, scale) + Vector3.Scale(pivot, offset);
             Overlay.transform.position = position + Vector3.Scale(Vector3.Scale(pivot + offset, scale), direction);
-            // Overlay.transform.position = position;
         }
 
         public void SetTitle(string title) {

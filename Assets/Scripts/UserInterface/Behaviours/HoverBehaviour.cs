@@ -22,6 +22,7 @@ namespace DdSG {
 
         // Private and protected members
         private EventTrigger eventTrigger;
+        private HoverOverlay hoverOverlay;
 
         private void Awake() {
             eventTrigger = gameObject.AddComponent<EventTrigger>();
@@ -31,17 +32,20 @@ namespace DdSG {
         }
 
         private void showHoverOverlay() {
-            HelperObjects.HoverOverlay.SetTitle(Title);
-            HelperObjects.HoverOverlay.SetText(Text);
+            hoverOverlay = Instantiate(HelperObjects.HoverOverlayPrefab, HelperObjects.Ephemerals)
+                .GetComponent<HoverOverlay>();
+
+            hoverOverlay.SetTitle(Title);
+            hoverOverlay.SetText(Text);
 
             var position = GameOverlay ? Input.mousePosition : transform.position;
-            HelperObjects.HoverOverlay.SetPosition(position, ShowUnder, ShowOnLeft);
+            hoverOverlay.SetPosition(position, ShowUnder, ShowOnLeft);
 
-            HelperObjects.HoverOverlay.SetActive(true);
+            hoverOverlay.Show();
         }
 
         private void hideHoverOverlay() {
-            HelperObjects.HoverOverlay.SetActive(false);
+            hoverOverlay.Hide();
         }
 
         private void addPointerEntersEvent() {

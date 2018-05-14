@@ -29,8 +29,7 @@ namespace DdSG {
                 State.I.Entities = newEntitiesJson.entities;
             }
 
-            HelperObjects.HoverOverlay =
-                Instantiate(HoverOverlayPrefab, HelperObjects.Ephemerals).GetComponent<HoverOverlay>();
+            HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
 
             EntitiesPicker.PickGameEntities();
 

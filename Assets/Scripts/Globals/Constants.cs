@@ -23,6 +23,7 @@
         // Scene transitions
         public const float SCENE_TRANSITION_TIME = 1.2f;
         public const float PAUSE_TRANSITION_TIME = 0.2f;
+        public const float HOVER_TRANSITION_TIME = 0.1f;
 
         // Play configuration
         public static readonly string[] DIFFICULTY_OPTIONS = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
