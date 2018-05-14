@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -40,12 +39,19 @@ namespace DdSG {
             GameManager.IsPaused = true;
 
             // Fade in menu
-            StartCoroutine(fadeIn());
+            FadeManager.I.Fade(0f, Constants.PAUSE_TRANSITION_TIME, setAlpha, show);
         }
 
         [UsedImplicitly]
         public void Resume() {
-            StartCoroutine(fadeOutAndPerformAction());
+            FadeManager.I.Fade(
+                Constants.PAUSE_TRANSITION_TIME,
+                0f,
+                setAlpha,
+                () => {
+                    hide();
+                    GameManager.IsPaused = false;
+                });
         }
 
         [UsedImplicitly]
@@ -132,41 +138,8 @@ namespace DdSG {
             canvasGroup.alpha = 0f;
         }
 
-        private IEnumerator fadeIn() {
-            // Fade
-            float t = 0f;
-
-            while (t < Constants.PAUSE_TRANSITION_TIME) {
-                t += Time.unscaledDeltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.PAUSE_TRANSITION_TIME);
-                canvasGroup.alpha = alpha;
-
-                yield return 0;
-            }
-
-            show();
-        }
-
-        private IEnumerator fadeOutAndPerformAction(Action action = null) {
-            // Fade
-            float t = Constants.PAUSE_TRANSITION_TIME;
-
-            while (t > 0f) {
-                t -= Time.unscaledDeltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.PAUSE_TRANSITION_TIME);
-                canvasGroup.alpha = alpha;
-
-                yield return 0;
-            }
-
-            // Hide and potentially resume
-            hide();
-            GameManager.IsPaused = false;
-
-            // Perform next action if supplied
-            if (action != null) {
-                action();
-            }
+        private void setAlpha(float value) {
+            canvasGroup.alpha = value;
         }
 
     }

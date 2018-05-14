@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DdSG {
 
@@ -41,50 +40,44 @@ namespace DdSG {
 
         public void PlayMenuAmbient() {
             if (Source.clip && Source.clip.Equals(GameAmbient)) {
-                StartCoroutine(fadeOutAndInWithNewAmbient(MenuAmbient));
+                FadeManager.I.Fade(
+                    Constants.SCENE_TRANSITION_TIME,
+                    0f,
+                    setSourceVolume,
+                    () => {
+                        Source.clip = MenuAmbient;
+                        Source.Play();
+                    },
+                    FadeCurve,
+                    true);
             } else {
                 Source.clip = MenuAmbient;
                 Source.Play();
-                StartCoroutine(fadeIn());
+                FadeManager.I.Fade(0f, Constants.SCENE_TRANSITION_TIME, setSourceVolume, null, FadeCurve);
             }
         }
 
         private void PlayGameAmbient() {
             if (Source.clip && Source.clip.Equals(MenuAmbient)) {
-                StartCoroutine(fadeOutAndInWithNewAmbient(GameAmbient));
+                FadeManager.I.Fade(
+                    Constants.SCENE_TRANSITION_TIME,
+                    0f,
+                    setSourceVolume,
+                    () => {
+                        Source.clip = GameAmbient;
+                        Source.Play();
+                    },
+                    FadeCurve,
+                    true);
             } else {
                 Source.clip = GameAmbient;
                 Source.Play();
-                StartCoroutine(fadeIn());
+                FadeManager.I.Fade(0f, Constants.SCENE_TRANSITION_TIME, setSourceVolume, null, FadeCurve);
             }
         }
 
-        private IEnumerator fadeIn() {
-            var t = 0f;
-
-            while (t < Constants.SCENE_TRANSITION_TIME) {
-                t += Time.deltaTime;
-                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.Options.AmbientVolume;
-                Source.volume = volume;
-
-                yield return 0;
-            }
-        }
-
-        private IEnumerator fadeOutAndInWithNewAmbient(AudioClip ambient) {
-            var t = Constants.SCENE_TRANSITION_TIME;
-
-            while (t > 0f) {
-                t -= Time.deltaTime;
-                var volume = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME)*State.I.Options.AmbientVolume;
-                Source.volume = volume;
-
-                yield return 0;
-            }
-
-            Source.clip = ambient;
-            Source.Play();
-            StartCoroutine(fadeIn());
+        private void setSourceVolume(float value) {
+            Source.volume = value*State.I.Options.AmbientVolume;
         }
 
     }

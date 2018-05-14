@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnitySceneManagement = UnityEngine.SceneManagement;
 using System.Collections;
@@ -28,7 +27,12 @@ namespace DdSG {
         protected override string persistentTag { get { return "SceneManager"; } }
 
         private void Start() {
-            StartCoroutine(fadeIn());
+            FadeManager.I.Fade(
+                Constants.SCENE_TRANSITION_TIME,
+                0f,
+                setFadeOverlayColor,
+                () => InputBlocker.enabled = false,
+                FadeCurve);
         }
 
         public void GoTo(string sceneName, bool additive = true) {
@@ -37,12 +41,16 @@ namespace DdSG {
             State.I.CurrentScene = sceneName;
 
             // Fade to new scene
-            StartCoroutine(
-                fadeOut(
-                    () => UnitySceneManagement.SceneManager.LoadScene(
-                        sceneName,
-                        additive ? UnitySceneManagement.LoadSceneMode.Additive
-                            : UnitySceneManagement.LoadSceneMode.Single)));
+            FadeManager.I.Fade(
+                0f,
+                Constants.SCENE_TRANSITION_TIME,
+                setFadeOverlayColor,
+                () => UnitySceneManagement.SceneManager.LoadScene(
+                    sceneName,
+                    additive ? UnitySceneManagement.LoadSceneMode.Additive
+                        : UnitySceneManagement.LoadSceneMode.Single),
+                FadeCurve,
+                true);
 
             AmbientManager.I.UpdateAmbient();
         }
@@ -53,7 +61,13 @@ namespace DdSG {
             State.I.CurrentScene = getLastSceneName();
 
             // Fade to new scene
-            StartCoroutine(fadeOut(() => UnitySceneManagement.SceneManager.UnloadSceneAsync(State.I.LastScene)));
+            FadeManager.I.Fade(
+                0f,
+                Constants.SCENE_TRANSITION_TIME,
+                setFadeOverlayColor,
+                () => UnitySceneManagement.SceneManager.UnloadSceneAsync(State.I.LastScene),
+                FadeCurve,
+                true);
 
             // If going back into the game view when the game is paused we should show pause menu
             if (State.I.CurrentScene == Constants.GAME_VIEW && GameManager.IsPaused) {
@@ -65,10 +79,14 @@ namespace DdSG {
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public void RestartScene() {
-            StartCoroutine(
-                fadeOut(
-                    () => UnitySceneManagement.SceneManager.LoadScene(
-                        UnitySceneManagement.SceneManager.GetActiveScene().name)));
+            FadeManager.I.Fade(
+                0f,
+                Constants.SCENE_TRANSITION_TIME,
+                setFadeOverlayColor,
+                () => UnitySceneManagement.SceneManager.LoadScene(
+                    UnitySceneManagement.SceneManager.GetActiveScene().name),
+                FadeCurve,
+                true);
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Global
@@ -85,44 +103,8 @@ namespace DdSG {
             Application.Quit();
         }
 
-        private IEnumerator fadeIn() {
-            // Fade
-            float t = Constants.SCENE_TRANSITION_TIME;
-
-            while (t > 0f) {
-                t -= Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME);
-                FadeOverlay.color = FadeColor.WithAlpha(alpha);
-
-                yield return 0;
-            }
-
-            // Disable input blocking
-            InputBlocker.enabled = false;
-        }
-
-        private IEnumerator fadeOut(Action action) {
-            // Enable input blocking
-            InputBlocker.enabled = true;
-
-            // Fade
-            float t = 0f;
-
-            while (t < Constants.SCENE_TRANSITION_TIME) {
-                t += Time.deltaTime;
-                float alpha = FadeCurve.Evaluate(t/Constants.SCENE_TRANSITION_TIME);
-                FadeOverlay.color = FadeColor.WithAlpha(alpha);
-
-                yield return 0;
-            }
-
-            // Perform action if supplied
-            if (action != null) {
-                action();
-            }
-
-            // Fade back in
-            StartCoroutine(fadeIn());
+        private void setFadeOverlayColor(float value) {
+            FadeOverlay.color = FadeColor.WithAlpha(value);
         }
 
         private string getCurrentSceneName() {
