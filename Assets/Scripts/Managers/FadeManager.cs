@@ -21,7 +21,11 @@ namespace DdSG {
 
         // Private and protected members
 
-        public IEnumerator Fade(float from, float to, Action<float> updater, Action action = null) {
+        public void Fade(float from, float to, Action<float> updater, Action action = null) {
+            StartCoroutine(fadeRoutine(from, to, updater, action));
+        }
+
+        private IEnumerator fadeRoutine(float from, float to, Action<float> updater, Action action = null) {
             var direction = to > from ? 1 : -1;
 
             float t = from;

@@ -28,17 +28,11 @@ namespace DdSG {
         }
 
         public void Show() {
-            StartCoroutine(
-                FadeManager.I.Fade(0f, Constants.HOVER_TRANSITION_TIME, (value) => CanvasGroup.alpha = value));
+            FadeManager.I.Fade(0f, Constants.HOVER_TRANSITION_TIME, setAlpha);
         }
 
         public void Hide() {
-            StartCoroutine(
-                FadeManager.I.Fade(
-                    Constants.HOVER_TRANSITION_TIME,
-                    0f,
-                    (value) => CanvasGroup.alpha = value,
-                    () => Destroy(gameObject)));
+            FadeManager.I.Fade(Constants.HOVER_TRANSITION_TIME, 0f, setAlpha, () => Destroy(gameObject));
         }
 
         public void SetPosition(Vector3 position, bool showUnder, bool showOnLeft) {
@@ -54,6 +48,10 @@ namespace DdSG {
 
         public void SetText(string text) {
             Text.text = text;
+        }
+
+        private void setAlpha(float value) {
+            CanvasGroup.alpha = value;
         }
 
     }
