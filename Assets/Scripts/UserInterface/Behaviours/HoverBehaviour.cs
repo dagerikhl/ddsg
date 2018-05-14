@@ -31,21 +31,16 @@ namespace DdSG {
             addPointerExitsEvent();
         }
 
-        private void showHoverOverlay() {
+        private void createHoverOverlay() {
             hoverOverlay = Instantiate(HelperObjects.HoverOverlayPrefab, HelperObjects.Ephemerals)
                 .GetComponent<HoverOverlay>();
 
-            hoverOverlay.SetTitle(Title);
-            hoverOverlay.SetText(Text);
-
             var position = GameOverlay ? Input.mousePosition : transform.position;
-            hoverOverlay.SetPosition(position, ShowUnder, ShowOnLeft);
-
-            hoverOverlay.Show();
+            hoverOverlay.Initialize(Title, Text, position, ShowUnder, ShowOnLeft);
         }
 
         private void hideHoverOverlay() {
-            hoverOverlay.Hide();
+            hoverOverlay.Destroy();
         }
 
         private void addPointerEntersEvent() {
@@ -54,7 +49,7 @@ namespace DdSG {
             eventType.callback.AddListener(
                 (eventData) => {
                     // Logger.Debug("Showing overlay.");
-                    showHoverOverlay();
+                    createHoverOverlay();
                 });
 
             eventTrigger.triggers.Add(eventType);
