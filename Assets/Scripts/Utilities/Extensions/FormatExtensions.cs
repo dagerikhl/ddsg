@@ -33,8 +33,6 @@ namespace DdSG {
         }
 
         public static string IntegrityFormat(this float value) {
-            // var color = BitConverter.DoubleToInt64Bits(value*(255f/100f)).ToString("X6");
-            // var color = Convert.ToDouble(value*(255f/100f)).ToString("X");
             var normalizedValue = value/100f;
             var color = string.Format(
                 "#{0:X2}{1:X2}{2:X2}",
@@ -44,6 +42,10 @@ namespace DdSG {
             var valueString = string.Format("{0:0}", value).PadLeft(3, ' ');
 
             return string.Format("<color={0}>{1}</color><space=1em>%", color, valueString);
+        }
+
+        public static string ExtractUrlDomain(this string value) {
+            return Regex.Match(value, @"(https?:\/\/)?(([\w\d\-]+\.)+(com|org|net|no|io|so)).*").Groups[2].Value;
         }
 
     }
