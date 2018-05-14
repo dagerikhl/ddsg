@@ -21,12 +21,14 @@ namespace DdSG {
         public void Initialize(Asset asset) {
             HoverBehaviour.Title = asset.custom.category;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
-            HoverBehaviour.HasSecondaryAction = true;
 
             if (asset.external_references.Any((e) => e.description == null)) {
+                HoverBehaviour.HasSecondaryAction = true;
                 ClickBehaviour.SecondaryAction = () => {
-                    var externalUrls = asset.external_references.Select((e) => e.url);
-                    // TODO Open ext. references
+                    foreach (var url in asset.external_references.Select((e) => e.url)) {
+                        FindObjectOfType<PauseMenu>().Pause();
+                        Application.OpenURL(url);
+                    }
                 };
             }
         }
