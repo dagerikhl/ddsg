@@ -12,6 +12,7 @@ namespace DdSG {
         public string Title;
         [TextArea(20, 50)]
         public string Text;
+        public string ActionText;
         public bool ShowUnder;
         public bool ShowOnLeft;
 
@@ -36,7 +37,9 @@ namespace DdSG {
                 .GetComponent<HoverOverlay>();
 
             var position = GameOverlay ? Input.mousePosition : transform.position;
-            hoverOverlay.Initialize(Title, Text, position, ShowUnder, ShowOnLeft);
+            var direction = new Vector3(ShowOnLeft ? -1 : 1, ShowUnder ? -1 : 1);
+            var data = new DescriptionData { Title = Title, Text = Text, ActionText = ActionText };
+            hoverOverlay.Initialize(position, direction, data);
         }
 
         private void hideHoverOverlay() {
@@ -45,25 +48,21 @@ namespace DdSG {
 
         private void addPointerEntersEvent() {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-
             eventType.callback.AddListener(
                 (eventData) => {
                     // Logger.Debug("Showing overlay.");
                     createHoverOverlay();
                 });
-
             eventTrigger.triggers.Add(eventType);
         }
 
         private void addPointerExitsEvent() {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-
             eventType.callback.AddListener(
                 (eventData) => {
                     // Logger.Debug("Hiding overlay.");
                     hideHoverOverlay();
                 });
-
             eventTrigger.triggers.Add(eventType);
         }
 

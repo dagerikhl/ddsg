@@ -15,6 +15,10 @@ namespace DdSG {
             return sb.ToString();
         }
 
+        public static string BuildActionText(string text) {
+            return "Click to " + text;
+        }
+
     }
 
 }
