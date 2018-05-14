@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114762265027977404}
   - component: {fileID: 64714871301316644}
   - component: {fileID: 114530001151413276}
+  - component: {fileID: 114495826930189444}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -130,6 +131,17 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
+--- !u!114 &114495826930189444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636669035974938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114530001151413276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +156,7 @@ MonoBehaviour:
   GameOverlay: 1
   Title: 
   Text: 
+  ActionText: 
   ShowUnder: 0
   ShowOnLeft: 0
 --- !u!114 &114685685558340040
@@ -158,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverBehaviour: {fileID: 114530001151413276}
+  ClickBehaviour: {fileID: 114495826930189444}
 --- !u!114 &114762265027977404
 MonoBehaviour:
   m_ObjectHideFlags: 1

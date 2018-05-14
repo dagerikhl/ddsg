@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace DdSG {
 
@@ -8,6 +9,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
+        public ClickBehaviour ClickBehaviour;
 
         //[Header("Optional")]
 
@@ -20,6 +22,13 @@ namespace DdSG {
             HoverBehaviour.Title = asset.custom.category;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
             HoverBehaviour.HasSecondaryAction = true;
+
+            if (asset.external_references.Any((e) => e.description == null)) {
+                ClickBehaviour.SecondaryAction = () => {
+                    var externalUrls = asset.external_references.Select((e) => e.url);
+                    // TODO Open ext. references
+                };
+            }
         }
 
     }
