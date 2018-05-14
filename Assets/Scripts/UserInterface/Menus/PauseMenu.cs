@@ -30,6 +30,12 @@ namespace DdSG {
                 StartCoroutine(showAfterDelay(Constants.SCENE_TRANSITION_TIME));
                 GameManager.ShouldResume = false;
             }
+
+            if (GameManager.IsPaused) {
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    Resume();
+                }
+            }
         }
 
         [UsedImplicitly]

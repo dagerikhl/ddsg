@@ -44,6 +44,12 @@ namespace DdSG {
 
                 updateGameTime();
             }
+
+            if (!IsPaused) {
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    FindObjectOfType<PauseMenu>().Pause();
+                }
+            }
         }
 
         private void updateGameTime() {
