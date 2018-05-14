@@ -20,10 +20,14 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        public bool HasSecondaryAction { private get; set; }
 
         // Private and protected members
         private EventTrigger eventTrigger;
         private HoverOverlay hoverOverlay;
+
+        private bool HasPrimaryAction { get { return !string.IsNullOrEmpty(ActionText); } }
+        private bool HasActions { get { return HasPrimaryAction || HasSecondaryAction; } }
 
         private void Awake() {
             eventTrigger = gameObject.AddComponent<EventTrigger>();
@@ -50,8 +54,11 @@ namespace DdSG {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
             eventType.callback.AddListener(
                 (eventData) => {
-                    // Logger.Debug("Showing overlay.");
                     createHoverOverlay();
+
+                    if (HasActions) {
+                        CursorManager.I.SetCursor(CursorType.Pointer);
+                    }
                 });
             eventTrigger.triggers.Add(eventType);
         }
@@ -60,8 +67,9 @@ namespace DdSG {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
             eventType.callback.AddListener(
                 (eventData) => {
-                    // Logger.Debug("Hiding overlay.");
                     hideHoverOverlay();
+
+                    CursorManager.I.SetCursor(CursorType.Default);
                 });
             eventTrigger.triggers.Add(eventType);
         }

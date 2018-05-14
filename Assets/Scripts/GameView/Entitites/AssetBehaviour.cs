@@ -19,6 +19,7 @@ namespace DdSG {
         public void Initialize(Asset asset) {
             HoverBehaviour.Title = asset.custom.category;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
+            HoverBehaviour.HasSecondaryAction = true;
         }
 
     }
