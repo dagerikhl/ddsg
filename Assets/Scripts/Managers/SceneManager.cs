@@ -83,8 +83,11 @@ namespace DdSG {
                 0f,
                 Constants.SCENE_TRANSITION_TIME,
                 setFadeOverlayColor,
-                () => UnitySceneManagement.SceneManager.LoadScene(
-                    UnitySceneManagement.SceneManager.GetActiveScene().name),
+                () => {
+                    GameManager.IsPaused = false;
+                    UnitySceneManagement.SceneManager.LoadScene(
+                        UnitySceneManagement.SceneManager.GetActiveScene().name);
+                },
                 FadeCurve,
                 true);
         }
