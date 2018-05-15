@@ -26,26 +26,28 @@ namespace DdSG {
         private Transform target;
         private int waypointIndex;
 
-        private void Awake() {
+        private void Start() {
             attackBehaviour = GetComponent<AttackBehaviour>();
 
-            targetedAsset = GetComponents<AssetBehaviour>()
+            targetedAsset = FindObjectsOfType<AssetBehaviour>()
                             .Where((a) => a.Category == attackBehaviour.ActivationZone)
                             .TakeRandom();
-            waypoints = GetComponents<Waypoints>().First((w) => w.Category == attackBehaviour.InjectionVector);
+            waypoints = FindObjectsOfType<Waypoints>().First((w) => w.Category == attackBehaviour.InjectionVector);
 
             target = waypoints.Points[0];
         }
 
         private void Update() {
-            Vector3 dir = target.position - transform.position;
-            transform.Translate(dir.normalized*attackBehaviour.Speed*Time.deltaTime, Space.World);
+            if (target != null) {
+                Vector3 dir = target.position - transform.position;
+                transform.Translate(dir.normalized*attackBehaviour.Speed*Time.deltaTime, Space.World);
 
-            if (Vector3.Distance(transform.position, target.position) <= 0.4f) {
-                getNextWaypoint();
+                if (Vector3.Distance(transform.position, target.position) <= 0.4f) {
+                    getNextWaypoint();
+                }
+
+                attackBehaviour.Speed = attackBehaviour.StartSpeed;
             }
-
-            attackBehaviour.Speed = attackBehaviour.StartSpeed;
         }
 
         private void getNextWaypoint() {

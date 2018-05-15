@@ -63,7 +63,9 @@ namespace DdSG {
         private void spawnAttack(AttackPattern attackPattern) {
             var spawnPoint = SpawnPoints.GetSpawnPoint(attackPattern.custom.injection_vector.categories.TakeRandom());
 
-            UnityHelper.Instantiate(AttackPrefab, spawnPoint.position, spawnPoint.rotation);
+            var attack = UnityHelper.Instantiate(AttackPrefab, spawnPoint.position, spawnPoint.rotation)
+                                    .GetComponent<AttackBehaviour>();
+            attack.Initialize(attackPattern);
         }
 
     }

@@ -11,7 +11,8 @@ namespace DdSG {
         public int Worth = 50;
 
         [Header("Unity Setup Fields")]
-        public Image HealthBar;
+        public Canvas HealthBar;
+        public Image HealthBarImage;
         public GameObject DeathEffect;
 
         // Public members hidden from Unity Inspector
@@ -30,6 +31,10 @@ namespace DdSG {
             Speed = StartSpeed;
         }
 
+        private void Update() {
+            HealthBar.transform.rotation = HelperObjects.Camera.rotation;
+        }
+
         public void Initialize(AttackPattern attackPattern) {
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
@@ -37,7 +42,7 @@ namespace DdSG {
 
         public void Damage(float amount) {
             Health -= amount;
-            HealthBar.fillAmount = Health/StartHealth;
+            HealthBarImage.fillAmount = Health/StartHealth;
 
             if (Health <= 0f && !isDead) {
                 die();
