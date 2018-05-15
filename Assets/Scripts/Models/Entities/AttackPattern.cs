@@ -18,8 +18,10 @@ namespace DdSG {
 
         public AttackSteps steps;
         public string[] prerequisites;
-        public string severity;
-        public string likelihood;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Scale? severity;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Scale? likelihood;
         public AttackExample[] examples;
         public string[] probing_techniques;
         public string[] indicators;
@@ -70,7 +72,6 @@ namespace DdSG {
     public class AttackInjectionVector: TransferObjectBase {
 
         public string description;
-        // [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("categories", ItemConverterType = typeof(StringEnumConverter))]
         public PathCategory[] categories;
 
@@ -80,7 +81,6 @@ namespace DdSG {
     public class AttackActivationZone: TransferObjectBase {
 
         public string description;
-        // [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("categories", ItemConverterType = typeof(StringEnumConverter))]
         public AssetCategory[] categories;
 
@@ -89,9 +89,12 @@ namespace DdSG {
     [Serializable]
     public class AttackImpact: TransferObjectBase {
 
-        public string confidentiality;
-        public string integrity;
-        public string availability;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Scale? confidentiality;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Scale? integrity;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Scale? availability;
 
     }
 
