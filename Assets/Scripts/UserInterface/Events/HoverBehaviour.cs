@@ -37,8 +37,7 @@ namespace DdSG {
         }
 
         private void createHoverOverlay() {
-            hoverOverlay = Instantiate(HelperObjects.HoverOverlayPrefab, HelperObjects.Ephemerals)
-                .GetComponent<HoverOverlay>();
+            hoverOverlay = UnityHelper.Instantiate(HelperObjects.HoverOverlayPrefab).GetComponent<HoverOverlay>();
 
             var position = GameOverlay ? Input.mousePosition : transform.position;
             var direction = new Vector3(ShowOnLeft ? -1 : 1, ShowUnder ? -1 : 1);

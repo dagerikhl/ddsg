@@ -37,7 +37,7 @@ namespace DdSG {
             AssetSockets.PlaceAssetsOnSockets();
         }
 
-        public void Win() {
+        public static void Win() {
             IsGameOver = true;
             Logger.Debug("Game won!");
             Application.Quit();

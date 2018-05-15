@@ -1,27 +1,24 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace DdSG {
 
     public class WaveSpawner: MonoBehaviour {
 
         [Header("Attributes")]
-        public float TimeBetweenWaves = 2f;
+        public int TotalWaves = 10;
+        public float TimeBetweenWaves = 10f;
 
         [Header("Unity Setup Fields")]
-        public Wave[] Waves;
-        public Transform SpawnPoint;
-        public GameManager GameManager;
-
-        public Text WaveCountdownText;
+        public GameObject AttackPrefab;
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
         public static int AttacksAlive;
 
         // Private and protected members
-        private float countdown = 2f;
+        private float countdown = 10f;
         private int waveIndex;
 
         private void Update() {
@@ -29,7 +26,7 @@ namespace DdSG {
                 return;
             }
 
-            if (waveIndex == Waves.Length) {
+            if (waveIndex > TotalWaves) {
                 GameManager.Win();
                 enabled = false;
                 return;
@@ -44,15 +41,18 @@ namespace DdSG {
             countdown -= Time.deltaTime;
             countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-            WaveCountdownText.text = string.Format("{0:00.00}", countdown);
+            // TODO Set text of some UI component showing countdown to new wave
+            // WaveCountdownText.text = string.Format("{0:00.00}", countdown);
         }
 
         private IEnumerator spawnWave() {
-            Wave wave = Waves[waveIndex];
+            var wave = new Wave { Count = 1, Rate = 5f };
+            wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
+
             AttacksAlive = wave.Count;
 
-            for (var i = 0; i < wave.Count; i++) {
-                spawnAttack(wave.Attack);
+            foreach (var attackPattern in wave.AttackPatterns) {
+                spawnAttack(attackPattern);
                 yield return new WaitForSeconds(1f/wave.Rate);
             }
 
@@ -60,8 +60,10 @@ namespace DdSG {
             waveIndex++;
         }
 
-        private void spawnAttack(GameObject enemy) {
-            Instantiate(enemy, SpawnPoint.position, SpawnPoint.rotation, HelperObjects.Ephemerals);
+        private void spawnAttack(AttackPattern attackPattern) {
+            var spawnPoint = SpawnPoints.GetSpawnPoint(attackPattern.custom.injection_vector.categories.TakeRandom());
+
+            UnityHelper.Instantiate(AttackPrefab, spawnPoint.position, spawnPoint.rotation);
         }
 
     }

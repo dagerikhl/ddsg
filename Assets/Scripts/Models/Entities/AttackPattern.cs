@@ -11,9 +11,6 @@ namespace DdSG {
 
         public AttackPatternCustoms custom;
 
-        [JsonIgnore]
-        public string[] TargetsAssetCategories { get; set; }
-
     }
 
     [Serializable]

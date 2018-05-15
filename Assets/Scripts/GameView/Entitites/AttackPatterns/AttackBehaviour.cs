@@ -54,11 +54,7 @@ namespace DdSG {
             PlayerStats.I.Worth += Worth;
 
             // SFX
-            GameObject effect = Instantiate(
-                DeathEffect,
-                transform.position,
-                Quaternion.identity,
-                HelperObjects.Ephemerals);
+            var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
             Destroy(effect, 5f);
 
             WaveSpawner.AttacksAlive--;
