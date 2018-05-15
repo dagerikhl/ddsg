@@ -57,7 +57,9 @@ namespace DdSG {
         }
 
         private void setAlpha(float value) {
-            CanvasGroup.alpha = value;
+            if (CanvasGroup != null) {
+                CanvasGroup.alpha = value;
+            }
         }
 
     }
