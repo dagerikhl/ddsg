@@ -46,7 +46,7 @@ namespace DdSG {
         }
 
         private IEnumerator spawnWave() {
-            var wave = new Wave { Count = 1, Rate = 5f };
+            var wave = new Wave { Count = 5, Rate = 5f };
             wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
 
             AttacksAlive = wave.Count;
