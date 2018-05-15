@@ -25,6 +25,7 @@ namespace DdSG {
         public PathCategory InjectionVector { get; private set; }
         public AssetCategory ActivationZone { get; private set; }
         public AssetBehaviour TargetedAsset { get; private set; }
+        public Transform SpawnPoint { get; private set; }
 
         // Private and protected members
         private bool isDead;
@@ -43,6 +44,9 @@ namespace DdSG {
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
             TargetedAsset = FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).TakeRandom();
+            SpawnPoint = SpawnPoints.GetSpawnPoint(InjectionVector);
+
+            transform.position = SpawnPoint.position;
 
             // TODO Set damageToAsset
         }
