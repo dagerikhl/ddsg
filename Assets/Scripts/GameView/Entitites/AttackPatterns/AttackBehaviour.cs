@@ -32,9 +32,7 @@ namespace DdSG {
         }
 
         private void Update() {
-            var cameraRotation = HelperObjects.Camera.rotation.eulerAngles;
-            var rotation = new Vector3(cameraRotation.x, cameraRotation.y, 0f);
-            HealthBar.transform.rotation = Quaternion.Euler(rotation);
+            HealthBar.transform.rotation = CameraHelper.GetCameraRotationXy();
         }
 
         public void Initialize(AttackPattern attackPattern) {

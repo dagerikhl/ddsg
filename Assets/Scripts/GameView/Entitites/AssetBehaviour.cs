@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DdSG {
 
@@ -11,6 +12,9 @@ namespace DdSG {
         public HoverBehaviour HoverBehaviour;
         public ClickBehaviour ClickBehaviour;
 
+        public Canvas HealthBar;
+        public Image HealthBarImage;
+
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
@@ -20,6 +24,10 @@ namespace DdSG {
         public int AssetIndex;
 
         // Private and protected members
+
+        private void Update() {
+            HealthBar.transform.rotation = CameraHelper.GetCameraRotationXy();
+        }
 
         public void Initialize(Asset asset, int assetIndex) {
             Category = asset.custom.category;
