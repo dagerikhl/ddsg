@@ -8,7 +8,7 @@ namespace DdSG {
 
         [Header("Attributes")]
         public int TotalWaves = 10;
-        public float TimeBetweenWaves = 10f;
+        public float TimeBetweenWaves = 2f;
 
         [Header("Unity Setup Fields")]
         public GameObject AttackPrefab;
@@ -18,7 +18,7 @@ namespace DdSG {
         public static int AttacksAlive;
 
         // Private and protected members
-        private float countdown = 10f;
+        private float countdown = 5f;
         private int waveIndex;
 
         private void Update() {
@@ -46,7 +46,7 @@ namespace DdSG {
         }
 
         private IEnumerator spawnWave() {
-            var wave = new Wave { Count = 5, Rate = 5f };
+            var wave = new Wave { Count = 10, Rate = 0.5f };
             wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
 
             AttacksAlive = wave.Count;
@@ -61,10 +61,7 @@ namespace DdSG {
         }
 
         private void spawnAttack(AttackPattern attackPattern) {
-            var spawnPoint = SpawnPoints.GetSpawnPoint(attackPattern.custom.injection_vector.categories.TakeRandom());
-
-            var attack = UnityHelper.Instantiate(AttackPrefab, spawnPoint.position, spawnPoint.rotation)
-                                    .GetComponent<AttackBehaviour>();
+            var attack = UnityHelper.Instantiate(AttackPrefab).GetComponent<AttackBehaviour>();
             attack.Initialize(attackPattern);
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -23,9 +24,12 @@ namespace DdSG {
 
         public PathCategory InjectionVector { get; private set; }
         public AssetCategory ActivationZone { get; private set; }
+        public AssetBehaviour TargetedAsset { get; private set; }
 
         // Private and protected members
         private bool isDead;
+
+        private float damageToAsset;
 
         private void Start() {
             Speed = StartSpeed;
@@ -38,6 +42,9 @@ namespace DdSG {
         public void Initialize(AttackPattern attackPattern) {
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
+            TargetedAsset = FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).TakeRandom();
+
+            // TODO Set damageToAsset
         }
 
         public void Damage(float amount) {
@@ -51,6 +58,11 @@ namespace DdSG {
 
         public void Slow(float factor) {
             Speed = StartSpeed*(1f - factor);
+        }
+
+        public void DamageAsset() {
+            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAsset.AssetIndex) - 1, 0);
+            PlayerStats.I.SetAssetIntegrity(TargetedAsset.AssetIndex, newIntegrity);
         }
 
         private void die() {

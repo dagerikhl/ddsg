@@ -29,9 +29,6 @@ namespace DdSG {
         private void Start() {
             attackBehaviour = GetComponent<AttackBehaviour>();
 
-            targetedAsset = FindObjectsOfType<AssetBehaviour>()
-                            .Where((a) => a.Category == attackBehaviour.ActivationZone)
-                            .TakeRandom();
             waypoints = FindObjectsOfType<Waypoints>().First((w) => w.Category == attackBehaviour.InjectionVector);
 
             target = waypoints.Points[0];
@@ -60,8 +57,7 @@ namespace DdSG {
         }
 
         private void endPath() {
-            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(targetedAsset.AssetIndex) - 1, 0);
-            PlayerStats.I.SetAssetIntegrity(targetedAsset.AssetIndex, newIntegrity);
+            attackBehaviour.DamageAsset();
 
             WaveSpawner.AttacksAlive--;
             Destroy(gameObject);

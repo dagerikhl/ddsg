@@ -27,6 +27,7 @@ namespace DdSG {
 
         private void Update() {
             HealthBar.transform.rotation = CameraHelper.GetCameraRotationXy();
+            HealthBarImage.fillAmount = PlayerStats.I.GetAssetIntegrity(AssetIndex)/100f;
         }
 
         public void Initialize(Asset asset, int assetIndex) {
