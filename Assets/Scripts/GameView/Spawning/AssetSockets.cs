@@ -30,14 +30,14 @@ namespace DdSG {
             for (var i = 0; i < State.I.GameEntities.SDOs.assets.Length; i++) {
                 var asset = State.I.GameEntities.SDOs.assets[i];
 
-                assets[i] = instantiateAsset(asset, sockets[i].position);
+                assets[i] = instantiateAsset(asset, i, sockets[i].position);
             }
         }
 
-        private AssetBehaviour instantiateAsset(Asset asset, Vector3 position) {
+        private AssetBehaviour instantiateAsset(Asset asset, int assetIndex, Vector3 position) {
             var assetGameObject = Instantiate(AssetPrefab, position, Quaternion.identity, HelperObjects.Ephemerals)
                 .GetComponent<AssetBehaviour>();
-            assetGameObject.Initialize(asset);
+            assetGameObject.Initialize(asset, assetIndex);
 
             return assetGameObject;
         }

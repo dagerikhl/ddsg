@@ -9,7 +9,11 @@ namespace DdSG {
             return string.Join(separator, value.Select((e) => e.ToString()).ToArray());
         }
 
-        public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> value, int numberOfElements = 1) {
+        public static T TakeRandom<T>(this IEnumerable<T> value) {
+            return value.TakeRandoms().FirstOrDefault();
+        }
+
+        public static IEnumerable<T> TakeRandoms<T>(this IEnumerable<T> value, int numberOfElements = 1) {
             IEnumerable<T> valueAsArray = value as T[] ?? value.ToArray();
 
             var elements = new List<T>();

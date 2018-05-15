@@ -14,12 +14,18 @@ namespace DdSG {
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
-        //[HideInInspector]
+        [HideInInspector]
+        public AssetCategory Category;
+        [HideInInspector]
+        public int AssetIndex;
 
         // Private and protected members
 
-        public void Initialize(Asset asset) {
-            HoverBehaviour.Title = asset.custom.category;
+        public void Initialize(Asset asset, int assetIndex) {
+            Category = asset.custom.category;
+            AssetIndex = assetIndex;
+
+            HoverBehaviour.Title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
 
             if (asset.external_references.Any((e) => e.description == null)) {

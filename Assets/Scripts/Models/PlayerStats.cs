@@ -31,30 +31,37 @@ namespace DdSG {
             set {
                 numberOfAssets = value;
 
-                integrities = new float[numberOfAssets];
+                Integrities = new float[numberOfAssets];
                 for (int i = 0; i < numberOfAssets; i++) {
-                    integrities[i] = StartIntegrity;
+                    Integrities[i] = StartIntegrity;
                 }
+
+                updateIntegrityTextUi();
             }
         }
+        public float[] Integrities { get; set; }
+        public int Waves { get; set; }
 
         // Private and protected members
         private int worth;
         private int numberOfAssets;
-        private float[] integrities;
 
         private void Awake() {
             Worth = StartWorth;
         }
 
         public float GetAssetIntegrity(int assetIndex) {
-            return integrities[assetIndex];
+            return Integrities[assetIndex];
         }
 
         public void SetAssetIntegrity(int assetIndex, float integrity) {
-            integrities[assetIndex] = integrity;
+            Integrities[assetIndex] = integrity;
 
-            IntegrityUi.text = integrities.Select((e) => e.IntegrityFormat()).Join(" \U0000f142 ").Monospaced();
+            updateIntegrityTextUi();
+        }
+
+        private void updateIntegrityTextUi() {
+            IntegrityUi.text = Integrities.Select((e) => e.IntegrityFormat()).Join(" \U0000f142 ").Monospaced();
         }
 
     }

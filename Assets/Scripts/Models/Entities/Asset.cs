@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 // ReSharper disable InconsistentNaming
 
@@ -14,7 +16,8 @@ namespace DdSG {
     [Serializable]
     public class AssetCustoms: TransferObjectBase {
 
-        public string category;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AssetCategory category;
 
     }
 

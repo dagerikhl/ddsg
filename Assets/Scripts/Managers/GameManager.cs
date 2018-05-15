@@ -18,6 +18,7 @@ namespace DdSG {
         //[HideInInspector]
         public static bool IsPaused;
         public static bool ShouldResume;
+        public static bool IsGameOver;
 
         // Private and protected members
         private float secondsElapsed;
@@ -34,6 +35,12 @@ namespace DdSG {
             EntitiesPicker.PickGameEntities();
 
             AssetSockets.PlaceAssetsOnSockets();
+        }
+
+        public void Win() {
+            IsGameOver = true;
+            Logger.Debug("Game won!");
+            Application.Quit();
         }
 
         private void Update() {

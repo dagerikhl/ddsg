@@ -26,7 +26,7 @@ namespace DdSG {
                 var numberOfAssets = Rnd.Gen.Next(2, 5);
                 PlayerStats.I.NumberOfAssets = numberOfAssets;
 
-                gameEntities.SDOs.assets = State.I.Entities.SDOs.assets.TakeRandom(numberOfAssets).ToArray();
+                gameEntities.SDOs.assets = State.I.Entities.SDOs.assets.TakeRandoms(numberOfAssets).ToArray();
 
                 // Attack pattern -> targets -> Asset relationships
                 foreach (var asset in gameEntities.SDOs.assets) {
@@ -87,28 +87,13 @@ namespace DdSG {
         }
 
         private static AttackPattern[] pickAttackPatterns(IEnumerable<Asset> assets) {
-            string[] gameTargetedCategories = assets.Select((a) => a.custom.category).Distinct().ToArray();
+            AssetCategory[] gameTargetedCategories = assets.Select((a) => a.custom.category).Distinct().ToArray();
 
-            var attackPatterns = new List<AttackPattern>();
-            foreach (var attackPattern in State.I.Entities.SDOs.attack_patterns) {
-                string[] targetedAssetIds = State.I.Entities.SROs.relationships
-                                                 .Where(
-                                                     (r) => r.relationship_type == StixRelationshipType.Targets
-                                                            && string.Equals(attackPattern.id.Id, r.source_ref.Id))
-                                                 .Select((r) => r.target_ref.Id)
-                                                 .ToArray();
-
-                string[] targetedAssetCategories =
-                    State.I.Entities.SDOs.assets.Where((a) => targetedAssetIds.Contains(a.id.Id))
-                         .Select((a) => a.custom.category)
-                         .ToArray();
-                attackPattern.TargetsAssetCategories = targetedAssetCategories;
-
-                bool shouldAddAttackPattern = targetedAssetCategories.Any((c) => gameTargetedCategories.Contains(c));
-                if (shouldAddAttackPattern) {
-                    attackPatterns.Add(attackPattern);
-                }
-            }
+            IEnumerable<AttackPattern> attackPatterns = State.I.Entities.SDOs.attack_patterns.Where(
+                (aP) => aP.custom.activation_zone.categories != null
+                        && aP.custom.activation_zone.categories.Any(
+                            (aZ) => gameTargetedCategories
+                                .Contains(aZ)));
 
             return attackPatterns.ToArray();
         }

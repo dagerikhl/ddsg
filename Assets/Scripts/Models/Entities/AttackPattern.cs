@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 // ReSharper disable InconsistentNaming
 
@@ -28,7 +29,7 @@ namespace DdSG {
         public AttackMotivation[] motivations;
         public AttackInjectionVector injection_vector;
         public string payload;
-        public string activation_zone;
+        public AttackActivationZone activation_zone;
         public AttackImpact impact;
 
     }
@@ -72,7 +73,19 @@ namespace DdSG {
     public class AttackInjectionVector: TransferObjectBase {
 
         public string description;
-        public string[] category;
+        // [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("categories", ItemConverterType = typeof(StringEnumConverter))]
+        public PathCategory[] categories;
+
+    }
+
+    [Serializable]
+    public class AttackActivationZone: TransferObjectBase {
+
+        public string description;
+        // [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("categories", ItemConverterType = typeof(StringEnumConverter))]
+        public AssetCategory[] categories;
 
     }
 
