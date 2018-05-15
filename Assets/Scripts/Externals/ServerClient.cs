@@ -18,9 +18,21 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        public bool HasHadError {
+            get {
+                if (hasHadError) {
+                    hasHadError = false;
+                    return true;
+                }
+                return false;
+            }
+            private set { hasHadError = value; }
+        }
 
         // Private and protected members
         private string entitiesEndpoint;
+
+        private bool hasHadError;
 
         private void Awake() {
             entitiesEndpoint = (Debug.isDebugBuild ? Constants.API_URL_DEVELOPMENT : Constants.API_URL)
@@ -38,6 +50,7 @@ namespace DdSG {
             yield return req.SendWebRequest();
 
             if (req.isNetworkError || req.isHttpError) {
+                HasHadError = true;
                 Logger.Error(req.error);
             } else {
                 var text = req.downloadHandler.text;

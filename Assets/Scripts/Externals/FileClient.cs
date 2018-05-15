@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace DdSG {
@@ -31,11 +33,22 @@ namespace DdSG {
             return File.Exists(path);
         }
 
-        public T LoadFromFile<T>(string filename) {
+        public T LoadFromFile<T>(string filename, bool useBackupPath = false) {
+            if (useBackupPath) {
+                var asset = Resources.Load<TextAsset>(filename);
+                return JsonConvert.DeserializeObject<T>(asset.text);
+            }
+
             var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.Open);
 
-            T data = (T) bf.Deserialize(file);
+            T data;
+            try {
+                data = (T) bf.Deserialize(file);
+            } catch {
+                file.Close();
+                throw;
+            }
 
             file.Close();
             return data;
@@ -45,7 +58,12 @@ namespace DdSG {
             var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
             var file = File.Open(path, FileMode.OpenOrCreate);
 
-            bf.Serialize(file, data);
+            try {
+                bf.Serialize(file, data);
+            } catch {
+                file.Close();
+                throw;
+            }
 
             file.Close();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public Text LoadingText;
+        public CanvasGroup EntitiesBackupMessage;
         public CanvasGroup ExitMessage;
 
         //[Header("Optional")]
@@ -56,20 +58,48 @@ namespace DdSG {
 
         private IEnumerator updateEntities() {
             var shouldFetchNewEntities = true;
+            var errorHasHappened = false;
             if (FileClient.I.FileExists(Constants.ENTITIES_FILENAME)) {
-                var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
-                if (entitiesJson.created.AddDays(7) > DateTime.Now) {
-                    shouldFetchNewEntities = false;
+                try {
+                    var entitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
+                    if (entitiesJson.created.AddDays(7) > DateTime.Now) {
+                        shouldFetchNewEntities = false;
+                    }
+                } catch (Exception e) {
+                    errorHasHappened = true;
+                    Logger.Error(e);
                 }
             }
 
             if (shouldFetchNewEntities) {
                 Logger.Debug("Fetching and saving entities...");
                 yield return StartCoroutine(ServerClient.I.DownloadEntities());
-                Logger.Debug("Fetching and saving entities... Done.");
+                if (ServerClient.I.HasHadError) {
+                    errorHasHappened = true;
+                } else {
+                    Logger.Debug("Fetching and saving entities... Done.");
+                }
             }
 
-            // Check if entities are available, otherwise terminate the game
+            // Check if an error has occured, if it has we use old backup
+            if (errorHasHappened) {
+                EntitiesBackupMessage.gameObject.SetActive(true);
+
+                Logger.Debug("Getting old backup entities from file...");
+                try {
+                    var backupEntities =
+                        FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_BACKUP_FILENAME, true);
+                    FileClient.I.SaveToFile(Constants.ENTITIES_FILENAME, backupEntities);
+                    Logger.Debug("Getting old backup entities from file... Done.");
+                } catch (Exception e) {
+                    Logger.Error(e);
+                }
+
+                yield return new WaitForSeconds(5f);
+                EntitiesBackupMessage.gameObject.SetActive(false);
+            }
+
+            // Terminate the game if the game was unable to load any entities
             if (!FileClient.I.FileExists(Constants.ENTITIES_FILENAME)) {
                 ExitMessage.gameObject.SetActive(true);
                 SceneManager.I.ExitGame(10f);

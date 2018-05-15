@@ -38,6 +38,7 @@
         public const string OPTIONS_FILENAME = "options";
         public const string PLAY_CONFIGURATION_FILENAME = "playConfiguration";
         public const string ENTITIES_FILENAME = "entities";
+        public const string ENTITIES_BACKUP_FILENAME = "entities-backup";
 
     }
 
