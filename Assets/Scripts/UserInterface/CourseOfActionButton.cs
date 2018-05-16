@@ -54,8 +54,15 @@ namespace DdSG {
 
             HoverBehaviour.ActionText = "implement";
             ActionEvents.PrimaryAction = () => {
-                // TODO Start build process
                 Logger.Debug("Building");
+                // TODO Start build process
+                /**
+                 * TODO
+                 * 1. Create ghost tower that follows mouse position raycasted to world with flattenede height.
+                 * 2. Listen for click.
+                 * 3. Destroy ghost on click.
+                 * 4. Instantiate tower on click.
+                 */
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
         }
