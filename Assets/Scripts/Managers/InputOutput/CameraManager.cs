@@ -11,6 +11,8 @@ namespace DdSG {
     [AddComponentMenu("Camera Manager")]
     public class CameraManager: MonoBehaviour {
 
+        public bool IsUiBlocking;
+
         private Vector3 originalPosition;
 
         private void Awake() {
@@ -281,7 +283,7 @@ namespace DdSG {
                 transform.Rotate(Vector3.up, RotationDirection*Time.unscaledDeltaTime*RotationSpeed, Space.World);
             }
 
-            if (UseMouseRotation && Input.GetKey(MouseRotationKey)) {
+            if (UseMouseRotation && !IsUiBlocking && Input.GetKey(MouseRotationKey)) {
                 mTransform.Rotate(Vector3.up, -MouseAxis.x*Time.unscaledDeltaTime*MouseRotationSpeed, Space.World);
             }
         }

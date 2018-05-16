@@ -4,8 +4,12 @@ namespace DdSG {
 
     public static class HelperObjects {
 
-        public static Transform Camera { get { return GameObject.FindWithTag("MainCamera").transform; } }
         public static Transform Ephemerals { get { return GameObject.FindWithTag("Ephemerals").transform; } }
+
+        public static GameObject Camera { get { return GameObject.FindWithTag("MainCamera"); } }
+        public static Transform CameraTransform { get { return Camera.transform; } }
+        public static CameraManager CameraManager { get { return Camera.GetComponent<CameraManager>(); } }
+
         public static GameObject HoverOverlayPrefab { get; set; }
 
     }
