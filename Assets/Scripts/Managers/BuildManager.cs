@@ -26,10 +26,7 @@ namespace DdSG {
         public void CreateCourseOfActionButtons() {
             foreach (var courseOfAction in State.I.GameEntities.SDOs.course_of_actions) {
                 var button = Instantiate(CourseOfActionButtonPrefab, CourseOfActionButtonsContainer);
-                button.Label.text = courseOfAction.custom.category;
-                button.HoverBehaviour.Title = courseOfAction.custom.category;
-                button.HoverBehaviour.Text = courseOfAction.FullDescription;
-                button.HoverBehaviour.ActionText = "implement";
+                button.Initialize(courseOfAction);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -10,7 +9,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
-        public ActionEvents ClickBehaviour;
+        public ActionEvents ActionEvents;
 
         public Canvas HealthBar;
         public Image HealthBarImage;
@@ -37,15 +36,7 @@ namespace DdSG {
             HoverBehaviour.Title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
 
-            if (asset.external_references.Any((e) => e.description == null)) {
-                HoverBehaviour.HasSecondaryAction = true;
-                ClickBehaviour.SecondaryAction = () => {
-                    foreach (var url in asset.external_references.Select((e) => e.url)) {
-                        FindObjectOfType<PauseMenu>().Pause();
-                        Application.OpenURL(url);
-                    }
-                };
-            }
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ActionEvents);
         }
 
     }

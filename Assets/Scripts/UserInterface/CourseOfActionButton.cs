@@ -1,11 +1,10 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace DdSG {
 
-    public class CourseOfActionButton: MonoBehaviour, IPointerClickHandler {
+    public class CourseOfActionButton: MonoBehaviour {
 
         //[Header("Attributes")]
 
@@ -21,20 +20,26 @@ namespace DdSG {
         // Private and protected members
         [HideInInspector]
         public HoverBehaviour HoverBehaviour;
+        [HideInInspector]
+        public ActionEvents ActionEvents;
 
         private void Awake() {
             HoverBehaviour = GetComponent<HoverBehaviour>();
+            ActionEvents = GetComponent<ActionEvents>();
         }
 
-        public void OnPointerClick(PointerEventData eventData) {
-            if (eventData.button == PointerEventData.InputButton.Left) {
+        public void Initialize(CourseOfAction courseOfAction) {
+            Label.text = courseOfAction.custom.category;
+
+            HoverBehaviour.Title = courseOfAction.custom.category;
+            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
+
+            HoverBehaviour.ActionText = "implement";
+            ActionEvents.PrimaryAction = () => {
                 // TODO Start build process
                 Logger.Debug("Building");
-            } else if (eventData.button == PointerEventData.InputButton.Right) {
-                // TODO Open source from external refs
-                Logger.Debug("Opening source");
-                // Application.OpenURL(url);
-            }
+            };
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
         }
 
     }

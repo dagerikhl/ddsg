@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverBehaviour: {fileID: 114530001151413276}
-  ClickBehaviour: {fileID: 114495826930189444}
+  ActionEvents: {fileID: 114495826930189444}
   HealthBar: {fileID: 223568124047422158}
   HealthBarImage: {fileID: 114272833205325674}
   Category: 0

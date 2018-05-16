@@ -10,6 +10,8 @@ namespace DdSG {
         public static Transform CameraTransform { get { return Camera.transform; } }
         public static CameraManager CameraManager { get { return Camera.GetComponent<CameraManager>(); } }
 
+        public static PauseMenu PauseMenu { get { return Object.FindObjectOfType<PauseMenu>(); } }
+
         public static GameObject HoverOverlayPrefab { get; set; }
 
     }

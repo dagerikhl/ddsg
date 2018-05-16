@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 222380121549689748}
   - component: {fileID: 114105101193514756}
   - component: {fileID: 114105775928727504}
+  - component: {fileID: 114404814906465492}
   m_Layer: 5
   m_Name: CourseOfActionButton
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   Icon: {fileID: 114168906856343654}
   Label: {fileID: 114867896475447548}
   HoverBehaviour: {fileID: 0}
+  ActionEvents: {fileID: 0}
 --- !u!114 &114105775928727504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,6 +272,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114404814906465492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1704930424912612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114867896475447548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,7 +382,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
