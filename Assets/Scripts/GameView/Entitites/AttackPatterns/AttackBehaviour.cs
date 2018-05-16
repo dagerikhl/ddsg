@@ -34,6 +34,7 @@ namespace DdSG {
 
         private void Start() {
             Speed = StartSpeed;
+            Health = StartHealth;
         }
 
         private void Update() {
@@ -51,7 +52,7 @@ namespace DdSG {
             // TODO Set damageToAsset
         }
 
-        public void Damage(float amount) {
+        public void TakeDamage(float amount) {
             Health -= amount;
             HealthBarImage.fillAmount = Health/StartHealth;
 

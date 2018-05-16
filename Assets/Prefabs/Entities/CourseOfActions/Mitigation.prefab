@@ -83,6 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4013665050741042}
+  - component: {fileID: 114797431106903268}
   m_Layer: 0
   m_Name: Mitigation
   m_TagString: Untagged
@@ -135,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726844609833150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18, y: 7, z: 0}
+  m_LocalPosition: {x: -28, y: 7, z: 33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4990267058453116}
@@ -2391,7 +2392,7 @@ MonoBehaviour:
   dontDestroyMeshOnDelete: 0
   m_selectedFaces: 
   m_SelectedEdges: []
-  m_selectedTriangles: 00000000
+  m_selectedTriangles: 
 --- !u!114 &114683044225833450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5112,7 +5113,27 @@ MonoBehaviour:
   dontDestroyMeshOnDelete: 0
   m_selectedFaces: 
   m_SelectedEdges: []
-  m_selectedTriangles: 00000000
+  m_selectedTriangles: 
+--- !u!114 &114797431106903268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726844609833150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538d260770949ec468259351a3bccb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 40
+  FireRate: 1
+  TurnSpeed: 10
+  SlowFactor: 0
+  Rotatable: {fileID: 4722109713112542}
+  FirePoint: {fileID: 4616663325569040}
+  BulletPrefab: {fileID: 1485473732046860, guid: d45f8b63780591d4180f142486ade85d,
+    type: 2}
+  AttackTag: Attack
 --- !u!114 &114864202245122414
 MonoBehaviour:
   m_ObjectHideFlags: 1

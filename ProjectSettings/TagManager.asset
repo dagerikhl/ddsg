@@ -9,6 +9,7 @@ TagManager:
   - AmbientManager
   - AudioListener
   - Ephemerals
+  - Attack
   layers:
   - Default
   - TransparentFX
