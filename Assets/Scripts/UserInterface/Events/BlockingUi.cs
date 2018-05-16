@@ -17,11 +17,11 @@ namespace DdSG {
         // Private and protected members
 
         public void OnPointerEnter(PointerEventData eventData) {
-            HelperObjects.CameraManager.IsUiBlocking = true;
+            HelperObjects.CameraManager.UiIsBlocking = true;
         }
 
         public void OnPointerExit(PointerEventData eventData) {
-            HelperObjects.CameraManager.IsUiBlocking = false;
+            HelperObjects.CameraManager.UiIsBlocking = false;
         }
 
     }

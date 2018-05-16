@@ -11,7 +11,7 @@ namespace DdSG {
     [AddComponentMenu("Camera Manager")]
     public class CameraManager: MonoBehaviour {
 
-        public bool IsUiBlocking;
+        public bool UiIsBlocking;
 
         private Vector3 originalPosition;
 
@@ -243,6 +243,10 @@ namespace DdSG {
         private void HeightCalculation() {
             float distanceToGround = DistanceToGround();
             if (UseScrollwheelZooming) {
+                if (UiIsBlocking) {
+                    return;
+                }
+
                 zoomPos += ScrollWheel*Time.unscaledDeltaTime*ScrollWheelZoomingSensitivity;
             }
             if (UseKeyboardZooming) {
@@ -283,7 +287,7 @@ namespace DdSG {
                 transform.Rotate(Vector3.up, RotationDirection*Time.unscaledDeltaTime*RotationSpeed, Space.World);
             }
 
-            if (UseMouseRotation && !IsUiBlocking && Input.GetKey(MouseRotationKey)) {
+            if (UseMouseRotation && !UiIsBlocking && Input.GetKey(MouseRotationKey)) {
                 mTransform.Rotate(Vector3.up, -MouseAxis.x*Time.unscaledDeltaTime*MouseRotationSpeed, Space.World);
             }
         }

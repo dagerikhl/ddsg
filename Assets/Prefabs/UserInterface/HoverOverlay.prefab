@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114395990441817612}
   - component: {fileID: 114676509132226306}
   - component: {fileID: 114780539791779088}
+  - component: {fileID: 114170548693244802}
   m_Layer: 5
   m_Name: HoverOverlay
   m_TagString: Untagged
@@ -319,6 +320,17 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114170548693244802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270357537714472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4872ba2644ce4114cbc1487eeeae1444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114352725271154410
 MonoBehaviour:
   m_ObjectHideFlags: 1
