@@ -21,6 +21,8 @@ namespace DdSG {
         public static bool IsGameOver;
 
         // Private and protected members
+        private BuildManager buildManager;
+
         private float secondsElapsed;
 
         private void Awake() {
@@ -30,11 +32,13 @@ namespace DdSG {
                 State.I.Entities = newEntitiesJson.entities;
             }
 
+            buildManager = GetComponent<BuildManager>();
+
             HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
 
             EntitiesPicker.PickGameEntities();
-
             AssetSockets.PlaceAssetsOnSockets();
+            buildManager.CreateCourseOfActionButtons();
         }
 
         public static void Win() {

@@ -41,7 +41,11 @@ namespace DdSG {
 
             var position = GameOverlay ? Input.mousePosition : transform.position;
             var direction = new Vector3(ShowOnLeft ? -1 : 1, ShowUnder ? -1 : 1);
-            var data = new DescriptionData { Title = Title, Text = Text, ActionText = ActionText };
+            var data = new DescriptionData {
+                Title = Title,
+                Text = Text,
+                ActionText = Formatter.BuildActionText(ActionText)
+            };
             hoverOverlay.Initialize(position, direction, data);
         }
 
