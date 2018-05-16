@@ -34,6 +34,10 @@ namespace DdSG {
         }
 
         private void Update() {
+            if (GameManager.IsPaused) {
+                return;
+            }
+
             if (target != null) {
                 Vector3 dir = target.position - transform.position;
                 transform.Translate(dir.normalized*attackBehaviour.Speed*Time.deltaTime, Space.World);
