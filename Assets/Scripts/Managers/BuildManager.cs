@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace DdSG {
 
@@ -13,6 +14,7 @@ namespace DdSG {
         public GameObject BuildEffect;
         public GameObject SellEffect;
 
+        public ScrollRect CourseOfActionScrollRect;
         public Transform CourseOfActionButtonsContainer;
         public CourseOfActionButton CourseOfActionButtonPrefab;
 
@@ -26,6 +28,7 @@ namespace DdSG {
         public void CreateCourseOfActionButtons() {
             foreach (var courseOfAction in State.I.GameEntities.SDOs.course_of_actions) {
                 var button = Instantiate(CourseOfActionButtonPrefab, CourseOfActionButtonsContainer);
+                button.parentScrollRect = CourseOfActionScrollRect;
                 button.Initialize(courseOfAction);
             }
         }

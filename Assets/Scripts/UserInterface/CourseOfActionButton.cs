@@ -1,10 +1,11 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace DdSG {
 
-    public class CourseOfActionButton: MonoBehaviour {
+    public class CourseOfActionButton: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler {
 
         //[Header("Attributes")]
 
@@ -15,17 +16,34 @@ namespace DdSG {
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
-        //[HideInInspector]
-
-        // Private and protected members
         [HideInInspector]
         public HoverBehaviour HoverBehaviour;
         [HideInInspector]
         public ActionEvents ActionEvents;
 
+        public ScrollRect parentScrollRect { private get; set; }
+
+        // Private and protected members
+
         private void Awake() {
             HoverBehaviour = GetComponent<HoverBehaviour>();
             ActionEvents = GetComponent<ActionEvents>();
+        }
+
+        public void OnBeginDrag(PointerEventData eventData) {
+            parentScrollRect.OnBeginDrag(eventData);
+        }
+
+        public void OnDrag(PointerEventData eventData) {
+            parentScrollRect.OnDrag(eventData);
+        }
+
+        public void OnEndDrag(PointerEventData eventData) {
+            parentScrollRect.OnEndDrag(eventData);
+        }
+
+        public void OnScroll(PointerEventData data) {
+            parentScrollRect.OnScroll(data);
         }
 
         public void Initialize(CourseOfAction courseOfAction) {
