@@ -10,7 +10,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
-        public ClickBehaviour ClickBehaviour;
+        public ActionEvents ClickBehaviour;
 
         public Canvas HealthBar;
         public Image HealthBarImage;

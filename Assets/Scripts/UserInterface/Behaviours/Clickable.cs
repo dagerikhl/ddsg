@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class ClickBehaviour<T>: MonoBehaviour {
+    public class Clickable<T>: MonoBehaviour {
 
         //[Header("Attributes")]
 

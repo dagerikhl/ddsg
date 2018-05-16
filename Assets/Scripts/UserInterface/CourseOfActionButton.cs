@@ -1,8 +1,8 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace DdSG {
 
-    public class ToggleBehaviour: Clickable<Toggle> {
+    public class CourseOfActionButton: MonoBehaviour {
 
         //[Header("Attributes")]
 
@@ -14,10 +14,6 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
-
-        private void Start() {
-            clickable.onValueChanged.AddListener((isOn) => PerformClickBehaviour());
-        }
 
     }
 

@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class ButtonBehaviour: ClickBehaviour<Button> {
+    public class ButtonBehaviour: Clickable<Button> {
 
         //[Header("Attributes")]
 

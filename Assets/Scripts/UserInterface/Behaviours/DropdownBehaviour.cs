@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class DropdownBehaviour: ClickBehaviour<Dropdown> {
+    public class DropdownBehaviour: Clickable<Dropdown> {
 
         //[Header("Attributes")]
 

@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class SliderBehaviour: ClickBehaviour<Slider> {
+    public class SliderBehaviour: Clickable<Slider> {
 
         //[Header("Attributes")]
 

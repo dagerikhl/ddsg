@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace DdSG {
 
-    public class ClickBehaviour: MonoBehaviour, IPointerClickHandler {
+    public class ActionEvents: MonoBehaviour, IPointerClickHandler {
 
         //[Header("Attributes")]
 
