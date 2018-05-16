@@ -20,7 +20,6 @@ namespace DdSG {
         // Private and protected members
         private AttackBehaviour attackBehaviour;
 
-        private AssetBehaviour targetedAsset;
         private Waypoints waypoints;
 
         private Transform target;
@@ -48,7 +47,12 @@ namespace DdSG {
         }
 
         private void getNextWaypoint() {
-            if (waypointIndex >= waypoints.Points.Length - 1) {
+            if (waypointIndex == waypoints.Points.Length - 1) {
+                waypointIndex++;
+                target = attackBehaviour.TargetedAsset.transform;
+                return;
+            }
+            if (waypointIndex == waypoints.Points.Length) {
                 endPath();
                 return;
             }
