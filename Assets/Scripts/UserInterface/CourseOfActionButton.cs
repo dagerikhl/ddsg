@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace DdSG {
 
@@ -6,7 +8,9 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        //[Header("Unity Setup Fields")]
+        [Header("Unity Setup Fields")]
+        public Image Icon;
+        public TextMeshProUGUI Label;
 
         //[Header("Optional")]
 
