@@ -3,7 +3,8 @@
     public enum CursorType {
 
         Default,
-        Pointer
+        Pointer,
+        Target
 
     }
 

@@ -60,7 +60,7 @@ namespace DdSG {
                     createHoverOverlay();
 
                     if (HasActions) {
-                        CursorManager.I.SetCursor(CursorType.Pointer);
+                        CursorManager.I.SetTemporaryCursor(CursorType.Pointer);
                     }
                 });
             eventTrigger.triggers.Add(eventType);
@@ -72,7 +72,7 @@ namespace DdSG {
                 (eventData) => {
                     hideHoverOverlay();
 
-                    CursorManager.I.SetCursor(CursorType.Default);
+                    CursorManager.I.ResetTemporaryCursor();
                 });
             eventTrigger.triggers.Add(eventType);
         }
