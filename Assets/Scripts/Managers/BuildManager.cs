@@ -22,6 +22,7 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        public CourseOfAction CurrentCourseOfAction { private get; set; }
 
         // Private and protected members
 
@@ -31,6 +32,14 @@ namespace DdSG {
                 button.parentScrollRect = CourseOfActionScrollRect;
                 button.Initialize(courseOfAction);
             }
+        }
+
+        public void ImplementMitigation(IPlacementArea area, IntVector2 gridPosition, IntVector2 sizeOffset) {
+            Logger.Debug("Trying to palce ghost");
+            area.Occupy(gridPosition, sizeOffset);
+            // TODO Place currentCourseOfAction here
+
+            CurrentCourseOfAction = null;
         }
 
     }

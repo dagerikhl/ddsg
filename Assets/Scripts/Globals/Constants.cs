@@ -25,6 +25,9 @@
         public const float PAUSE_TRANSITION_TIME = 0.2f;
         public const float HOVER_TRANSITION_TIME = 0.1f;
 
+        // Layers
+        public const int PATH_LAYER = 8;
+
         // Play configuration
         public static readonly string[] DIFFICULTY_OPTIONS = { "10 %", "25 %", "50 %", "75 %", "90 %", "100 %" };
         public static readonly string[] GAME_SPEED_OPTIONS = { "1x", "2x", "3x" };
