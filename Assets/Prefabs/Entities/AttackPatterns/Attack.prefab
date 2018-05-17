@@ -12725,9 +12725,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f405387d8150d054aad04060b157771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartSpeed: 5
+  StartSpeed: 50
   StartHealth: 100
   Worth: 50
+  SpawnLikelihood: 1
+  DamageToAsset: 1
   HoverBehaviour: {fileID: 114288261633681234}
   ActionEvents: {fileID: 114030746442004962}
   HealthBar: {fileID: 223125341698362660}

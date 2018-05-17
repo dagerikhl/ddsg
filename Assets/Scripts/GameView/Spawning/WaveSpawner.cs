@@ -38,8 +38,9 @@ namespace DdSG {
                 return;
             }
 
+            currentTime = 0f;
+            WaveCurrentTimeText.text = TimeHelper.CounterFormat(currentTime).Monospaced();
             if (countdown <= 0f) {
-                currentTime = 0f;
                 countdown = TimeBetweenWaves;
                 StartCoroutine(spawnWave());
                 return;
