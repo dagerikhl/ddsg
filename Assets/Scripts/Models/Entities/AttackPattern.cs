@@ -12,6 +12,32 @@ namespace DdSG {
         public string name;
         public AttackPatternCustoms custom;
 
+        public float calculateHealthFromSeverity(float baseValue) {
+            return baseValue + custom.severity.AsFloat()*baseValue;
+        }
+
+        public float calculateSpawnLikelihoodFromLikelihood(float baseValue) {
+            if (custom.likelihood == null) {
+                return baseValue;
+            }
+
+            var likelihoodPart = custom.likelihood.AsPart();
+            return MathHelper.Rangify(likelihoodPart, 0.5f, 1f);
+        }
+
+        public float calculateDamageToAssetFromImpact(float baseValue) {
+            if (custom.impact == null) {
+                return baseValue;
+            }
+
+            var averageScale = (custom.impact.availability.AsPart()
+                                + custom.impact.confidentiality.AsPart()
+                                + custom.impact.integrity.AsPart())
+                               /3f;
+
+            return baseValue + averageScale*9f;
+        }
+
     }
 
     [Serializable]

@@ -53,9 +53,9 @@ namespace DdSG {
 
             transform.position = SpawnPoint.position;
 
-            StartHealth = Health = calculateHealthFrom(attackPattern.custom.severity);
-            SpawnLikelihood = calculateSpawnLikelihoodFrom(attackPattern.custom.likelihood);
-            DamageToAsset = calculateDamageToAssetFrom(attackPattern.custom.impact);
+            StartHealth = Health = attackPattern.calculateHealthFromSeverity(StartHealth);
+            SpawnLikelihood = attackPattern.calculateSpawnLikelihoodFromLikelihood(SpawnLikelihood);
+            DamageToAsset = attackPattern.calculateDamageToAssetFromImpact(DamageToAsset);
             // TODO Balance these values
             // Logger.Debug(string.Format("{0}, {1}, {2}", Health, SpawnLikelihood, DamageToAsset));
 
@@ -86,30 +86,6 @@ namespace DdSG {
         public void DamageAsset() {
             var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAsset.AssetIndex) - DamageToAsset, 0);
             PlayerStats.I.SetAssetIntegrity(TargetedAsset.AssetIndex, newIntegrity);
-        }
-
-        private float calculateHealthFrom(Scale? severity) {
-            return StartHealth + severity.AsFloat()*StartHealth;
-        }
-
-        private float calculateSpawnLikelihoodFrom(Scale? likelihood) {
-            if (likelihood == null) {
-                return SpawnLikelihood;
-            }
-
-            var likelihoodPart = likelihood.AsPart();
-            return MathHelper.Rangify(likelihoodPart, 0.5f, 1f);
-        }
-
-        private float calculateDamageToAssetFrom([CanBeNull] AttackImpact impact) {
-            if (impact == null) {
-                return DamageToAsset;
-            }
-
-            var averageScale =
-                (impact.availability.AsPart() + impact.confidentiality.AsPart() + impact.integrity.AsPart())/3f;
-
-            return DamageToAsset + averageScale*9f;
         }
 
         private void die() {

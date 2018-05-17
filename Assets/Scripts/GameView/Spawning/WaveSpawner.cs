@@ -53,6 +53,7 @@ namespace DdSG {
 
         private IEnumerator spawnWave() {
             var wave = new Wave { Count = 10, Rate = 0.5f };
+            // TODO Use likelihood here to determine how often to pick the attack pattern
             wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
 
             AttacksAlive = wave.Count;
