@@ -21,6 +21,7 @@ namespace DdSG {
         public static bool IsPaused;
         public static bool ShouldResume;
         public static bool IsGameOver;
+        public static bool IsUiBlocking;
 
         // Private and protected members
         private BuildManager buildManager;

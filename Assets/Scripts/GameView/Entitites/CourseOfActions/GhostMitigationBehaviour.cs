@@ -24,10 +24,6 @@ namespace DdSG {
         private Vector3 targetPosition;
         private Vector3 velocity;
 
-        private void Awake() {
-            transform.localScale = Vector3.zero;
-        }
-
         private void Update() {
             // Check collisions with placement areas
             var mouseRay = HelperObjects.CameraComponent.ScreenPointToRay(Input.mousePosition);
@@ -41,6 +37,8 @@ namespace DdSG {
                         firstPlacement = false;
                         transform.position = areaHit.point;
                         transform.localScale = Vector3.one;
+
+                        return;
                     }
 
                     // Check if the ghost is too close to the path
@@ -60,11 +58,13 @@ namespace DdSG {
 
             // Build when clicked
             if (Input.GetMouseButtonDown(0)) {
-                if (targetArea != null) {
+                if (targetArea != null && !GameManager.IsUiBlocking) {
                     BuildManager.I.ImplementMitigation(
                         targetArea,
                         targetArea.WorldToGrid(targetPosition, SizeOffset),
                         SizeOffset);
+
+                    Destroy(gameObject);
                 }
             }
         }
