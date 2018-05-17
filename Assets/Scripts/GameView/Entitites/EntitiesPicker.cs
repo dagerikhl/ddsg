@@ -102,10 +102,13 @@ namespace DdSG {
             Relationship[] courseOfActionRelationships =
                 relationships.Where((r) => r.relationship_type == StixRelationshipType.Mitigates).ToArray();
 
-            return courseOfActionRelationships.Select(
-                                                  (r) => State.I.Entities.SDOs.course_of_actions.First(
-                                                      (c) => string.Equals(c.id.Id, r.source_ref.Id)))
-                                              .ToArray();
+            CourseOfAction[] allCourseOfActions = courseOfActionRelationships
+                                                  .Select(
+                                                      (r) => State.I.Entities.SDOs.course_of_actions.First(
+                                                          (c) => string.Equals(c.id.Id, r.source_ref.Id)))
+                                                  .ToArray();
+
+            return allCourseOfActions.DistinctBy((c) => c.custom.category).ToArray();
         }
 
     }
