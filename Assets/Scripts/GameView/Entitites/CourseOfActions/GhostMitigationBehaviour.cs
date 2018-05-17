@@ -85,13 +85,19 @@ namespace DdSG {
                         targetArea.WorldToGrid(targetPosition, SizeOffset),
                         SizeOffset);
 
-                    DestroyThis();
+                    DestroyGhost();
                 }
             } else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)) {
                 clearAllOldTiles();
                 enabled = false;
-                DestroyThis();
+                DestroyGhost();
             }
+        }
+
+        public void DestroyGhost() {
+            GameManager.IsBuilding = false;
+            BuildManager.I.CurrentCourseOfAction = null;
+            Destroy(gameObject);
         }
 
         private void clearAllOldTiles() {
@@ -110,11 +116,6 @@ namespace DdSG {
             if (oldFits) {
                 targetArea.Clear(targetGridPosition, SizeOffset);
             }
-        }
-
-        private void DestroyThis() {
-            GameManager.IsBuilding = false;
-            Destroy(gameObject);
         }
 
     }

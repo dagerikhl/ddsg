@@ -54,19 +54,15 @@ namespace DdSG {
 
             HoverBehaviour.ActionText = "implement";
             ActionEvents.PrimaryAction = () => {
-                Logger.Debug("Building");
-                // TODO Start build process
-                /**
-                 * TODO
-                 * 1. Create ghost tower that follows mouse position raycasted to world with flattenede height.
-                 * 2. Listen for click.
-                 * 3. Destroy ghost on click.
-                 * 4. Instantiate tower on click.
-                 */
+                // Destroy the old ghost if it's already in the game
+                var oldGhost = FindObjectOfType<GhostMitigationBehaviour>();
+                if (oldGhost != null) {
+                    oldGhost.DestroyGhost();
+                }
+
                 GameManager.IsBuilding = true;
                 BuildManager.I.CurrentCourseOfAction = courseOfAction;
-                var ghost = UnityHelper.Instantiate(HelperObjects.GhostMitigationPrefab)
-                                       .GetComponent<GhostMitigationBehaviour>();
+                UnityHelper.Instantiate(HelperObjects.GhostMitigationPrefab);
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
         }
