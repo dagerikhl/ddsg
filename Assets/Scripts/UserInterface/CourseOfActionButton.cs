@@ -60,8 +60,7 @@ namespace DdSG {
                     oldGhost.DestroyGhost();
                 }
 
-                GameManager.IsBuilding = true;
-                BuildManager.I.CurrentCourseOfAction = courseOfAction;
+                BuildManager.I.EnterBuildMode(courseOfAction);
                 UnityHelper.Instantiate(HelperObjects.GhostMitigationPrefab);
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);

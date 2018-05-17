@@ -24,7 +24,7 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
-        public CourseOfAction CurrentCourseOfAction { private get; set; }
+        private CourseOfAction currentCourseOfAction;
 
         // Private and protected members
 
@@ -37,12 +37,25 @@ namespace DdSG {
         }
 
         public void ImplementMitigation(IPlacementArea area, IntVector2 gridPosition, IntVector2 sizeOffset) {
-            area.Occupy(gridPosition, sizeOffset, PlacementTileState.Filled);
-            var mitigation = UnityHelper.Instantiate(CourseOfActionPrefab, area.GridToWorld(gridPosition, sizeOffset))
-                                        .GetComponent<MitigationBehaviour>();
-            mitigation.Initialize(CurrentCourseOfAction);
+            if (currentCourseOfAction != null) {
+                area.Occupy(gridPosition, sizeOffset, PlacementTileState.Filled);
+                var mitigation = UnityHelper
+                                 .Instantiate(CourseOfActionPrefab, area.GridToWorld(gridPosition, sizeOffset))
+                                 .GetComponent<MitigationBehaviour>();
+                mitigation.Initialize(currentCourseOfAction);
 
-            CurrentCourseOfAction = null;
+                ExitBuildMode();
+            }
+        }
+
+        public void EnterBuildMode(CourseOfAction courseOfAction) {
+            GameManager.IsBuilding = false;
+            currentCourseOfAction = courseOfAction;
+        }
+
+        public void ExitBuildMode() {
+            GameManager.IsBuilding = false;
+            currentCourseOfAction = null;
         }
 
     }

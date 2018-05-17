@@ -95,8 +95,7 @@ namespace DdSG {
         }
 
         public void DestroyGhost() {
-            GameManager.IsBuilding = false;
-            BuildManager.I.CurrentCourseOfAction = null;
+            BuildManager.I.ExitBuildMode();
             Destroy(gameObject);
         }
 
