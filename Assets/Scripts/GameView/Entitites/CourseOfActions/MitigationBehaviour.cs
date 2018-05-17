@@ -51,6 +51,10 @@ namespace DdSG {
             Gizmos.DrawWireSphere(transform.position, Range);
         }
 
+        public void Initialize(CourseOfAction courseOfAction) {
+            // TODO Initialize the mitigation with values from course of action
+        }
+
         private void updateTarget() {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(AttackTag);
             float shortestDistance = Mathf.Infinity;

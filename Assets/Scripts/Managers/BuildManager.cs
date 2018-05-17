@@ -14,6 +14,8 @@ namespace DdSG {
         public GameObject BuildEffect;
         public GameObject SellEffect;
 
+        public GameObject CourseOfActionPrefab;
+
         public ScrollRect CourseOfActionScrollRect;
         public Transform CourseOfActionButtonsContainer;
         public CourseOfActionButton CourseOfActionButtonPrefab;
@@ -35,9 +37,10 @@ namespace DdSG {
         }
 
         public void ImplementMitigation(IPlacementArea area, IntVector2 gridPosition, IntVector2 sizeOffset) {
-            Logger.Debug("Trying to palce ghost");
             area.Occupy(gridPosition, sizeOffset, PlacementTileState.Filled);
-            // TODO Place currentCourseOfAction here
+            var mitigation = UnityHelper.Instantiate(CourseOfActionPrefab, area.GridToWorld(gridPosition, sizeOffset))
+                                        .GetComponent<MitigationBehaviour>();
+            mitigation.Initialize(CurrentCourseOfAction);
 
             CurrentCourseOfAction = null;
         }
