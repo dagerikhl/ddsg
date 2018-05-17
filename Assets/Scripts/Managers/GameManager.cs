@@ -9,8 +9,10 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI GameTime;
-        public GameObject HoverOverlayPrefab;
         public AssetSockets AssetSockets;
+
+        public GameObject HoverOverlayPrefab;
+        public GameObject GhostMitigationPrefab;
 
         //[Header("Optional")]
 
@@ -34,7 +36,7 @@ namespace DdSG {
 
             buildManager = GetComponent<BuildManager>();
 
-            HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
+            assignPrefabHelperObjects();
 
             EntitiesPicker.PickGameEntities();
             AssetSockets.PlaceAssetsOnSockets();
@@ -67,6 +69,11 @@ namespace DdSG {
             secondsElapsed += Time.unscaledDeltaTime;
 
             GameTime.text = TimeHelper.FormatTime(secondsElapsed).Monospaced();
+        }
+
+        private void assignPrefabHelperObjects() {
+            HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
+            HelperObjects.GhostMitigationPrefab = GhostMitigationPrefab;
         }
 
     }

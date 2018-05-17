@@ -8,11 +8,13 @@ namespace DdSG {
 
         public static GameObject Camera { get { return GameObject.FindWithTag("MainCamera"); } }
         public static Transform CameraTransform { get { return Camera.transform; } }
+        public static Camera CameraComponent { get { return Camera.GetComponent<Camera>(); } }
         public static CameraManager CameraManager { get { return Camera.GetComponent<CameraManager>(); } }
 
         public static PauseMenu PauseMenu { get { return Object.FindObjectOfType<PauseMenu>(); } }
 
         public static GameObject HoverOverlayPrefab { get; set; }
+        public static GameObject GhostMitigationPrefab { get; set; }
 
     }
 
