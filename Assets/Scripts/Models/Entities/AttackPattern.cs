@@ -9,6 +9,7 @@ namespace DdSG {
     [Serializable]
     public class AttackPattern: StixDataEntityBase {
 
+        public string name;
         public AttackPatternCustoms custom;
 
     }

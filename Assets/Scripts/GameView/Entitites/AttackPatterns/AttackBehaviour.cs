@@ -12,6 +12,9 @@ namespace DdSG {
         public int Worth = 50;
 
         [Header("Unity Setup Fields")]
+        public HoverBehaviour HoverBehaviour;
+        public ActionEvents ActionEvents;
+
         public Canvas HealthBar;
         public Image HealthBarImage;
         public GameObject DeathEffect;
@@ -50,6 +53,16 @@ namespace DdSG {
             transform.position = SpawnPoint.position;
 
             // TODO Set damageToAsset
+
+            HoverBehaviour.Title = attackPattern.name;
+            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
+
+            HoverBehaviour.ActionText = "select";
+            ActionEvents.PrimaryAction = () => {
+                Logger.Debug("Attack selected");
+                // TODO Select entity in UI
+            };
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ActionEvents);
         }
 
         public void TakeDamage(float amount) {
