@@ -64,9 +64,16 @@ namespace DdSG {
                         targetArea.WorldToGrid(targetPosition, SizeOffset),
                         SizeOffset);
 
-                    Destroy(gameObject);
+                    DestroyThis();
                 }
+            } else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)) {
+                DestroyThis();
             }
+        }
+
+        private void DestroyThis() {
+            GameManager.IsBuilding = false;
+            Destroy(gameObject);
         }
 
     }

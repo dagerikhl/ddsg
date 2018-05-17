@@ -23,6 +23,8 @@ namespace DdSG {
         public static bool IsGameOver;
         public static bool IsUiBlocking;
 
+        public static bool IsBuilding;
+
         // Private and protected members
         private BuildManager buildManager;
 
@@ -59,7 +61,7 @@ namespace DdSG {
                 updateGameTime();
             }
 
-            if (!IsPaused) {
+            if (!IsPaused && !IsBuilding) {
                 if (Input.GetKeyDown(KeyCode.Escape)) {
                     FindObjectOfType<PauseMenu>().Pause();
                 }

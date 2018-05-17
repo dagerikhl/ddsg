@@ -63,6 +63,7 @@ namespace DdSG {
                  * 3. Destroy ghost on click.
                  * 4. Instantiate tower on click.
                  */
+                GameManager.IsBuilding = true;
                 BuildManager.I.CurrentCourseOfAction = courseOfAction;
                 var ghost = UnityHelper.Instantiate(HelperObjects.GhostMitigationPrefab)
                                        .GetComponent<GhostMitigationBehaviour>();
