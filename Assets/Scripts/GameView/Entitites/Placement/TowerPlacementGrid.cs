@@ -124,7 +124,8 @@ namespace DdSG {
         /// </summary>
         /// <param name="gridPos">The grid location</param>
         /// <param name="size">The size of the item</param>
-        public void Occupy(IntVector2 gridPos, IntVector2 size) {
+        /// <param name="state">The state to occupy the grid with; only Filled actually occupies</param>
+        public void Occupy(IntVector2 gridPos, IntVector2 size, PlacementTileState state) {
             IntVector2 extents = gridPos + size;
 
             // Validate the dimensions and size
@@ -140,11 +141,13 @@ namespace DdSG {
             // Fill those positions
             for (int y = gridPos.y; y < extents.y; y++) {
                 for (int x = gridPos.x; x < extents.x; x++) {
-                    m_AvailableCells[x, y] = true;
+                    if (state == PlacementTileState.Filled) {
+                        m_AvailableCells[x, y] = true;
+                    }
 
                     // If there's a placement tile, clear it
                     if (m_Tiles != null && m_Tiles[x, y] != null) {
-                        m_Tiles[x, y].SetState(PlacementTileState.Filled);
+                        m_Tiles[x, y].SetState(state);
                     }
                 }
             }

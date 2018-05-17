@@ -7,8 +7,9 @@
     /// </summary>
     public enum PlacementTileState {
 
-        Filled,
-        Empty
+        Empty,
+        Potential,
+        Filled
 
     }
 

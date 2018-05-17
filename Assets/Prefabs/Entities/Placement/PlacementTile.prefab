@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f60c997669d134aa8b58cf6c1c8f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyMaterial: {fileID: 2100000, guid: b183406d77125204cbcc4c3dda79f4cb, type: 2}
-  filledMaterial: {fileID: 2100000, guid: 8bc9b4199efc6014498bec5713b733f2, type: 2}
-  tileRenderer: {fileID: 23873669531479790}
+  EmptyMaterial: {fileID: 2100000, guid: b183406d77125204cbcc4c3dda79f4cb, type: 2}
+  PotentialMaterial: {fileID: 2100000, guid: 7b9eb3e27c52ac743b936e856ecef647, type: 2}
+  FilledMaterial: {fileID: 2100000, guid: 8bc9b4199efc6014498bec5713b733f2, type: 2}
+  TileRenderer: {fileID: 23873669531479790}

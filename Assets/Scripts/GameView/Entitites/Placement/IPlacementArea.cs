@@ -10,11 +10,6 @@ namespace DdSG {
     public interface IPlacementArea {
 
         /// <summary>
-        /// Gets this object's transform
-        /// </summary>
-        Transform transform { get; }
-
-        /// <summary>
         /// Calculates the grid position from a given world position, offset to center for a specific size object
         /// </summary>
         IntVector2 WorldToGrid(Vector3 worldPosition, IntVector2 sizeOffset);
@@ -37,7 +32,8 @@ namespace DdSG {
         /// </summary>
         /// <param name="gridPos">The grid location</param>
         /// <param name="size">The size of the item</param>
-        void Occupy(IntVector2 gridPos, IntVector2 size);
+        /// <param name="state">The state to occupy the grid with; only Filled actually occupies</param>
+        void Occupy(IntVector2 gridPos, IntVector2 size, PlacementTileState state);
 
         /// <summary>
         /// Clear the given space on this placement area

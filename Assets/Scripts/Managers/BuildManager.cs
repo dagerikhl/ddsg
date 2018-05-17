@@ -36,7 +36,7 @@ namespace DdSG {
 
         public void ImplementMitigation(IPlacementArea area, IntVector2 gridPosition, IntVector2 sizeOffset) {
             Logger.Debug("Trying to palce ghost");
-            area.Occupy(gridPosition, sizeOffset);
+            area.Occupy(gridPosition, sizeOffset, PlacementTileState.Filled);
             // TODO Place currentCourseOfAction here
 
             CurrentCourseOfAction = null;
