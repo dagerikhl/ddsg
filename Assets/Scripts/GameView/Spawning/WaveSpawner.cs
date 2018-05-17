@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace DdSG {
@@ -12,17 +13,22 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public GameObject AttackPrefab;
+        public TextMeshProUGUI WaveCurrentTimeText;
+        public TextMeshProUGUI WaveCountdownText;
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
         public static int AttacksAlive;
 
         // Private and protected members
+        private float currentTime;
         private float countdown = 5f;
         private int waveIndex;
 
         private void Update() {
             if (AttacksAlive > 0) {
+                currentTime += Time.deltaTime;
+                WaveCurrentTimeText.text = TimeHelper.CounterFormat(currentTime).Monospaced();
                 return;
             }
 
@@ -33,16 +39,15 @@ namespace DdSG {
             }
 
             if (countdown <= 0f) {
-                StartCoroutine(spawnWave());
+                currentTime = 0f;
                 countdown = TimeBetweenWaves;
+                StartCoroutine(spawnWave());
                 return;
             }
 
             countdown -= Time.deltaTime;
             countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-            // TODO Set text of some UI component showing countdown to new wave
-            // WaveCountdownText.text = string.Format("{0:00.00}", countdown);
+            WaveCountdownText.text = TimeHelper.CounterFormat(countdown).Monospaced();
         }
 
         private IEnumerator spawnWave() {
