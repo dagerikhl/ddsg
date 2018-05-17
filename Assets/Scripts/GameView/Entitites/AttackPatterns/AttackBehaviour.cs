@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,8 @@ namespace DdSG {
         public float StartSpeed = 10f;
         public float StartHealth = 100f;
         public int Worth = 50;
+        public float SpawnLikelihood = 1f;
+        public float DamageToAsset = 1f;
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
@@ -33,8 +37,6 @@ namespace DdSG {
         // Private and protected members
         private bool isDead;
 
-        private float damageToAsset;
-
         private void Start() {
             Speed = StartSpeed;
             Health = StartHealth;
@@ -52,7 +54,11 @@ namespace DdSG {
 
             transform.position = SpawnPoint.position;
 
-            // TODO Set damageToAsset
+            StartHealth = Health = calculateHealthFrom(attackPattern.custom.severity);
+            SpawnLikelihood = calculateSpawnLikelihoodFrom(attackPattern.custom.likelihood);
+            DamageToAsset = calculateDamageToAssetFrom(attackPattern.custom.impact);
+            // TODO Balance these values
+            // Logger.Debug(string.Format("{0}, {1}, {2}", Health, SpawnLikelihood, DamageToAsset));
 
             HoverBehaviour.Title = attackPattern.name;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
@@ -79,8 +85,32 @@ namespace DdSG {
         }
 
         public void DamageAsset() {
-            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAsset.AssetIndex) - 1, 0);
+            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAsset.AssetIndex) - DamageToAsset, 0);
             PlayerStats.I.SetAssetIntegrity(TargetedAsset.AssetIndex, newIntegrity);
+        }
+
+        private float calculateHealthFrom(Scale? severity) {
+            return StartHealth + severity.AsFloat()*StartHealth;
+        }
+
+        private float calculateSpawnLikelihoodFrom(Scale? likelihood) {
+            if (likelihood == null) {
+                return SpawnLikelihood;
+            }
+
+            var likelihoodPart = likelihood.AsPart();
+            return MathHelper.Rangify(likelihoodPart, 0.5f, 1f);
+        }
+
+        private float calculateDamageToAssetFrom([CanBeNull] AttackImpact impact) {
+            if (impact == null) {
+                return DamageToAsset;
+            }
+
+            var averageScale =
+                (impact.availability.AsPart() + impact.confidentiality.AsPart() + impact.integrity.AsPart())/3f;
+
+            return DamageToAsset + averageScale*9f;
         }
 
         private void die() {
