@@ -3,19 +3,9 @@
 namespace DdSG {
 
     /// <summary>
-    /// States the placement tile can be in
+    /// Simple class to illustrate tile placement locations
     ///
     /// All credit goes to Unity3d Technologies.
-    /// </summary>
-    public enum PlacementTileState {
-
-        Filled,
-        Empty
-
-    }
-
-    /// <summary>
-    /// Simple class to illustrate tile placement locations
     /// </summary>
     public class PlacementTile: MonoBehaviour {
 
