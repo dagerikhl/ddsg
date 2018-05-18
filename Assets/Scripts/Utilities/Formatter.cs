@@ -34,33 +34,12 @@ namespace DdSG {
             sb.AppendLine(entity.FullDescription);
             sb.AppendLine();
 
-            if (entity.GetType() == typeof(AttackPattern)) {
-                var attackPattern = (AttackPattern) entity;
-                sb.AppendLine("<i><size=140%>Attributes</size></i>");
-                sb.AppendLine();
-                if (attackPattern.custom.severity != null) {
-                    sb.AppendLine(
-                        BuildAttributeText(
-                            "Severity",
-                            EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.severity)));
-                }
-                if (attackPattern.custom.likelihood != null) {
-                    sb.AppendLine(
-                        BuildAttributeText(
-                            "Likelihood",
-                            EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.likelihood)));
-                }
-                sb.AppendLine(
-                    BuildAttributeText(
-                        "Injection Vector",
-                        BuildInjectionVectorText(attackPattern.custom.injection_vector)));
-                sb.AppendLine(BuildAttributeText("Payload", attackPattern.custom.payload));
-                sb.AppendLine(
-                    BuildAttributeText(
-                        "Activation Zone",
-                        BuildActivationZoneText(attackPattern.custom.activation_zone)));
-                sb.AppendLine(BuildAttributeText("Impact", BuildImpactText(attackPattern.custom.impact)));
-                sb.AppendLine("<indent=0>");
+            if (entity.GetType() == typeof(Asset)) {
+                AppendAssetAttributes(sb, (Asset) entity);
+            } else if (entity.GetType() == typeof(AttackPattern)) {
+                AppendAttackPatternAttributes(sb, (AttackPattern) entity);
+            } else if (entity.GetType() == typeof(CourseOfAction)) {
+                AppendCourseOfActionAttributes(sb, (CourseOfAction) entity);
             }
 
             sb.Append("<i><size=140%>Sources</size></i>");
@@ -87,6 +66,42 @@ namespace DdSG {
 
         public static string BuildActionText(string text) {
             return !string.IsNullOrEmpty(text) ? "Click to " + text : "";
+        }
+
+        private static void AppendAssetAttributes(StringBuilder sb, Asset asset) {
+            // Doesn't have any attributes worth showing yet; kept for future use
+        }
+
+        private static void AppendAttackPatternAttributes(StringBuilder sb, AttackPattern attackPattern) {
+            sb.AppendLine("<i><size=140%>Attributes</size></i>");
+            sb.AppendLine();
+            if (attackPattern.custom.severity != null) {
+                sb.AppendLine(
+                    BuildAttributeText(
+                        "Severity",
+                        EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.severity)));
+            }
+            if (attackPattern.custom.likelihood != null) {
+                sb.AppendLine(
+                    BuildAttributeText(
+                        "Likelihood",
+                        EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.likelihood)));
+            }
+            sb.AppendLine(
+                BuildAttributeText(
+                    "Injection Vector",
+                    BuildInjectionVectorText(attackPattern.custom.injection_vector)));
+            sb.AppendLine(BuildAttributeText("Payload", attackPattern.custom.payload));
+            sb.AppendLine(
+                BuildAttributeText("Activation Zone", BuildActivationZoneText(attackPattern.custom.activation_zone)));
+            sb.AppendLine(BuildAttributeText("Impact", BuildImpactText(attackPattern.custom.impact)));
+            sb.AppendLine("<indent=0>");
+        }
+
+        private static void AppendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
+            sb.AppendLine("<i><size=140%>Attributes</size></i>");
+            sb.AppendLine();
+            sb.AppendLine("<indent=0>");
         }
 
         private static string BuildAttributeText(string label, string text) {
