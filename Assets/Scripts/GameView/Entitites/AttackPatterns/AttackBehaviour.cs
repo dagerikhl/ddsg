@@ -51,8 +51,8 @@ namespace DdSG {
 
             transform.position = SpawnPoint.position;
 
-            StartHealth = Health = attackPattern.calculateHealthFromSeverity(StartHealth);
-            DamageToAsset = attackPattern.calculateDamageToAssetFromImpact(DamageToAsset);
+            StartHealth = Health = attackPattern.CalculateHealthFromSeverity(StartHealth);
+            DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
             // TODO Balance these values
             // Logger.Debug(string.Format("{0}, {1}, {2}", Health, SpawnLikelihood, DamageToAsset));
 

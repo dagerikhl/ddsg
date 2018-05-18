@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DdSG {
 
     public static class EntitiesExtensions {
 
-        public static AttackPattern[] TakeRandomsByLikelihood(this AttackPattern[] attackPatterns, int count) {
+        public static AttackPattern TakeRandomByLikelihood(this AttackPattern[] attackPatterns) {
+            return attackPatterns.TakeRandomsByLikelihood().FirstOrDefault();
+        }
+
+        public static AttackPattern[] TakeRandomsByLikelihood(this AttackPattern[] attackPatterns, int count = 1) {
             var randomAttackPatterns = new List<AttackPattern>(count);
             while (randomAttackPatterns.Count < count) {
                 var randomAttackPattern = attackPatterns.TakeRandom();
 
-                var chance = randomAttackPattern.calculateSpawnLikelihoodFromLikelihood(1f);
+                var chance = randomAttackPattern.CalculateSpawnLikelihoodFromLikelihood(1f);
                 var threshold = Rnd.Gen.NextDouble();
                 if (chance >= threshold) {
                     randomAttackPatterns.Add(randomAttackPattern);
@@ -19,11 +24,11 @@ namespace DdSG {
             return randomAttackPatterns.ToArray();
         }
 
-        public static float calculateHealthFromSeverity(this AttackPattern attackPattern, float baseValue) {
+        public static float CalculateHealthFromSeverity(this AttackPattern attackPattern, float baseValue) {
             return baseValue + attackPattern.custom.severity.AsFloat()*baseValue;
         }
 
-        public static float calculateSpawnLikelihoodFromLikelihood(
+        public static float CalculateSpawnLikelihoodFromLikelihood(
             this AttackPattern attackPattern,
             float baseValue,
             float minChance = 0f,
@@ -36,7 +41,7 @@ namespace DdSG {
             return MathHelper.Rangify(likelihoodPart, minChance, maxChance);
         }
 
-        public static float calculateDamageToAssetFromImpact(this AttackPattern attackPattern, float baseValue) {
+        public static float CalculateDamageToAssetFromImpact(this AttackPattern attackPattern, float baseValue) {
             if (attackPattern.custom.impact == null) {
                 return baseValue;
             }

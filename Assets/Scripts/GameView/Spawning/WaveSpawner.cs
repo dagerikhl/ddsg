@@ -13,6 +13,8 @@ namespace DdSG {
 
         public float SpawnRate = 0.5f;
 
+        public int PossibleAttackPatternsPerWave = 2;
+
         public int MinAttacksPerWave = 2;
         public int MaxAttacksPerWave = 5;
         public int ExtraPotentialAttacksPerWave = 2;
@@ -57,8 +59,13 @@ namespace DdSG {
             }
         }
 
+        private Wave currentWave;
+        private Wave nextWave;
+
         private void Awake() {
             Countdown = TimeBetweenWaves;
+
+            nextWave = pickNewWave();
         }
 
         private void Update() {
@@ -89,15 +96,17 @@ namespace DdSG {
         private IEnumerator spawnWave() {
             WaveIndex++;
 
-            var count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave;
-            var wave = new Wave {
-                Count = count,
-                AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandomsByLikelihood(count)
-            };
+            currentWave = nextWave;
+            nextWave = pickNewWave();
 
-            AttacksAlive = wave.Count;
+            AttacksAlive = nextWave.Count;
 
-            foreach (var attackPattern in wave.AttackPatterns) {
+            for (int i = 0; i < nextWave.Count; i++) {
+                spawnAttack(nextWave.AttackPatterns.TakeRandomByLikelihood());
+                yield return new WaitForSeconds(1f/SpawnRate);
+            }
+
+            foreach (var attackPattern in nextWave.AttackPatterns) {
                 spawnAttack(attackPattern);
                 yield return new WaitForSeconds(1f/SpawnRate);
             }
@@ -106,6 +115,14 @@ namespace DdSG {
         private void spawnAttack(AttackPattern attackPattern) {
             var attack = UnityHelper.Instantiate(AttackPrefab).GetComponent<AttackBehaviour>();
             attack.Initialize(attackPattern);
+        }
+
+        private Wave pickNewWave() {
+            return new Wave {
+                Count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave,
+                AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(PossibleAttackPatternsPerWave)
+                                      .ToArray()
+            };
         }
 
     }
