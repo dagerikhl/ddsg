@@ -24,6 +24,8 @@ namespace DdSG {
         // Private and protected members
         private readonly Vector3 offset = new Vector3(20f, 20f);
 
+        private bool isBeingDestroyed;
+
         public void Initialize(Vector3 position, Vector3 direction, DescriptionData data) {
             Title.text = data.Title;
             Text.text = data.Text;
@@ -37,7 +39,10 @@ namespace DdSG {
         }
 
         public void Destroy() {
-            FadeManager.I.Fade(Constants.HOVER_TRANSITION_TIME, 0f, setAlpha, () => Destroy(gameObject));
+            if (!isBeingDestroyed) {
+                isBeingDestroyed = true;
+                FadeManager.I.Fade(Constants.HOVER_TRANSITION_TIME, 0f, setAlpha, () => Destroy(gameObject));
+            }
         }
 
         private IEnumerator setPositionRoutine(Vector3 position, Vector3 direction, Action action) {

@@ -36,6 +36,13 @@ namespace DdSG {
             addPointerExitsEvent();
         }
 
+        private void destroyOldHoverOverlays() {
+            foreach (var hoverOverlayGo in GameObject.FindGameObjectsWithTag("HoverOverlay")) {
+                var hoverOverlay = hoverOverlayGo.GetComponent<HoverOverlay>();
+                hoverOverlay.Destroy();
+            }
+        }
+
         private void createHoverOverlay() {
             hoverOverlay = UnityHelper.Instantiate(HelperObjects.HoverOverlayPrefab).GetComponent<HoverOverlay>();
 
@@ -57,6 +64,7 @@ namespace DdSG {
             EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
             eventType.callback.AddListener(
                 (eventData) => {
+                    destroyOldHoverOverlays();
                     createHoverOverlay();
 
                     if (HasActions) {
