@@ -18,6 +18,9 @@ namespace DdSG {
         public GameObject BulletPrefab;
         public string AttackTag = "Attack";
 
+        public HoverBehaviour HoverBehaviour;
+        public ActionEvents ActionEvents;
+
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
@@ -52,7 +55,14 @@ namespace DdSG {
         }
 
         public void Initialize(CourseOfAction courseOfAction) {
-            // TODO Initialize the mitigation with values from course of action
+            HoverBehaviour.Title = courseOfAction.custom.category;
+            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
+
+            HoverBehaviour.ActionText = "select";
+            ActionEvents.PrimaryAction = () => {
+                // TODO Select mitigation
+            };
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
         }
 
         private void updateTarget() {

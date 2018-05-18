@@ -36,6 +36,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4990267058453116}
+  - component: {fileID: 114100356788268986}
+  - component: {fileID: 114196599656011646}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -107,8 +109,6 @@ GameObject:
   - component: {fileID: 33305434933577954}
   - component: {fileID: 114474452992085140}
   - component: {fileID: 64285858938943852}
-  - component: {fileID: 114288261633681234}
-  - component: {fileID: 114030746442004962}
   m_Layer: 0
   m_Name: Icosphere
   m_TagString: Untagged
@@ -231,17 +231,23 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
---- !u!114 &114030746442004962
+--- !u!114 &114100356788268986
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1866905325885814}
+  m_GameObject: {fileID: 1148341823288138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c94ed412976fb245bf1ec8d97ac5464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameOverlay: 1
+  Title: 
+  Text: 
+  ActionText: 
+  ShowUnder: 0
+  ShowOnLeft: 0
 --- !u!114 &114189957999763302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +269,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114196599656011646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1148341823288138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114263660611530748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,23 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f5c680905667f44991cb32b8bb7141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114288261633681234
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1866905325885814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c94ed412976fb245bf1ec8d97ac5464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameOverlay: 1
-  Title: 
-  Text: 
-  ActionText: 
-  ShowUnder: 0
-  ShowOnLeft: 0
 --- !u!114 &114474452992085140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12728,10 +12728,9 @@ MonoBehaviour:
   StartSpeed: 50
   StartHealth: 100
   Worth: 50
-  SpawnLikelihood: 1
   DamageToAsset: 1
-  HoverBehaviour: {fileID: 114288261633681234}
-  ActionEvents: {fileID: 114030746442004962}
+  HoverBehaviour: {fileID: 114100356788268986}
+  ActionEvents: {fileID: 114196599656011646}
   HealthBar: {fileID: 223125341698362660}
   HealthBarImage: {fileID: 114526679194757394}
   DeathEffect: {fileID: 1392354813126156, guid: 7f60ffff54ba9bb49a87425a91e7b00d,

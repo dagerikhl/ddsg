@@ -35,6 +35,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4076649030170230}
+  - component: {fileID: 114470170866659750}
+  - component: {fileID: 114396587227100146}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -89,10 +91,8 @@ GameObject:
   - component: {fileID: 33447819034148278}
   - component: {fileID: 114762265027977404}
   - component: {fileID: 64714871301316644}
-  - component: {fileID: 114530001151413276}
-  - component: {fileID: 114495826930189444}
   m_Layer: 0
-  m_Name: Model
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,6 +284,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114396587227100146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1211131856654802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114449092478533356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,6 +322,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114470170866659750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1211131856654802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c94ed412976fb245bf1ec8d97ac5464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameOverlay: 1
+  Title: 
+  Text: 
+  ActionText: 
+  ShowUnder: 0
+  ShowOnLeft: 0
 --- !u!114 &114472424665828296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,34 +360,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114495826930189444
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1636669035974938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114530001151413276
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1636669035974938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c94ed412976fb245bf1ec8d97ac5464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameOverlay: 1
-  Title: 
-  Text: 
-  ActionText: 
-  ShowUnder: 0
-  ShowOnLeft: 0
 --- !u!114 &114555992026448998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,8 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5085de4a9a0541977bdf6ec12844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverBehaviour: {fileID: 114530001151413276}
-  ActionEvents: {fileID: 114495826930189444}
+  HoverBehaviour: {fileID: 114470170866659750}
+  ActionEvents: {fileID: 114396587227100146}
   HealthBar: {fileID: 223568124047422158}
   HealthBarImage: {fileID: 114272833205325674}
   Category: 0
