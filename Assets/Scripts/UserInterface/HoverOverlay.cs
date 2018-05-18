@@ -27,7 +27,7 @@ namespace DdSG {
         public void Initialize(Vector3 position, Vector3 direction, DescriptionData data) {
             Title.text = data.Title;
             Text.text = data.Text;
-            ActionText.text = !string.IsNullOrEmpty(data.ActionText) ? data.ActionText : "";
+            ActionText.text = data.ActionText;
 
             StartCoroutine(
                 setPositionRoutine(

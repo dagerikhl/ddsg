@@ -28,6 +28,7 @@ namespace DdSG {
             return waveString.PadLeft(2);
         }
 
+        // TODO Create a custom one for attack patterns to show more custom data
         public static string BuildStixDataEntityDescription(StixDataEntityBase entity) {
             var sb = new StringBuilder();
 
@@ -56,7 +57,7 @@ namespace DdSG {
         }
 
         public static string BuildActionText(string text) {
-            return "Click to " + text;
+            return !string.IsNullOrEmpty(text) ? "Click to " + text : "";
         }
 
     }

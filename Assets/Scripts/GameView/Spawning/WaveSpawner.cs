@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -20,10 +21,16 @@ namespace DdSG {
         public int ExtraPotentialAttacksPerWave = 2;
 
         [Header("Unity Setup Fields")]
-        public GameObject AttackPrefab;
         public TextMeshProUGUI WaveCounterText;
         public TextMeshProUGUI WaveCurrentTimeText;
         public TextMeshProUGUI WaveCountdownText;
+
+        public Transform CurrentWaveInfoContainer;
+        public Transform NextWaveInfoContainer;
+
+        [Header("Prefabs")]
+        public GameObject AttackPrefab;
+        public GameObject WaveInformationIconPrefab;
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
@@ -59,13 +66,55 @@ namespace DdSG {
             }
         }
 
+        private List<WaveInfoIcon> currentWaveInformationIcons;
         private Wave currentWave;
+        private Wave CurrentWave {
+            set {
+                // Clear old icons
+                if (currentWaveInformationIcons != null) {
+                    foreach (var icon in currentWaveInformationIcons) {
+                        Destroy(icon.gameObject);
+                    }
+                }
+
+                // Transfer next wave icons to this container
+                currentWaveInformationIcons = new List<WaveInfoIcon>(PossibleAttackPatternsPerWave);
+                foreach (var icon in nextWaveInformationIcons) {
+                    icon.transform.SetParent(CurrentWaveInfoContainer);
+                    currentWaveInformationIcons.Add(icon);
+                }
+
+                // Update field
+                currentWave = value;
+            }
+        }
+        private List<WaveInfoIcon> nextWaveInformationIcons;
         private Wave nextWave;
+        private Wave NextWave {
+            get { return nextWave; }
+            set {
+                if (nextWave != null) {
+                    CurrentWave = nextWave;
+                }
+
+                // Generate new icons for this container
+                nextWaveInformationIcons = new List<WaveInfoIcon>(PossibleAttackPatternsPerWave);
+                foreach (var attackPattern in value.AttackPatterns) {
+                    var icon = Instantiate(WaveInformationIconPrefab, NextWaveInfoContainer)
+                        .GetComponent<WaveInfoIcon>();
+                    icon.Initialize(attackPattern);
+                    nextWaveInformationIcons.Add(icon);
+                }
+
+                // Update field
+                nextWave = value;
+            }
+        }
 
         private void Awake() {
             Countdown = TimeBetweenWaves;
 
-            nextWave = pickNewWave();
+            NextWave = generateNewWave();
         }
 
         private void Update() {
@@ -96,17 +145,16 @@ namespace DdSG {
         private IEnumerator spawnWave() {
             WaveIndex++;
 
-            currentWave = nextWave;
-            nextWave = pickNewWave();
+            NextWave = generateNewWave();
 
-            AttacksAlive = nextWave.Count;
+            AttacksAlive = NextWave.Count;
 
-            for (int i = 0; i < nextWave.Count; i++) {
-                spawnAttack(nextWave.AttackPatterns.TakeRandomByLikelihood());
+            for (int i = 0; i < NextWave.Count; i++) {
+                spawnAttack(NextWave.AttackPatterns.TakeRandomByLikelihood());
                 yield return new WaitForSeconds(1f/SpawnRate);
             }
 
-            foreach (var attackPattern in nextWave.AttackPatterns) {
+            foreach (var attackPattern in NextWave.AttackPatterns) {
                 spawnAttack(attackPattern);
                 yield return new WaitForSeconds(1f/SpawnRate);
             }
@@ -117,7 +165,7 @@ namespace DdSG {
             attack.Initialize(attackPattern);
         }
 
-        private Wave pickNewWave() {
+        private Wave generateNewWave() {
             return new Wave {
                 Count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave,
                 AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(PossibleAttackPatternsPerWave)
