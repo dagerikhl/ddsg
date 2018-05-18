@@ -11,6 +11,12 @@ namespace DdSG {
         public int TotalWaves = 10;
         public float TimeBetweenWaves = 2f;
 
+        public float SpawnRate = 0.5f;
+
+        public int MinAttacksPerWave = 2;
+        public int MaxAttacksPerWave = 5;
+        public int ExtraPotentialAttacksPerWave = 2;
+
         [Header("Unity Setup Fields")]
         public GameObject AttackPrefab;
         public TextMeshProUGUI WaveCounterText;
@@ -83,15 +89,17 @@ namespace DdSG {
         private IEnumerator spawnWave() {
             WaveIndex++;
 
-            var wave = new Wave { Count = 3, Rate = 0.5f };
-            // TODO Use likelihood here to determine how often to pick the attack pattern
-            wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
+            var count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave;
+            var wave = new Wave {
+                Count = count,
+                AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandomsByLikelihood(count)
+            };
 
             AttacksAlive = wave.Count;
 
             foreach (var attackPattern in wave.AttackPatterns) {
                 spawnAttack(attackPattern);
-                yield return new WaitForSeconds(1f/wave.Rate);
+                yield return new WaitForSeconds(1f/SpawnRate);
             }
         }
 

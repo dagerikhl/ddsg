@@ -10,7 +10,6 @@ namespace DdSG {
         public float StartSpeed = 10f;
         public float StartHealth = 100f;
         public int Worth = 50;
-        public float SpawnLikelihood = 1f;
         public float DamageToAsset = 1f;
 
         [Header("Unity Setup Fields")]
@@ -53,7 +52,6 @@ namespace DdSG {
             transform.position = SpawnPoint.position;
 
             StartHealth = Health = attackPattern.calculateHealthFromSeverity(StartHealth);
-            SpawnLikelihood = attackPattern.calculateSpawnLikelihoodFromLikelihood(SpawnLikelihood);
             DamageToAsset = attackPattern.calculateDamageToAssetFromImpact(DamageToAsset);
             // TODO Balance these values
             // Logger.Debug(string.Format("{0}, {1}, {2}", Health, SpawnLikelihood, DamageToAsset));
