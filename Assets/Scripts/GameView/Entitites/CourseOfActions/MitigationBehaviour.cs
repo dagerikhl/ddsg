@@ -55,7 +55,7 @@ namespace DdSG {
         }
 
         public void Initialize(CourseOfAction courseOfAction) {
-            HoverBehaviour.Title = courseOfAction.custom.category;
+            HoverBehaviour.Title = courseOfAction.custom.mitigation;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
             HoverBehaviour.ActionText = "select";

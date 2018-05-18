@@ -49,6 +49,7 @@ namespace DdSG {
                 sb.AppendLine();
             }
             sb.AppendLine();
+
             foreach (var externalReference in entity.external_references) {
                 if (externalReference.description == null) {
                     sb.AppendFormat(
@@ -75,6 +76,7 @@ namespace DdSG {
         private static void AppendAttackPatternAttributes(StringBuilder sb, AttackPattern attackPattern) {
             sb.AppendLine("<i><size=140%>Attributes</size></i>");
             sb.AppendLine();
+
             if (attackPattern.custom.severity != null) {
                 sb.AppendLine(
                     BuildAttributeText(
@@ -95,12 +97,16 @@ namespace DdSG {
             sb.AppendLine(
                 BuildAttributeText("Activation Zone", BuildActivationZoneText(attackPattern.custom.activation_zone)));
             sb.AppendLine(BuildAttributeText("Impact", BuildImpactText(attackPattern.custom.impact)));
+
             sb.AppendLine("<indent=0>");
         }
 
         private static void AppendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
             sb.AppendLine("<i><size=140%>Attributes</size></i>");
             sb.AppendLine();
+
+            // TODO Add attributes for mitigations
+
             sb.AppendLine("<indent=0>");
         }
 
