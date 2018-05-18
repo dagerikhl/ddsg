@@ -71,7 +71,7 @@ namespace DdSG {
         private void updateGameTime() {
             secondsElapsed += Time.unscaledDeltaTime;
 
-            GameTime.text = TimeHelper.TimeFormat(secondsElapsed).Monospaced();
+            GameTime.text = Formatter.TimeFormat(secondsElapsed).Monospaced();
         }
 
         private void assignPrefabHelperObjects() {

@@ -13,6 +13,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public GameObject AttackPrefab;
+        public TextMeshProUGUI WaveCounterText;
         public TextMeshProUGUI WaveCurrentTimeText;
         public TextMeshProUGUI WaveCountdownText;
 
@@ -28,7 +29,7 @@ namespace DdSG {
         private void Update() {
             if (AttacksAlive > 0) {
                 currentTime += Time.deltaTime;
-                WaveCurrentTimeText.text = TimeHelper.CounterFormat(currentTime).Monospaced();
+                WaveCurrentTimeText.text = Formatter.CounterFormat(currentTime).Monospaced();
                 return;
             }
 
@@ -39,7 +40,7 @@ namespace DdSG {
             }
 
             currentTime = 0f;
-            WaveCurrentTimeText.text = TimeHelper.CounterFormat(currentTime).Monospaced();
+            WaveCurrentTimeText.text = Formatter.CounterFormat(currentTime).Monospaced();
             if (countdown <= 0f) {
                 countdown = TimeBetweenWaves;
                 StartCoroutine(spawnWave());
@@ -48,10 +49,12 @@ namespace DdSG {
 
             countdown -= Time.deltaTime;
             countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-            WaveCountdownText.text = TimeHelper.CounterFormat(countdown).Monospaced();
+            WaveCountdownText.text = Formatter.CounterFormat(countdown).Monospaced();
         }
 
         private IEnumerator spawnWave() {
+            WaveCounterText.text = Formatter.WaveCounterFormat(waveIndex + 1).Monospaced();
+
             var wave = new Wave { Count = 10, Rate = 0.5f };
             // TODO Use likelihood here to determine how often to pick the attack pattern
             wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();

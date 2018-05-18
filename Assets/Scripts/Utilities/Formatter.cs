@@ -1,9 +1,32 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace DdSG {
 
     public static class Formatter {
+
+        public static string TimeFormat(float seconds) {
+            var secondsRounded = Mathf.RoundToInt(seconds);
+            var time = new TimeSpan(0, 0, secondsRounded);
+
+            return string.Format(
+                "{0}{1:D2}:{2:D2}",
+                time.Hours == 0 ? " " : "",
+                time.Hours*60 + time.Minutes,
+                time.Seconds);
+        }
+
+        public static string CounterFormat(float seconds) {
+            var timeString = seconds < 0.01f ? "-.--" : string.Format("{0:##0.00}", seconds);
+            return timeString.PadLeft(6);
+        }
+
+        public static string WaveCounterFormat(int waveNumber) {
+            var waveString = waveNumber == 0 ? "-" : string.Format("{0:#0}", waveNumber);
+            return waveString.PadLeft(2);
+        }
 
         public static string BuildStixDataEntityDescription(StixDataEntityBase entity) {
             var sb = new StringBuilder();
