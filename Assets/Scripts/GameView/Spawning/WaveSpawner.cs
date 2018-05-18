@@ -22,40 +22,68 @@ namespace DdSG {
         public static int AttacksAlive;
 
         // Private and protected members
-        private float currentTime;
-        private float countdown = 5f;
         private int waveIndex;
+        private int WaveIndex {
+            get { return waveIndex; }
+            set {
+                waveIndex = value;
+                WaveCounterText.text = Formatter.WaveCounterFormat(value).Monospaced();
+
+                PlayerStats.I.Waves++;
+            }
+        }
+
+        private float currentTime;
+        private float CurrentTime {
+            get { return currentTime; }
+            set {
+                currentTime = value;
+                WaveCurrentTimeText.text = Formatter.CounterFormat(value).Monospaced();
+            }
+        }
+
+        private float countdown;
+        private float Countdown {
+            get { return countdown; }
+            set {
+                countdown = Mathf.Clamp(value, 0f, Mathf.Infinity);
+                WaveCountdownText.text = Formatter.CounterFormat(value).Monospaced();
+            }
+        }
+
+        private void Awake() {
+            Countdown = TimeBetweenWaves;
+        }
 
         private void Update() {
-            if (AttacksAlive > 0) {
-                currentTime += Time.deltaTime;
-                WaveCurrentTimeText.text = Formatter.CounterFormat(currentTime).Monospaced();
-                return;
-            }
-
-            if (waveIndex > TotalWaves) {
+            // Final wave has been defeated
+            if (WaveIndex > TotalWaves) {
                 GameManager.Win();
                 enabled = false;
                 return;
             }
 
-            currentTime = 0f;
-            WaveCurrentTimeText.text = Formatter.CounterFormat(currentTime).Monospaced();
-            if (countdown <= 0f) {
-                countdown = TimeBetweenWaves;
-                StartCoroutine(spawnWave());
+            // Wave is still in progress
+            if (AttacksAlive > 0) {
+                CurrentTime += Time.deltaTime;
                 return;
             }
 
-            countdown -= Time.deltaTime;
-            countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-            WaveCountdownText.text = Formatter.CounterFormat(countdown).Monospaced();
+            // We are between waves
+            Countdown -= Time.deltaTime;
+
+            // It's time to start the next wave
+            if (Countdown <= 0f) {
+                CurrentTime = 0f;
+                Countdown = TimeBetweenWaves;
+                StartCoroutine(spawnWave());
+            }
         }
 
         private IEnumerator spawnWave() {
-            WaveCounterText.text = Formatter.WaveCounterFormat(waveIndex + 1).Monospaced();
+            WaveIndex++;
 
-            var wave = new Wave { Count = 10, Rate = 0.5f };
+            var wave = new Wave { Count = 3, Rate = 0.5f };
             // TODO Use likelihood here to determine how often to pick the attack pattern
             wave.AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(wave.Count).ToArray();
 
@@ -65,9 +93,6 @@ namespace DdSG {
                 spawnAttack(attackPattern);
                 yield return new WaitForSeconds(1f/wave.Rate);
             }
-
-            PlayerStats.I.Waves++;
-            waveIndex++;
         }
 
         private void spawnAttack(AttackPattern attackPattern) {
