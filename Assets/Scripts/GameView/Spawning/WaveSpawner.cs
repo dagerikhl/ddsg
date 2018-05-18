@@ -114,6 +114,8 @@ namespace DdSG {
         private void Awake() {
             Countdown = TimeBetweenWaves;
 
+            AttacksAlive = 0;
+
             NextWave = generateNewWave();
         }
 
