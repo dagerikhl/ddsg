@@ -28,11 +28,16 @@ namespace DdSG {
             return waveString.PadLeft(2);
         }
 
-        public static string BuildStixDataEntityDescription(StixDataEntityBase entity) {
+        public static string BuildStixDataEntityDescription(
+            StixDataEntityBase entity,
+            bool showDescription = true,
+            bool showSources = true) {
             var sb = new StringBuilder();
 
-            sb.AppendLine(entity.FullDescription);
-            sb.AppendLine();
+            if (showDescription) {
+                sb.AppendLine(entity.FullDescription);
+                sb.AppendLine();
+            }
 
             if (entity.GetType() == typeof(Asset)) {
                 AppendAssetAttributes(sb, (Asset) entity);
@@ -42,24 +47,26 @@ namespace DdSG {
                 AppendCourseOfActionAttributes(sb, (CourseOfAction) entity);
             }
 
-            sb.Append("<i><size=140%>Sources</size></i>");
-            if (entity.external_references.Any((e) => e.description == null)) {
-                sb.AppendLine("<space=25em><color=#848484><b>Right-click to open all in browser</b></color>");
-            } else {
-                sb.AppendLine();
-            }
-            sb.AppendLine();
-
-            foreach (var externalReference in entity.external_references) {
-                if (externalReference.description == null) {
-                    sb.AppendFormat(
-                        "<indent=2em>\U00002014<indent=7em><b>{0}</b> (from <color=#96c8e9>{1}</color>)",
-                        externalReference.id,
-                        externalReference.url.ExtractUrlDomain());
+            if (showSources) {
+                sb.Append("<i><size=140%>Sources</size></i>");
+                if (entity.external_references.Any((e) => e.description == null)) {
+                    sb.AppendLine("<space=25em><color=#848484><b>Right-click to open all in browser</b></color>");
                 } else {
-                    sb.AppendFormat("<i><b><indent=7em>{0}</b></i>", externalReference.description);
+                    sb.AppendLine();
                 }
-                sb.AppendLine("<indent=0>");
+                sb.AppendLine();
+
+                foreach (var externalReference in entity.external_references) {
+                    if (externalReference.description == null) {
+                        sb.AppendFormat(
+                            "<indent=2em>\U00002014<indent=7em><b>{0}</b> (from <color=#96c8e9>{1}</color>)",
+                            externalReference.id,
+                            externalReference.url.ExtractUrlDomain());
+                    } else {
+                        sb.AppendFormat("<i><b><indent=7em>{0}</b></i>", externalReference.description);
+                    }
+                    sb.AppendLine("<indent=0>");
+                }
             }
 
             return sb.ToString();
