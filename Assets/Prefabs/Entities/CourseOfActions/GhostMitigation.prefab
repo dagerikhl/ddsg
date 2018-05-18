@@ -5100,7 +5100,7 @@ MonoBehaviour:
   SizeOffset:
     x: 2
     y: 2
-  PathCollisionRadius: 1.5
+  PathCollisionRadius: 1.8
 --- !u!114 &114864202245122414
 MonoBehaviour:
   m_ObjectHideFlags: 1
