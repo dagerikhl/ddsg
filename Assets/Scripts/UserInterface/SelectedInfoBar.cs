@@ -23,14 +23,25 @@ namespace DdSG {
 
         // Private and protected members
 
-        public void SelectEntity(string title, string description, IEnumerable<SelectedAction> selectedActions) {
+        public void SelectEntity(string title, string description, IEnumerable<SelectedAction> selectedActions = null) {
             Title.text = title;
             Description.text = description;
 
-            foreach (var selectedAction in selectedActions) {
-                var selectedActionButton =
-                    Instantiate(ButtonPrefab, ActionsContainer).GetComponent<SelectedActionButton>();
-                selectedActionButton.Initialize(selectedAction);
+            destroyOldSelectedActionButtons();
+
+            if (selectedActions != null) {
+                foreach (var selectedAction in selectedActions) {
+                    var selectedActionButton =
+                        Instantiate(ButtonPrefab, ActionsContainer).GetComponent<SelectedActionButton>();
+                    selectedActionButton.Initialize(selectedAction);
+                }
+            }
+        }
+
+        // TODO Fix this so it actually destroys the old buttons
+        private void destroyOldSelectedActionButtons() {
+            foreach (Transform selectedActionButton in ActionsContainer) {
+                Destroy(selectedActionButton);
             }
         }
 

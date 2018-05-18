@@ -36,6 +36,12 @@ namespace DdSG {
             HoverBehaviour.Title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
 
+            HoverBehaviour.ActionText = "select";
+            ActionEvents.PrimaryAction = () => {
+                var title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
+                var description = Formatter.BuildStixDataEntityDescription(asset, false, false);
+                HelperObjects.SelectedInfoBar.SelectEntity(title, description);
+            };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ActionEvents);
         }
 

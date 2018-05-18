@@ -13,6 +13,10 @@ namespace DdSG {
 
         public static PauseMenu PauseMenu { get { return Object.FindObjectOfType<PauseMenu>(); } }
 
+        public static SelectedInfoBar SelectedInfoBar {
+            get { return GameObject.FindWithTag("SelectedInfoBar").GetComponent<SelectedInfoBar>(); }
+        }
+
         public static GameObject HoverOverlayPrefab { get; set; }
         public static GameObject GhostMitigationPrefab { get; set; }
 
