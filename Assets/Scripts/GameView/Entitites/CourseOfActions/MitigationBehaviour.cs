@@ -60,7 +60,7 @@ namespace DdSG {
 
             HoverBehaviour.ActionText = "select";
             ActionEvents.PrimaryAction = () => {
-                var title = EnumHelper.GetEnumMemberAttributeValue(courseOfAction.custom.mitigation);
+                var title = courseOfAction.custom.mitigation;
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
                 var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
