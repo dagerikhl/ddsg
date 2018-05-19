@@ -17,12 +17,12 @@ namespace DdSG {
 
         // Private and protected members
 
-        public Sprite GetSpriteByType(SpriteType type) {
+        public Sprite GetSpriteByActionType(ActionType type) {
             switch (type) {
-            case SpriteType.Sell:
+            case ActionType.Sell:
                 return SellIcon;
             default:
-                throw new ArgumentOutOfRangeException("type", type, "The SpriteType doesn't exist.");
+                throw new ArgumentOutOfRangeException("type", type, "The action type doesn't exist.");
             }
         }
 

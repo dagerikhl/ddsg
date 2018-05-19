@@ -1,6 +1,6 @@
 ﻿namespace DdSG {
 
-    public enum SpriteType {
+    public enum ActionType {
 
         Sell
 

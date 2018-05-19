@@ -62,9 +62,7 @@ namespace DdSG {
             ActionEvents.PrimaryAction = () => {
                 var title = EnumHelper.GetEnumMemberAttributeValue(courseOfAction.custom.mitigation);
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
-                var selectedActions = new SelectedAction[] {
-                    new SelectedAction { IconType = SpriteType.Sell, Label = "Sell", Action = sell }
-                };
+                var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);

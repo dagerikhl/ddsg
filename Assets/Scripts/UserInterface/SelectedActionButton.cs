@@ -25,14 +25,11 @@ namespace DdSG {
         }
 
         public void Initialize(SelectedAction selectedAction) {
-            Icon.sprite = SpriteManager.I.GetSpriteByType(selectedAction.IconType);
+            Icon.sprite = SpriteManager.I.GetSpriteByActionType(selectedAction.ActionType);
             Label.text = selectedAction.Label;
-            buttonComponent.onClick.AddListener(
-                () => {
-                    if (selectedAction.Action != null) {
-                        selectedAction.Action();
-                    }
-                });
+            if (selectedAction.Action != null) {
+                buttonComponent.onClick.AddListener(() => selectedAction.Action());
+            }
         }
 
     }
