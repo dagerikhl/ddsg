@@ -66,27 +66,19 @@ namespace DdSG {
             }
         }
 
-        private List<WaveInfoIcon> currentWaveInformationIcons;
         private Wave currentWave;
         private Wave CurrentWave {
             set {
                 // Clear old icons
-                if (currentWaveInformationIcons != null) {
-                    currentWaveInformationIcons.Clear();
-                }
+                CurrentWaveInfoContainer.Clear();
 
                 // Transfer next wave icons to this container
-                currentWaveInformationIcons = new List<WaveInfoIcon>(PossibleAttackPatternsPerWave);
-                foreach (var icon in nextWaveInformationIcons) {
-                    icon.transform.SetParent(CurrentWaveInfoContainer);
-                    currentWaveInformationIcons.Add(icon);
-                }
+                NextWaveInfoContainer.StealChildren(CurrentWaveInfoContainer);
 
                 // Update field
                 currentWave = value;
             }
         }
-        private List<WaveInfoIcon> nextWaveInformationIcons;
         private Wave nextWave;
         private Wave NextWave {
             get { return nextWave; }
@@ -96,12 +88,10 @@ namespace DdSG {
                 }
 
                 // Generate new icons for this container
-                nextWaveInformationIcons = new List<WaveInfoIcon>(PossibleAttackPatternsPerWave);
                 foreach (var attackPattern in value.AttackPatterns) {
                     var icon = Instantiate(WaveInformationIconPrefab, NextWaveInfoContainer)
                         .GetComponent<WaveInfoIcon>();
                     icon.Initialize(attackPattern);
-                    nextWaveInformationIcons.Add(icon);
                 }
 
                 // Update field
