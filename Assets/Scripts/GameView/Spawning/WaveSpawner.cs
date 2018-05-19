@@ -72,9 +72,7 @@ namespace DdSG {
             set {
                 // Clear old icons
                 if (currentWaveInformationIcons != null) {
-                    foreach (var icon in currentWaveInformationIcons) {
-                        Destroy(icon.gameObject);
-                    }
+                    currentWaveInformationIcons.Clear();
                 }
 
                 // Transfer next wave icons to this container

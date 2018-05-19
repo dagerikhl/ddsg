@@ -33,7 +33,7 @@ namespace DdSG {
             Type.text = string.Format("Selected {0}", type);
             Description.text = description;
 
-            destroyOldSelectedActionButtons();
+            ActionsContainer.Clear();
 
             if (selectedActions != null) {
                 foreach (var selectedAction in selectedActions) {
@@ -41,13 +41,6 @@ namespace DdSG {
                         Instantiate(ButtonPrefab, ActionsContainer).GetComponent<SelectedActionButton>();
                     selectedActionButton.Initialize(selectedAction);
                 }
-            }
-        }
-
-        // TODO Fix this so it actually destroys the old buttons
-        private void destroyOldSelectedActionButtons() {
-            foreach (Transform selectedActionButton in ActionsContainer) {
-                Destroy(selectedActionButton);
             }
         }
 
