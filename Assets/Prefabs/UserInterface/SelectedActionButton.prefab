@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114962314205507768}
   - component: {fileID: 114353997470506188}
   - component: {fileID: 114685005246686102}
+  - component: {fileID: 114051279761626442}
   m_Layer: 0
   m_Name: SelectedActionButton
   m_TagString: Untagged
@@ -100,6 +101,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114051279761626442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404372268673874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c94ed412976fb245bf1ec8d97ac5464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameOverlay: 0
+  Title: 
+  Text: 
+  ActionText: 
+  ShowUnder: 0
+  ShowOnLeft: 1
 --- !u!114 &114171428695752330
 MonoBehaviour:
   m_ObjectHideFlags: 1

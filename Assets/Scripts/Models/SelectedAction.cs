@@ -6,6 +6,7 @@ namespace DdSG {
 
         public ActionType ActionType;
         public string Label;
+        public string Description;
         public Action Action;
 
         public SelectedAction(ActionType type, Action action) {
@@ -13,6 +14,7 @@ namespace DdSG {
             case ActionType.Sell:
                 ActionType = type;
                 Label = "Sell";
+                Description = string.Format("Sell for {0:P0} of its orignal worth.", Constants.SELL_PERCENTAGE);
                 Action = action;
                 break;
             default:
