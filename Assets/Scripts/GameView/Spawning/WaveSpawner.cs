@@ -137,22 +137,22 @@ namespace DdSG {
             }
 
             // We are between waves
+            if (Countdown <= 0f) {
+                Countdown = TimeBetweenWaves;
+            }
+            CurrentTime = 0f;
             Countdown -= Time.deltaTime;
 
             // It's time to start the next wave
             if (Countdown <= 0f) {
-                CurrentTime = 0f;
-                Countdown = TimeBetweenWaves;
+                WaveIndex++;
+                NextWave = generateNewWave();
+                AttacksAlive = NextWave.Count;
                 StartCoroutine(spawnWave());
             }
         }
 
         private IEnumerator spawnWave() {
-            WaveIndex++;
-
-            NextWave = generateNewWave();
-
-            AttacksAlive = NextWave.Count;
             for (int i = 0; i < NextWave.Count; i++) {
                 spawnAttack(NextWave.AttackPatterns.TakeRandomByLikelihood());
                 yield return countdownToSpawn();

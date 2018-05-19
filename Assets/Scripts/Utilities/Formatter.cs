@@ -19,8 +19,8 @@ namespace DdSG {
         }
 
         public static string CounterFormat(float seconds) {
-            var timeString = seconds < 0.01f ? "-.--" : string.Format("{0:##0.00}", seconds);
-            return timeString.PadLeft(6);
+            return seconds < 0.01f ? "0.00".PadLeft(6).WithColor("#8c8c8c")
+                : string.Format("{0:##0.00}", seconds).PadLeft(6);
         }
 
         public static string WaveCounterFormat(int waveNumber) {

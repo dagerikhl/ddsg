@@ -28,6 +28,10 @@ namespace DdSG {
             return string.Format("<mspace={0}em>{1}</mspace>", monospaceEm, value);
         }
 
+        public static string WithColor(this string value, string hexColor) {
+            return string.Format("<color={0}>{1}</color>", hexColor, value);
+        }
+
         public static string WorthFormat(this string value) {
             return string.Format("{0:###,##0}", Convert.ToInt32(value));
         }
