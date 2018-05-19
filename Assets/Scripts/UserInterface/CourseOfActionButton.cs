@@ -10,24 +10,33 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
+        public HoverBehaviour HoverBehaviour;
+        public ActionEvents ActionEvents;
+
+        // TODO This is added for later use
         public Image Icon;
         public TextMeshProUGUI Label;
+        public TextMeshProUGUI Cost;
+
+        public GameObject Blocker;
 
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
-        [HideInInspector]
-        public HoverBehaviour HoverBehaviour;
-        [HideInInspector]
-        public ActionEvents ActionEvents;
-
         public ScrollRect parentScrollRect { private get; set; }
 
         // Private and protected members
+        private int value;
+        private int Value {
+            get { return value; }
+            set {
+                this.value = value;
+                Cost.text = value.ToString();
+            }
+        }
 
-        private void Awake() {
-            HoverBehaviour = GetComponent<HoverBehaviour>();
-            ActionEvents = GetComponent<ActionEvents>();
+        private void Update() {
+            Blocker.SetActive(PlayerStats.I.Worth < Value);
         }
 
         public void OnBeginDrag(PointerEventData eventData) {
@@ -47,6 +56,8 @@ namespace DdSG {
         }
 
         public void Initialize(CourseOfAction courseOfAction) {
+            Value = courseOfAction.GetValue();
+
             Label.text = courseOfAction.custom.category;
 
             HoverBehaviour.Title = courseOfAction.custom.category;

@@ -38,7 +38,13 @@ namespace DdSG {
 
         public void ImplementMitigation(IPlacementArea area, IntVector2 gridPosition, IntVector2 sizeOffset) {
             if (currentCourseOfAction != null) {
+                // Withdraw cost
+                PlayerStats.I.Worth -= currentCourseOfAction.GetValue();
+
+                // Occupy area in grid
                 area.Occupy(gridPosition, sizeOffset, PlacementTileState.Filled);
+
+                // Initialize the mitigation
                 var mitigation = UnityHelper
                                  .Instantiate(CourseOfActionPrefab, area.GridToWorld(gridPosition, sizeOffset))
                                  .GetComponent<MitigationBehaviour>();
