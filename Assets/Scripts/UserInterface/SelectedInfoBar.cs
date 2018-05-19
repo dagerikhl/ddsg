@@ -24,6 +24,10 @@ namespace DdSG {
 
         // Private and protected members
 
+        private void Awake() {
+            Deselect();
+        }
+
         public void SelectEntity(
             string title,
             string type,
@@ -42,6 +46,14 @@ namespace DdSG {
                     selectedActionButton.Initialize(selectedAction);
                 }
             }
+        }
+
+        public void Deselect() {
+            Title.text = "";
+            Description.text = "";
+            Type.text = "Nothing selected";
+
+            ActionsContainer.Clear();
         }
 
     }

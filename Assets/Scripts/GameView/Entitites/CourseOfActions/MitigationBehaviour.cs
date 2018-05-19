@@ -118,6 +118,8 @@ namespace DdSG {
 
             placementArea.Clear(areaGridPosition, areaSizeOffset);
 
+            HelperObjects.SelectedInfoBar.Deselect();
+
             // Spawn effect
             GameObject effect = UnityHelper.Instantiate(BuildManager.I.SellEffect, transform.position);
             Destroy(effect, 5f);
