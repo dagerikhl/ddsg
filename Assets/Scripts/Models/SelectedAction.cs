@@ -15,7 +15,7 @@ namespace DdSG {
 
             switch (type) {
             case ActionType.OpenExternalReferences:
-                Label = "Source";
+                Label = "Open";
                 Description = "Opens the external references related to this entity.";
                 break;
             case ActionType.Sell:

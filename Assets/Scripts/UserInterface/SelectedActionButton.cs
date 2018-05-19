@@ -35,6 +35,7 @@ namespace DdSG {
 
             hoverBehaviour.Title = selectedAction.Label;
             hoverBehaviour.Text = selectedAction.Description;
+            hoverBehaviour.ActionText = selectedAction.Label.ToLower();
         }
 
     }
