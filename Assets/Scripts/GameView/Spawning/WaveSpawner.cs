@@ -118,6 +118,11 @@ namespace DdSG {
         }
 
         private void Update() {
+            // Don't update when pause
+            if (GameManager.IsPaused) {
+                return;
+            }
+
             // Final wave has been defeated
             if (WaveIndex > TotalWaves) {
                 GameManager.Win();
@@ -148,16 +153,23 @@ namespace DdSG {
             NextWave = generateNewWave();
 
             AttacksAlive = NextWave.Count;
-
             for (int i = 0; i < NextWave.Count; i++) {
                 spawnAttack(NextWave.AttackPatterns.TakeRandomByLikelihood());
-                yield return new WaitForSeconds(1f/SpawnRate);
+                yield return countdownToSpawn();
+            }
+        }
+
+        private IEnumerator countdownToSpawn() {
+            var countdown = 1f/SpawnRate;
+
+            while (countdown > 0f) {
+                // Wait until game isn't paused if it is
+                yield return new WaitUntil(() => !GameManager.IsPaused);
+
+                countdown -= Time.deltaTime;
             }
 
-            foreach (var attackPattern in NextWave.AttackPatterns) {
-                spawnAttack(attackPattern);
-                yield return new WaitForSeconds(1f/SpawnRate);
-            }
+            yield return 0;
         }
 
         private void spawnAttack(AttackPattern attackPattern) {
