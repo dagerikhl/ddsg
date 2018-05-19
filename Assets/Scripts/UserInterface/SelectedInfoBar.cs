@@ -11,6 +11,7 @@ namespace DdSG {
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI Title;
         public TextMeshProUGUI Description;
+        public TextMeshProUGUI Type;
         public Transform ActionsContainer;
 
         [Header("Prefabs")]
@@ -23,8 +24,13 @@ namespace DdSG {
 
         // Private and protected members
 
-        public void SelectEntity(string title, string description, IEnumerable<SelectedAction> selectedActions = null) {
+        public void SelectEntity(
+            string title,
+            string type,
+            string description,
+            IEnumerable<SelectedAction> selectedActions = null) {
             Title.text = title;
+            Type.text = string.Format("Selected {0}", type);
             Description.text = description;
 
             destroyOldSelectedActionButtons();

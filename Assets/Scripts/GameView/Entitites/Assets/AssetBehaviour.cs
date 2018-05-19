@@ -40,7 +40,7 @@ namespace DdSG {
             ActionEvents.PrimaryAction = () => {
                 var title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
                 var description = Formatter.BuildStixDataEntityDescription(asset, true, false);
-                HelperObjects.SelectedInfoBar.SelectEntity(title, description);
+                HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description);
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ActionEvents);
         }

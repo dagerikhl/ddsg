@@ -10,6 +10,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI Label;
+        public Image Icon;
 
         //[Header("Optional")]
 
@@ -24,6 +25,7 @@ namespace DdSG {
         }
 
         public void Initialize(SelectedAction selectedAction) {
+            Icon.sprite = SpriteManager.I.GetSpriteByType(selectedAction.IconType);
             Label.text = selectedAction.Label;
             buttonComponent.onClick.AddListener(
                 () => {
