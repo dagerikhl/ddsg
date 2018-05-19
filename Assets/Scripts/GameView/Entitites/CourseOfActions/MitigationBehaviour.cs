@@ -8,6 +8,7 @@ namespace DdSG {
         public float Range = 15f;
         public float FireRate = 1f;
         public float TurnSpeed = 10f;
+        public int Value = 10;
 
         [Header("Special Attacks (optional)")]
         public float SlowFactor;
@@ -26,6 +27,10 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
 
         // Private and protected members
+        private IPlacementArea placementArea;
+        private IntVector2 areaGridPosition;
+        private IntVector2 areaSizeOffset;
+
         private float fireCountdown;
 
         private Transform target;
@@ -49,12 +54,15 @@ namespace DdSG {
             fireCountdown -= Time.deltaTime;
         }
 
-        private void OnDrawGizmosSelected() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, Range);
-        }
+        public void Initialize(
+            IPlacementArea area,
+            IntVector2 gridPosition,
+            IntVector2 sizeOffset,
+            CourseOfAction courseOfAction) {
+            placementArea = area;
+            areaGridPosition = gridPosition;
+            areaSizeOffset = sizeOffset;
 
-        public void Initialize(CourseOfAction courseOfAction) {
             HoverBehaviour.Title = courseOfAction.custom.mitigation;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
@@ -106,8 +114,20 @@ namespace DdSG {
         }
 
         private void sell() {
-            // TODO Impl. selling
-            Logger.Debug("Selling mitigation");
+            PlayerStats.I.Worth += Mathf.CeilToInt(Value*Constants.SELL_PERCENTAGE);
+
+            placementArea.Clear(areaGridPosition, areaSizeOffset);
+
+            // Spawn effect
+            GameObject effect = UnityHelper.Instantiate(BuildManager.I.SellEffect, transform.position);
+            Destroy(effect, 5f);
+
+            Destroy(gameObject);
+        }
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, Range);
         }
 
     }

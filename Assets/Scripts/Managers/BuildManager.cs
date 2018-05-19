@@ -42,7 +42,7 @@ namespace DdSG {
                 var mitigation = UnityHelper
                                  .Instantiate(CourseOfActionPrefab, area.GridToWorld(gridPosition, sizeOffset))
                                  .GetComponent<MitigationBehaviour>();
-                mitigation.Initialize(currentCourseOfAction);
+                mitigation.Initialize(area, gridPosition, sizeOffset, currentCourseOfAction);
 
                 ExitBuildMode();
             }
