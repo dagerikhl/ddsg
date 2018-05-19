@@ -106,6 +106,8 @@ namespace DdSG {
         }
 
         private void sell() {
+            // TODO Impl. selling
+            Logger.Debug("Selling mitigation");
         }
 
     }
