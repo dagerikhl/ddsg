@@ -39,13 +39,7 @@ namespace DdSG {
                 sb.AppendLine();
             }
 
-            if (entity.GetType() == typeof(Asset)) {
-                AppendAssetAttributes(sb, (Asset) entity);
-            } else if (entity.GetType() == typeof(AttackPattern)) {
-                AppendAttackPatternAttributes(sb, (AttackPattern) entity);
-            } else if (entity.GetType() == typeof(CourseOfAction)) {
-                AppendCourseOfActionAttributes(sb, (CourseOfAction) entity);
-            }
+            appendAttributes(sb, entity, showDescription);
 
             if (showSources) {
                 sb.Append("<i><size=140%>Sources</size></i>");
@@ -76,63 +70,80 @@ namespace DdSG {
             return !string.IsNullOrEmpty(text) ? "Click to " + text : "";
         }
 
-        private static void AppendAssetAttributes(StringBuilder sb, Asset asset) {
+        private static void appendAttributes(StringBuilder sb, StixDataEntityBase entity, bool showDescription) {
+            var hasAttributes = entity.GetType() == typeof(Asset)
+                                || entity.GetType() == typeof(AttackPattern)
+                                || entity.GetType() == typeof(CourseOfAction);
+
+            if (!hasAttributes) {
+                return;
+            }
+
+            if (showDescription) {
+                sb.AppendLine("<i><size=140%>Attributes</size></i>");
+                sb.AppendLine();
+            }
+
+            if (entity.GetType() == typeof(Asset)) {
+                appendAssetAttributes(sb, (Asset) entity);
+            } else if (entity.GetType() == typeof(AttackPattern)) {
+                appendAttackPatternAttributes(sb, (AttackPattern) entity);
+            } else if (entity.GetType() == typeof(CourseOfAction)) {
+                appendCourseOfActionAttributes(sb, (CourseOfAction) entity);
+            }
+        }
+
+        private static void appendAssetAttributes(StringBuilder sb, Asset asset) {
             // Doesn't have any attributes worth showing yet; kept for future use
         }
 
-        private static void AppendAttackPatternAttributes(StringBuilder sb, AttackPattern attackPattern) {
-            sb.AppendLine("<i><size=140%>Attributes</size></i>");
-            sb.AppendLine();
-
+        private static void appendAttackPatternAttributes(StringBuilder sb, AttackPattern attackPattern) {
             if (attackPattern.custom.severity != null) {
                 sb.AppendLine(
-                    BuildAttributeText(
+                    buildAttributeText(
                         "Severity",
                         EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.severity)));
             }
             if (attackPattern.custom.likelihood != null) {
                 sb.AppendLine(
-                    BuildAttributeText(
+                    buildAttributeText(
                         "Likelihood",
                         EnumHelper.GetEnumMemberAttributeValue((Scale) attackPattern.custom.likelihood)));
             }
             sb.AppendLine(
-                BuildAttributeText(
+                buildAttributeText(
                     "Injection Vector",
-                    BuildInjectionVectorText(attackPattern.custom.injection_vector)));
-            sb.AppendLine(BuildAttributeText("Payload", attackPattern.custom.payload));
+                    buildInjectionVectorText(attackPattern.custom.injection_vector)));
+            sb.AppendLine(buildAttributeText("Payload", attackPattern.custom.payload));
             sb.AppendLine(
-                BuildAttributeText("Activation Zone", BuildActivationZoneText(attackPattern.custom.activation_zone)));
-            sb.AppendLine(BuildAttributeText("Impact", BuildImpactText(attackPattern.custom.impact)));
+                buildAttributeText("Activation Zone", buildActivationZoneText(attackPattern.custom.activation_zone)));
+            sb.AppendLine(buildAttributeText("Impact", buildImpactText(attackPattern.custom.impact)));
 
             sb.AppendLine("<indent=0>");
         }
 
-        private static void AppendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
-            sb.AppendLine("<i><size=140%>Attributes</size></i>");
-            sb.AppendLine();
-
+        private static void appendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
             // TODO Add attributes for mitigations
 
             sb.AppendLine("<indent=0>");
         }
 
-        private static string BuildAttributeText(string label, string text) {
+        private static string buildAttributeText(string label, string text) {
             return string.Format(
                 "<indent=2em>\U00002014<indent=7em><b>{0}:</b> {1}",
                 label,
                 !string.IsNullOrEmpty(text) ? text : "-");
         }
 
-        private static string BuildInjectionVectorText(AttackInjectionVector vector) {
+        private static string buildInjectionVectorText(AttackInjectionVector vector) {
             return string.Format("{0} <i>({1})</i>", vector.description, vector.categories.Join(", "));
         }
 
-        private static string BuildActivationZoneText(AttackActivationZone zone) {
+        private static string buildActivationZoneText(AttackActivationZone zone) {
             return string.Format("{0} <i>({1})</i>", zone.description, zone.categories.Join(", "));
         }
 
-        private static string BuildImpactText(AttackImpact impact) {
+        private static string buildImpactText(AttackImpact impact) {
             return string.Format(
                 "Confidentiality: {0}, Integrity: {1}, Availability: {2}",
                 impact.confidentiality,

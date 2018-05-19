@@ -61,8 +61,15 @@ namespace DdSG {
 
             HoverBehaviour.ActionText = "select";
             ActionEvents.PrimaryAction = () => {
-                Logger.Debug("Attack selected");
-                // TODO Select entity in UI
+                var title = attackPattern.name;
+                var description = Formatter.BuildStixDataEntityDescription(attackPattern, false, false);
+                SelectedAction[] selectedActions = ReferencesHelper.HasExternalReferences(attackPattern)
+                    ? new SelectedAction[] {
+                        new SelectedAction(
+                            ActionType.OpenExternalReferences,
+                            () => ReferencesHelper.OpenExternalReferences(attackPattern))
+                    } : null;
+                HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
             HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ActionEvents);
         }

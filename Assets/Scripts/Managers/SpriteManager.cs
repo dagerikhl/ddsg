@@ -8,6 +8,7 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
+        public Sprite OpenExternalReferencesIcon;
         public Sprite SellIcon;
 
         //[Header("Optional")]
@@ -19,6 +20,8 @@ namespace DdSG {
 
         public Sprite GetSpriteByActionType(ActionType type) {
             switch (type) {
+            case ActionType.OpenExternalReferences:
+                return OpenExternalReferencesIcon;
             case ActionType.Sell:
                 return SellIcon;
             default:
