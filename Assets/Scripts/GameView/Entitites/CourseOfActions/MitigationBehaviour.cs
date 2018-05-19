@@ -8,7 +8,6 @@ namespace DdSG {
         public float Range = 15f;
         public float FireRate = 1f;
         public float TurnSpeed = 10f;
-        public int Value = 10;
 
         [Header("Special Attacks (optional)")]
         public float SlowFactor;
@@ -30,6 +29,7 @@ namespace DdSG {
         private IPlacementArea placementArea;
         private IntVector2 areaGridPosition;
         private IntVector2 areaSizeOffset;
+        private int value;
 
         private float fireCountdown;
 
@@ -62,6 +62,7 @@ namespace DdSG {
             placementArea = area;
             areaGridPosition = gridPosition;
             areaSizeOffset = sizeOffset;
+            value = courseOfAction.GetValue();
 
             HoverBehaviour.Title = courseOfAction.custom.mitigation;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
@@ -114,7 +115,7 @@ namespace DdSG {
         }
 
         private void sell() {
-            PlayerStats.I.Worth += Mathf.CeilToInt(Value*Constants.SELL_PERCENTAGE);
+            PlayerStats.I.Worth += Mathf.CeilToInt(value*Constants.SELL_PERCENTAGE);
 
             placementArea.Clear(areaGridPosition, areaSizeOffset);
 
