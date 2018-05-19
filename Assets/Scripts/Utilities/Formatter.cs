@@ -71,10 +71,7 @@ namespace DdSG {
         }
 
         private static void appendAttributes(StringBuilder sb, StixDataEntityBase entity, bool showDescription) {
-            var hasAttributes = entity.GetType() == typeof(Asset)
-                                || entity.GetType() == typeof(AttackPattern)
-                                || entity.GetType() == typeof(CourseOfAction);
-
+            var hasAttributes = entity.GetType() == typeof(AttackPattern) || entity.GetType() == typeof(CourseOfAction);
             if (!hasAttributes) {
                 return;
             }
@@ -84,17 +81,12 @@ namespace DdSG {
                 sb.AppendLine();
             }
 
-            if (entity.GetType() == typeof(Asset)) {
-                appendAssetAttributes(sb, (Asset) entity);
-            } else if (entity.GetType() == typeof(AttackPattern)) {
+            if (entity.GetType() == typeof(AttackPattern)) {
                 appendAttackPatternAttributes(sb, (AttackPattern) entity);
             } else if (entity.GetType() == typeof(CourseOfAction)) {
                 appendCourseOfActionAttributes(sb, (CourseOfAction) entity);
             }
-        }
-
-        private static void appendAssetAttributes(StringBuilder sb, Asset asset) {
-            // Doesn't have any attributes worth showing yet; kept for future use
+            sb.AppendLine("<indent=0>");
         }
 
         private static void appendAttackPatternAttributes(StringBuilder sb, AttackPattern attackPattern) {
@@ -118,14 +110,10 @@ namespace DdSG {
             sb.AppendLine(
                 buildAttributeText("Activation Zone", buildActivationZoneText(attackPattern.custom.activation_zone)));
             sb.AppendLine(buildAttributeText("Impact", buildImpactText(attackPattern.custom.impact)));
-
-            sb.AppendLine("<indent=0>");
         }
 
         private static void appendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
             // TODO Add attributes for mitigations
-
-            sb.AppendLine("<indent=0>");
         }
 
         private static string buildAttributeText(string label, string text) {
