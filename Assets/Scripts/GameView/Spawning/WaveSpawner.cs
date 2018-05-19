@@ -66,25 +66,16 @@ namespace DdSG {
             }
         }
 
-        private Wave currentWave;
-        private Wave CurrentWave {
-            set {
-                // Clear old icons
-                CurrentWaveInfoContainer.Clear();
-
-                // Transfer next wave icons to this container
-                NextWaveInfoContainer.StealChildren(CurrentWaveInfoContainer);
-
-                // Update field
-                currentWave = value;
-            }
-        }
         private Wave nextWave;
         private Wave NextWave {
             get { return nextWave; }
             set {
                 if (nextWave != null) {
-                    CurrentWave = nextWave;
+                    // Clear old icons
+                    CurrentWaveInfoContainer.Clear();
+
+                    // Transfer next wave icons to this container
+                    NextWaveInfoContainer.StealChildren(CurrentWaveInfoContainer);
                 }
 
                 // Generate new icons for this container
