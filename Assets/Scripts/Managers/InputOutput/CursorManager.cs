@@ -4,6 +4,9 @@ namespace DdSG {
 
     public class CursorManager: SingletonBehaviour<CursorManager> {
 
+        protected CursorManager() {
+        }
+
         [Header("Attributes")]
         public CursorMode CursorMode = CursorMode.Auto;
 
