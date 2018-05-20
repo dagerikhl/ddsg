@@ -87,7 +87,7 @@ namespace DdSG {
             foreach (GameObject attack in attacks) {
                 // Skip all enemies that aren't mitigated
                 var attackBehaviour = attack.GetComponent<AttackBehaviour>();
-                if (attackBehaviour == null || !courseOfAction.RelatedTo(attackBehaviour.AttackPattern)) {
+                if (attackBehaviour == null || !courseOfAction.RelatedAsSourceTo(attackBehaviour.AttackPattern)) {
                     continue;
                 }
 

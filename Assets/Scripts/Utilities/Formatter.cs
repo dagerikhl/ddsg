@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DdSG {
 
+    // TODO This code has reach a critical point of spaghetti-mass and should be refactored severely.
     public static class Formatter {
 
         public static string TimeFormat(float seconds) {
@@ -38,29 +40,10 @@ namespace DdSG {
                 sb.AppendLine(entity.FullDescription);
                 sb.AppendLine();
             }
-
             appendAttributes(sb, entity, showDescription);
-
+            appendRelationships(sb, entity);
             if (showSources) {
-                sb.Append("<i><size=140%>Sources</size></i>");
-                if (entity.external_references.Any((e) => e.description == null)) {
-                    sb.AppendLine("<space=25em><color=#848484><b>Right-click to open all in browser</b></color>");
-                } else {
-                    sb.AppendLine();
-                }
-                sb.AppendLine();
-
-                foreach (var externalReference in entity.external_references) {
-                    if (externalReference.description == null) {
-                        sb.AppendFormat(
-                            "<indent=2em>\U00002014<indent=7em><b>{0}</b> (from <color=#96c8e9>{1}</color>)",
-                            externalReference.id,
-                            externalReference.url.ExtractUrlDomain());
-                    } else {
-                        sb.AppendFormat("<i><b><indent=7em>{0}</b></i>", externalReference.description);
-                    }
-                    sb.AppendLine("<indent=0>");
-                }
+                appendSources(sb, entity);
             }
 
             return sb.ToString();
@@ -114,6 +97,60 @@ namespace DdSG {
 
         private static void appendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
             // TODO Add attributes for mitigations
+        }
+
+        private static void appendRelationships(StringBuilder sb, StixDataEntityBase entity) {
+            sb.AppendLine("<i><size=140%>Relationships</size></i>");
+            sb.AppendLine();
+
+            if (entity.GetType() == typeof(Asset)) {
+                var asset = (Asset) entity;
+
+                // Is targeted by attack patterns
+                var targetedBy = State.I.GameEntities.SDOs.attack_patterns.Where(
+                    (aP) => aP.custom.activation_zone.categories.Any(
+                        (c) => c == asset.custom.category));
+                var targetedByStrings = targetedBy.Select((aP) => aP.name);
+                sb.AppendLine(buildAttributeText("Target by", targetedByStrings.Join("; ")));
+            } else if (entity.GetType() == typeof(AttackPattern)) {
+                var attackPattern = (AttackPattern) entity;
+
+                // Targets assets
+                var targets =
+                    attackPattern.custom.activation_zone.categories.Select(EnumHelper.GetEnumMemberAttributeValue);
+                sb.AppendLine(buildAttributeText("Targets", targets.Join("; ")));
+
+                // Mitigated by course of actions
+                var mitigatedBy =
+                    State.I.GameEntities.SDOs.course_of_actions.Where((c) => c.RelatedAsSourceTo(attackPattern));
+                var mitigatedByStrings = mitigatedBy.Select((c) => c.custom.mitigation);
+                sb.AppendLine(buildAttributeText("Mitigated by", mitigatedByStrings.Join("; ")));
+            } else if (entity.GetType() == typeof(CourseOfAction)) {
+                // (sb, (CourseOfAction) entity);
+            }
+            sb.AppendLine("<indent=0>");
+        }
+
+        private static void appendSources(StringBuilder sb, StixDataEntityBase entity) {
+            sb.Append("<i><size=140%>Sources</size></i>");
+            if (entity.external_references.Any((e) => e.description == null)) {
+                sb.AppendLine("<space=25em><color=#848484><b>Right-click to open all in browser</b></color>");
+            } else {
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+
+            foreach (var externalReference in entity.external_references) {
+                if (externalReference.description == null) {
+                    sb.AppendFormat(
+                        "<indent=2em>\U00002014<indent=7em><b>{0}</b> (from <color=#96c8e9>{1}</color>)",
+                        externalReference.id,
+                        externalReference.url.ExtractUrlDomain());
+                } else {
+                    sb.AppendFormat("<i><b><indent=7em>{0}</b></i>", externalReference.description);
+                }
+                sb.AppendLine("<indent=0>");
+            }
         }
 
         private static string buildAttributeText(string label, string text) {

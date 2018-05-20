@@ -47,7 +47,7 @@ namespace DdSG {
         }
 
         public void Initialize(AttackPattern attackPattern) {
-            this.AttackPattern = attackPattern;
+            AttackPattern = attackPattern;
 
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
@@ -58,8 +58,6 @@ namespace DdSG {
 
             StartHealth = Health = attackPattern.CalculateHealthFromSeverity(StartHealth);
             DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
-            // TODO Balance these values
-            // Logger.Debug(string.Format("{0}, {1}, {2}", Health, SpawnLikelihood, DamageToAsset));
 
             HoverBehaviour.Title = attackPattern.name;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
