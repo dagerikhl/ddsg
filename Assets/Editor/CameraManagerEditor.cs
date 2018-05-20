@@ -52,7 +52,9 @@ namespace DdSG {
             }
 
             if (camera.UseScreenEdgeInput) {
-                EditorGUILayout.FloatField("Screen edge border size: ", camera.ScreenEdgeBorder);
+                camera.ScreenEdgeBorder = EditorGUILayout.FloatField(
+                    "Screen edge border size: ",
+                    camera.ScreenEdgeBorder);
                 camera.ScreenEdgeMovementSpeed = EditorGUILayout.FloatField(
                     "Screen edge movement speed: ",
                     camera.ScreenEdgeMovementSpeed);
