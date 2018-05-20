@@ -12,8 +12,8 @@ namespace DdSG {
         }
 
         public static bool RelatedAsTargetTo(this StixDataEntityBase entity, StixDataEntityBase otherEntity) {
-            IEnumerable<Relationship> relationships = entity.GetRelationships(true, false);
-            return relationships.Any((r) => string.Equals(r.target_ref.Id, otherEntity.id.Id));
+            IEnumerable<Relationship> relationships = entity.GetRelationships(false);
+            return relationships.Any((r) => string.Equals(r.source_ref.Id, otherEntity.id.Id));
         }
 
         /// <summary>

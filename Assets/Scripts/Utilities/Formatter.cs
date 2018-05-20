@@ -126,7 +126,13 @@ namespace DdSG {
                 var mitigatedByStrings = mitigatedBy.Select((c) => c.custom.mitigation);
                 sb.AppendLine(buildAttributeText("Mitigated by", mitigatedByStrings.Join("; ")));
             } else if (entity.GetType() == typeof(CourseOfAction)) {
-                // (sb, (CourseOfAction) entity);
+                var courseOfAction = (CourseOfAction) entity;
+
+                // Mitigates attack patterns
+                var mitigates =
+                    State.I.GameEntities.SDOs.attack_patterns.Where((aP) => aP.RelatedAsTargetTo(courseOfAction));
+                var mitigatesStrings = mitigates.Select((c) => c.name);
+                sb.AppendLine(buildAttributeText("Mitigates", mitigatesStrings.Join("; ")));
             }
             sb.AppendLine("<indent=0>");
         }
