@@ -26,10 +26,11 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
 
         // Private and protected members
+        private CourseOfAction courseOfAction;
+
         private IPlacementArea placementArea;
         private IntVector2 areaGridPosition;
         private IntVector2 areaSizeOffset;
-        private int value;
 
         private float fireCountdown;
 
@@ -59,10 +60,11 @@ namespace DdSG {
             IntVector2 gridPosition,
             IntVector2 sizeOffset,
             CourseOfAction courseOfAction) {
+            this.courseOfAction = courseOfAction;
+
             placementArea = area;
             areaGridPosition = gridPosition;
             areaSizeOffset = sizeOffset;
-            value = courseOfAction.GetValue();
 
             HoverBehaviour.Title = courseOfAction.custom.mitigation;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
@@ -78,16 +80,22 @@ namespace DdSG {
         }
 
         private void updateTarget() {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag(AttackTag);
+            GameObject[] attacks = GameObject.FindGameObjectsWithTag(AttackTag);
             float shortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
 
-            foreach (GameObject enemy in enemies) {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            foreach (GameObject attack in attacks) {
+                // Skip all enemies that aren't mitigated
+                var attackBehaviour = attack.GetComponent<AttackBehaviour>();
+                if (attackBehaviour == null || !courseOfAction.RelatedTo(attackBehaviour.AttackPattern)) {
+                    continue;
+                }
+
+                float distanceToEnemy = Vector3.Distance(transform.position, attack.transform.position);
 
                 if (distanceToEnemy < shortestDistance) {
                     shortestDistance = distanceToEnemy;
-                    nearestEnemy = enemy;
+                    nearestEnemy = attack;
                 }
             }
 
@@ -115,7 +123,7 @@ namespace DdSG {
         }
 
         private void sell() {
-            PlayerStats.I.Worth += Mathf.CeilToInt(value*Constants.SELL_PERCENTAGE);
+            PlayerStats.I.Worth += Mathf.CeilToInt(courseOfAction.GetValue()*Constants.SELL_PERCENTAGE);
 
             placementArea.Clear(areaGridPosition, areaSizeOffset);
 

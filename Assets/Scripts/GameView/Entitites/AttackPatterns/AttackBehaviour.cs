@@ -22,6 +22,9 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         [HideInInspector]
+        public AttackPattern AttackPattern;
+
+        [HideInInspector]
         public float Speed;
         [HideInInspector]
         public float Health;
@@ -44,6 +47,8 @@ namespace DdSG {
         }
 
         public void Initialize(AttackPattern attackPattern) {
+            this.AttackPattern = attackPattern;
+
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
             TargetedAsset = FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).TakeRandom();
