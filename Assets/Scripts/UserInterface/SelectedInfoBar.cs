@@ -54,6 +54,7 @@ namespace DdSG {
             Type.text = "Nothing selected";
 
             ActionsContainer.Clear();
+            CursorManager.I.ResetTemporaryCursor();
         }
 
     }

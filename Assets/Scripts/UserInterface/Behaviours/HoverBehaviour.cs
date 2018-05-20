@@ -86,7 +86,6 @@ namespace DdSG {
         }
 
         private void OnDestroy() {
-            CursorManager.I.ResetTemporaryCursor();
             if (hoverOverlay != null) {
                 hoverOverlay.Destroy();
             }
