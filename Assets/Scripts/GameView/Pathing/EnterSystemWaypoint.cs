@@ -22,7 +22,11 @@ namespace DdSG {
                 float distanceToEnemy = Vector3.Distance(transform.position, attack.transform.position);
 
                 if (distanceToEnemy < minimumDistance) {
-                    attack.GetComponent<AttackBehaviour>().Invulnerable = true;
+                    var attackBehaviour = attack.GetComponent<AttackBehaviour>();
+                    if (!attackBehaviour.Invulnerable) {
+                        Instantiate(HelperObjects.EnteredSystemMessagePrefab, transform);
+                        attackBehaviour.Invulnerable = true;
+                    }
                 }
             }
         }

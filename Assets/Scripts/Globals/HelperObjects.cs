@@ -19,6 +19,7 @@ namespace DdSG {
 
         public static GameObject HoverOverlayPrefab { get; set; }
         public static GameObject GhostMitigationPrefab { get; set; }
+        public static GameObject EnteredSystemMessagePrefab { get; set; }
 
     }
 

@@ -13,6 +13,7 @@ namespace DdSG {
 
         public GameObject HoverOverlayPrefab;
         public GameObject GhostMitigationPrefab;
+        public GameObject EnteredSystemMessagePrefab;
 
         //[Header("Optional")]
 
@@ -77,6 +78,7 @@ namespace DdSG {
         private void assignPrefabHelperObjects() {
             HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
             HelperObjects.GhostMitigationPrefab = GhostMitigationPrefab;
+            HelperObjects.EnteredSystemMessagePrefab = EnteredSystemMessagePrefab;
         }
 
     }
