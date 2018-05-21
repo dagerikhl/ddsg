@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 114676509132226306}
   - component: {fileID: 114780539791779088}
   - component: {fileID: 114170548693244802}
+  - component: {fileID: 225400991762332930}
   m_Layer: 5
   m_Name: HoverOverlay
   m_TagString: HoverOverlay
@@ -1032,6 +1033,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225400991762332930
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270357537714472}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!225 &225890002263686382
 CanvasGroup:
   m_ObjectHideFlags: 1
