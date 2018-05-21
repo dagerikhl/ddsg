@@ -1,10 +1,11 @@
-﻿using JetBrains.Annotations;
+﻿using Bases;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
 namespace DdSG {
 
-    public class GameOverMenu: SingletonBehaviour<GameOverMenu> {
+    public class GameOverMenu: PopupMenu<GameOverMenu> {
 
         protected GameOverMenu() {
         }
@@ -12,8 +13,6 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public AnimationCurve FadeCurve;
-
         public TextMeshProUGUI TitleText;
         public TextMeshProUGUI ScoreText;
 
@@ -22,11 +21,6 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
 
         // Private and protected members
-        private CanvasGroup canvasGroup;
-
-        private void Awake() {
-            canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        }
 
         [UsedImplicitly]
         public void Show(bool isWin) {
@@ -59,22 +53,6 @@ namespace DdSG {
         [UsedImplicitly]
         public void Exit() {
             SceneManager.I.ExitGame();
-        }
-
-        private void show() {
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.alpha = 1f;
-        }
-
-        private void hide() {
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0f;
-        }
-
-        private void setAlpha(float value) {
-            canvasGroup.alpha = value;
         }
 
     }

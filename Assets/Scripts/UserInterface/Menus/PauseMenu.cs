@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using Bases;
 using JetBrains.Annotations;
 using UnityEngine;
 
 namespace DdSG {
 
-    public class PauseMenu: SingletonBehaviour<PauseMenu> {
+    public class PauseMenu: PopupMenu<PauseMenu> {
 
         protected PauseMenu() {
         }
@@ -12,7 +13,6 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public AnimationCurve FadeCurve;
         public GameObject RestartPrompt;
         public GameObject MainMenuPrompt;
         public GameObject ExitPrompt;
@@ -22,11 +22,6 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
 
         // Private and protected members
-        private CanvasGroup canvasGroup;
-
-        private void Awake() {
-            canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        }
 
         [UsedImplicitly]
         public void Pause() {
@@ -123,26 +118,10 @@ namespace DdSG {
             show();
         }
 
-        private void show() {
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.alpha = 1f;
-        }
-
         private IEnumerator hideAfterDelay(float delay) {
             yield return new WaitForSecondsRealtime(delay);
 
             hide();
-        }
-
-        private void hide() {
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.alpha = 0f;
-        }
-
-        private void setAlpha(float value) {
-            canvasGroup.alpha = value;
         }
 
     }
