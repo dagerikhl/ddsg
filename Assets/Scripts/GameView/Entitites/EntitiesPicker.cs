@@ -118,7 +118,12 @@ namespace DdSG {
                                                           (c) => string.Equals(c.id.Id, r.source_ref.Id)))
                                                   .ToArray();
 
-            return allCourseOfActions.DistinctBy((c) => c.custom.category).ToArray();
+            /**
+             * TODO Should be improved
+             * This makes course of actions quite messy, and they should be distincy by category, but this must be
+             * reflected in mitigation and attack behaviours.
+             */
+            return allCourseOfActions /*.DistinctBy((c) => c.custom.category)*/.ToArray();
         }
 
     }
