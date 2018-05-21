@@ -126,7 +126,7 @@ namespace DdSG {
             if (Countdown <= 0f) {
                 WaveIndex++;
                 NextWave = generateNewWave();
-                AttacksAlive = NextWave.Count;
+                AttacksAlive = currentWave.Count;
                 StartCoroutine(spawnWave());
             }
         }
