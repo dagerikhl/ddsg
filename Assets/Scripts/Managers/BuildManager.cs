@@ -55,7 +55,7 @@ namespace DdSG {
         }
 
         public void EnterBuildMode(CourseOfAction courseOfAction) {
-            GameManager.IsBuilding = false;
+            GameManager.IsBuilding = true;
             CursorManager.I.SetCursor(CursorType.Target);
             currentCourseOfAction = courseOfAction;
         }
