@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5085de4a9a0541977bdf6ec12844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverBehaviour: {fileID: 114470170866659750}
+  ClickableBehaviour: {fileID: 114470170866659750}
   HealthBar: {fileID: 223568124047422158}
   HealthBarImage: {fileID: 114272833205325674}
   Category: 0

@@ -5147,11 +5147,11 @@ MonoBehaviour:
   FireRate: 1
   TurnSpeed: 10
   SlowFactor: 0
+  ClickableBehaviour: {fileID: 114293278149052186}
   Rotatable: {fileID: 4722109713112542}
   FirePoint: {fileID: 4616663325569040}
   BulletPrefab: {fileID: 1485473732046860, guid: d45f8b63780591d4180f142486ade85d,
     type: 2}
-  HoverBehaviour: {fileID: 114293278149052186}
 --- !u!114 &114864202245122414
 MonoBehaviour:
   m_ObjectHideFlags: 1

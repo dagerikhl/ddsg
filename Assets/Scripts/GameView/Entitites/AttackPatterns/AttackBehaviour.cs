@@ -13,7 +13,7 @@ namespace DdSG {
         public float DamageToAsset = 1f;
 
         [Header("Unity Setup Fields")]
-        public HoverBehaviour HoverBehaviour;
+        public ClickableBehaviour ClickableBehaviour;
 
         public Transform Model;
 
@@ -84,11 +84,11 @@ namespace DdSG {
             Speed *= value/10f;
 
             // Hover and click actions
-            HoverBehaviour.Title = attackPattern.name;
-            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
+            ClickableBehaviour.Title = attackPattern.name;
+            ClickableBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
 
-            HoverBehaviour.ActionText = "select";
-            HoverBehaviour.PrimaryAction = () => {
+            ClickableBehaviour.ActionText = "select";
+            ClickableBehaviour.PrimaryAction = () => {
                 var title = attackPattern.name;
                 var description = Formatter.BuildStixDataEntityDescription(attackPattern, false, false);
                 SelectedAction[] selectedActions = ReferencesHelper.HasExternalReferences(attackPattern)
@@ -99,7 +99,7 @@ namespace DdSG {
                     } : null;
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, HoverBehaviour);
+            ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ClickableBehaviour);
         }
 
         public void TakeDamage(float amount) {

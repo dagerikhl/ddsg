@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace DdSG {
 
-    public class HoverBehaviour: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
+    public class ClickableBehaviour: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
         //[Header("Attributes")]
 

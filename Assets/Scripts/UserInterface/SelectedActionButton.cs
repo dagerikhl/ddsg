@@ -19,11 +19,11 @@ namespace DdSG {
 
         // Private and protected members
         private Button buttonComponent;
-        private HoverBehaviour hoverBehaviour;
+        private ClickableBehaviour clickableBehaviour;
 
         private void Awake() {
             buttonComponent = GetComponent<Button>();
-            hoverBehaviour = GetComponent<HoverBehaviour>();
+            clickableBehaviour = GetComponent<ClickableBehaviour>();
         }
 
         public void Initialize(SelectedAction selectedAction) {
@@ -33,9 +33,9 @@ namespace DdSG {
                 buttonComponent.onClick.AddListener(() => selectedAction.Action());
             }
 
-            hoverBehaviour.Title = selectedAction.Label;
-            hoverBehaviour.Text = selectedAction.Description;
-            hoverBehaviour.ActionText = selectedAction.Label.ToLower();
+            clickableBehaviour.Title = selectedAction.Label;
+            clickableBehaviour.Text = selectedAction.Description;
+            clickableBehaviour.ActionText = selectedAction.Label.ToLower();
         }
 
     }

@@ -13,11 +13,11 @@ namespace DdSG {
         public float SlowFactor;
 
         [Header("Unity Setup Fields")]
+        public ClickableBehaviour ClickableBehaviour;
+
         public Transform Rotatable;
         public Transform FirePoint;
         public GameObject BulletPrefab;
-
-        public HoverBehaviour HoverBehaviour;
 
         //[Header("Optional")]
 
@@ -64,17 +64,18 @@ namespace DdSG {
             areaGridPosition = gridPosition;
             areaSizeOffset = sizeOffset;
 
-            HoverBehaviour.Title = courseOfAction.custom.mitigation;
-            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
+            ClickableBehaviour.Title = courseOfAction.custom.mitigation;
+            ClickableBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
-            HoverBehaviour.ActionText = "select";
-            HoverBehaviour.PrimaryAction = () => {
+            ClickableBehaviour.ActionText = "select";
+            ClickableBehaviour.PrimaryAction = () => {
                 var title = courseOfAction.custom.mitigation;
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
                 var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, HoverBehaviour);
+            ClickableBehaviour.HasSecondaryAction =
+                ReferencesHelper.AddReferencesAsAction(courseOfAction, ClickableBehaviour);
         }
 
         private void updateTarget() {

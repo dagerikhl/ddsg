@@ -8,7 +8,7 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public HoverBehaviour HoverBehaviour;
+        public ClickableBehaviour ClickableBehaviour;
 
         public Canvas HealthBar;
         public Image HealthBarImage;
@@ -32,16 +32,16 @@ namespace DdSG {
             Category = asset.custom.category;
             AssetIndex = assetIndex;
 
-            HoverBehaviour.Title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
-            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
+            ClickableBehaviour.Title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
+            ClickableBehaviour.Text = Formatter.BuildStixDataEntityDescription(asset);
 
-            HoverBehaviour.ActionText = "select";
-            HoverBehaviour.PrimaryAction = () => {
+            ClickableBehaviour.ActionText = "select";
+            ClickableBehaviour.PrimaryAction = () => {
                 var title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
                 var description = Formatter.BuildStixDataEntityDescription(asset, true, false);
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, HoverBehaviour);
+            ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ClickableBehaviour);
         }
 
     }

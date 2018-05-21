@@ -14,21 +14,21 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         [HideInInspector]
-        public HoverBehaviour HoverBehaviour;
+        public ClickableBehaviour ClickableBehaviour;
 
         // Private and protected members
 
         private void Awake() {
-            HoverBehaviour = GetComponent<HoverBehaviour>();
+            ClickableBehaviour = GetComponent<ClickableBehaviour>();
         }
 
         public void Initialize(AttackPattern attackPattern) {
             Label.text = attackPattern.name;
 
-            HoverBehaviour.Title = attackPattern.name;
-            HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
+            ClickableBehaviour.Title = attackPattern.name;
+            ClickableBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
 
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, HoverBehaviour);
+            ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ClickableBehaviour);
         }
 
     }

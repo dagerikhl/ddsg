@@ -12717,7 +12717,7 @@ MonoBehaviour:
   StartHealth: 100
   StartValue: 10
   DamageToAsset: 1
-  HoverBehaviour: {fileID: 114100356788268986}
+  ClickableBehaviour: {fileID: 114100356788268986}
   Model: {fileID: 4990267058453116}
   HealthBar: {fileID: 223125341698362660}
   HealthBarImage: {fileID: 114526679194757394}

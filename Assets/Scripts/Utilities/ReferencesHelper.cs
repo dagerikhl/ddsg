@@ -5,10 +5,10 @@ namespace DdSG {
 
     public static class ReferencesHelper {
 
-        public static bool AddReferencesAsAction(StixDataEntityBase entity, HoverBehaviour hoverBehaviour) {
+        public static bool AddReferencesAsAction(StixDataEntityBase entity, ClickableBehaviour clickableBehaviour) {
             ExternalReference[] references = getExternalReferences(entity);
             if (references.Any()) {
-                hoverBehaviour.SecondaryAction = () => {
+                clickableBehaviour.SecondaryAction = () => {
                     foreach (var url in references.Select((e) => e.url)) {
                         HelperObjects.PauseMenu.Pause();
                         Application.OpenURL(url);

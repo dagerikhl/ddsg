@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e2ce0ae2bc5714896cea072ad93a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverBehaviour: {fileID: 114948224115311464}
+  ClickableBehaviour: {fileID: 114948224115311464}
   Icon: {fileID: 114168906856343654}
   Label: {fileID: 114626181436456268}
   Cost: {fileID: 114867896475447548}
