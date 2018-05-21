@@ -47,7 +47,14 @@ namespace DdSG {
                 (int) (255 - normalizedValue*255),
                 (int) (normalizedValue*255),
                 0);
-            var valueString = string.Format("{0:0}", value).PadLeft(3, ' ');
+            var valueString = string.Format("{0:0}", value).PadLeft(3);
+
+            return string.Format("<color={0}>{1}</color><space=1em>%", color, valueString);
+        }
+
+        public static string DifficultyFormat(this float value) {
+            var color = string.Format("#{0:X2}{1:X2}{2:X2}", (int) (value*255), (int) (255 - value*255), 0);
+            var valueString = string.Format("{0:0}", value*100).PadLeft(3);
 
             return string.Format("<color={0}>{1}</color><space=1em>%", color, valueString);
         }

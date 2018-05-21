@@ -8,7 +8,8 @@ namespace DdSG {
         //[Header("Attributes")]
 
         [Header("Unity Setup Fields")]
-        public TextMeshProUGUI GameTime;
+        public TextMeshProUGUI GameTimeUi;
+        public TextMeshProUGUI DifficultyUi;
         public AssetSockets AssetSockets;
 
         public GameObject HoverOverlayPrefab;
@@ -33,7 +34,7 @@ namespace DdSG {
             get { return secondsElapsed; }
             set {
                 secondsElapsed = value;
-                GameTime.text = Formatter.TimeFormat(value).Monospaced();
+                GameTimeUi.text = Formatter.TimeFormat(value).Monospaced();
             }
         }
 
@@ -46,6 +47,7 @@ namespace DdSG {
 
             // Set current running state
             GameState = GameState.Running;
+            DifficultyUi.text = State.I.PlayConfiguration.Difficulty.DifficultyFormat().Monospaced();
 
             // Set timescale according to settings
             Time.timeScale = State.I.PlayConfiguration.GameSpeed;
