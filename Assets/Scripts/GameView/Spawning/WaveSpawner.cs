@@ -22,6 +22,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public TextMeshProUGUI WaveCounterText;
+        public TextMeshProUGUI AttacksAliveText;
         public TextMeshProUGUI WaveCurrentTimeText;
         public TextMeshProUGUI WaveCountdownText;
 
@@ -103,6 +104,11 @@ namespace DdSG {
         }
 
         private void Update() {
+            // Update attacks alive
+            if (currentWave != null) {
+                AttacksAliveText.text = string.Format("{0}/{1}", AttacksAlive, currentWave.Count).Monospaced();
+            }
+
             // Final wave has been defeated
             if (WaveIndex > TotalWaves) {
                 GameManager.Win();
