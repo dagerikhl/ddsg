@@ -26,10 +26,18 @@ namespace DdSG {
         [HideInInspector]
         public AttackPattern AttackPattern;
 
+        private float health;
+        private float Health {
+            get { return health; }
+            set {
+                health = value;
+
+                HealthBarImage.fillAmount = value/StartHealth;
+            }
+        }
+
         [HideInInspector]
         public float Speed;
-        [HideInInspector]
-        public float Health;
 
         public PathCategory InjectionVector { get; private set; }
         public AssetCategory ActivationZone { get; private set; }
@@ -55,7 +63,7 @@ namespace DdSG {
         private bool invulnerable;
         private bool isDead;
 
-        private void Start() {
+        private void Awake() {
             Speed = StartSpeed;
             Health = StartHealth;
         }
@@ -75,12 +83,13 @@ namespace DdSG {
             transform.position = SpawnPoint.position;
 
             StartHealth = Health = attackPattern.CalculateHealthFromSeverity(StartHealth);
+            Health *= State.I.PlayConfiguration.Difficulty;
             DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
 
             value += Mathf.CeilToInt(StartHealth/100f) + Mathf.CeilToInt(DamageToAsset);
 
             // Tweak scale and speed after value to indicate which attacks are more important
-            transform.localScale *= value/10f;
+            Model.localScale *= value/10f;
             Speed *= value/10f;
 
             // Hover and click actions
@@ -99,7 +108,8 @@ namespace DdSG {
                     } : null;
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
-            ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ClickableBehaviour);
+            ClickableBehaviour.HasSecondaryAction =
+                ReferencesHelper.AddReferencesAsAction(attackPattern, ClickableBehaviour);
         }
 
         public void TakeDamage(float amount) {
@@ -108,7 +118,6 @@ namespace DdSG {
             }
 
             Health -= amount;
-            HealthBarImage.fillAmount = Health/StartHealth;
 
             if (Health <= 0f && !isDead) {
                 die();
