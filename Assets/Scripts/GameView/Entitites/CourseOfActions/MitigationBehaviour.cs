@@ -16,7 +16,6 @@ namespace DdSG {
         public Transform Rotatable;
         public Transform FirePoint;
         public GameObject BulletPrefab;
-        public string AttackTag = "Attack";
 
         public HoverBehaviour HoverBehaviour;
         public ActionEvents ActionEvents;
@@ -80,14 +79,20 @@ namespace DdSG {
         }
 
         private void updateTarget() {
-            GameObject[] attacks = GameObject.FindGameObjectsWithTag(AttackTag);
+            GameObject[] attacks = GameObject.FindGameObjectsWithTag(Constants.ATTACK_TAG);
             float shortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
 
             foreach (GameObject attack in attacks) {
-                // Skip all enemies that aren't mitigated
                 var attackBehaviour = attack.GetComponent<AttackBehaviour>();
-                if (attackBehaviour == null || !courseOfAction.RelatedAsSourceTo(attackBehaviour.AttackPattern)) {
+
+                // Skip all attacks that aren't mitigated
+                if (!courseOfAction.RelatedAsSourceTo(attackBehaviour.AttackPattern)) {
+                    continue;
+                }
+
+                // Skip invulnerable attacks
+                if (attackBehaviour.Invulnerable) {
                     continue;
                 }
 

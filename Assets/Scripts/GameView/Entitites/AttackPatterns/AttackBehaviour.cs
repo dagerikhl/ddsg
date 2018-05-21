@@ -16,8 +16,11 @@ namespace DdSG {
         public HoverBehaviour HoverBehaviour;
         public ActionEvents ActionEvents;
 
+        public Transform Model;
+
         public Canvas HealthBar;
         public Image HealthBarImage;
+
         public GameObject DeathEffect;
 
         // Public members hidden from Unity Inspector
@@ -34,9 +37,23 @@ namespace DdSG {
         public AssetBehaviour TargetedAsset { get; private set; }
         public Transform SpawnPoint { get; private set; }
 
+        public bool Invulnerable {
+            get { return invulnerable; }
+            set {
+                invulnerable = value;
+
+                foreach (Transform child in Model) {
+                    child.GetComponent<Renderer>().material.color = Color.gray;
+                }
+                HealthBarImage.sprite = null;
+                HealthBarImage.color = Color.gray;
+            }
+        }
+
         // Private and protected members
         private int value;
 
+        private bool invulnerable;
         private bool isDead;
 
         private void Start() {
@@ -87,6 +104,10 @@ namespace DdSG {
         }
 
         public void TakeDamage(float amount) {
+            if (Invulnerable) {
+                return;
+            }
+
             Health -= amount;
             HealthBarImage.fillAmount = Health/StartHealth;
 
@@ -96,6 +117,10 @@ namespace DdSG {
         }
 
         public void Slow(float factor) {
+            if (Invulnerable) {
+                return;
+            }
+
             Speed = StartSpeed*(1f - factor);
         }
 

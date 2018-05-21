@@ -12727,10 +12727,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartSpeed: 10
   StartHealth: 100
-  Worth: 50
+  StartValue: 10
   DamageToAsset: 1
   HoverBehaviour: {fileID: 114100356788268986}
   ActionEvents: {fileID: 114196599656011646}
+  Model: {fileID: 4990267058453116}
   HealthBar: {fileID: 223125341698362660}
   HealthBarImage: {fileID: 114526679194757394}
   DeathEffect: {fileID: 1392354813126156, guid: 7f60ffff54ba9bb49a87425a91e7b00d,

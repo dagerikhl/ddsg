@@ -46,6 +46,9 @@
         // Game constants
         public const float SELL_PERCENTAGE = 0.75f;
 
+        // Tags
+        public const string ATTACK_TAG = "Attack";
+
     }
 
 }
