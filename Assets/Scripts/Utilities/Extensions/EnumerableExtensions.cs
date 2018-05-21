@@ -7,7 +7,13 @@ namespace DdSG {
     public static class EnumerableExtensions {
 
         public static string Join<T>(this IEnumerable<T> value, string separator) {
-            return string.Join(separator, value.Select((e) => e.ToString()).ToArray());
+            if (value == null) {
+                return "";
+            }
+
+            var joinedValues = value.Where((e) => e != null).Select((e) => e.ToString());
+
+            return string.Join(separator, joinedValues.ToArray());
         }
 
         public static T TakeRandom<T>(this IEnumerable<T> value) {

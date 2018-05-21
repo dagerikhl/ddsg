@@ -61,9 +61,13 @@ namespace DdSG {
         private void Update() {
             SecondsElapsed += Time.deltaTime;
 
-            if (!IsPaused && !IsBuilding) {
-                if (Input.GetKeyDown(KeyCode.Escape)) {
-                    FindObjectOfType<PauseMenu>().Pause();
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (!IsBuilding) {
+                    if (!IsPaused) {
+                        HelperObjects.PauseMenu.Pause();
+                    } else {
+                        HelperObjects.PauseMenu.Resume();
+                    }
                 }
             }
         }

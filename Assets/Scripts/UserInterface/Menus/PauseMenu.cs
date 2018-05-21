@@ -28,14 +28,6 @@ namespace DdSG {
             canvasGroup = gameObject.GetComponent<CanvasGroup>();
         }
 
-        private void Update() {
-            if (GameManager.IsPaused) {
-                if (Input.GetKeyDown(KeyCode.Escape)) {
-                    Resume();
-                }
-            }
-        }
-
         [UsedImplicitly]
         public void Pause() {
             // Pause game

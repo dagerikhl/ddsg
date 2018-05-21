@@ -107,43 +107,31 @@ namespace DdSG {
 
                 // Is targeted by attack patterns
                 var targetedBy = State.I.GameEntities.SDOs.attack_patterns.Where(
-                                          (aP) => aP.custom.activation_zone.categories.Any(
-                                              (c) => c == asset.custom.category))
-                                      .ToArray();
-                if (targetedBy.Any()) {
-                    var targetedByStrings = targetedBy.Select((aP) => aP.name);
-                    sb.AppendLine(buildAttributeText("Targeted by", targetedByStrings.Join("; ")));
-                }
+                    (aP) => aP.custom.activation_zone.categories.Any(
+                        (c) => c == asset.custom.category));
+                var targetedByStrings = targetedBy.Select((aP) => aP.name);
+                sb.AppendLine(buildAttributeText("Targeted by", targetedByStrings.Join("; ")));
             } else if (entity.GetType() == typeof(AttackPattern)) {
                 var attackPattern = (AttackPattern) entity;
 
                 // Targets assets
-                var targets = attackPattern.custom.activation_zone.categories
-                                           .Select(EnumHelper.GetEnumMemberAttributeValue)
-                                           .ToArray();
-                if (targets.Any()) {
-                    sb.AppendLine(buildAttributeText("Targets", targets.Join("; ")));
-                }
+                var targets =
+                    attackPattern.custom.activation_zone.categories.Select(EnumHelper.GetEnumMemberAttributeValue);
+                sb.AppendLine(buildAttributeText("Targets", targets.Join("; ")));
 
                 // Mitigated by course of actions
-                var mitigatedBy = State.I.GameEntities.SDOs.course_of_actions
-                                       .Where((c) => c.RelatedAsSourceTo(attackPattern))
-                                       .ToArray();
-                if (mitigatedBy.Any()) {
-                    var mitigatedByStrings = mitigatedBy.Select((c) => c.custom.mitigation);
-                    sb.AppendLine(buildAttributeText("Mitigated by", mitigatedByStrings.Join("; ")));
-                }
+                var mitigatedBy =
+                    State.I.GameEntities.SDOs.course_of_actions.Where((c) => c.RelatedAsSourceTo(attackPattern));
+                var mitigatedByStrings = mitigatedBy.Select((c) => c.custom.mitigation);
+                sb.AppendLine(buildAttributeText("Mitigated by", mitigatedByStrings.Join("; ")));
             } else if (entity.GetType() == typeof(CourseOfAction)) {
                 var courseOfAction = (CourseOfAction) entity;
 
                 // Mitigates attack patterns
-                var mitigates = State.I.GameEntities.SDOs.attack_patterns
-                                     .Where((aP) => aP.RelatedAsTargetTo(courseOfAction))
-                                     .ToArray();
-                if (mitigates.Any()) {
-                    var mitigatesStrings = mitigates.Select((c) => c.name);
-                    sb.AppendLine(buildAttributeText("Mitigates", mitigatesStrings.Join("; ")));
-                }
+                var mitigates =
+                    State.I.GameEntities.SDOs.attack_patterns.Where((aP) => aP.RelatedAsTargetTo(courseOfAction));
+                var mitigatesStrings = mitigates.Select((c) => c.name);
+                sb.AppendLine(buildAttributeText("Mitigates", mitigatesStrings.Join("; ")));
             }
             sb.AppendLine("<indent=0>");
         }
@@ -156,7 +144,6 @@ namespace DdSG {
                 sb.AppendLine();
             }
             sb.AppendLine();
-
             foreach (var externalReference in entity.external_references) {
                 if (externalReference.description == null) {
                     sb.AppendFormat(
