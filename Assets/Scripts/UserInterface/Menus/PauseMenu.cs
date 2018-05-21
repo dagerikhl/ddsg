@@ -31,7 +31,7 @@ namespace DdSG {
         [UsedImplicitly]
         public void Pause() {
             // Pause game
-            GameManager.State = GameState.Paused;
+            GameManager.GameState = GameState.Paused;
             Time.timeScale = 0f;
 
             // Fade in menu
@@ -46,8 +46,8 @@ namespace DdSG {
                 setAlpha,
                 () => {
                     hide();
-                    GameManager.State = GameState.Running;
-                    Time.timeScale = 1f;
+                    GameManager.GameState = GameState.Running;
+                    Time.timeScale = State.I.PlayConfiguration.GameSpeed;
                 });
         }
 
@@ -60,8 +60,8 @@ namespace DdSG {
         [UsedImplicitly]
         public void RestartPromptYes() {
             RestartPrompt.SetActive(false);
-            GameManager.State = GameState.Running;
-            Time.timeScale = 1f;
+            GameManager.GameState = GameState.Running;
+            Time.timeScale = State.I.PlayConfiguration.GameSpeed;
             SceneManager.I.RestartScene();
         }
 
@@ -73,7 +73,7 @@ namespace DdSG {
 
         [UsedImplicitly]
         public void GoToOptionsMenu() {
-            GameManager.State = GameState.Menu;
+            GameManager.GameState = GameState.Menu;
             StartCoroutine(hideAfterDelay(Constants.SCENE_TRANSITION_TIME));
             SceneManager.I.GoTo(Constants.OPTIONS_MENU);
         }
@@ -89,7 +89,7 @@ namespace DdSG {
             MainMenuPrompt.SetActive(false);
             SceneManager.I.GoTo(Constants.MAIN_MENU, false);
 
-            GameManager.State = GameState.Menu;
+            GameManager.GameState = GameState.Menu;
             Time.timeScale = 1f;
         }
 

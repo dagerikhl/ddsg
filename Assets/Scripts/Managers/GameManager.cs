@@ -19,7 +19,7 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
-        public static GameState State;
+        public static GameState GameState;
 
         public static bool IsUiBlocking;
         public static bool IsBuilding;
@@ -39,12 +39,16 @@ namespace DdSG {
 
         private void Awake() {
             // Fetch entities here if it's a debug build so we can start from game view
-            if (Debug.isDebugBuild && DdSG.State.I.Entities == null) {
+            if (Debug.isDebugBuild && State.I.Entities == null) {
                 var newEntitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
-                DdSG.State.I.Entities = newEntitiesJson.entities;
+                State.I.Entities = newEntitiesJson.entities;
             }
 
-            State = GameState.Running;
+            // Set current running state
+            GameState = GameState.Running;
+
+            // Set timescale according to settings
+            Time.timeScale = State.I.PlayConfiguration.GameSpeed;
 
             buildManager = GetComponent<BuildManager>();
 
@@ -65,11 +69,11 @@ namespace DdSG {
             SecondsElapsed += Time.deltaTime;
 
             if (Input.GetKeyDown(KeyCode.Escape)) {
-                if (State == GameState.Running) {
+                if (GameState == GameState.Running) {
                     if (!IsBuilding) {
                         HelperObjects.PauseMenu.Pause();
                     }
-                } else if (State == GameState.Paused) {
+                } else if (GameState == GameState.Paused) {
                     HelperObjects.PauseMenu.Resume();
                 }
             }

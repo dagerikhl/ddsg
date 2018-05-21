@@ -175,7 +175,7 @@ namespace DdSG {
         /// update camera movement and rotation
         /// </summary>
         private void CameraUpdate() {
-            if (GameManager.State == GameState.Running) {
+            if (GameManager.GameState == GameState.Running) {
                 if (FollowingTarget) {
                     FollowTarget();
                 } else {
