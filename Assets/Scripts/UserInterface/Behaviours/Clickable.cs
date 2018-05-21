@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace DdSG {
 
-    public class Clickable<T>: MonoBehaviour {
+    public class Clickable<T>: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
         //[Header("Attributes")]
 
@@ -15,6 +16,14 @@ namespace DdSG {
 
         // Private and protected members
         protected T clickable { get { return GetComponent<T>(); } }
+
+        public void OnPointerEnter(PointerEventData eventData) {
+            CursorManager.I.SetTemporaryCursor(CursorType.Pointer);
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            CursorManager.I.ResetTemporaryCursor();
+        }
 
         protected void PerformClickBehaviour() {
             SoundsManager.I.PlayClickSound();
