@@ -241,11 +241,9 @@ namespace DdSG {
         private void HeightCalculation() {
             float distanceToGround = DistanceToGround();
             if (UseScrollwheelZooming) {
-                if (GameManager.IsUiBlocking) {
-                    return;
-                }
-
-                zoomPos += ScrollWheel*Time.unscaledDeltaTime*ScrollWheelZoomingSensitivity;
+                zoomPos += (GameManager.IsUiBlocking ? 0f : ScrollWheel)
+                           *Time.unscaledDeltaTime
+                           *ScrollWheelZoomingSensitivity;
             }
             if (UseKeyboardZooming) {
                 zoomPos += ZoomDirection*Time.unscaledDeltaTime*KeyboardZoomingSensitivity;
