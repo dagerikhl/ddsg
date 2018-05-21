@@ -19,7 +19,6 @@ namespace DdSG {
         // Public members hidden from Unity Inspector
         //[HideInInspector]
         public static bool IsPaused;
-        public static bool ShouldResume;
         public static bool IsGameOver;
         public static bool IsUiBlocking;
 

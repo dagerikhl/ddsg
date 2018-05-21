@@ -71,7 +71,7 @@ namespace DdSG {
 
             // If going back into the game view when the game is paused we should show pause menu
             if (State.I.CurrentScene == Constants.GAME_VIEW && GameManager.IsPaused) {
-                GameManager.ShouldResume = true;
+                StartCoroutine(PauseMenu.I.ShowAfterDelay(Constants.SCENE_TRANSITION_TIME));
             }
 
             AmbientManager.I.UpdateAmbient();

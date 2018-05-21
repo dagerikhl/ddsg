@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace DdSG {
 
-    public class PauseMenu: MonoBehaviour {
+    public class PauseMenu: SingletonBehaviour<PauseMenu> {
+
+        protected PauseMenu() {
+        }
 
         //[Header("Attributes")]
 
@@ -26,11 +29,6 @@ namespace DdSG {
         }
 
         private void Update() {
-            if (GameManager.ShouldResume) {
-                StartCoroutine(showAfterDelay(Constants.SCENE_TRANSITION_TIME));
-                GameManager.ShouldResume = false;
-            }
-
             if (GameManager.IsPaused) {
                 if (Input.GetKeyDown(KeyCode.Escape)) {
                     Resume();
@@ -128,7 +126,7 @@ namespace DdSG {
             show();
         }
 
-        private IEnumerator showAfterDelay(float delay) {
+        public IEnumerator ShowAfterDelay(float delay) {
             yield return new WaitForSecondsRealtime(delay);
 
             show();
