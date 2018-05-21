@@ -43,6 +43,7 @@ namespace DdSG {
             // Pause game
             show();
             GameManager.IsPaused = true;
+            Time.timeScale = 0f;
 
             // Fade in menu
             FadeManager.I.Fade(0f, Constants.PAUSE_TRANSITION_TIME, setAlpha, show);
@@ -57,6 +58,7 @@ namespace DdSG {
                 () => {
                     hide();
                     GameManager.IsPaused = false;
+                    Time.timeScale = 1f;
                 });
         }
 
@@ -70,6 +72,9 @@ namespace DdSG {
         public void RestartPromptYes() {
             RestartPrompt.SetActive(false);
             SceneManager.I.RestartScene();
+
+            GameManager.IsPaused = false;
+            Time.timeScale = 1f;
         }
 
         [UsedImplicitly]
@@ -94,6 +99,9 @@ namespace DdSG {
         public void MainMenuPromptYes() {
             MainMenuPrompt.SetActive(false);
             SceneManager.I.GoTo(Constants.MAIN_MENU, false);
+
+            GameManager.IsPaused = false;
+            Time.timeScale = 1f;
         }
 
         [UsedImplicitly]
@@ -121,7 +129,7 @@ namespace DdSG {
         }
 
         private IEnumerator showAfterDelay(float delay) {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
 
             show();
         }
@@ -133,7 +141,7 @@ namespace DdSG {
         }
 
         private IEnumerator hideAfterDelay(float delay) {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
 
             hide();
         }

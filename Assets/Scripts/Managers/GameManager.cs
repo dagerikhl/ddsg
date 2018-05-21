@@ -29,6 +29,13 @@ namespace DdSG {
         private BuildManager buildManager;
 
         private float secondsElapsed;
+        private float SecondsElapsed {
+            get { return secondsElapsed; }
+            set {
+                secondsElapsed = value;
+                GameTime.text = Formatter.TimeFormat(value).Monospaced();
+            }
+        }
 
         private void Awake() {
             // Fetch entities here if it's a debug build so we can start from game view
@@ -53,25 +60,13 @@ namespace DdSG {
         }
 
         private void Update() {
-            if (IsPaused) {
-                Time.timeScale = 1f;
-            } else {
-                Time.timeScale = State.I.PlayConfiguration.GameSpeed;
-
-                updateGameTime();
-            }
+            SecondsElapsed += Time.deltaTime;
 
             if (!IsPaused && !IsBuilding) {
                 if (Input.GetKeyDown(KeyCode.Escape)) {
                     FindObjectOfType<PauseMenu>().Pause();
                 }
             }
-        }
-
-        private void updateGameTime() {
-            secondsElapsed += Time.unscaledDeltaTime;
-
-            GameTime.text = Formatter.TimeFormat(secondsElapsed).Monospaced();
         }
 
         private void assignPrefabHelperObjects() {

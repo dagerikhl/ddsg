@@ -42,7 +42,7 @@ namespace DdSG {
 
             float t = from;
             while (direction == 1 ? t < to : t > to) {
-                t += direction*Time.deltaTime;
+                t += direction*Time.unscaledDeltaTime;
                 float value = (curve ?? defaultCurve).Evaluate(t/(direction == 1 ? to : from));
                 updater(value);
 
