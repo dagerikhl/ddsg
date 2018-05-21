@@ -12,6 +12,7 @@ TagManager:
   - Attack
   - HoverOverlay
   - SelectedInfoBar
+  - CursorManager
   layers:
   - Default
   - TransparentFX

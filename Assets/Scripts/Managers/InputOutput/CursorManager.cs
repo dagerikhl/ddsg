@@ -2,7 +2,7 @@
 
 namespace DdSG {
 
-    public class CursorManager: SingletonBehaviour<CursorManager> {
+    public class CursorManager: PersistentSingletonBehaviour<CursorManager> {
 
         protected CursorManager() {
         }
@@ -22,6 +22,7 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        protected override string persistentTag { get { return "CursorManager"; } }
 
         // Private and protected members
         private CursorType currentCursorType;
