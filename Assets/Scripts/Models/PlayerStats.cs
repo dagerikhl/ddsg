@@ -69,6 +69,10 @@ namespace DdSG {
         public void SetAssetIntegrity(int assetIndex, float integrity) {
             Integrities[assetIndex] = integrity;
 
+            if (Integrities.All((i) => i <= 0f)) {
+                GameManager.Lose();
+            }
+
             updateIntegrityTextUi();
         }
 

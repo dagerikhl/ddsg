@@ -61,12 +61,6 @@ namespace DdSG {
             buildManager.CreateCourseOfActionButtons();
         }
 
-        public static void Win() {
-            IsGameOver = true;
-            Logger.Debug("Game won!");
-            Application.Quit();
-        }
-
         private void Update() {
             SecondsElapsed += Time.deltaTime;
 
@@ -79,6 +73,18 @@ namespace DdSG {
                     HelperObjects.PauseMenu.Resume();
                 }
             }
+        }
+
+        public static void Win() {
+            IsGameOver = true;
+            Logger.Debug("Game won!");
+            Application.Quit();
+        }
+
+        public static void Lose() {
+            IsGameOver = true;
+            Logger.Debug("Game lost!");
+            Application.Quit();
         }
 
         private void assignPrefabHelperObjects() {
