@@ -25,8 +25,7 @@ namespace DdSG {
                 // Assets
                 var numberOfAssets = Rnd.Gen.Next(2, 5);
                 PlayerStats.I.NumberOfAssets = numberOfAssets;
-
-                gameEntities.SDOs.assets = State.I.Entities.SDOs.assets.TakeRandoms(numberOfAssets).ToArray();
+                gameEntities.SDOs.assets = pickAssets(numberOfAssets);
 
                 // Attack pattern -> targets -> Asset relationships
                 foreach (var asset in gameEntities.SDOs.assets) {
@@ -84,6 +83,17 @@ namespace DdSG {
 
             // Store game entities
             State.I.GameEntities = gameEntities;
+        }
+
+        private static Asset[] pickAssets(int numberOfAssets) {
+            var assets = new List<Asset>(numberOfAssets);
+
+            while (assets.Count < numberOfAssets) {
+                assets.Add(State.I.Entities.SDOs.assets.TakeRandom());
+                assets = assets.Distinct().DistinctBy((a) => a.FullDescription.ToLower()).ToList();
+            }
+
+            return assets.ToArray();
         }
 
         private static AttackPattern[] pickAttackPatterns(IEnumerable<Asset> assets) {
