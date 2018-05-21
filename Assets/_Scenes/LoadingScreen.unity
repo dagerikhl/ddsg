@@ -2074,6 +2074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305852324}
   - component: {fileID: 1305852323}
+  - component: {fileID: 1305852325}
   m_Layer: 0
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -2134,6 +2135,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305852325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1305852322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23dc95bdf1a3dff4ca2fc6b4dc8a110f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorMode: 0
+  Default: {fileID: 2800000, guid: c928cc8ca109f0b40a92e00739795a57, type: 3}
+  DefaultHotSpot: {x: 4, y: 2}
+  Pointer: {fileID: 2800000, guid: 1f8bbc72be713cf4992592e4b9f7eff3, type: 3}
+  PointerHotSpot: {x: 11, y: 2}
+  Target: {fileID: 2800000, guid: 4ce1b4c20a6736c4aaf718e6c74ad631, type: 3}
+  TargetHotSpot: {x: 16, y: 16}
 --- !u!114 &1314399704
 MonoBehaviour:
   m_ObjectHideFlags: 0
