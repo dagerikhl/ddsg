@@ -76,21 +76,35 @@ namespace DdSG {
         }
 
         public static void Win() {
-            IsGameOver = true;
-            Logger.Debug("Game won!");
-            Application.Quit();
+            if (!IsGameOver) {
+                Logger.Debug("Game won.");
+
+                IsGameOver = true;
+                updateHighscores();
+
+                GameOverMenu.I.Show(true);
+            }
         }
 
         public static void Lose() {
-            IsGameOver = true;
-            Logger.Debug("Game lost!");
-            Application.Quit();
+            if (!IsGameOver) {
+                Logger.Debug("Game lost.");
+
+                IsGameOver = true;
+                updateHighscores();
+
+                GameOverMenu.I.Show(false);
+            }
         }
 
         private void assignPrefabHelperObjects() {
             HelperObjects.HoverOverlayPrefab = HoverOverlayPrefab;
             HelperObjects.GhostMitigationPrefab = GhostMitigationPrefab;
             HelperObjects.EnteredSystemMessagePrefab = EnteredSystemMessagePrefab;
+        }
+
+        // TODO Store highscores in file by appending
+        private static void updateHighscores() {
         }
 
     }
