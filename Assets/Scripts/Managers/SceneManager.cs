@@ -77,7 +77,6 @@ namespace DdSG {
             AmbientManager.I.UpdateAmbient();
         }
 
-        // ReSharper disable once MemberCanBeMadeStatic.Global
         public void RestartScene() {
             FadeManager.I.Fade(
                 0f,
@@ -92,7 +91,6 @@ namespace DdSG {
                 true);
         }
 
-        // ReSharper disable once MemberCanBeMadeStatic.Global
         public void ExitGame(float delay = 0f) {
             StartCoroutine(exitGameRoutine(delay));
         }
