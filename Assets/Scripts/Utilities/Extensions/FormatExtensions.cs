@@ -32,6 +32,10 @@ namespace DdSG {
             return string.Format("<color={0}>{1}</color>", hexColor, value);
         }
 
+        public static string ScoreFormat(this string value) {
+            return string.Format("{0:###,##0}", Convert.ToInt32(value));
+        }
+
         public static string WorthFormat(this string value) {
             return string.Format("{0:###,##0}", Convert.ToInt32(value));
         }

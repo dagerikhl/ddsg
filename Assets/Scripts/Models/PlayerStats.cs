@@ -7,10 +7,12 @@ namespace DdSG {
     public class PlayerStats: SingletonBehaviour<PlayerStats> {
 
         [Header("Attributes")]
+        public int StartScore;
         public int StartWorth = 50;
         public float StartIntegrity = 100f;
 
         [Header("Unity Setup Fields")]
+        public TextMeshProUGUI ScoreUi;
         public TextMeshProUGUI WorthUi;
         public TextMeshProUGUI IntegrityUi;
 
@@ -18,6 +20,14 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        public int Score {
+            get { return score; }
+            set {
+                score = value;
+
+                ScoreUi.text = value.ToString().ScoreFormat().Monospaced();
+            }
+        }
         public int Worth {
             get { return worth; }
             set {
@@ -43,10 +53,12 @@ namespace DdSG {
         public int Waves { get; set; }
 
         // Private and protected members
+        private int score;
         private int worth;
         private int numberOfAssets;
 
         private void Awake() {
+            Score = StartScore;
             Worth = StartWorth;
         }
 
@@ -58,6 +70,11 @@ namespace DdSG {
             Integrities[assetIndex] = integrity;
 
             updateIntegrityTextUi();
+        }
+
+        public void UpdateStatsFromKill(int value) {
+            Score += value*100;
+            Worth += value;
         }
 
         private void updateIntegrityTextUi() {

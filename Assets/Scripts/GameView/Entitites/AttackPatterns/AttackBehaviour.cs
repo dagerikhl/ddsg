@@ -9,7 +9,7 @@ namespace DdSG {
         [Header("Attributes")]
         public float StartSpeed = 10f;
         public float StartHealth = 100f;
-        public int Worth = 50;
+        public int StartValue = 10;
         public float DamageToAsset = 1f;
 
         [Header("Unity Setup Fields")]
@@ -35,6 +35,8 @@ namespace DdSG {
         public Transform SpawnPoint { get; private set; }
 
         // Private and protected members
+        private int value;
+
         private bool isDead;
 
         private void Start() {
@@ -59,6 +61,13 @@ namespace DdSG {
             StartHealth = Health = attackPattern.CalculateHealthFromSeverity(StartHealth);
             DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
 
+            value += Mathf.CeilToInt(StartHealth/100f) + Mathf.CeilToInt(DamageToAsset);
+
+            // Tweak scale and speed after value to indicate which attacks are more important
+            transform.localScale *= value/10f;
+            Speed *= value/10f;
+
+            // Hover and click actions
             HoverBehaviour.Title = attackPattern.name;
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
 
@@ -98,7 +107,7 @@ namespace DdSG {
         private void die() {
             isDead = true;
 
-            PlayerStats.I.Worth += Worth;
+            PlayerStats.I.UpdateStatsFromKill(StartValue);
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
