@@ -12725,7 +12725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f405387d8150d054aad04060b157771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartSpeed: 2
+  StartSpeed: 10
   StartHealth: 100
   Worth: 50
   DamageToAsset: 1
@@ -12735,6 +12735,31 @@ MonoBehaviour:
   HealthBarImage: {fileID: 114526679194757394}
   DeathEffect: {fileID: 1392354813126156, guid: 7f60ffff54ba9bb49a87425a91e7b00d,
     type: 2}
+  AttackPattern:
+    type: 0
+    id:
+      Type: 0
+      Id: 
+    description: []
+    external_references: []
+    name: 
+    custom:
+      steps:
+        explore: []
+        experiment: []
+        exploit: []
+      prerequisites: []
+      examples: []
+      probing_techniques: []
+      indicators: []
+      motivations: []
+      injection_vector:
+        description: 
+        categories: 
+      payload: 
+      activation_zone:
+        description: 
+        categories: 
   Speed: 0
   Health: 0
 --- !u!114 &114914652655387462
