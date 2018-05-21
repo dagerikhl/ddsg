@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace DdSG {
 
-    public class HoverBehaviour: MonoBehaviour {
+    public class HoverBehaviour: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
         //[Header("Attributes")]
 
@@ -23,17 +23,24 @@ namespace DdSG {
         public bool HasSecondaryAction { private get; set; }
 
         // Private and protected members
-        private EventTrigger eventTrigger;
         private HoverOverlay hoverOverlay;
 
         private bool HasPrimaryAction { get { return !string.IsNullOrEmpty(ActionText); } }
         private bool HasActions { get { return HasPrimaryAction || HasSecondaryAction; } }
 
-        private void Awake() {
-            eventTrigger = gameObject.AddComponent<EventTrigger>();
+        public void OnPointerEnter(PointerEventData eventData) {
+            destroyOldHoverOverlays();
+            createHoverOverlay();
 
-            addPointerEntersEvent();
-            addPointerExitsEvent();
+            if (HasActions) {
+                CursorManager.I.SetTemporaryCursor(CursorType.Pointer);
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            hideHoverOverlay();
+
+            CursorManager.I.ResetTemporaryCursor();
         }
 
         private void destroyOldHoverOverlays() {
@@ -58,31 +65,6 @@ namespace DdSG {
 
         private void hideHoverOverlay() {
             hoverOverlay.Destroy();
-        }
-
-        private void addPointerEntersEvent() {
-            EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-            eventType.callback.AddListener(
-                (eventData) => {
-                    destroyOldHoverOverlays();
-                    createHoverOverlay();
-
-                    if (HasActions) {
-                        CursorManager.I.SetTemporaryCursor(CursorType.Pointer);
-                    }
-                });
-            eventTrigger.triggers.Add(eventType);
-        }
-
-        private void addPointerExitsEvent() {
-            EventTrigger.Entry eventType = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-            eventType.callback.AddListener(
-                (eventData) => {
-                    hideHoverOverlay();
-
-                    CursorManager.I.ResetTemporaryCursor();
-                });
-            eventTrigger.triggers.Add(eventType);
         }
 
         private void OnDestroy() {
