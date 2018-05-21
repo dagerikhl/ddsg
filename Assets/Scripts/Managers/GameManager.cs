@@ -39,7 +39,7 @@ namespace DdSG {
 
         private void Awake() {
             // Fetch entities here if it's a debug build so we can start from game view
-            if (Debug.isDebugBuild) {
+            if (Debug.isDebugBuild && State.I.Entities == null) {
                 var newEntitiesJson = FileClient.I.LoadFromFile<EntitiesJson>(Constants.ENTITIES_FILENAME);
                 State.I.Entities = newEntitiesJson.entities;
             }
