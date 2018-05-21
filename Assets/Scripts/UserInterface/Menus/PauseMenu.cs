@@ -31,7 +31,6 @@ namespace DdSG {
         [UsedImplicitly]
         public void Pause() {
             // Pause game
-            show();
             GameManager.IsPaused = true;
             Time.timeScale = 0f;
 
@@ -61,10 +60,9 @@ namespace DdSG {
         [UsedImplicitly]
         public void RestartPromptYes() {
             RestartPrompt.SetActive(false);
-            SceneManager.I.RestartScene();
-
             GameManager.IsPaused = false;
             Time.timeScale = 1f;
+            SceneManager.I.RestartScene();
         }
 
         [UsedImplicitly]
