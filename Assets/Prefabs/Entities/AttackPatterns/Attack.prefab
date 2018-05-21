@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4990267058453116}
   - component: {fileID: 114100356788268986}
-  - component: {fileID: 114196599656011646}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -269,17 +268,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114196599656011646
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148341823288138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114263660611530748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12730,7 +12718,6 @@ MonoBehaviour:
   StartValue: 10
   DamageToAsset: 1
   HoverBehaviour: {fileID: 114100356788268986}
-  ActionEvents: {fileID: 114196599656011646}
   Model: {fileID: 4990267058453116}
   HealthBar: {fileID: 223125341698362660}
   HealthBarImage: {fileID: 114526679194757394}

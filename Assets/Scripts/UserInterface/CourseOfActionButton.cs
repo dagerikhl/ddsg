@@ -11,7 +11,6 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
-        public ActionEvents ActionEvents;
 
         // TODO This is added for later use
         public Image Icon;
@@ -64,7 +63,7 @@ namespace DdSG {
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
             HoverBehaviour.ActionText = "implement";
-            ActionEvents.PrimaryAction = () => {
+            HoverBehaviour.PrimaryAction = () => {
                 // Destroy the old ghost if it's already in the game
                 var oldGhost = FindObjectOfType<GhostMitigationBehaviour>();
                 if (oldGhost != null) {
@@ -74,7 +73,7 @@ namespace DdSG {
                 BuildManager.I.EnterBuildMode(courseOfAction);
                 UnityHelper.Instantiate(HelperObjects.GhostMitigationPrefab);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, HoverBehaviour);
         }
 
     }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace DdSG {
 
-    public class HoverBehaviour: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+    public class HoverBehaviour: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
         //[Header("Attributes")]
 
@@ -15,6 +16,9 @@ namespace DdSG {
         public string ActionText;
         public bool ShowUnder;
         public bool ShowOnLeft;
+
+        public Action PrimaryAction;
+        public Action SecondaryAction;
 
         //[Header("Optional")]
 
@@ -41,6 +45,18 @@ namespace DdSG {
             hideHoverOverlay();
 
             CursorManager.I.ResetTemporaryCursor();
+        }
+
+        public void OnPointerClick(PointerEventData eventData) {
+            if (eventData.button == PointerEventData.InputButton.Left) {
+                if (PrimaryAction != null) {
+                    PrimaryAction();
+                }
+            } else if (eventData.button == PointerEventData.InputButton.Right) {
+                if (SecondaryAction != null) {
+                    SecondaryAction();
+                }
+            }
         }
 
         private void destroyOldHoverOverlays() {

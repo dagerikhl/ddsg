@@ -18,7 +18,6 @@ namespace DdSG {
         public GameObject BulletPrefab;
 
         public HoverBehaviour HoverBehaviour;
-        public ActionEvents ActionEvents;
 
         //[Header("Optional")]
 
@@ -69,13 +68,13 @@ namespace DdSG {
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
             HoverBehaviour.ActionText = "select";
-            ActionEvents.PrimaryAction = () => {
+            HoverBehaviour.PrimaryAction = () => {
                 var title = courseOfAction.custom.mitigation;
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
                 var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, ActionEvents);
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(courseOfAction, HoverBehaviour);
         }
 
         private void updateTarget() {

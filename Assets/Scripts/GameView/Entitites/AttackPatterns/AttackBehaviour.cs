@@ -14,7 +14,6 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public HoverBehaviour HoverBehaviour;
-        public ActionEvents ActionEvents;
 
         public Transform Model;
 
@@ -89,7 +88,7 @@ namespace DdSG {
             HoverBehaviour.Text = Formatter.BuildStixDataEntityDescription(attackPattern);
 
             HoverBehaviour.ActionText = "select";
-            ActionEvents.PrimaryAction = () => {
+            HoverBehaviour.PrimaryAction = () => {
                 var title = attackPattern.name;
                 var description = Formatter.BuildStixDataEntityDescription(attackPattern, false, false);
                 SelectedAction[] selectedActions = ReferencesHelper.HasExternalReferences(attackPattern)
@@ -100,7 +99,7 @@ namespace DdSG {
                     } : null;
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
-            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, ActionEvents);
+            HoverBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(attackPattern, HoverBehaviour);
         }
 
         public void TakeDamage(float amount) {

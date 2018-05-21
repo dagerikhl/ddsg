@@ -39,7 +39,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4990267058453116}
   - component: {fileID: 114293278149052186}
-  - component: {fileID: 114964773949722602}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -5152,9 +5151,7 @@ MonoBehaviour:
   FirePoint: {fileID: 4616663325569040}
   BulletPrefab: {fileID: 1485473732046860, guid: d45f8b63780591d4180f142486ade85d,
     type: 2}
-  AttackTag: Attack
   HoverBehaviour: {fileID: 114293278149052186}
-  ActionEvents: {fileID: 114964773949722602}
 --- !u!114 &114864202245122414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6084,14 +6081,3 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!114 &114964773949722602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1148341823288138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

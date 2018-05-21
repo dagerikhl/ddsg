@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 222549469383876344}
   - component: {fileID: 114306809279801764}
   - component: {fileID: 114594365159554284}
-  - component: {fileID: 114802303534961280}
   m_Layer: 5
   m_Name: WaveInfoIcon
   m_TagString: Untagged
@@ -199,7 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Label: {fileID: 114373332178905702}
   HoverBehaviour: {fileID: 0}
-  ActionEvents: {fileID: 0}
 --- !u!114 &114373332178905702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,17 +382,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114802303534961280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172363833080758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222096104493615988
 CanvasRenderer:
   m_ObjectHideFlags: 1

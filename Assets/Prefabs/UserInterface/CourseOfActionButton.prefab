@@ -121,7 +121,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224676476145464100}
   - component: {fileID: 114948224115311464}
-  - component: {fileID: 114729718140198944}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -254,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverBehaviour: {fileID: 114948224115311464}
-  ActionEvents: {fileID: 114729718140198944}
   Icon: {fileID: 114168906856343654}
   Label: {fileID: 114626181436456268}
   Cost: {fileID: 114867896475447548}
@@ -593,17 +591,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &114729718140198944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1548261069606482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114832353031275894
 MonoBehaviour:
   m_ObjectHideFlags: 1

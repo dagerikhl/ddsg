@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4076649030170230}
   - component: {fileID: 114470170866659750}
-  - component: {fileID: 114396587227100146}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -284,17 +283,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114396587227100146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1211131856654802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4a314f5f60e0c4ea57f14ab5b0f405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114449092478533356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,7 +376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverBehaviour: {fileID: 114470170866659750}
-  ActionEvents: {fileID: 114396587227100146}
   HealthBar: {fileID: 223568124047422158}
   HealthBarImage: {fileID: 114272833205325674}
   Category: 0
