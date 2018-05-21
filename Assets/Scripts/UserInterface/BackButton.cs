@@ -16,6 +16,12 @@ namespace DdSG {
 
         // Private and protected members
 
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                GoToLastMenu();
+            }
+        }
+
         [UsedImplicitly]
         public void GoToLastMenu() {
             SceneManager.I.GoToLastMenu();
