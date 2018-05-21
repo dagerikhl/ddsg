@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -144,10 +145,18 @@ namespace DdSG {
         }
 
         private Wave generateNewWave() {
+            var possibleAttackPatterns = new List<AttackPattern>(PossibleAttackPatternsPerWave);
+            while (possibleAttackPatterns.Count < PossibleAttackPatternsPerWave) {
+                var possibleAttackPattern = State.I.GameEntities.SDOs.attack_patterns.TakeRandom();
+                possibleAttackPatterns.Add(possibleAttackPattern);
+                // Ensure that no duplicate attack patterns are chosen for this wave
+                possibleAttackPatterns =
+                    possibleAttackPatterns.Distinct().DistinctBy((aP) => aP.name.ToLower()).ToList();
+            }
+
             return new Wave {
                 Count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave,
-                AttackPatterns = State.I.GameEntities.SDOs.attack_patterns.TakeRandoms(PossibleAttackPatternsPerWave)
-                                      .ToArray()
+                AttackPatterns = possibleAttackPatterns.ToArray()
             };
         }
 
