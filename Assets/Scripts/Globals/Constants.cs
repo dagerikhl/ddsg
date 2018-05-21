@@ -48,6 +48,7 @@
 
         // Tags
         public const string ATTACK_TAG = "Attack";
+        public const string HOVER_OVERLAY_TAG = "HoverOverlay";
 
     }
 

@@ -37,7 +37,7 @@ namespace DdSG {
         }
 
         private void destroyOldHoverOverlays() {
-            foreach (var hoverOverlayGo in GameObject.FindGameObjectsWithTag("HoverOverlay")) {
+            foreach (var hoverOverlayGo in GameObject.FindGameObjectsWithTag(Constants.HOVER_OVERLAY_TAG)) {
                 var hoverOverlay = hoverOverlayGo.GetComponent<HoverOverlay>();
                 hoverOverlay.Destroy();
             }
