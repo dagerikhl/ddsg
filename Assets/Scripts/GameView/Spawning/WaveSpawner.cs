@@ -65,6 +65,8 @@ namespace DdSG {
             }
         }
 
+        private Wave currentWave;
+
         private Wave nextWave;
         private Wave NextWave {
             get { return nextWave; }
@@ -76,6 +78,8 @@ namespace DdSG {
                     // Transfer next wave icons to this container
                     NextWaveInfoContainer.StealChildren(CurrentWaveInfoContainer);
                 }
+
+                currentWave = nextWave;
 
                 // Generate new icons for this container
                 foreach (var attackPattern in value.AttackPatterns) {
@@ -128,8 +132,8 @@ namespace DdSG {
         }
 
         private IEnumerator spawnWave() {
-            for (int i = 0; i < NextWave.Count; i++) {
-                spawnAttack(NextWave.AttackPatterns.TakeRandomByLikelihood());
+            for (int i = 0; i < currentWave.Count; i++) {
+                spawnAttack(currentWave.AttackPatterns.TakeRandomByLikelihood());
                 yield return new WaitForSeconds(1f/SpawnRate);
             }
         }
