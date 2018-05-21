@@ -43,7 +43,7 @@ namespace DdSG {
             get { return waveIndex; }
             set {
                 waveIndex = value;
-                WaveCounterText.text = Formatter.WaveCounterFormat(value).Monospaced();
+                WaveCounterText.text = Formatter.CountOfMaxFormat(value, TotalWaves).Monospaced();
 
                 PlayerStats.I.Waves++;
             }
@@ -106,7 +106,7 @@ namespace DdSG {
         private void Update() {
             // Update attacks alive
             if (currentWave != null) {
-                AttacksAliveText.text = string.Format("{0}/{1}", AttacksAlive, currentWave.Count).Monospaced();
+                AttacksAliveText.text = Formatter.CountOfMaxFormat(AttacksAlive, currentWave.Count).Monospaced();
             }
 
             // Final wave has been defeated

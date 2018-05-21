@@ -24,9 +24,10 @@ namespace DdSG {
                 : string.Format("{0:##0.00}", seconds).PadLeft(6);
         }
 
-        public static string WaveCounterFormat(int waveNumber) {
-            var waveString = waveNumber == 0 ? "-" : string.Format("{0:#0}", waveNumber);
-            return waveString.PadLeft(2);
+        public static string CountOfMaxFormat(int count, int max) {
+            var countString = (count == 0 ? "-" : string.Format("{0:#0}", count)).PadLeft(2);
+            var maxString = (max == 0 ? "-" : string.Format("{0:#0}", max)).PadLeft(2);
+            return string.Format("{0}/{1}", countString, maxString);
         }
 
         public static string BuildStixDataEntityDescription(
