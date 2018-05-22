@@ -55,7 +55,6 @@ namespace DdSG {
                                                                         gameEntities.SDOs.course_of_actions,
                                                                         relationships))
                                                                 .ToArray();
-                Logger.Debug(gameEntities.SDOs.attack_patterns[0].MitigatedByCategories.Join(", "));
 
                 // Make course of actions distincy by category
                 gameEntities.SDOs.course_of_actions =
