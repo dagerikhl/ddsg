@@ -42,6 +42,7 @@
         public const string PLAY_CONFIGURATION_FILENAME = "playConfiguration";
         public const string ENTITIES_FILENAME = "entities";
         public const string ENTITIES_BACKUP_FILENAME = "entities-backup";
+        public const string HIGHSCORES_FILENAME = "highscores";
 
         // Game constants
         public const float SELL_PERCENTAGE = 0.75f;

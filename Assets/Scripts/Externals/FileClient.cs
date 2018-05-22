@@ -53,9 +53,9 @@ namespace DdSG {
             return data;
         }
 
-        public void SaveToFile<T>(string filename, T data) {
+        public void SaveToFile<T>(string filename, T data, bool append = false) {
             var path = dataPath + "/" + filename + Constants.FILE_DATA_EXT;
-            var file = File.Open(path, FileMode.OpenOrCreate);
+            var file = File.Open(path, append ? FileMode.Append : FileMode.OpenOrCreate);
 
             try {
                 bf.Serialize(file, data);

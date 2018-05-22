@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace DdSG {
@@ -80,9 +81,9 @@ namespace DdSG {
                 Logger.Debug("Game won.");
 
                 IsGameOver = true;
-                updateHighscores();
+                updateHighscores(GameOverState.Win);
 
-                GameOverMenu.I.Show(true);
+                GameOverMenu.I.Show(GameOverState.Win);
             }
         }
 
@@ -91,9 +92,9 @@ namespace DdSG {
                 Logger.Debug("Game lost.");
 
                 IsGameOver = true;
-                updateHighscores();
+                updateHighscores(GameOverState.Lose);
 
-                GameOverMenu.I.Show(false);
+                GameOverMenu.I.Show(GameOverState.Lose);
             }
         }
 
@@ -103,8 +104,9 @@ namespace DdSG {
             HelperObjects.EnteredSystemMessagePrefab = EnteredSystemMessagePrefab;
         }
 
-        // TODO Store highscores in file by appending
-        private static void updateHighscores() {
+        private static void updateHighscores(GameOverState gameOverState) {
+            var highscore = new Highscore { Time = DateTime.Now, State = gameOverState, Score = PlayerStats.I.Score };
+            FileClient.I.SaveToFile(Constants.HIGHSCORES_FILENAME, highscore, true);
         }
 
     }

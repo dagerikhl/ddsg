@@ -23,11 +23,11 @@ namespace DdSG {
         // Private and protected members
 
         [UsedImplicitly]
-        public void Show(bool isWin) {
+        public void Show(GameOverState gameOverState) {
             GameManager.GameState = GameState.Menu;
             Time.timeScale = 0f;
 
-            TitleText.text = isWin ? "Congratulations, you won!" : "GAME OVER";
+            TitleText.text = gameOverState == GameOverState.Win ? "Congratulations, you won!" : "GAME OVER";
             ScoreText.text = PlayerStats.I.Score.ToString().ScoreFormat().Monospaced();
 
             // Fade in menu
