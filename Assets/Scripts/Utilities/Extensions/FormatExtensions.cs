@@ -24,6 +24,10 @@ namespace DdSG {
             return sb.ToString();
         }
 
+        public static string Italic(this string value) {
+            return string.Format("<i>{0}</i>", value);
+        }
+
         public static string Indented(this string value, float width = 2f) {
             return string.Format("<indent={0}em>{1}", width, value);
         }

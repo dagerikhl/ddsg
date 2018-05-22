@@ -96,7 +96,10 @@ namespace DdSG {
         }
 
         private static void appendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
-            sb.AppendLine(buildAttributeText("Damage", buildDamageText(courseOfAction.GetDamage())));
+            sb.AppendLine(
+                buildAttributeText(
+                    "Damage",
+                    buildDamageText(courseOfAction.GetDamage(), courseOfAction.GetFireRate())));
             sb.AppendLine(buildAttributeText("Range", buildRangeText(courseOfAction.GetRange())));
             sb.AppendLine(buildAttributeText("Fire Rate", buildFireRateText(courseOfAction.GetFireRate())));
         }
@@ -175,16 +178,19 @@ namespace DdSG {
             return string.Format("{0} <i>({1})</i>", zone.description, zone.categories.Join(", "));
         }
 
-        private static string buildDamageText(float damage) {
-            return string.Format("{0:F1}", damage).PadLeft(4).Monospaced().Indented(35);
+        private static string buildDamageText(DamageAttribute damage, float fireRate) {
+            return (string.Format("{0:#0.0}-{1:#0.0}", damage.MinimumDamage, damage.MaximumDamage).PadLeft(10)
+                    + string.Format(" ({0:##0.0} {1})", damage.GetDamagePerSecond(fireRate), "DPS".Monospaced(2.5f)))
+                   .Monospaced()
+                   .Indented(25);
         }
 
         private static string buildRangeText(float range) {
-            return string.Format("{0:F1}", range).PadLeft(4).Monospaced().Indented(35);
+            return string.Format("{0:F1}", range).PadLeft(10).Monospaced().Indented(25);
         }
 
         private static string buildFireRateText(float fireRate) {
-            return string.Format("{0:F1}", fireRate).PadLeft(4).Monospaced().Indented(35);
+            return string.Format("{0:F1}", fireRate).PadLeft(10).Monospaced().Indented(25);
         }
 
         private static string buildImpactText(AttackImpact impact) {

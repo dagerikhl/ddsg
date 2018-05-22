@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DdSG {
 
     public class MitigationBehaviour: MonoBehaviour {
 
         [Header("Attributes")]
-        public float Damage = 10f;
+        public DamageAttribute Damage = new DamageAttribute { MinimumDamage = 5f, MaximumDamage = 15f };
         public float Range = 15f;
         public float FireRate = 1f;
         public float TurnSpeed = 10f;
@@ -129,7 +130,10 @@ namespace DdSG {
                                     .GetComponent<Bullet>();
 
             if (bullet != null) {
-                bullet.Damage = Damage;
+                bullet.Damage = MathHelper.Rangify(
+                    Convert.ToSingle(Rnd.Gen.NextDouble()),
+                    Damage.MinimumDamage,
+                    Damage.MaximumDamage);
                 bullet.Seek(target);
             }
         }

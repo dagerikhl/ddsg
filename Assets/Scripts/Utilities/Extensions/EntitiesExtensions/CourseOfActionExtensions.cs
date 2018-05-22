@@ -16,14 +16,15 @@ namespace DdSG {
         }
 
         // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
-        public static float GetDamage(this CourseOfAction courseOfAction) {
+        public static DamageAttribute GetDamage(this CourseOfAction courseOfAction) {
             var categoryValue = courseOfAction.custom.category == null ? 8f : courseOfAction.custom.category.Length;
             var mitigationValue =
                 courseOfAction.custom.mitigation == null ? 5f : courseOfAction.custom.mitigation.Length;
             var referencesValue = courseOfAction.external_references == null ? 25f
                 : courseOfAction.external_references.Length;
 
-            return (categoryValue*2 + mitigationValue + referencesValue/2f)/5f;
+            var baseDamage = (categoryValue*2 + mitigationValue + referencesValue/2f)/5f;
+            return new DamageAttribute { MinimumDamage = (baseDamage - 2)*0.8f, MaximumDamage = (baseDamage + 4)*1.1f };
         }
 
         // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
