@@ -80,8 +80,6 @@ namespace DdSG {
 
         public static void Win() {
             if (!IsGameOver) {
-                Logger.Debug("Game won.");
-
                 IsGameOver = true;
                 updateHighscores(GameOverState.Win);
 
@@ -91,8 +89,6 @@ namespace DdSG {
 
         public static void Lose() {
             if (!IsGameOver) {
-                Logger.Debug("Game lost.");
-
                 IsGameOver = true;
                 updateHighscores(GameOverState.Lose);
 
