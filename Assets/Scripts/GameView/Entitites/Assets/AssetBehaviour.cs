@@ -59,7 +59,7 @@ namespace DdSG {
         private void die() {
             isDead = true;
 
-            PlayerStats.I.UpdateStatsForLostAsset(-Value);
+            PlayerStats.I.UpdateStatsForLostAsset(Value);
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
