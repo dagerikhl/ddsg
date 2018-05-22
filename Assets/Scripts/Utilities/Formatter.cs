@@ -96,7 +96,9 @@ namespace DdSG {
         }
 
         private static void appendCourseOfActionAttributes(StringBuilder sb, CourseOfAction courseOfAction) {
-            // TODO Add attributes for mitigations
+            sb.AppendLine(buildAttributeText("Damage", buildDamageText(courseOfAction.GetDamage())));
+            sb.AppendLine(buildAttributeText("Range", buildRangeText(courseOfAction.GetRange())));
+            sb.AppendLine(buildAttributeText("Fire Rate", buildFireRateText(courseOfAction.GetFireRate())));
         }
 
         private static void appendRelationships(StringBuilder sb, StixDataEntityBase entity) {
@@ -171,6 +173,18 @@ namespace DdSG {
 
         private static string buildActivationZoneText(AttackActivationZone zone) {
             return string.Format("{0} <i>({1})</i>", zone.description, zone.categories.Join(", "));
+        }
+
+        private static string buildDamageText(float damage) {
+            return string.Format("{0:F1}", damage).PadLeft(4).Monospaced().Indented(35);
+        }
+
+        private static string buildRangeText(float range) {
+            return string.Format("{0:F1}", range).PadLeft(4).Monospaced().Indented(35);
+        }
+
+        private static string buildFireRateText(float fireRate) {
+            return string.Format("{0:F1}", fireRate).PadLeft(4).Monospaced().Indented(35);
         }
 
         private static string buildImpactText(AttackImpact impact) {

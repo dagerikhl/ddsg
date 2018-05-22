@@ -24,8 +24,12 @@ namespace DdSG {
             return sb.ToString();
         }
 
-        public static string Monospaced(this string value, float monospaceEm = 2f) {
-            return string.Format("<mspace={0}em>{1}</mspace>", monospaceEm, value);
+        public static string Indented(this string value, float width = 2f) {
+            return string.Format("<indent={0}em>{1}", width, value);
+        }
+
+        public static string Monospaced(this string value, float width = 2f) {
+            return string.Format("<mspace={0}em>{1}</mspace>", width, value);
         }
 
         public static string WithColor(this string value, string hexColor) {
