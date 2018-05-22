@@ -35,7 +35,7 @@ namespace DdSG {
             var referencesValue = courseOfAction.external_references == null ? 30f
                 : courseOfAction.external_references.Length;
 
-            return (categoryValue + mitigationValue*2 + referencesValue)/5f;
+            return 5 + (categoryValue + mitigationValue*2 + referencesValue)/8f;
         }
 
         // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
