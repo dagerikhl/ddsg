@@ -12,6 +12,9 @@ namespace DdSG {
         public string name;
         public AttackPatternCustoms custom;
 
+        [JsonIgnore]
+        public StixId ParentAssetId { get; set; }
+
     }
 
     [Serializable]

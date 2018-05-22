@@ -5,6 +5,11 @@ namespace DdSG {
 
     public static class AttackPatternExtensions {
 
+        public static AttackPattern WithReferenceToParentAsset(this AttackPattern attackPattern, StixId assetId) {
+            attackPattern.ParentAssetId = assetId;
+            return attackPattern;
+        }
+
         public static AttackPattern TakeRandomByLikelihood(this AttackPattern[] attackPatterns) {
             return attackPatterns.TakeRandomsByLikelihood().FirstOrDefault();
         }

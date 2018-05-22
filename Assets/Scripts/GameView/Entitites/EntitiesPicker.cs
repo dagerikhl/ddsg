@@ -99,13 +99,22 @@ namespace DdSG {
         }
 
         private static AttackPattern[] pickAttackPatterns(IEnumerable<Asset> assets) {
-            AssetCategory[] gameTargetedCategories = assets.Select((a) => a.custom.category).Distinct().ToArray();
+            var attackPatterns = new List<AttackPattern>();
+            foreach (var asset in assets) {
+                Asset assetCopy = asset;
 
-            IEnumerable<AttackPattern> attackPatterns = State.I.Entities.SDOs.attack_patterns.Where(
-                (aP) => aP.custom.activation_zone.categories != null
-                        && aP.custom.activation_zone.categories.Any(
-                            (aZ) => gameTargetedCategories
-                                .Contains(aZ)));
+                AssetCategory targetedCategory = assetCopy.custom.category;
+
+                var fittingAttackPatterns = State.I.Entities.SDOs.attack_patterns
+                                                 .Where(
+                                                     (aP) => aP.custom.activation_zone.categories != null
+                                                             && aP.custom.activation_zone.categories.Contains(
+                                                                 targetedCategory))
+                                                 .Select((aP) => aP.WithReferenceToParentAsset(assetCopy.id));
+
+                attackPatterns.AddRange(fittingAttackPatterns);
+                attackPatterns = attackPatterns.Distinct().ToList();
+            }
 
             return attackPatterns.ToArray();
         }
