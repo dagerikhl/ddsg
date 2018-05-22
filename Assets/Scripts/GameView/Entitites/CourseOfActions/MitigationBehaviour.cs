@@ -5,6 +5,7 @@ namespace DdSG {
     public class MitigationBehaviour: MonoBehaviour {
 
         [Header("Attributes")]
+        public float Damage = 10f;
         public float Range = 15f;
         public float FireRate = 1f;
         public float TurnSpeed = 10f;
@@ -64,6 +65,11 @@ namespace DdSG {
             areaGridPosition = gridPosition;
             areaSizeOffset = sizeOffset;
 
+            Damage = courseOfAction.GetDamage();
+            Range = courseOfAction.GetRange();
+            FireRate = courseOfAction.GetFireRate();
+
+            // Hover and click actions
             ClickableBehaviour.Title = courseOfAction.custom.mitigation;
             ClickableBehaviour.Text = Formatter.BuildStixDataEntityDescription(courseOfAction);
 
@@ -123,6 +129,7 @@ namespace DdSG {
                                     .GetComponent<Bullet>();
 
             if (bullet != null) {
+                bullet.Damage = Damage;
                 bullet.Seek(target);
             }
         }

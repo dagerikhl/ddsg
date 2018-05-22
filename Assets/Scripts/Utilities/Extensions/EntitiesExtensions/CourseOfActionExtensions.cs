@@ -4,7 +4,7 @@ namespace DdSG {
 
     public static class CourseOfActionExtensions {
 
-        // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent1
+        // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
         public static int GetValue(this CourseOfAction courseOfAction) {
             var categoryValue = courseOfAction.custom.category == null ? 10 : courseOfAction.custom.category.Length;
             var mitigationValue =
@@ -13,6 +13,39 @@ namespace DdSG {
                 : courseOfAction.external_references.Length;
 
             return Mathf.RoundToInt((categoryValue + mitigationValue + referencesValue)/2f/10f)*5;
+        }
+
+        // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
+        public static float GetDamage(this CourseOfAction courseOfAction) {
+            var categoryValue = courseOfAction.custom.category == null ? 8f : courseOfAction.custom.category.Length;
+            var mitigationValue =
+                courseOfAction.custom.mitigation == null ? 5f : courseOfAction.custom.mitigation.Length;
+            var referencesValue = courseOfAction.external_references == null ? 25f
+                : courseOfAction.external_references.Length;
+
+            return (categoryValue*2 + mitigationValue + referencesValue/2f)/5f;
+        }
+
+        // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
+        public static float GetRange(this CourseOfAction courseOfAction) {
+            var categoryValue = courseOfAction.custom.category == null ? 5f : courseOfAction.custom.category.Length;
+            var mitigationValue =
+                courseOfAction.custom.mitigation == null ? 19f : courseOfAction.custom.mitigation.Length;
+            var referencesValue = courseOfAction.external_references == null ? 30f
+                : courseOfAction.external_references.Length;
+
+            return (categoryValue + mitigationValue*2 + referencesValue)/5f;
+        }
+
+        // TODO This is fairly random, but made so because of missing data in CourseOfAction and to be consistent
+        public static float GetFireRate(this CourseOfAction courseOfAction) {
+            var categoryValue = courseOfAction.custom.category == null ? 10f : courseOfAction.custom.category.Length;
+            var mitigationValue =
+                courseOfAction.custom.mitigation == null ? 15f : courseOfAction.custom.mitigation.Length;
+            var referencesValue = courseOfAction.external_references == null ? 20f
+                : courseOfAction.external_references.Length;
+
+            return Mathf.Max((categoryValue*2 - mitigationValue + referencesValue)/10f, 0f) + 1f;
         }
 
     }
