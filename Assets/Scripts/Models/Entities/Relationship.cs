@@ -16,6 +16,9 @@ namespace DdSG {
         [JsonConverter(typeof(StixIdConverter))]
         public StixId target_ref;
 
+        [JsonIgnore]
+        public StixId ParentAssetId { get; set; }
+
     }
 
 }

@@ -30,9 +30,11 @@ namespace DdSG {
                 // Attack pattern -> targets -> Asset relationships
                 foreach (var asset in gameEntities.SDOs.assets) {
                     relationships.AddRange(
-                        State.I.Entities.SROs.relationships.Where(
-                            (r) => r.target_ref.Type == StixType.Asset
-                                   && string.Equals(asset.id.Id, r.target_ref.Id)));
+                        State.I.Entities.SROs.relationships
+                             .Where(
+                                 (r) => r.target_ref.Type == StixType.Asset
+                                        && string.Equals(asset.id.Id, r.target_ref.Id))
+                             .Select((r) => r.WithReferenceToParentAsset(asset.id)));
                 }
 
                 // Attack patterns
