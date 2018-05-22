@@ -114,7 +114,7 @@ namespace DdSG {
             var highscore = new Highscore { Time = DateTime.Now, State = gameOverState, Score = PlayerStats.I.Score };
             highscores.Add(highscore);
 
-            FileClient.I.SaveToFile(Constants.HIGHSCORES_FILENAME, highscores);
+            FileClient.I.SaveToFile(Constants.HIGHSCORES_FILENAME, highscores.ToArray());
         }
 
     }
