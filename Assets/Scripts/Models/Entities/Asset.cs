@@ -11,6 +11,9 @@ namespace DdSG {
 
         public AssetCustoms custom;
 
+        [JsonIgnore]
+        public int AssetSocketIndex { get; set; }
+
     }
 
     [Serializable]

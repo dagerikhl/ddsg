@@ -77,10 +77,14 @@ namespace DdSG {
 
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
-            TargetedAssetIndex = FindObjectsOfType<AssetBehaviour>()
-                                 .Where((a) => a.Category == ActivationZone)
-                                 .TakeRandom()
-                                 .AssetIndex;
+            // Asset[] possibleTargetAssets =
+            // TargetedAssetIndex =    AssetSockets.Assets.Where((a) => a.custom.category == ActivationZone).TakeRandom();
+            TargetedAssetIndex = AssetSockets.Assets.Select((a, i) => a.WithAssetSocketIndex(i))
+                                             .Where((a) => a.custom.category == ActivationZone)
+                                             .TakeRandom()
+                                             .AssetSocketIndex;
+            // FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).ToArray();)
+            // = possibleTargetAssets.Any() ? possibleTargetAssets.TakeRandom().AssetIndex : -1;
             SpawnPoint = SpawnPoints.GetSpawnPoint(InjectionVector);
 
             transform.position = SpawnPoint.position;
@@ -136,7 +140,9 @@ namespace DdSG {
         }
 
         public void DamageAsset() {
-            AssetSockets.ASSETS[TargetedAssetIndex].TakeDamage(DamageToAsset);
+            if (TargetedAssetIndex != -1) {
+                AssetSockets.AssetBehaviours[TargetedAssetIndex].TakeDamage(DamageToAsset);
+            }
         }
 
         private void die() {
