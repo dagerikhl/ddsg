@@ -77,12 +77,12 @@ namespace DdSG {
         }
 
         public void UpdateStatsForKilledAttack(int value) {
-            Score += value*100;
-            Worth += value;
+            Score += Mathf.CeilToInt(value*1000f*State.I.PlayConfiguration.Difficulty);
+            Worth += Mathf.CeilToInt(value/State.I.PlayConfiguration.Difficulty);
         }
 
         public void UpdateStatsForLostAsset(int value) {
-            Score -= value*1000;
+            Score -= Mathf.FloorToInt(value*2000f/State.I.PlayConfiguration.Difficulty);
         }
 
         private void updateIntegrityTextUi() {
