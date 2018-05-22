@@ -21,10 +21,13 @@ namespace DdSG {
         public Transform Rotatable;
         public Transform FirePoint;
         public GameObject BulletPrefab;
+        public Transform RangeIndicator;
 
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
+        //[HideInInspector]
+        public bool IsSelected { set { RangeIndicator.gameObject.SetActive(value); } }
 
         // Private and protected members
         private CourseOfAction courseOfAction;
@@ -69,6 +72,7 @@ namespace DdSG {
 
             Damage = courseOfAction.GetDamage();
             Range = courseOfAction.GetRange();
+            RangeIndicator.localScale = Vector3.one*Range;
             FireRate = courseOfAction.GetFireRate();
 
             // Hover and click actions
@@ -77,6 +81,9 @@ namespace DdSG {
 
             ClickableBehaviour.ActionText = "select";
             ClickableBehaviour.PrimaryAction = () => {
+                SelectionHelper.DeselectAllMitigations();
+                IsSelected = true;
+
                 var title = courseOfAction.custom.mitigation;
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
                 var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };

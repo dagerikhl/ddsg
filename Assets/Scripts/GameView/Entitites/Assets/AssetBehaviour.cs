@@ -45,6 +45,8 @@ namespace DdSG {
 
             ClickableBehaviour.ActionText = "select";
             ClickableBehaviour.PrimaryAction = () => {
+                SelectionHelper.DeselectAllMitigations();
+
                 var title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
                 var description = Formatter.BuildStixDataEntityDescription(asset, true, false);
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description);

@@ -101,6 +101,8 @@ namespace DdSG {
 
             ClickableBehaviour.ActionText = "select";
             ClickableBehaviour.PrimaryAction = () => {
+                SelectionHelper.DeselectAllMitigations();
+
                 var title = attackPattern.name;
                 var description = Formatter.BuildStixDataEntityDescription(attackPattern, false, false);
                 SelectedAction[] selectedActions = ReferencesHelper.HasExternalReferences(attackPattern)

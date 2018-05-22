@@ -13,6 +13,7 @@ TagManager:
   - HoverOverlay
   - SelectedInfoBar
   - CursorManager
+  - Mitigation
   layers:
   - Default
   - TransparentFX
