@@ -31,9 +31,7 @@ namespace DdSG {
                 foreach (var asset in gameEntities.SDOs.assets) {
                     relationships.AddRange(
                         State.I.Entities.SROs.relationships
-                             .Where(
-                                 (r) => r.target_ref.Type == StixType.Asset
-                                        && string.Equals(asset.id.Id, r.target_ref.Id))
+                             .Where((r) => r.target_ref.Type == StixType.Asset && asset.id == r.target_ref)
                              .Select((r) => r.WithReferenceToParentAsset(asset.id)));
                 }
 
@@ -45,7 +43,7 @@ namespace DdSG {
                     relationships.AddRange(
                         State.I.Entities.SROs.relationships.Where(
                             (r) => r.source_ref.Type == StixType.CourseOfAction
-                                   && string.Equals(attackPattern.id.Id, r.target_ref.Id)));
+                                   && attackPattern.id == r.target_ref));
                 }
 
                 // Course of actions
@@ -126,7 +124,7 @@ namespace DdSG {
             CourseOfAction[] allCourseOfActions = courseOfActionRelationships
                                                   .Select(
                                                       (r) => State.I.Entities.SDOs.course_of_actions.First(
-                                                          (c) => string.Equals(c.id.Id, r.source_ref.Id)))
+                                                          (c) => c.id == r.source_ref))
                                                   .ToArray();
 
             /**

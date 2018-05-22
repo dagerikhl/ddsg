@@ -9,8 +9,7 @@ namespace DdSG {
         public static StixRelationshipObjects WithAllChildrenOfAssetRemoved(
             this StixRelationshipObjects SROs,
             StixId assetId) {
-            SROs.relationships = SROs.relationships.Where((r) => !string.Equals(r.ParentAssetId.Id, assetId.Id))
-                                     .ToArray();
+            SROs.relationships = SROs.relationships.Where((r) => r.ParentAssetId != assetId).ToArray();
 
             return SROs;
         }

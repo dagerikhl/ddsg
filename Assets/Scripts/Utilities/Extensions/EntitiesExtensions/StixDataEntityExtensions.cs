@@ -8,12 +8,12 @@ namespace DdSG {
 
         public static bool RelatedAsSourceTo(this StixDataEntityBase entity, StixDataEntityBase otherEntity) {
             IEnumerable<Relationship> relationships = entity.GetRelationships(true, false);
-            return relationships.Any((r) => string.Equals(r.target_ref.Id, otherEntity.id.Id));
+            return relationships.Any((r) => r.target_ref == otherEntity.id);
         }
 
         public static bool RelatedAsTargetTo(this StixDataEntityBase entity, StixDataEntityBase otherEntity) {
             IEnumerable<Relationship> relationships = entity.GetRelationships(false);
-            return relationships.Any((r) => string.Equals(r.source_ref.Id, otherEntity.id.Id));
+            return relationships.Any((r) => r.source_ref == otherEntity.id);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace DdSG {
             }
 
             return State.I.GameEntities.SROs.relationships.Where(
-                            (r) => whereSource && string.Equals(r.source_ref.Id, entity.id.Id)
-                                   || whereTarget && string.Equals(r.target_ref.Id, entity.id.Id))
+                            (r) => whereSource && r.source_ref == entity.id
+                                   || whereTarget && r.target_ref == entity.id)
                         .ToArray();
         }
 

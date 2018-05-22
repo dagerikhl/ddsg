@@ -15,6 +15,14 @@ namespace DdSG {
             return Enum.GetName(typeof(StixType), Type).PascalToKebabCase() + "--" + Id;
         }
 
+        public static bool operator ==(StixId lhs, StixId rhs) {
+            return (object) lhs != null && (object) rhs != null && string.Equals(lhs.Id, rhs.Id);
+        }
+
+        public static bool operator !=(StixId lhs, StixId rhs) {
+            return !(lhs == rhs);
+        }
+
     }
 
 }
