@@ -36,7 +36,7 @@ namespace DdSG {
             destroyOldHoverOverlays();
             createHoverOverlay();
 
-            if (HasActions) {
+            if (HasActions && !GameManager.IsQuickPaused) {
                 CursorManager.I.SetTemporaryCursor(CursorType.Pointer);
             }
         }
@@ -48,6 +48,10 @@ namespace DdSG {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
+            if (GameManager.IsQuickPaused) {
+                return;
+            }
+
             if (eventData.button == PointerEventData.InputButton.Left) {
                 if (PrimaryAction != null) {
                     PrimaryAction();

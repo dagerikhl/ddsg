@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DdSG {
 
@@ -19,6 +21,9 @@ namespace DdSG {
         public GameObject GhostMitigationPrefab;
         public GameObject EnteredSystemMessagePrefab;
 
+        public GameObject QuickPauseOverlay;
+        public Button MenuButton;
+
         //[Header("Optional")]
 
         // Public members hidden from Unity Inspector
@@ -28,6 +33,7 @@ namespace DdSG {
         public static bool IsUiBlocking;
         public static bool IsBuilding;
         public static bool IsGameOver;
+        public static bool IsQuickPaused;
 
         // Private and protected members
         private BuildManager buildManager;
@@ -50,6 +56,7 @@ namespace DdSG {
 
             // Set current running state
             GameState = GameState.Running;
+            IsQuickPaused = false;
             DifficultyUi.text = State.I.PlayConfiguration.Difficulty.DifficultyFormat().Monospaced();
 
             // Set timescale according to settings
@@ -76,6 +83,10 @@ namespace DdSG {
                     HelperObjects.PauseMenu.Resume();
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                QuickPause();
+            }
         }
 
         public static void Win() {
@@ -94,6 +105,20 @@ namespace DdSG {
 
                 GameOverMenu.I.Show(GameOverState.Lose);
             }
+        }
+
+        [UsedImplicitly]
+        public void QuickPause() {
+            IsQuickPaused = !IsQuickPaused;
+
+            if (IsQuickPaused) {
+                Time.timeScale = 0f;
+            } else {
+                Time.timeScale = State.I.PlayConfiguration.GameSpeed;
+            }
+
+            QuickPauseOverlay.SetActive(IsQuickPaused);
+            MenuButton.interactable = !IsQuickPaused;
         }
 
         private void assignPrefabHelperObjects() {
