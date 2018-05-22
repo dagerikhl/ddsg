@@ -14,6 +14,8 @@ namespace DdSG {
 
         [JsonIgnore]
         public StixId ParentAssetId { get; set; }
+        [JsonIgnore]
+        public string[] MitigatedByCategories { get; set; }
 
     }
 

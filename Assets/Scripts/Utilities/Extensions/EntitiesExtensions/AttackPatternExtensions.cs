@@ -10,6 +10,27 @@ namespace DdSG {
             return attackPattern;
         }
 
+        public static AttackPattern WithReferenceToMitigatedByCategories(
+            this AttackPattern attackPattern,
+            IEnumerable<CourseOfAction> courseOfActions,
+            IEnumerable<Relationship> relationships) {
+            // TODO
+            var categories = new List<string>();
+            foreach (var relationship in relationships) {
+                foreach (var courseOfAction in courseOfActions) {
+                    if (relationship.relationship_type == StixRelationshipType.Mitigates
+                        && relationship.source_ref == courseOfAction.id
+                        && relationship.target_ref == attackPattern.id) {
+                        categories.Add(courseOfAction.custom.category);
+                    }
+                }
+            }
+
+            attackPattern.MitigatedByCategories = categories.Distinct().ToArray();
+
+            return attackPattern;
+        }
+
         public static AttackPattern TakeRandomByLikelihood(this AttackPattern[] attackPatterns) {
             return attackPatterns.TakeRandomsByLikelihood().FirstOrDefault();
         }

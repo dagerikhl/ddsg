@@ -48,6 +48,18 @@ namespace DdSG {
 
                 // Course of actions
                 gameEntities.SDOs.course_of_actions = pickCourseOfActions(relationships);
+
+                // Add relation for Course of actions -> mitigates -> Attack patterns to mitigate by categories
+                gameEntities.SDOs.attack_patterns = gameEntities.SDOs.attack_patterns.Select(
+                                                                    (aP) => aP.WithReferenceToMitigatedByCategories(
+                                                                        gameEntities.SDOs.course_of_actions,
+                                                                        relationships))
+                                                                .ToArray();
+                Logger.Debug(gameEntities.SDOs.attack_patterns[0].MitigatedByCategories.Join(", "));
+
+                // Make course of actions distincy by category
+                gameEntities.SDOs.course_of_actions =
+                    gameEntities.SDOs.course_of_actions.DistinctBy((c) => c.custom.category).ToArray();
             }
 
             if (attempts == maxAttempts) {
@@ -99,7 +111,7 @@ namespace DdSG {
         private static AttackPattern[] pickAttackPatterns(IEnumerable<Asset> assets) {
             var attackPatterns = new List<AttackPattern>();
             foreach (var asset in assets) {
-                Asset assetCopy = asset;
+                var assetCopy = asset;
 
                 AssetCategory targetedCategory = assetCopy.custom.category;
 
@@ -111,8 +123,8 @@ namespace DdSG {
                                                  .Select((aP) => aP.WithReferenceToParentAsset(assetCopy.id));
 
                 attackPatterns.AddRange(fittingAttackPatterns);
-                attackPatterns = attackPatterns.Distinct().ToList();
             }
+            attackPatterns = attackPatterns.Distinct().ToList();
 
             return attackPatterns.ToArray();
         }
