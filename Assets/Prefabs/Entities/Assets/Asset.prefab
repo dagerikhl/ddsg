@@ -376,9 +376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5085de4a9a0541977bdf6ec12844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Value: 0
   ClickableBehaviour: {fileID: 114470170866659750}
   HealthBar: {fileID: 223568124047422158}
   HealthBarImage: {fileID: 114272833205325674}
+  DeathEffect: {fileID: 1461671178847830, guid: 3c231397ed2b0af49bae9b30ddcc14b0,
+    type: 2}
   Category: 0
   AssetIndex: 0
 --- !u!114 &114762265027977404

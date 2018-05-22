@@ -76,9 +76,13 @@ namespace DdSG {
             updateIntegrityTextUi();
         }
 
-        public void UpdateStatsFromKill(int value) {
+        public void UpdateStatsForKilledAttack(int value) {
             Score += value*100;
             Worth += value;
+        }
+
+        public void UpdateStatsForLostAsset(int value) {
+            Score -= value*1000;
         }
 
         private void updateIntegrityTextUi() {

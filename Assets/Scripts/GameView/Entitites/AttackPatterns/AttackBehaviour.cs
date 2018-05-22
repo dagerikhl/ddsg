@@ -140,7 +140,7 @@ namespace DdSG {
         private void die() {
             isDead = true;
 
-            PlayerStats.I.UpdateStatsFromKill(StartValue);
+            PlayerStats.I.UpdateStatsForKilledAttack(StartValue);
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
