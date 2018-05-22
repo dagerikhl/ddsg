@@ -49,7 +49,7 @@ namespace DdSG {
         private void getNextWaypoint() {
             if (waypointIndex == waypoints.Points.Length - 1) {
                 waypointIndex++;
-                target = attackBehaviour.TargetedAsset.transform;
+                target = AssetSockets.GetSocketPosition(attackBehaviour.TargetedAssetIndex);
                 return;
             }
             if (waypointIndex == waypoints.Points.Length) {

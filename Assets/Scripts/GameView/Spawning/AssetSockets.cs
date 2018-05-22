@@ -19,8 +19,8 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
-        private Transform[] sockets;
-        private AssetBehaviour[] assets = new AssetBehaviour[4];
+        private static Transform[] sockets;
+        private readonly AssetBehaviour[] assets = new AssetBehaviour[4];
 
         private void Awake() {
             sockets = new[] { AssetSocket1, AssetSocket2, AssetSocket3, AssetSocket4 };
@@ -33,6 +33,10 @@ namespace DdSG {
                 assets[i] = UnityHelper.Instantiate(AssetPrefab, sockets[i].position).GetComponent<AssetBehaviour>();
                 assets[i].Initialize(asset, i);
             }
+        }
+
+        public static Transform GetSocketPosition(int index) {
+            return sockets[index];
         }
 
     }

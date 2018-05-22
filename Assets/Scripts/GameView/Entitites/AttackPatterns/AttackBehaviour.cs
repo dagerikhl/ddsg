@@ -41,7 +41,7 @@ namespace DdSG {
 
         public PathCategory InjectionVector { get; private set; }
         public AssetCategory ActivationZone { get; private set; }
-        public AssetBehaviour TargetedAsset { get; private set; }
+        public int TargetedAssetIndex { get; private set; }
         public Transform SpawnPoint { get; private set; }
 
         public bool Invulnerable {
@@ -77,7 +77,10 @@ namespace DdSG {
 
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
-            TargetedAsset = FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).TakeRandom();
+            TargetedAssetIndex = FindObjectsOfType<AssetBehaviour>()
+                                 .Where((a) => a.Category == ActivationZone)
+                                 .TakeRandom()
+                                 .AssetIndex;
             SpawnPoint = SpawnPoints.GetSpawnPoint(InjectionVector);
 
             transform.position = SpawnPoint.position;
@@ -133,8 +136,8 @@ namespace DdSG {
         }
 
         public void DamageAsset() {
-            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAsset.AssetIndex) - DamageToAsset, 0);
-            PlayerStats.I.SetAssetIntegrity(TargetedAsset.AssetIndex, newIntegrity);
+            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAssetIndex) - DamageToAsset, 0);
+            PlayerStats.I.SetAssetIntegrity(TargetedAssetIndex, newIntegrity);
         }
 
         private void die() {
