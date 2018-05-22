@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -9,6 +10,7 @@ namespace DdSG {
 
         [Header("Unity Setup Fields")]
         public Text Place;
+        public Text Time;
         public Text State;
         public Text Score;
 
@@ -21,7 +23,8 @@ namespace DdSG {
 
         public void Initialize(int place, Highscore highscore) {
             Place.text = place + ".";
-            State.text = "The game ended with a: " + (highscore.State == GameOverState.Win ? "Win!" : "Loss.");
+            Time.text = highscore.Time.ToString("yyyy-MM-dd HH:mm");
+            State.text = highscore.State == GameOverState.Win ? "Win!" : "Loss.";
             Score.text = string.Format("{0:###,##0}", highscore.Score);
         }
 
