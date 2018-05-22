@@ -63,6 +63,10 @@ namespace DdSG {
         private void endPath() {
             attackBehaviour.DamageAsset();
 
+            // SFX
+            var effect = UnityHelper.Instantiate(attackBehaviour.DeathEffect, transform.position);
+            Destroy(effect, 5f);
+
             WaveSpawner.AttacksAlive--;
             Destroy(gameObject);
         }
