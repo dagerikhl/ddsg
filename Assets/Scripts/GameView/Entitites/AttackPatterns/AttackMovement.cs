@@ -8,7 +8,8 @@ namespace DdSG {
 
         //[Header("Blueprints")]
 
-        //[Header("Attributes")]
+        [Header("Attributes")]
+        public float DistanceToWaypoint = 0.4f;
 
         //[Header("Unity Setup Fields")]
 
@@ -38,7 +39,7 @@ namespace DdSG {
                 Vector3 dir = target.position - transform.position;
                 transform.Translate(dir.normalized*attackBehaviour.Speed*Time.deltaTime, Space.World);
 
-                if (Vector3.Distance(transform.position, target.position) <= 0.4f) {
+                if (Vector3.Distance(transform.position, target.position) <= DistanceToWaypoint) {
                     getNextWaypoint();
                 }
 
@@ -50,6 +51,7 @@ namespace DdSG {
             if (waypointIndex == waypoints.Points.Length - 1) {
                 waypointIndex++;
                 target = AssetSockets.GetSocketPosition(attackBehaviour.TargetedAssetIndex);
+                DistanceToWaypoint = 5f;
                 return;
             }
             if (waypointIndex == waypoints.Points.Length) {
