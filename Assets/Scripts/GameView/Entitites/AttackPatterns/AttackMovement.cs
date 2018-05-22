@@ -51,7 +51,7 @@ namespace DdSG {
             if (waypointIndex == waypoints.Points.Length - 1) {
                 waypointIndex++;
                 target = AssetSockets.GetSocketPosition(attackBehaviour.TargetedAssetIndex);
-                DistanceToWaypoint = 5f;
+                DistanceToWaypoint = 3f;
                 return;
             }
             if (waypointIndex == waypoints.Points.Length) {
