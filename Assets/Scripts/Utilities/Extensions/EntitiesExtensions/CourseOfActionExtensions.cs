@@ -45,7 +45,7 @@ namespace DdSG {
             var referencesValue = courseOfAction.external_references == null ? 20f
                 : courseOfAction.external_references.Length;
 
-            return Mathf.Max((categoryValue*2 - mitigationValue + referencesValue)/10f, 0f) + 1f;
+            return Mathf.Min(Mathf.Max((categoryValue*2 - mitigationValue + referencesValue)/20f, 0f) + 1f, 4f);
         }
 
     }
