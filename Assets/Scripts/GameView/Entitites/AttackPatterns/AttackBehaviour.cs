@@ -136,8 +136,7 @@ namespace DdSG {
         }
 
         public void DamageAsset() {
-            var newIntegrity = Mathf.Max(PlayerStats.I.GetAssetIntegrity(TargetedAssetIndex) - DamageToAsset, 0);
-            PlayerStats.I.SetAssetIntegrity(TargetedAssetIndex, newIntegrity);
+            AssetSockets.ASSETS[TargetedAssetIndex].TakeDamage(DamageToAsset);
         }
 
         private void die() {

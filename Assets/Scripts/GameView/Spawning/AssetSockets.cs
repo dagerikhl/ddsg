@@ -17,10 +17,10 @@ namespace DdSG {
 
         // Public members hidden from Unity Inspector
         //[HideInInspector]
+        public static readonly AssetBehaviour[] ASSETS = new AssetBehaviour[4];
 
         // Private and protected members
         private static Transform[] sockets;
-        private readonly AssetBehaviour[] assets = new AssetBehaviour[4];
 
         private void Awake() {
             sockets = new[] { AssetSocket1, AssetSocket2, AssetSocket3, AssetSocket4 };
@@ -30,8 +30,8 @@ namespace DdSG {
             for (var i = 0; i < State.I.GameEntities.SDOs.assets.Length; i++) {
                 var asset = State.I.GameEntities.SDOs.assets[i];
 
-                assets[i] = UnityHelper.Instantiate(AssetPrefab, sockets[i].position).GetComponent<AssetBehaviour>();
-                assets[i].Initialize(asset, i);
+                ASSETS[i] = UnityHelper.Instantiate(AssetPrefab, sockets[i].position).GetComponent<AssetBehaviour>();
+                ASSETS[i].Initialize(asset, i);
             }
         }
 

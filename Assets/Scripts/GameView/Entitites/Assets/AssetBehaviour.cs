@@ -27,19 +27,11 @@ namespace DdSG {
 
         // Private and protected members
         private Asset asset;
-        private float integrity;
 
         private bool isDead;
 
         private void Update() {
-            integrity = PlayerStats.I.GetAssetIntegrity(AssetIndex);
-
             HealthBar.transform.rotation = CameraHelper.GetCameraRotationXy();
-            HealthBarImage.fillAmount = integrity/100f;
-
-            if (integrity <= 0f && !isDead) {
-                die();
-            }
         }
 
         public void Initialize(Asset asset, int assetIndex) {
@@ -58,6 +50,18 @@ namespace DdSG {
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description);
             };
             ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ClickableBehaviour);
+        }
+
+        public void TakeDamage(float amount) {
+            var oldIntegrity = PlayerStats.I.GetAssetIntegrity(AssetIndex);
+            var newIntegrity = Mathf.Max(oldIntegrity - amount, 0);
+
+            PlayerStats.I.SetAssetIntegrity(AssetIndex, newIntegrity);
+            HealthBarImage.fillAmount = newIntegrity/100f;
+
+            if (newIntegrity <= 0f && !isDead) {
+                die();
+            }
         }
 
         private void die() {
