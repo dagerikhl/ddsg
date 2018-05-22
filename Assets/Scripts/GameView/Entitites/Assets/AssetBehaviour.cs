@@ -66,9 +66,8 @@ namespace DdSG {
             PlayerStats.I.UpdateStatsForLostAsset(Value);
 
             // Update game state to not spawn attacks for this asset
-            State.I.GameEntities.SDOs.assets = State.I.GameEntities.SDOs.assets
-                                                    .Where((a) => !string.Equals(a.id.Id, asset.id.Id))
-                                                    .ToArray();
+            State.I.GameEntities.SDOs = State.I.GameEntities.SDOs.WithAllChildrenOfAssetRemoved(asset.id);
+            State.I.GameEntities.SROs = State.I.GameEntities.SROs.WithAllChildrenOfAssetRemoved(asset.id);
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
