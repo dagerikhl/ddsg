@@ -107,7 +107,9 @@ namespace DdSG {
         }
 
         private static void updateHighscores(GameOverState gameOverState) {
-            List<Highscore> highscores = FileClient.I.LoadFromFile<Highscore[]>(Constants.HIGHSCORES_FILENAME).ToList();
+            List<Highscore> highscores = FileClient.I.FileExists(Constants.HIGHSCORES_FILENAME)
+                ? FileClient.I.LoadFromFile<Highscore[]>(Constants.HIGHSCORES_FILENAME).ToList()
+                : new List<Highscore>();
 
             var highscore = new Highscore { Time = DateTime.Now, State = gameOverState, Score = PlayerStats.I.Score };
             highscores.Add(highscore);

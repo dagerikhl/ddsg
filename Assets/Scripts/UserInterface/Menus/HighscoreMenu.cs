@@ -19,8 +19,12 @@ namespace DdSG {
         // Private and protected members
 
         private void Awake() {
+            // Abort if no highscores exists
+            if (!FileClient.I.FileExists(Constants.HIGHSCORES_FILENAME)) {
+                return;
+            }
+
             // Fetch highscores from file
-            // var highscores = new Highscore[125];
             var highscores = FileClient.I.LoadFromFile<Highscore[]>(Constants.HIGHSCORES_FILENAME);
 
             // Initialize highscores with data
