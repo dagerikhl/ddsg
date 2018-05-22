@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DdSG {
@@ -25,6 +26,7 @@ namespace DdSG {
         public int AssetIndex;
 
         // Private and protected members
+        private Asset asset;
         private float integrity;
 
         private bool isDead;
@@ -41,6 +43,8 @@ namespace DdSG {
         }
 
         public void Initialize(Asset asset, int assetIndex) {
+            this.asset = asset;
+
             Category = asset.custom.category;
             AssetIndex = assetIndex;
 
@@ -60,6 +64,11 @@ namespace DdSG {
             isDead = true;
 
             PlayerStats.I.UpdateStatsForLostAsset(Value);
+
+            // Update game state to not spawn attacks for this asset
+            State.I.GameEntities.SDOs.assets = State.I.GameEntities.SDOs.assets
+                                                    .Where((a) => !string.Equals(a.id.Id, asset.id.Id))
+                                                    .ToArray();
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
