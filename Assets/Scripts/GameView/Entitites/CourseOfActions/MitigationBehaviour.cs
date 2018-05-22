@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace DdSG {
@@ -94,7 +95,7 @@ namespace DdSG {
                 var attackBehaviour = attack.GetComponent<AttackBehaviour>();
 
                 // Skip all attacks that aren't mitigated
-                if (!courseOfAction.RelatedAsSourceTo(attackBehaviour.AttackPattern)) {
+                if (!attackBehaviour.AttackPattern.MitigatedByCategories.Contains(courseOfAction.custom.category)) {
                     continue;
                 }
 
