@@ -13,7 +13,7 @@ namespace DdSG {
             return transform;
         }
 
-        public static Transform StealChildren(this Transform transform, Transform newParent) {
+        public static Transform TransferChildrenTo(this Transform transform, Transform newParent) {
             foreach (Transform child in transform.Cast<Transform>().ToList()) {
                 child.SetParent(newParent);
             }

@@ -72,6 +72,7 @@ namespace DdSG {
             // Update game state to not spawn attacks for this asset
             State.I.GameEntities.SDOs = State.I.GameEntities.SDOs.WithAllChildrenOfAssetRemoved(asset.id);
             State.I.GameEntities.SROs = State.I.GameEntities.SROs.WithAllChildrenOfAssetRemoved(asset.id);
+            WaveSpawner.I.NextWave = WaveSpawner.I.GenerateNewWave();
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);

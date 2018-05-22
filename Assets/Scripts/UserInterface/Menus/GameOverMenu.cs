@@ -25,6 +25,7 @@ namespace DdSG {
         [UsedImplicitly]
         public void Show(bool isWin) {
             GameManager.GameState = GameState.Menu;
+            Time.timeScale = 0f;
 
             TitleText.text = isWin ? "Congratulations, you won!" : "GAME OVER";
             ScoreText.text = PlayerStats.I.Score.ToString().ScoreFormat().Monospaced();

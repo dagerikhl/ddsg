@@ -69,7 +69,7 @@ namespace DdSG {
             var effect = UnityHelper.Instantiate(attackBehaviour.DeathEffect, transform.position);
             Destroy(effect, 5f);
 
-            WaveSpawner.AttacksAlive--;
+            WaveSpawner.I.AttacksAlive--;
             Destroy(gameObject);
         }
 

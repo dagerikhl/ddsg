@@ -77,14 +77,10 @@ namespace DdSG {
 
             InjectionVector = attackPattern.custom.injection_vector.categories.TakeRandom();
             ActivationZone = attackPattern.custom.activation_zone.categories.TakeRandom();
-            // Asset[] possibleTargetAssets =
-            // TargetedAssetIndex =    AssetSockets.Assets.Where((a) => a.custom.category == ActivationZone).TakeRandom();
             TargetedAssetIndex = AssetSockets.Assets.Select((a, i) => a.WithAssetSocketIndex(i))
-                                             .Where((a) => a.custom.category == ActivationZone)
+                                             .Where((a) => a != null && a.custom.category == ActivationZone)
                                              .TakeRandom()
                                              .AssetSocketIndex;
-            // FindObjectsOfType<AssetBehaviour>().Where((a) => a.Category == ActivationZone).ToArray();)
-            // = possibleTargetAssets.Any() ? possibleTargetAssets.TakeRandom().AssetIndex : -1;
             SpawnPoint = SpawnPoints.GetSpawnPoint(InjectionVector);
 
             transform.position = SpawnPoint.position;
@@ -154,7 +150,7 @@ namespace DdSG {
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
             Destroy(effect, 5f);
 
-            WaveSpawner.AttacksAlive--;
+            WaveSpawner.I.AttacksAlive--;
             Destroy(gameObject);
         }
 

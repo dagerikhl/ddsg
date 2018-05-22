@@ -6,7 +6,10 @@ using UnityEngine;
 
 namespace DdSG {
 
-    public class WaveSpawner: MonoBehaviour {
+    public class WaveSpawner: SingletonBehaviour<WaveSpawner> {
+
+        protected WaveSpawner() {
+        }
 
         [Header("Attributes")]
         public int TotalWaves = 10;
@@ -34,8 +37,35 @@ namespace DdSG {
         public GameObject WaveInformationIconPrefab;
 
         // Public members hidden from Unity Inspector
-        //[HideInInspector]
-        public static int AttacksAlive;
+        [HideInInspector]
+        private int attacksAlive;
+        public int AttacksAlive {
+            get { return attacksAlive; }
+            set {
+                attacksAlive = value;
+
+                if (currentWave != null) {
+                    AttacksAliveText.text = Formatter.CountOfMaxFormat(value, currentWave.Count).Monospaced();
+                }
+            }
+        }
+
+        private Wave nextWave;
+        public Wave NextWave {
+            get { return nextWave; }
+            set {
+                // Generate new icons for this container
+                NextWaveInfoContainer.Clear();
+                foreach (var attackPattern in value.AttackPatterns) {
+                    var icon = Instantiate(WaveInformationIconPrefab, NextWaveInfoContainer)
+                        .GetComponent<WaveInfoIcon>();
+                    icon.Initialize(attackPattern);
+                }
+
+                // Update field
+                nextWave = value;
+            }
+        }
 
         // Private and protected members
         private int waveIndex;
@@ -69,46 +99,15 @@ namespace DdSG {
 
         private Wave currentWave;
 
-        private Wave nextWave;
-        private Wave NextWave {
-            get { return nextWave; }
-            set {
-                if (nextWave != null) {
-                    // Clear old icons
-                    CurrentWaveInfoContainer.Clear();
-
-                    // Transfer next wave icons to this container
-                    NextWaveInfoContainer.StealChildren(CurrentWaveInfoContainer);
-                }
-
-                currentWave = nextWave;
-
-                // Generate new icons for this container
-                foreach (var attackPattern in value.AttackPatterns) {
-                    var icon = Instantiate(WaveInformationIconPrefab, NextWaveInfoContainer)
-                        .GetComponent<WaveInfoIcon>();
-                    icon.Initialize(attackPattern);
-                }
-
-                // Update field
-                nextWave = value;
-            }
-        }
-
         private void Awake() {
             Countdown = TimeBetweenWaves;
 
             AttacksAlive = 0;
 
-            NextWave = generateNewWave();
+            NextWave = GenerateNewWave();
         }
 
         private void Update() {
-            // Update attacks alive
-            if (currentWave != null) {
-                AttacksAliveText.text = Formatter.CountOfMaxFormat(AttacksAlive, currentWave.Count).Monospaced();
-            }
-
             // Final wave has been defeated
             if (WaveIndex > TotalWaves) {
                 GameManager.Win();
@@ -132,10 +131,40 @@ namespace DdSG {
             // It's time to start the next wave
             if (Countdown <= 0f) {
                 WaveIndex++;
-                NextWave = generateNewWave();
-                AttacksAlive = currentWave.Count;
+
+                // Update current wave
+                if (nextWave != null) {
+                    // Clear old icons
+                    CurrentWaveInfoContainer.Clear();
+
+                    // Transfer next wave icons to current wave container
+                    NextWaveInfoContainer.TransferChildrenTo(CurrentWaveInfoContainer);
+                }
+
+                currentWave = nextWave;
+                AttacksAlive = currentWave == null ? 0 : currentWave.Count;
+
+                // Set up next wave
+                NextWave = GenerateNewWave();
                 StartCoroutine(spawnWave());
             }
+        }
+
+        public Wave GenerateNewWave() {
+            var possibleAttackPatterns = new List<AttackPattern>();
+            while (possibleAttackPatterns.Count
+                   < Mathf.Min(State.I.GameEntities.SDOs.attack_patterns.Length, PossibleAttackPatternsPerWave)) {
+                var possibleAttackPattern = State.I.GameEntities.SDOs.attack_patterns.TakeRandom();
+                possibleAttackPatterns.Add(possibleAttackPattern);
+                // Ensure that no duplicate attack patterns are chosen for this wave
+                possibleAttackPatterns =
+                    possibleAttackPatterns.Distinct().DistinctBy((aP) => aP.name.ToLower()).ToList();
+            }
+
+            return new Wave {
+                Count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave,
+                AttackPatterns = possibleAttackPatterns.ToArray()
+            };
         }
 
         private IEnumerator spawnWave() {
@@ -148,22 +177,6 @@ namespace DdSG {
         private void spawnAttack(AttackPattern attackPattern) {
             var attack = UnityHelper.Instantiate(AttackPrefab).GetComponent<AttackBehaviour>();
             attack.Initialize(attackPattern);
-        }
-
-        private Wave generateNewWave() {
-            var possibleAttackPatterns = new List<AttackPattern>(PossibleAttackPatternsPerWave);
-            while (possibleAttackPatterns.Count < PossibleAttackPatternsPerWave) {
-                var possibleAttackPattern = State.I.GameEntities.SDOs.attack_patterns.TakeRandom();
-                possibleAttackPatterns.Add(possibleAttackPattern);
-                // Ensure that no duplicate attack patterns are chosen for this wave
-                possibleAttackPatterns =
-                    possibleAttackPatterns.Distinct().DistinctBy((aP) => aP.name.ToLower()).ToList();
-            }
-
-            return new Wave {
-                Count = Rnd.Gen.Next(MinAttacksPerWave, MaxAttacksPerWave + 1) + WaveIndex*ExtraPotentialAttacksPerWave,
-                AttackPatterns = possibleAttackPatterns.ToArray()
-            };
         }
 
     }
