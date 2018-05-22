@@ -5,7 +5,9 @@ using Newtonsoft.Json.Converters;
 namespace DdSG {
 
     [Serializable]
+#pragma warning disable 660,661
     public class StixId: TransferObjectBase {
+#pragma warning restore 660,661
 
         [JsonConverter(typeof(StringEnumConverter))]
         public StixType Type;
