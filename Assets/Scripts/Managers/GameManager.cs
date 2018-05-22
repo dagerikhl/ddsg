@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -105,8 +107,12 @@ namespace DdSG {
         }
 
         private static void updateHighscores(GameOverState gameOverState) {
+            List<Highscore> highscores = FileClient.I.LoadFromFile<Highscore[]>(Constants.HIGHSCORES_FILENAME).ToList();
+
             var highscore = new Highscore { Time = DateTime.Now, State = gameOverState, Score = PlayerStats.I.Score };
-            FileClient.I.SaveToFile(Constants.HIGHSCORES_FILENAME, highscore, true);
+            highscores.Add(highscore);
+
+            FileClient.I.SaveToFile(Constants.HIGHSCORES_FILENAME, highscores);
         }
 
     }

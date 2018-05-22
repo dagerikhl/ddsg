@@ -24,6 +24,10 @@ namespace DdSG {
             return sb.ToString();
         }
 
+        public static string Capitalize(this string value) {
+            return value.First().ToString().ToUpper() + value.Substring(1);
+        }
+
         public static string Italic(this string value) {
             return string.Format("<i>{0}</i>", value);
         }

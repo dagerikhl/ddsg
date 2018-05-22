@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace DdSG {
 
@@ -6,7 +7,9 @@ namespace DdSG {
 
         //[Header("Attributes")]
 
-        //[Header("Unity Setup Fields")]
+        [Header("Unity Setup Fields")]
+        public Transform HighscoresContainer;
+        public GameObject HighscorePrefab;
 
         //[Header("Optional")]
 
@@ -14,6 +17,20 @@ namespace DdSG {
         //[HideInInspector]
 
         // Private and protected members
+
+        private void Awake() {
+            // Fetch highscores from file
+            // var highscores = new Highscore[125];
+            var highscores = FileClient.I.LoadFromFile<Highscore[]>(Constants.HIGHSCORES_FILENAME);
+
+            // Initialize highscores with data
+            highscores = highscores.OrderByDescending((h) => h.Score).ToArray();
+            for (var i = 0; i < highscores.Length; i++) {
+                var highscoreBehaviour =
+                    Instantiate(HighscorePrefab, HighscoresContainer).GetComponent<HighscoreBehaviour>();
+                highscoreBehaviour.Initialize(i + 1, highscores[i]);
+            }
+        }
 
     }
 
