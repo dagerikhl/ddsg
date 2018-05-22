@@ -100,7 +100,7 @@ namespace DdSG {
         private Wave currentWave;
 
         private void Awake() {
-            Countdown = TimeBetweenWaves;
+            Countdown = TimeBetweenWaves*2f;
 
             AttacksAlive = 0;
 
