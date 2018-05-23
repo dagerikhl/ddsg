@@ -49,7 +49,12 @@ namespace DdSG {
 
                 var title = EnumHelper.GetEnumMemberAttributeValue(asset.custom.category);
                 var description = Formatter.BuildStixDataEntityDescription(asset, true, false);
-                HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description);
+                var selectedActions = new SelectedAction[] {
+                    new SelectedAction(
+                        ActionType.OpenExternalReferences,
+                        () => ReferencesHelper.OpenExternalReferences(asset))
+                };
+                HelperObjects.SelectedInfoBar.SelectEntity(title, "Asset", description, selectedActions);
             };
             ClickableBehaviour.HasSecondaryAction = ReferencesHelper.AddReferencesAsAction(asset, ClickableBehaviour);
         }

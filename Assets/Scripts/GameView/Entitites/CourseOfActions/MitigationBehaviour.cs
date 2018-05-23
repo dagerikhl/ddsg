@@ -86,7 +86,12 @@ namespace DdSG {
 
                 var title = courseOfAction.custom.mitigation;
                 var description = Formatter.BuildStixDataEntityDescription(courseOfAction, true, false);
-                var selectedActions = new SelectedAction[] { new SelectedAction(ActionType.Sell, sell) };
+                var selectedActions = new SelectedAction[] {
+                    new SelectedAction(ActionType.Sell, sell),
+                    new SelectedAction(
+                        ActionType.OpenExternalReferences,
+                        () => ReferencesHelper.OpenExternalReferences(courseOfAction))
+                };
                 HelperObjects.SelectedInfoBar.SelectEntity(title, "Mitigation", description, selectedActions);
             };
             ClickableBehaviour.HasSecondaryAction =
