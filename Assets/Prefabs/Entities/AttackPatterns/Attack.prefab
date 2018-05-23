@@ -12717,8 +12717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartSpeed: 8
   StartHealth: 100
-  StartValue: 10
-  DamageToAsset: 1
+  StartValue: 8
+  DamageToAsset: 3
   ClickableBehaviour: {fileID: 114100356788268986}
   Model: {fileID: 4990267058453116}
   HealthBar: {fileID: 223125341698362660}
