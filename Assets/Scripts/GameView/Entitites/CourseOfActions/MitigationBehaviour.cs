@@ -72,7 +72,7 @@ namespace DdSG {
 
             Damage = courseOfAction.GetDamage();
             Range = courseOfAction.GetRange();
-            RangeIndicator.localScale = Vector3.one*Range;
+            RangeIndicator.localScale = Vector3.one*Range*2f;
             FireRate = courseOfAction.GetFireRate();
 
             // Hover and click actions
