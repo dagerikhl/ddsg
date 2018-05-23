@@ -94,8 +94,8 @@ namespace DdSG {
             value = StartValue + WaveSpawner.I.WaveIndex;
 
             // Tweak scale and speed after value to indicate which attacks are more important
-            Model.localScale *= Mathf.Pow(DamageToAsset/10f, 2f);
-            Speed *= Mathf.Pow(DamageToAsset/10f, 2f);
+            Model.localScale *= Mathf.Pow(DamageToAsset/30f, 2f);
+            Speed *= Mathf.Pow(DamageToAsset/30f, 2f);
 
             // Hover and click actions
             ClickableBehaviour.Title = attackPattern.name;
