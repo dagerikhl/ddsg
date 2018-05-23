@@ -74,7 +74,7 @@ namespace DdSG {
         private void Update() {
             SecondsElapsed += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Input.GetKeyDown(KeyCode.Escape) && !IsQuickPaused) {
                 if (GameState == GameState.Running) {
                     if (!IsBuilding) {
                         HelperObjects.PauseMenu.Pause();
@@ -84,7 +84,7 @@ namespace DdSG {
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space) && GameState == GameState.Running) {
                 QuickPause();
             }
         }
