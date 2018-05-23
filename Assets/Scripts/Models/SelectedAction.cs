@@ -21,6 +21,11 @@ namespace DdSG {
             case ActionType.Sell:
                 Label = "Sell";
                 Description = string.Format("Sell for {0:P0} of its orignal worth.", Constants.SELL_PERCENTAGE);
+                Action = () => {
+                    if (!GameManager.IsQuickPaused) {
+                        action();
+                    }
+                };
                 break;
             default:
                 throw new ArgumentOutOfRangeException("type", type, "The action type doesn't exist.");

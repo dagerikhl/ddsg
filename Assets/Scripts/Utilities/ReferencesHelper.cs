@@ -10,7 +10,9 @@ namespace DdSG {
             if (references.Any()) {
                 clickableBehaviour.SecondaryAction = () => {
                     foreach (var url in references.Select((e) => e.url)) {
-                        HelperObjects.PauseMenu.Pause();
+                        if (!GameManager.IsQuickPaused) {
+                            HelperObjects.PauseMenu.Pause();
+                        }
                         Application.OpenURL(url);
                     }
                 };
@@ -25,7 +27,9 @@ namespace DdSG {
             ExternalReference[] references = getExternalReferences(entity);
             if (references.Any()) {
                 foreach (var url in references.Select((e) => e.url)) {
-                    HelperObjects.PauseMenu.Pause();
+                    if (!GameManager.IsQuickPaused) {
+                        HelperObjects.PauseMenu.Pause();
+                    }
                     Application.OpenURL(url);
                 }
             }
