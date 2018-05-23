@@ -9,7 +9,7 @@ namespace DdSG {
         [Header("Attributes")]
         public float StartSpeed = 10f;
         public float StartHealth = 100f;
-        public int StartValue = 10;
+        public int StartValue = 5;
         public float DamageToAsset = 1f;
 
         [Header("Unity Setup Fields")]
@@ -91,11 +91,11 @@ namespace DdSG {
             Health *= State.I.PlayConfiguration.Difficulty;
             DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
 
-            value += Mathf.CeilToInt(StartHealth/WaveSpawner.I.WaveIndex*0.5f/100f) + Mathf.CeilToInt(DamageToAsset);
+            value = StartValue + WaveSpawner.I.WaveIndex;
 
             // Tweak scale and speed after value to indicate which attacks are more important
-            Model.localScale *= value/10f;
-            Speed *= value/10f;
+            Model.localScale *= Mathf.Pow(DamageToAsset/10f, 2f);
+            Speed *= Mathf.Pow(DamageToAsset/10f, 2f);
 
             // Hover and click actions
             ClickableBehaviour.Title = attackPattern.name;
@@ -148,7 +148,7 @@ namespace DdSG {
         private void die() {
             isDead = true;
 
-            PlayerStats.I.UpdateStatsForKilledAttack(StartValue);
+            PlayerStats.I.UpdateStatsForKilledAttack(value);
 
             // SFX
             var effect = UnityHelper.Instantiate(DeathEffect, transform.position);
