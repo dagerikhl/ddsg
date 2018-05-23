@@ -64,6 +64,8 @@ namespace DdSG {
         private bool isDead;
 
         private void Awake() {
+            StartHealth *= WaveSpawner.I.WaveIndex*0.5f;
+
             Speed = StartSpeed;
             Health = StartHealth;
         }
@@ -89,7 +91,7 @@ namespace DdSG {
             Health *= State.I.PlayConfiguration.Difficulty;
             DamageToAsset = attackPattern.CalculateDamageToAssetFromImpact(DamageToAsset);
 
-            value += Mathf.CeilToInt(StartHealth/100f) + Mathf.CeilToInt(DamageToAsset);
+            value += Mathf.CeilToInt(StartHealth/WaveSpawner.I.WaveIndex*0.5f/100f) + Mathf.CeilToInt(DamageToAsset);
 
             // Tweak scale and speed after value to indicate which attacks are more important
             Model.localScale *= value/10f;

@@ -37,6 +37,17 @@ namespace DdSG {
         public GameObject WaveInformationIconPrefab;
 
         // Public members hidden from Unity Inspector
+        private int waveIndex;
+        public int WaveIndex {
+            get { return waveIndex; }
+            private set {
+                waveIndex = value;
+                WaveCounterText.text = Formatter.CountOfMaxFormat(value, TotalWaves).Monospaced();
+
+                PlayerStats.I.Waves++;
+            }
+        }
+
         [HideInInspector]
         private int attacksAlive;
         public int AttacksAlive {
@@ -68,17 +79,6 @@ namespace DdSG {
         }
 
         // Private and protected members
-        private int waveIndex;
-        private int WaveIndex {
-            get { return waveIndex; }
-            set {
-                waveIndex = value;
-                WaveCounterText.text = Formatter.CountOfMaxFormat(value, TotalWaves).Monospaced();
-
-                PlayerStats.I.Waves++;
-            }
-        }
-
         private float currentTime;
         private float CurrentTime {
             get { return currentTime; }
