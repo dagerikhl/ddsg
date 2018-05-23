@@ -109,7 +109,7 @@ namespace DdSG {
 
         private void Update() {
             // Final wave has been defeated
-            if (WaveIndex > TotalWaves) {
+            if (WaveIndex == TotalWaves && AttacksAlive <= 0) {
                 GameManager.Win();
                 enabled = false;
                 return;

@@ -78,7 +78,7 @@ namespace DdSG {
 
         public void UpdateStatsForKilledAttack(int value) {
             Score += Mathf.CeilToInt(value*1000f*State.I.PlayConfiguration.Difficulty);
-            Worth += Mathf.CeilToInt(value/State.I.PlayConfiguration.Difficulty);
+            Worth += Mathf.CeilToInt(value*0.35f*(2f - State.I.PlayConfiguration.Difficulty));
         }
 
         public void UpdateStatsForLostAsset(int value) {
